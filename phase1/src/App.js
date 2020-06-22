@@ -12,6 +12,7 @@ import Screening from './components/Screening';
 import Policies from './components/Policies';
 import FAQs from './components/FAQs';
 import News from './components/News';
+import AssessmentCentres from './components/AssessmentCentres';
 
 class App extends Component {
 
@@ -30,6 +31,7 @@ class App extends Component {
             <Route path='/policies' component={Policies} />
             <Route path='/faqs' component={FAQs} />
             <Route path='/news' component={News} />
+            <Route path='/centres' component={AssessmentCentres} />
             <Route path="/" render={() => <div>404</div>} />
           </Switch>
         </Router>

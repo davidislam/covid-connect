@@ -10,7 +10,7 @@ class Booking extends Component {
       <div>
         <h1>Schedule an appointment</h1>
         <DatePicker label="Choose a date" />
-        <Link to='/booking'>
+        <Link to='/centres'>
           <Button variant="contained" color="primary">
             Show Assessment Centres
         </Button>
