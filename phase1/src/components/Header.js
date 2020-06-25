@@ -20,6 +20,9 @@ class Header extends Component {
           <Link to="/Signup">
             <li>Sign Up</li>
           </Link>
+          <Link to="/Screening">
+            <li>COVID Screening</li>
+          </Link>
         </ul>
       </nav>
 
