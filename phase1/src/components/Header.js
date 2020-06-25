@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 class Header extends Component {
@@ -11,7 +11,7 @@ class Header extends Component {
           <Link to="/">
             <li>Home</li>
           </Link>
-          <Link to="/Centre">
+          <Link to="/booking">
             <li>Center</li>
           </Link>
           <Link to="/FAQs">
