@@ -1,9 +1,29 @@
 import React, { Component } from 'react';
 
 class Signup extends Component {
-  state = {}
+  state = {};
   render() {
-    return (<h1>Signup</h1>);
+    return (
+      <form action="">
+        <label for="formUserName">User Name:</label> <br />
+        <input type="text" id="formUserName" name="formUserName" /><br /><br />
+
+        <label for="formFN">First Name:</label> <br />
+        <input type="text" id="formFN" name="formFN" /><br /><br />
+
+        <label for="formLN">Last Name:</label> <br />
+        <input type="text" id="formLN" name="formLN" /><br /><br />
+
+        <label for="formPassword">Password:</label> <br />
+        <input type="password" id="formPassword" name="formPassword" /><br /><br />
+
+        <label for="formEmail">Email:</label> <br />
+        <input type="text" id="formEmail" name="formEmail" /><br /><br />
+
+        <input type="submit" value="Register" />
+      </form>
+
+    );
   }
 }
 
