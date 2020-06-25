@@ -38,12 +38,12 @@ class FAQs extends Component {
       */} 
 
       <div onClick={(e)=>this.togglePanel(e)} className='collapsible__header'>
-        {this.props.title}
+        <p> What should I do if I have had close contact with someone who has COVID-19? </p>
       </div>
 
       {this.state.open ? (
         <div className='collapsible__inner'>
-          {this.props.children}
+          <p>Be alert for symptoms. Watch for fever, cough, shortness of breath, or other symptoms of COVID-19. Take your temperature and follow CDC guidance if you have symptoms.</p>
         </div>
       ) : null}
 
