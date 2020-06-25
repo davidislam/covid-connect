@@ -11,11 +11,11 @@ class Centre extends Component {
     return (
       <ExpansionPanel>
         <ExpnsionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <h2>{centre.name}</h2>
+          {centre.name}
         </ExpnsionPanelSummary>
         <ExpansionPanelDetails>
-          <h4>{centre.location}</h4>
-          <h4>{centre.number}</h4>
+          <div>{centre.location}</div>
+          <div>{centre.number}</div>
         </ExpansionPanelDetails>
       </ExpansionPanel>
     );
