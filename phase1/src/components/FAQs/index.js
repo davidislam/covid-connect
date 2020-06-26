@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
 // import Button from "@material-ui/core/Button";
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpnsionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
@@ -37,7 +38,7 @@ class FAQs extends Component {
             {<p>Who can visit an assessment centre?</p>}
           </ExpnsionPanelSummary>
           <ExpansionPanelDetails>
-            {<p>Anyone can be tested. Testing is a free service. If possible, bring your Ontario health card to the appointent.</p>}
+            {<p>Anyone can be tested. Testing is a free service. If possible, bring your Ontario health card to the appointent. <strong className='link__centre'><Link to="/booking">Find a centre now.</Link></strong></p>}
           </ExpansionPanelDetails>
         </ExpansionPanel>
 
