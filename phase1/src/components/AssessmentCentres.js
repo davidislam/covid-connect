@@ -32,11 +32,15 @@ class AssessmentCentres extends Component {
     ]
   }
 
+  componentDidMount() {
+    // Fetch centres data
+  }
+
   render() {
-    let { selected_date } = this.props.location.state;
+    let { selected_date, selected_city } = this.props.location.state;
     return (
       <div>
-        <h1>Showing Assessment Centres for {selected_date}</h1>
+        <h1>COVID-19 assessment centres in {selected_city} for {selected_date.toLocaleDateString()}</h1>
         <CentreList centres={this.state.centres} />
       </div>
     );
