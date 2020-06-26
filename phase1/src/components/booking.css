@@ -5,3 +5,7 @@
 .link {
   text-decoration: none;
 }
+
+.city-select {
+  width: 200px;
+}

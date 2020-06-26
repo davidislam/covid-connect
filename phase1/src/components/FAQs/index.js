@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import Button from "@material-ui/core/Button";
+// import Button from "@material-ui/core/Button";
 
 import "./styles.css";
 
-import { Link } from "react-router-dom";
-import Collapsible from './Collapsible';
+// import { Link } from "react-router-dom";
+// import Collapsible from './Collapsible';
 
 class FAQs extends Component {
   state = {}
