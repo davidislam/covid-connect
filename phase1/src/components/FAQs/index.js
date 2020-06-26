@@ -7,58 +7,64 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import "./styles.css";
 
-// import { Link } from "react-router-dom";
-// import Collapsible from './Collapsible';
-
 class FAQs extends Component {
   state = {}
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      open: false
-    }
-
-    this.togglePanel = this.togglePanel.bind(this);
-  }
-
-  togglePanel(e) {
-    this.setState({ open: !this.state.open })
-  }
 
   render() {
     return (
       <div>
-        <h1>FAQs</h1>
-
-        {/*
-      <Collapsible trigger="What should I do if I have had close contact with someone who has COVID-19?">
-        <p>Be alert for symptoms. Watch for fever, cough, shortness of breath, or other symptoms of COVID-19. Take your temperature and follow CDC guidance if you have symptoms.</p>
-      </Collapsible>
-
-      <Collapsible trigger="Who is considered a close contact to someone with COVID-19??">
-        <p>For COVID-19, a close contact is defined as anyone who was within 6 feet of an infected person for at least 15 minutes starting from 48 hours before the person began feeling sick until the time the patient was isolated.</p>
-      </Collapsible>
-      
-
-        <div onClick={(e) => this.togglePanel(e)} className='collapsible__header'>
-          <p> What should I do if I have had close contact with someone who has COVID-19? </p>
-        </div>
-
-        {this.state.open ? (
-          <div className='collapsible__inner'>
-            <p>Be alert for symptoms. Watch for fever, cough, shortness of breath, or other symptoms of COVID-19. Take your temperature and follow CDC guidance if you have symptoms.</p>
-          </div>
-        ) : null}
-
-        */}
+        <h1>Frequently Asked Questions</h1>
 
         <ExpansionPanel>
-          <ExpnsionPanelSummary expandIcon={<ExpandMoreIcon />}>
+          <ExpnsionPanelSummary expandIcon={<ExpandMoreIcon />} className="expansion__header">
             {<p>When should I visit an assessment centre?</p>}
           </ExpnsionPanelSummary>
           <ExpansionPanelDetails>
-            <div>{<p>Even if you don't show symptoms, if you feel you have been exposed to COVID-19, you should get tested. </p>}</div>
+            {<div>
+              <p>Even if you don't show <a href="https://www.ontario.ca/page/covid-19-stop-spread#section-0">symptoms</a>, if you feel you have been exposed to COVID-19, you should get tested. </p>
+              <p>You should visit an assessment centre if you:</p>
+                <ul>
+                  <li>Have symptoms</li>
+                  <li>Don't have symptoms but may have been exposed</li>
+                  <li>Don't have symptoms but may be at risk</li>
+                </ul>
+            </div>}
+          </ExpansionPanelDetails>
+        </ExpansionPanel>
+
+        <ExpansionPanel>
+          <ExpnsionPanelSummary expandIcon={<ExpandMoreIcon />} className="expansion__header">
+            {<p>Who can visit an assessment centre?</p>}
+          </ExpnsionPanelSummary>
+          <ExpansionPanelDetails>
+            {<p>Anyone can be tested. Testing is a free service. If possible, bring your Ontario health card to the appointent.</p>}
+          </ExpansionPanelDetails>
+        </ExpansionPanel>
+
+        <ExpansionPanel>
+          <ExpnsionPanelSummary expandIcon={<ExpandMoreIcon />} className="expansion__header">
+            {<p>How should I prepare for testing?</p>}
+          </ExpnsionPanelSummary>
+          <ExpansionPanelDetails>
+            {<p>If possible, bring your Ontario health card and a pen with you to be tested. Call the assessment centre if you have any additional questions or concerns.</p>}
+          </ExpansionPanelDetails>
+        </ExpansionPanel>
+
+        <ExpansionPanel>
+          <ExpnsionPanelSummary expandIcon={<ExpandMoreIcon />} className="expansion__header">
+            {<p>What should I expect during testing?</p>}
+          </ExpnsionPanelSummary>
+          <ExpansionPanelDetails>
+            {<p>The health care practitioner will take a swab of your nasal passages. Expect some temporary discomfort. </p>}
+          </ExpansionPanelDetails>
+        </ExpansionPanel>
+
+        <ExpansionPanel>
+          <ExpnsionPanelSummary expandIcon={<ExpandMoreIcon />} className="expansion__header">
+            {<p>How can I get my results?</p>}
+          </ExpnsionPanelSummary>
+          <ExpansionPanelDetails>
+            {<p>After you have been tested, you can <a href="https://covid19results.ehealthontario.ca:4443/agree">get your results</a> online. If you have trouble accessing the internet, contact your assessment centre. </p>}
           </ExpansionPanelDetails>
         </ExpansionPanel>
 

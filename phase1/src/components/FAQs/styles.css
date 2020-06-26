@@ -6,7 +6,7 @@
     transform: translate(-50%, -50%);
 }
 
-.collapsible__header {
+.expansion__header {
     cursor: pointer;
     border: solid 1px #f2f2f2;
     padding: 15px;
@@ -15,7 +15,7 @@
     font-family: verdana;
 }
 
-.collapsible__inner {
+.expansion__inner {
     cursor: pointer;
     border-left: solid 1px #f2f2f2;
     border-right: solid 1px #f2f2f2;
