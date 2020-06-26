@@ -15,8 +15,8 @@ nav {
   list-style: none;
 }
 
-a {
+.headerLinks {
+  color: white;
   font-weight: bold;
-  color: inherit;
   text-decoration: none;
 }

@@ -10,19 +10,19 @@ class Header extends Component {
       <nav>
         <ul className="navList">
           <Link to="/">
-            <li>Home</li>
+            <li className='headerLinks'>Home</li>
           </Link>
           <Link to="/booking">
-            <li>Center</li>
+            <li className='headerLinks'>Center</li>
           </Link>
           <Link to="/FAQs">
-            <li>FAQs</li>
+            <li className='headerLinks'>FAQs</li>
           </Link>
           <Link to="/Signup">
-            <li>Sign Up</li>
+            <li className='headerLinks'>Sign Up</li>
           </Link>
           <Link to="/Screening">
-            <li>COVID Screening</li>
+            <li className='headerLinks'>COVID Screening</li>
           </Link>
         </ul>
       </nav>

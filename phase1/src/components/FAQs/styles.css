@@ -7,23 +7,7 @@
 }
 
 .expansion__header {
-    cursor: pointer;
-    border: solid 1px #f2f2f2;
-    padding: 15px;
-    background-color: #0089CC;
-    color: #FFF;
-    font-family: verdana;
-}
-
-.expansion__inner {
-    cursor: pointer;
-    border-left: solid 1px #f2f2f2;
-    border-right: solid 1px #f2f2f2;
-    border-bottom: solid 1px #f2f2f2;
-    border-radius: 0 0 5px 5px;
-    padding: 15px;
-    font-family: verdana;
-    font-size: 14px;
+    font-weight: bold;
 }
 
 .home__button {
@@ -33,9 +17,5 @@
 
 .home__button-link {
     text-decoration: none;
- }
-
- .link__centre {
-    color: #5088e9;
  }
 
