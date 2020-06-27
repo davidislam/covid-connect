@@ -18,8 +18,8 @@ class Header extends Component {
           <Link to="/FAQs">
             <li className='headerLinks'>FAQs</li>
           </Link>
-          <Link to="/Signup">
-            <li className='headerLinks'>Sign Up</li>
+          <Link to="/Signin">
+            <li className='headerLinks'>Sign In</li>
           </Link>
           <Link to="/Screening">
             <li className='headerLinks'>COVID Screening</li>
