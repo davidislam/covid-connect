@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import { Drawer } from '@material-ui/core';
+//import { Drawer } from '@material-ui/core';
 //import Button from "@material-ui/core/Button";
-import yellowMark from "./yellowMark.png";
 
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpnsionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
@@ -12,14 +11,16 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import "./styles.css";
 
 class FAQs extends Component {
-  state = {}
+  state = {
+
+  }
+
 
   render() {
     return (
       <div>
-        <h1>Frequently Asked Questions</h1>
 
-        <img src={yellowMark} className="yellowLogo" />
+        <h1>Frequently Asked Questions</h1>
 
         <ExpansionPanel>
           <ExpnsionPanelSummary expandIcon={<ExpandMoreIcon />} className="expansion__header">
@@ -73,7 +74,6 @@ class FAQs extends Component {
             {<p>After you have been tested, you can <a href="https://covid19results.ehealthontario.ca:4443/agree">get your results</a> online. If you have trouble accessing the internet, contact your assessment centre. </p>}
           </ExpansionPanelDetails>
         </ExpansionPanel>
-
 
       </div>
     );
