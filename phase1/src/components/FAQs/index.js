@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-// import Button from "@material-ui/core/Button";
+import { Drawer } from '@material-ui/core';
+//import Button from "@material-ui/core/Button";
+import yellowMark from "./yellowMark.png";
+
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpnsionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
@@ -15,6 +18,8 @@ class FAQs extends Component {
     return (
       <div>
         <h1>Frequently Asked Questions</h1>
+
+        <img src={yellowMark} className="yellowLogo" />
 
         <ExpansionPanel>
           <ExpnsionPanelSummary expandIcon={<ExpandMoreIcon />} className="expansion__header">
