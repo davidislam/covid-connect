@@ -6,12 +6,12 @@ import Popup from "./FAQs/Popup.js";
 
 class Home extends Component {
   state = {
-    showPopup: false
+    selectPopup: false
   }
 
   togglePopup() {
     this.setState({
-      showPopup: !this.state.showPopup
+      selectPopup: !this.state.selectPopup
     });
   }
 
@@ -25,7 +25,7 @@ class Home extends Component {
           <button onClick={this.togglePopup.bind(this)} className="button__yellow "><img src={yellowMark} className="yellowLogo" /></button>
         </div>
         
-        {this.state.showPopup ? 
+        {this.state.selectPopup ? 
           <Popup
             text='Important Alerts'
             closePopup={this.togglePopup.bind(this)}
