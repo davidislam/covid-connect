@@ -6,8 +6,8 @@ class Signin extends Component {
   render() {
     return (
       <div>
-      <h1>Sign In</h1>
-      <p>If you haven't created an account yet, then <Link to="/Signup">sign up</Link> instead.</p>
+        <h1>Sign In</h1>
+        <p>If you haven't created an account yet, then <Link to="/Signup">sign up</Link> instead.</p>
 
       </div>
       );

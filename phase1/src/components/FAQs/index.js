@@ -28,7 +28,7 @@ class FAQs extends Component {
           </ExpnsionPanelSummary>
           <ExpansionPanelDetails>
             {<div>
-              <p>Even if you don't show <a href="https://www.ontario.ca/page/covid-19-stop-spread#section-0">symptoms</a>, if you feel you have been exposed to COVID-19, you should get tested. </p>
+              <p>Even if you don't show <a href="https://www.ontario.ca/page/covid-19-stop-spread#section-0">symptoms</a>, you should get tested if you feel you may have been exposed to COVID-19. </p>
               <p>You should visit an assessment centre if you:</p>
                 <ul>
                   <li>Have symptoms</li>

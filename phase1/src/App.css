@@ -6,3 +6,13 @@
   color: #5088e9;
 }
 
+button {
+  padding: 5px 20px;
+  text-align: center;
+
+  border-radius: 4px;
+  background-color: #3b6978;
+  color: white;
+  font-weight: bold;
+}
+
