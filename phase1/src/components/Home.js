@@ -9,7 +9,7 @@ class Home extends Component {
     selectPopup: false
   }
 
-  togglePopup() {
+  togglePop = () => {
     this.setState({
       selectPopup: !this.state.selectPopup
     });
@@ -22,13 +22,14 @@ class Home extends Component {
         <h1>Home</h1>
 
         <div>
-          <button onClick={this.togglePopup.bind(this)} className="button__yellow "><img src={yellowMark} className="yellowLogo" /></button>
+          <button onClick={this.togglePop.bind(this)} className="button__yellow "><img src={yellowMark} className="yellowLogo" /></button>
         </div>
         
         {this.state.selectPopup ? 
           <Popup
-            text='Important Alerts'
-            closePopup={this.togglePopup.bind(this)}
+            heading="Important Alerts"
+            innertext="This is the important information to know!"
+            closePopup={this.togglePop.bind(this)}
           />
           : null
         }
