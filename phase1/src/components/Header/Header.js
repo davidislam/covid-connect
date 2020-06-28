@@ -15,7 +15,7 @@ export default function Header() {
   const classes = useStyles();
 
   return (
-    <div style={{background:"LightCoral"}}>
+    <div style={{background:"#3b6978"}}>
       <Grid container spacing={2} direction="row" justify="flex-start" alignItems="center">
 
         <Grid item xs={2}>
