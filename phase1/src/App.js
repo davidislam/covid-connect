@@ -7,7 +7,7 @@ import Home from './components/Home';
 import Signin from './components/Signin';
 import Signup from './components/Signup';
 import Profile from './components/Profile';
-import Booking from './components/Booking';
+import Booking from './components/Booking/index';
 import Screening from './components/Screening';
 import Policies from './components/Policies';
 import FAQs from './components/FAQs';
