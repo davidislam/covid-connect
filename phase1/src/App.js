@@ -12,7 +12,7 @@ import Screening from './components/Screening';
 import Policies from './components/Policies';
 import FAQs from './components/FAQs';
 import News from './components/News';
-import AssessmentCentres from './components/AssessmentCentres';
+import AssessmentCentres from './components/Centre';
 
 class App extends Component {
 

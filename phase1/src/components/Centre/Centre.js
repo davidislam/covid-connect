@@ -14,7 +14,7 @@ class Centre extends Component {
           {centre.name}
         </ExpnsionPanelSummary>
         <ExpansionPanelDetails>
-          <div>{centre.location}</div>
+          <div>{centre.location.city}</div>
           <div>{centre.number}</div>
         </ExpansionPanelDetails>
       </ExpansionPanel>
