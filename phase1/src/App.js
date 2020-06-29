@@ -6,7 +6,7 @@ import Header from './components/Header/Header'
 import Home from './components/Home';
 import Signin from './components/Signin/index';
 import Signup from './components/Signup/index';
-import Profile from './components/Profile';
+import Profile from './components/Profile/index';
 import Booking from './components/Booking/index';
 import Screening from './components/Screening';
 import Policies from './components/Policies';

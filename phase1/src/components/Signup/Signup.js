@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {TextField,makeStyles, Button,InputAdornment,IconButton,
-Radio,RadioGroup,FormControl,FormControlLabel} from "@material-ui/core"
+Radio,RadioGroup,FormControl,FormControlLabel,
+Select,MenuItem,InputLabel} from "@material-ui/core"
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
@@ -9,7 +10,7 @@ const useStyles = makeStyles(theme => ({
     '& > *': {
       margin: theme.spacing(2),
       width: '35ch',
-    }
+    },
   }
 
 }));
@@ -26,6 +27,9 @@ export default function SignupComponent(){
     firstName:'',
     lastName:'',
     age:0,
+    healthCardNum:'',
+    phoneNumber:'' ,
+    address: '',
     showPassword: ''
   })
 
@@ -36,6 +40,16 @@ export default function SignupComponent(){
   const handleChange = (prop)=>(event)=>{
     setValue({...value,[prop]:event.target.value});
   };
+
+   const populateAge = () => {
+    let i = 0;
+    let ageArr = [];
+    while (i < 99){
+      i++;
+      ageArr.push(i);
+    }
+    return ageArr;
+  }
 
   return(
     <div>
@@ -68,7 +82,8 @@ export default function SignupComponent(){
           <RadioGroup
           name="gender"
           onChange={()=>handleChange("gender")}
-          row>
+          row
+          required>
 
           <FormControlLabel
           value="male"
@@ -80,11 +95,24 @@ export default function SignupComponent(){
           control={<Radio color="secondary" />}
           label="female" />
 
-
           </RadioGroup>
         </FormControl>
         <br />
 
+        <FormControl variant="outlined">
+          <InputLabel id="ageLabel">Age</InputLabel>
+            <Select
+            labelId="ageLabel"
+            id="age"
+            onChange={handleChange("age")}
+            style={{width:'10ch'}}>
+
+            {populateAge().map(num =>
+              <MenuItem value={num}>{num}</MenuItem>)
+            }
+        </Select>
+        </FormControl>
+        <br />
 
         <TextField
         id="Password"
@@ -104,12 +132,29 @@ export default function SignupComponent(){
         <br />
 
         <TextField
+        id="healthCardNum"
+        label="Health Card Number(optional)"
+        variant="outlined"
+        onChange={()=>handleChange("healthCardNum")}
+         />
+        <br />
+
+        <TextField
+        id="address"
+        label="Address(optional)"
+        variant="outlined"
+        onChange={()=>handleChange("address")}
+         />
+        <br />
+
+        <TextField
         id="Email"
         label="E-mail(optional)"
         variant="outlined"
         onChange={()=>handleChange("email")}
          />
         <br />
+
 
         <Button variant="contained" color="primary">
         Register
