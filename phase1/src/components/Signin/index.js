@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from "react-router-dom";
+import SigninComponent from './Signin'
+import {Grid,Divider} from "@material-ui/core"
+
 
 class Signin extends Component {
   state = {}
@@ -7,8 +9,7 @@ class Signin extends Component {
     return (
       <div>
         <h1>Sign In</h1>
-        <p>If you haven't created an account yet, then <Link to="/Signup">sign up</Link> instead.</p>
-
+        <SigninComponent />
       </div>
       );
   }
