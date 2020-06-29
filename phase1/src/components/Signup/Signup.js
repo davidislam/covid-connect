@@ -140,6 +140,15 @@ export default function SignupComponent(){
         <br />
 
         <TextField
+        id="phoneNumber"
+        label="Phone Number"
+        variant="outlined"
+        onChange={()=>handleChange("phoneNumber")}
+        required
+         />
+        <br />
+
+        <TextField
         id="address"
         label="Address(optional)"
         variant="outlined"
