@@ -64,12 +64,6 @@ export default function SigninComponent(){
           Sign in
           </Button>
 
-          <br />
-          <Link to="/Signup" style={{textDecoration: 'none'}}>
-            <Button variant="contained">
-            Don't have an account? Register here
-            </Button>
-          </Link>
 
       </form>
     </div>
