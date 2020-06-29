@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 
 
 class Profile extends Component {
-  state = {}
+  state = {
+    adminStatus:false
+  }
   render() {
     return (<h1>Profile</h1>);
   }

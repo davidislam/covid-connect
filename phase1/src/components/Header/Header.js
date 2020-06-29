@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Link } from "react-router-dom";
 import {Typography, makeStyles,Grid} from "@material-ui/core";
 
@@ -11,6 +11,14 @@ const useStyles = makeStyles({
 
 export default function Header() {
   const classes = useStyles();
+
+  const [status,setStatus] = useState({
+    loggedIn: false
+  });
+
+  const handleStatus = () =>{
+    setStatus({loggedIn:!status.loggedIn});
+  }
 
   return (
     <div style={{background:"#3b6978"}}>
@@ -40,11 +48,29 @@ export default function Header() {
             </Link>
         </Grid>
 
-        <Grid item>
-          <Link to="/Signin" style={{textDecoration: 'none'}}>
-            <Typography variant="h6" className={classes.words}>Sign In</Typography>
-            </Link>
-        </Grid>
+        {status.loggedIn &&
+          <Grid item>
+            <Link to="/Profile" style={{textDecoration: 'none'}}>
+              <Typography variant="h6" className={classes.words}>Profile</Typography>
+              </Link>
+          </Grid>
+        }
+
+        {!status.loggedIn?(
+          <Grid item>
+            <Link to="/Signin" style={{textDecoration: 'none'}} onClick={()=>handleStatus()}>
+              <Typography variant="h6" className={classes.words}>Sign In</Typography>
+              </Link>
+          </Grid>
+        ):(
+          <Grid item>
+            <Link to="/Signin" style={{textDecoration: 'none'}} onClick={()=>handleStatus()}>
+              <Typography variant="h6" className={classes.words}>Sign Out</Typography>
+              </Link>
+          </Grid>
+        )
+        }
+
       </Grid>
     </div>
   );
