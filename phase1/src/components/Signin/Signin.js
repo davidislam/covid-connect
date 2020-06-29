@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import { Link } from "react-router-dom";
 import {TextField,makeStyles, Button,InputAdornment,IconButton} from "@material-ui/core"
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
@@ -21,13 +20,15 @@ export default function SigninComponent(){
   const [value, setValue] = useState({
     password: '',
     showPassword: false,
+    username: '',
+
   })
 
-  const handlePassword = (prop)=>(event)=>{
+  const handleChange = (prop)=>(event)=>{
     setValue({...value,[prop]:event.target.value});
   };
 
-  const handleShowChange = () => {
+  const handleShowPass = () => {
     setValue({...value, showPassword: !value.showPassword})
   };
 
@@ -38,6 +39,8 @@ export default function SigninComponent(){
           id="Username"
           label="Username"
           variant="outlined"
+          value = {value.username}
+          onChange={handleChange("username")}
           required />
           <br />
 
@@ -48,10 +51,10 @@ export default function SigninComponent(){
           variant="outlined"
           type={value.showPassword ? "text" : "password"}
           value = {value.password}
-          onChange={handlePassword("password")}
+          onChange={handleChange("password")}
           InputProps={{
             endAdornment: <InputAdornment position="end">
-            <IconButton onClick={() => handleShowChange()} >
+            <IconButton onClick={() => handleShowPass()} >
             {value.showPassword ? <VisibilityOff /> : <Visibility />}
             </IconButton>
             </InputAdornment>,

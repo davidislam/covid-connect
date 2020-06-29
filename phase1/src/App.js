@@ -5,7 +5,7 @@ import './App.css';
 import Header from './components/Header/Header'
 import Home from './components/Home';
 import Signin from './components/Signin/index';
-import Signup from './components/Signup';
+import Signup from './components/Signup/index';
 import Profile from './components/Profile';
 import Booking from './components/Booking/index';
 import Screening from './components/Screening';

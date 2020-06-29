@@ -1,8 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import {Typography, AppBar,Toolbar, IconButton, makeStyles, Container,Grid} from "@material-ui/core";
-import Menu from "@material-ui/icons/Menu"
-import MenuItem from '@material-ui/core/MenuItem';
+import {Typography, makeStyles,Grid} from "@material-ui/core";
 
 const useStyles = makeStyles({
   words: {
