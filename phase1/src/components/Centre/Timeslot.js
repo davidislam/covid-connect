@@ -2,20 +2,13 @@ import React, { useState } from 'react';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 
-
 export default function Timeslot(props) {
-  const [state, setState] = useState({ checked: false });
+  const [state, setState] = useState({ isChecked: false })
+  const { timeslot, handleCheckboxChange } = props;
 
-  const { timeslot, addTime, removeTime } = props;
-
-  const handleChange = e => {
-    const isChecked = e.target.checked;
-    if (isChecked) {
-      addTime(timeslot)
-    } else {
-      removeTime(timeslot);
-    }
-    setState({ checked: isChecked });
+  const handleChange = () => {
+    setState({ ...state, isChecked: !state.isChecked });
+    handleCheckboxChange(timeslot.time);
   }
 
   let element;
@@ -24,8 +17,7 @@ export default function Timeslot(props) {
       disabled
       control={
         <Checkbox
-          checked={state.checked}
-          onChange={handleChange}
+          checked={true}
           name='checked'
           color='primary'
         />
@@ -36,10 +28,10 @@ export default function Timeslot(props) {
     element = <FormControlLabel
       control={
         <Checkbox
-          checked={state.checked}
           onChange={handleChange}
-          name='checked'
+          name='isChecked'
           color='primary'
+          checked={state.isChecked}
         />
       }
       label={timeslot.time}

@@ -1,5 +1,14 @@
-/* .panel {
+.centres {
+  margin-top: 25px;
   margin-left: 150px;
   margin-right: 150px;
-  padding: 20px;
-} */
+}
+
+.container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.icon {
+  margin-right: 5px;
+}

@@ -2,50 +2,69 @@ import React, { Component } from 'react';
 import { uid } from 'react-uid';
 import Button from '@material-ui/core/Button';
 import FormGroup from '@material-ui/core/FormGroup';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import WatchLaterIcon from '@material-ui/icons/WatchLater';
 
 import Timeslot from './Timeslot';
 
 export default class HoursForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      times: []
-    }
+  state = {
+    timeslots: this.props.timeslots,
+    errorMessage: ""
+  }
+
+  componentWillMount() {
+    this.selected_times = new Set();
   }
 
   handleSubmit = e => {
     e.preventDefault();
+
+    if (this.selected_times.size === 0) {
+      this.setState({ errorMessage: 'Please choose a timeslot' });
+      return;
+    }
+
+    // Update timeslot's <is_taken> value
+    this.setState({
+      timeslots: this.state.timeslots.map(t => {
+        if (this.selected_times.has(t.time)) {
+          t.is_taken = true;
+        }
+        return t;
+      })
+    })
+
     // Pass selected timeslots into User's profile
-    this.state.times.forEach(time => {
-      time.is_taken = true;
-    });
+
+    this.selected_times = new Set();
+    this.setState({ errorMessage: '' });
+
     alert("Appointment successfully scheduled");
   }
 
-  addTime = time => {
-    this.setState(state => ({
-      times: state.times.concat([time])
-    }))
-  }
-
-  removeTime = time => {
-    const newTimes = this.state.times.filter(t => t !== time);
-    this.setState({ times: newTimes });
+  toggleCheckbox = time => {
+    if (this.selected_times.has(time)) {
+      this.selected_times.delete(time);
+    } else {
+      this.selected_times.add(time);
+    }
   }
 
   render() {
-    const { heading, timeslots } = this.props;
+    const { heading } = this.props;
     return (
       <form onSubmit={this.handleSubmit}>
-        <h4>{heading}</h4>
+        <h4> <WatchLaterIcon color='primary' fontSize='small' className='icon' />  {heading}</h4>
         <FormGroup>
-          {timeslots.map(timeslot => (
-            <Timeslot key={uid(timeslot)} timeslot={timeslot} addTime={this.addTime} removeTime={this.removeTime} />
+          {this.state.timeslots.map((timeslot) => (
+            <Timeslot key={uid(timeslot)} timeslot={timeslot} handleCheckboxChange={this.toggleCheckbox} />
           ))}
         </FormGroup>
+        <FormHelperText error={true}>{this.state.errorMessage}</FormHelperText>
         <Button type='submit' variant="contained" color="primary">
           Confirm
-          </Button>
+        </Button>
       </form>
     )
   }
