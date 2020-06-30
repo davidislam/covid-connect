@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import CentreList from './CentreList';
 import CENTRES from './data';
 
+import './styles.css';
+
 class AssessmentCentres extends Component {
   state = {
     centres: []
@@ -26,7 +28,7 @@ class AssessmentCentres extends Component {
 
   render() {
     if (!this.props.location) {
-      return;
+      return null;
     }
     let { selected_date, selected_city } = this.props.location.state;
 
