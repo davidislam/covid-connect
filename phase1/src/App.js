@@ -60,7 +60,9 @@ class App extends Component {
             )} />
             <Route path='/signup' component={Signup} />
             <Route path='/profile' component={Profile} />
-            <Route path='/booking' component={Booking} />
+            <Route path='/booking' render={() => (
+              <Booking isLoggedIn={this.state.isLoggedIn} username={this.state.username} />
+            )} />
             <Route path='/screening' component={Screening} />
             <Route path='/policies' component={Policies} />
             <Route path='/faqs' component={FAQs} />
