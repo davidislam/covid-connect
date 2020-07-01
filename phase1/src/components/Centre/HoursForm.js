@@ -4,13 +4,15 @@ import Button from '@material-ui/core/Button';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import WatchLaterIcon from '@material-ui/icons/WatchLater';
+import CustomizedSnackbar from './../CustomizedSnackbar';
 
 import Timeslot from './Timeslot';
 
 export default class HoursForm extends Component {
   state = {
     timeslots: this.props.timeslots,
-    errorMessage: ""
+    errorMessage: "",
+    showSnackbar: false
   }
 
   componentWillMount() {
@@ -38,9 +40,7 @@ export default class HoursForm extends Component {
     // Pass selected timeslots into User's profile
 
     this.selected_times = new Set();
-    this.setState({ errorMessage: '' });
-
-    alert("Appointment successfully scheduled");
+    this.setState({ errorMessage: '', showSnackbar: true });
   }
 
   toggleCheckbox = time => {
@@ -50,6 +50,8 @@ export default class HoursForm extends Component {
       this.selected_times.add(time);
     }
   }
+
+  toggleSnackbar = () => { this.setState(state => ({ showSnackbar: !state.showSnackbar })) };
 
   render() {
     const { heading } = this.props;
@@ -65,6 +67,7 @@ export default class HoursForm extends Component {
         <Button type='submit' variant="contained" color="primary">
           Confirm
         </Button>
+        <CustomizedSnackbar message="Appointment details have been added to your profile" severity='success' open={this.state.showSnackbar} toggleSnackbar={this.toggleSnackbar} />
       </form>
     )
   }

@@ -59,7 +59,9 @@ class App extends Component {
               <Signin onLogin={this.handleLogin} onAdmin={this.handleAdmin} changeUsername={this.changeUsername} />
             )} />
             <Route path='/signup' component={Signup} />
-            <Route path='/profile' component={Profile} />
+            <Route path='/profile' render={() => (
+              <Profile username={this.state.username} />
+            )} />
             <Route path='/booking' render={() => (
               <Booking isLoggedIn={this.state.isLoggedIn} username={this.state.username} />
             )} />

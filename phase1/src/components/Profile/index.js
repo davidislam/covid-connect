@@ -1,13 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
+import User from './User';
+import Admin from './Admin';
 
 
-class Profile extends Component {
-  state = {
-    adminStatus:false,
+function Profile(props) {
+  let element;
+  if (props.isAdmin) {
+    element = <Admin username={props.username} />
+  } else {
+    element = <User username={props.username} />
   }
-  render() {
-    return (<h1>Profile</h1>);
-  }
+
+  return element;
 }
 
 export default Profile;
