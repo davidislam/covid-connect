@@ -1,77 +1,95 @@
-import React, {useState} from 'react';
-import {Link,TextField,makeStyles, Button,InputAdornment,IconButton} from "@material-ui/core"
+import React, { useState } from 'react';
+import { TextField, makeStyles, Button, InputAdornment, IconButton } from "@material-ui/core"
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import CustomizedSnackbar from './../CustomizedSnackbar';
+
+import { useHistory } from 'react-router-dom';
 
 
 const useStyles = makeStyles(theme => ({
-  root:{
+  root: {
     '& > *': {
       margin: theme.spacing(2),
       width: '35ch',
-    }
+    },
   }
-
 }));
 
-export default function SigninComponent(){
+export default function SigninComponent(props) {
   const classes = useStyles();
+  let history = useHistory()
 
   const [value, setValue] = useState({
     password: '',
     showPassword: false,
     username: '',
-
+    showSnackbar: false,
+    message: '',
+    severity: ''
   })
 
-  const handleChange = (prop)=>(event)=>{
-    setValue({...value,[prop]:event.target.value});
+  const handleChange = (prop) => (event) => {
+    setValue({ ...value, [prop]: event.target.value });
   };
 
   const handleShowPass = () => {
-    setValue({...value, showPassword: !value.showPassword})
+    setValue({ ...value, showPassword: !value.showPassword })
   };
 
-  return(
+  const handleClick = () => {
+    if (value.username === 'user' && value.password === 'user') {
+      helper();
+    } else if (value.username === 'admin' && value.password === 'admin') {
+      props.onAdmin();
+      helper();
+    } else {
+      setValue({ ...value, showSnackbar: true, message: "Incorrect username/password", severity: 'error' })
+    }
+  }
+
+  const helper = () => {
+    props.onLogin();
+    props.changeUsername(value.username);
+    // setValue({ ...value, showSnackbar: true, message: "Logged in successfully as " + value.username, severity: 'success' })
+    history.push('/');
+    alert("Logged in successfully as " + value.username);
+  }
+
+  const toggleSnackbar = () => setValue({ ...value, showSnackbar: !value.showSnackbar });
+
+  return (
     <div>
       <form className={classes.root}>
-          <TextField
+        <TextField
           id="Username"
           label="Username"
           variant="outlined"
-          value = {value.username}
+          value={value.username}
           onChange={handleChange("username")}
           required />
-          <br />
-
-
-          <TextField
+        <br />
+        <TextField
           id="Password"
           label="Password"
           variant="outlined"
           type={value.showPassword ? "text" : "password"}
-          value = {value.password}
+          value={value.password}
           onChange={handleChange("password")}
           InputProps={{
             endAdornment: <InputAdornment position="end">
-            <IconButton onClick={() => handleShowPass()} >
-            {value.showPassword ? <VisibilityOff /> : <Visibility />}
-            </IconButton>
+              <IconButton onClick={() => handleShowPass()} >
+                {value.showPassword ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
             </InputAdornment>,
           }}
           required />
-
-
-          <br />
-          <Link to="/profile">
-            <Button variant="contained" color="primary">
-            Sign in
-            </Button>
-          </Link>
-
-
+        <br />
+        <Button variant="contained" color="primary" onClick={handleClick}>
+          Sign in
+        </Button>
+        <CustomizedSnackbar message={value.message} severity={value.severity} open={value.showSnackbar} toggleSnackbar={toggleSnackbar} />
       </form>
     </div>
-
   );
 }

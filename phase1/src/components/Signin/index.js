@@ -8,10 +8,10 @@ class Signin extends Component {
     return (
       <div>
         <h1>Sign In</h1>
-        <SigninComponent />
+        <SigninComponent onLogin={this.props.onLogin} changeUsername={this.props.changeUsername} onAdmin={this.props.onAdmin} />
         <SignupButton />
       </div>
-      );
+    );
   }
 }
 
