@@ -16,22 +16,32 @@ import AssessmentCentres from './components/Centre';
 
 class App extends Component {
   // Global state
+  initState = {
+    isLoggedIn: false,
+    isAdmin: false,
+    username: ''
+  }
+
   state = {
     isLoggedIn: false,
     isAdmin: false,
     username: ''
   }
 
-  toggleLogin = () => {
-    this.setState(state => ({
-      isLoggedIn: !state.isLoggedIn
-    }))
+  handleLogin = () => {
+    this.setState({
+      isLoggedIn: true
+    })
   }
 
-  toggleAdmin = () => {
-    this.setState(state => ({
-      isAdmin: !state.isAdmin
-    }))
+  handleAdmin = () => {
+    this.setState({
+      isAdmin: true
+    })
+  }
+
+  handleLogout = () => {
+    this.setState(this.initState);
   }
 
   changeUsername = username => this.setState({ username });
@@ -40,11 +50,11 @@ class App extends Component {
     return (
       <div className="App">
         <Router>
-          <Header loggedIn={this.state.isLoggedIn} />
+          <Header loggedIn={this.state.isLoggedIn} onSignout={this.handleLogout} />
           <Switch>
             <Route path='/' exact component={Home} />
             <Route path='/signin' render={() => (
-              <Signin onLogin={this.toggleLogin} onAdmin={this.toggleAdmin} changeUsername={this.changeUsername} />
+              <Signin onLogin={this.handleLogin} onAdmin={this.handleAdmin} changeUsername={this.changeUsername} />
             )} />
             <Route path='/signup' component={Signup} />
             <Route path='/profile' component={Profile} />
