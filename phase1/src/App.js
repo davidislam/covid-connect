@@ -52,7 +52,9 @@ class App extends Component {
         <Router>
           <Header loggedIn={this.state.isLoggedIn} onSignout={this.handleLogout} />
           <Switch>
-            <Route path='/' exact component={Home} />
+            <Route path='/' exact render={() => (
+              <Home username={this.state.username} isLoggedIn={this.state.isLoggedIn} />
+            )} />
             <Route path='/signin' render={() => (
               <Signin onLogin={this.handleLogin} onAdmin={this.handleAdmin} changeUsername={this.changeUsername} />
             )} />

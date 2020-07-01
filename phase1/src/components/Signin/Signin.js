@@ -53,7 +53,7 @@ export default function SigninComponent(props) {
     props.changeUsername(value.username);
     // setValue({ ...value, showSnackbar: true, message: "Logged in successfully as " + value.username, severity: 'success' })
     history.push('/');
-    alert("Logged in successfully as " + value.username);
+    // alert("Logged in successfully as " + value.username);
   }
 
   const toggleSnackbar = () => setValue({ ...value, showSnackbar: !value.showSnackbar });
