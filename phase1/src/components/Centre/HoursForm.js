@@ -15,7 +15,7 @@ export default class HoursForm extends Component {
     showSnackbar: false
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.selected_times = new Set();
   }
 

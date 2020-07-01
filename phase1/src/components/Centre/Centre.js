@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpnsionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import PhoneIcon from '@material-ui/icons/Phone';
@@ -44,17 +44,17 @@ class Centre extends Component {
   render() {
     const { centre } = this.props;
     return (
-      <ExpansionPanel className='panel'>
-        <ExpnsionPanelSummary expandIcon={<ExpandMoreIcon />}>
+      <Accordion className='panel'>
+        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
           {centre.name}
-        </ExpnsionPanelSummary>
-        <ExpansionPanelDetails className='container'>
+        </AccordionSummary>
+        <AccordionDetails className='container'>
           <Address location={centre.location} className='item' />
           <Number phone={centre.number} className='item' />
           <Url link={centre.website} className='item' />
           <HoursForm heading="Details" timeslots={centre.hours} className='item' />
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
+        </AccordionDetails>
+      </Accordion>
     );
   }
 }

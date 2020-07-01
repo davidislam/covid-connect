@@ -30,7 +30,7 @@ class AssessmentCentres extends Component {
     if (!this.props.location) {
       return null;
     }
-    let { selected_date, selected_city } = this.props.location.state;
+    // let { selected_date, selected_city } = this.props.location.state;
 
     return (
       <div className='centres'>

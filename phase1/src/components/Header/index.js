@@ -59,11 +59,11 @@ export default function Header(props) {
         </Grid>
 
         <Grid item>
-          <IconButton edge="end">
+          <IconButton edge="end" onClick={handleMenuClick}>
 
             <AccountCircleIcon
               fontSize="large"
-              onClick={handleMenuClick} />
+            />
           </IconButton>
 
           <Menu
