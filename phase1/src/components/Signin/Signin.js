@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {TextField,makeStyles, Button,InputAdornment,IconButton} from "@material-ui/core"
+import {Link,TextField,makeStyles, Button,InputAdornment,IconButton} from "@material-ui/core"
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
@@ -63,9 +63,11 @@ export default function SigninComponent(){
 
 
           <br />
-          <Button variant="contained" color="primary">
-          Sign in
-          </Button>
+          <Link to="/profile">
+            <Button variant="contained" color="primary">
+            Sign in
+            </Button>
+          </Link>
 
 
       </form>

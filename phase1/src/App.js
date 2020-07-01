@@ -15,6 +15,8 @@ import News from './components/News';
 import AssessmentCentres from './components/Centre';
 
 class App extends Component {
+  state = {loggedIn: false}
+
 
   render() {
     return (

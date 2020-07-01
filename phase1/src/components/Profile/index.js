@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 class Profile extends Component {
   state = {
-    adminStatus:false
+    adminStatus:false,
   }
   render() {
     return (<h1>Profile</h1>);

@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 
 
 
-export default function SignupComponent(){
+export default function ProfileComponent(){
   const classes = useStyles();
 
 

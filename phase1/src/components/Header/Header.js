@@ -1,24 +1,42 @@
 import React, {useState} from 'react';
 import { Link } from "react-router-dom";
-import {Typography, makeStyles,Grid} from "@material-ui/core";
-
+import {Typography, makeStyles,Grid,IconButton,MenuItem,Menu} from "@material-ui/core";
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 const useStyles = makeStyles({
   words: {
     padding:'10px',
     color:"black",
-  }
+  },
 });
 
 export default function Header() {
   const classes = useStyles();
 
   const [status,setStatus] = useState({
-    loggedIn: false
+    loggedIn: true
   });
+
 
   const handleStatus = () =>{
     setStatus({loggedIn:!status.loggedIn});
   }
+
+
+
+
+  const [anchorEl,setAnchorEl] = useState(null);
+
+  const handleMenuClick = (event)=>{
+    setAnchorEl(event.currentTarget);
+  }
+
+  const handleMenuClosed = () =>{
+    setAnchorEl(null);
+  }
+
+
+
+
 
   return (
     <div style={{background:"#3b6978"}}>
@@ -48,28 +66,50 @@ export default function Header() {
             </Link>
         </Grid>
 
-        {status.loggedIn &&
-          <Grid item>
-            <Link to="/Profile" style={{textDecoration: 'none'}}>
-              <Typography variant="h6" className={classes.words}>Profile</Typography>
-              </Link>
-          </Grid>
-        }
+        <Grid item>
+        <IconButton edge="end">
 
-        {!status.loggedIn?(
-          <Grid item>
-            <Link to="/Signin" style={{textDecoration: 'none'}} onClick={()=>handleStatus()}>
-              <Typography variant="h6" className={classes.words}>Sign In</Typography>
-              </Link>
-          </Grid>
-        ):(
-          <Grid item>
-            <Link to="/Signin" style={{textDecoration: 'none'}} onClick={()=>handleStatus()}>
-              <Typography variant="h6" className={classes.words}>Sign Out</Typography>
-              </Link>
-          </Grid>
-        )
-        }
+        <AccountCircleIcon
+        fontSize="large"
+        onClick={handleMenuClick}/>
+        </IconButton>
+
+          <Menu
+            id="account-menu"
+            anchorEl={anchorEl}
+            open={Boolean(anchorEl)}
+            onClose={handleMenuClosed}>
+            {!status.loggedIn?(
+              <div>
+                <Link to="/Signin" style={{textDecoration: 'none'}}>
+                <MenuItem className={classes.words}>Sign In</MenuItem>
+                </Link>
+
+                <Link to="/Signup" style={{textDecoration: 'none'}}>
+                <MenuItem className={classes.words}>Sign Up</MenuItem>
+                </Link>
+              </div>
+
+            ):(
+              <div>
+                <Link to="/Profile" style={{textDecoration: 'none'}}>
+                <MenuItem className={classes.words}>Profile</MenuItem>
+                </Link>
+
+                <Link
+                to="/Signin"
+                style={{textDecoration: 'none'}}
+                >
+                <MenuItem
+                className={classes.words}
+                onClick={handleStatus}
+                >Sign Out</MenuItem>
+                </Link>
+              </div>
+            )
+          }
+          </Menu>
+        </Grid>
 
       </Grid>
     </div>
