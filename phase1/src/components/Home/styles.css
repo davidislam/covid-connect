@@ -51,3 +51,10 @@
     background: white;
     border: 0ch;
  }
+
+ .flip_image {
+    top: 230px;
+	left: 100px;
+	width: 200px;
+	height: 200px;
+ }

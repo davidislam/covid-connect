@@ -22,13 +22,20 @@ function Greeting(props) {
 
 class Home extends Component {
   state = {
-    selectPopup: false
+    selectPopup: false,
+    flipScreen: 0
   }
 
   togglePop = () => {
     this.setState({
       selectPopup: !this.state.selectPopup
     });
+  }
+
+  toggleFlip () {
+    this.setState({
+      flipScreen: this.state.flipScreen + 1
+    })
   }
 
   render() {
@@ -41,6 +48,8 @@ class Home extends Component {
             <img src={yellowMark} className="yellowLogo" alt='' />
           </button>
         </div>
+
+
         {this.state.selectPopup ?
           <Popup
             heading="Important Alerts"
