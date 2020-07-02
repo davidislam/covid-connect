@@ -44,7 +44,7 @@ class Centre extends Component {
   render() {
     const { centre } = this.props;
     return (
-      <Accordion className='panel'>
+      <Accordion >
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
           {centre.name}
         </AccordionSummary>
