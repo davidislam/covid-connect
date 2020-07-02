@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import yellowMark from "./FAQs/yellowMark.png";
-import Popup from "./FAQs/Popup.js";
+import yellowMark from "./Home/yellowMark.png";
+import Popup from "./Home/Popup.js";
 
 
 function UserGreeting(props) {
