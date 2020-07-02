@@ -23,7 +23,7 @@
 	width:30px
  }
 
- .popup {
+ .popup_surrounding {
     position: fixed;
     width: 100%;
     height: 100%;
