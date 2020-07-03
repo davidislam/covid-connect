@@ -10,32 +10,8 @@ import Paper from "@material-ui/core/Paper";
 
 import { uid } from 'react-uid';
 
-// This will be passed from global state
-// const appointments = [
-//   {
-//     date: "June 27, 2020",
-//     time: { time: "9:00 - 10:00 AM", is_taken: true },
-//     address: "2 Janda Court, Etobicoke, ON M9W 0A4"
-//   },
-//   {
-//     date: "June 27, 2020",
-//     time: { time: "3:00 - 4:00 PM", is_taken: true },
-//     address: "2111 Finch Avenue West, Toronto, ON M3N 1N1"
-//   }
-// ];
 
 export default class ApptTable extends Component {
-  // state = {
-  //   rows: this.props.appointments
-  // };
-
-  // deleteRow = i => {
-  //   const { rows } = this.state;
-  //   rows[i].time.is_taken = false;
-  //   rows.splice(i, 1);
-  //   this.setState({ rows });
-  // };
-
   handleClick = (appt) => {
     this.props.deleteAppt(appt);
   }
