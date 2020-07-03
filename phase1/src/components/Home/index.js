@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 
-import yellowMark from "./Home/yellowMark.png";
-import Popup from "./Home/Popup.js";
-import {Pagination} from '@material-ui/lab'; 
-import FlipScreen from "./Home/FlipScreen.js";
-import img1 from "./Home/covid_img1.jpg";
-import img2 from "./Home/covid_img2.jpg";
-import img3 from "./Home/covid_img3.jpg";
+import yellowMark from "./static/yellowMark.png";
+import Popup from "./Popup.js";
+import { Pagination } from '@material-ui/lab';
+import FlipScreen from "./FlipScreen.js";
+import img1 from "./static/covid_img1.jpg";
+import img2 from "./static/covid_img2.jpg";
+import img3 from "./static/covid_img3.jpg";
 import { makeStyles, Grid } from '@material-ui/core';
 
 function UserGreeting(props) {
@@ -27,11 +27,11 @@ function Greeting(props) {
 
 function CreatePagination(props) {
   const useStyles = makeStyles(theme => ({
-      paginator: {
-        justifyContent: "center",
-      }
-    }));
-    
+    paginator: {
+      justifyContent: "center",
+    }
+  }));
+
   const classes = useStyles();
   const [page, setPage] = React.useState(1);
   const handleChange = (event, value) => {
@@ -40,19 +40,19 @@ function CreatePagination(props) {
   const collection = props.flipCollection
 
   return <div>
-      {collection[page - 1]}
+    {collection[page - 1]}
 
-      <div className='page_styles'>
-        <Pagination
-          classes={{ ul: classes.paginator }}
-          variant="outlined"
-          color="primary"
-          count={3} 
-          page={page}
-          onChange={handleChange}
-        />
-      </div>
+    <div className='page_styles'>
+      <Pagination
+        classes={{ ul: classes.paginator }}
+        variant="outlined"
+        color="primary"
+        count={3}
+        page={page}
+        onChange={handleChange}
+      />
     </div>
+  </div>
 }
 
 class Home extends Component {
@@ -67,18 +67,18 @@ class Home extends Component {
   }
 
   flipCollection = [
-    <FlipScreen 
+    <FlipScreen
       image={img1}
       link="https://www.cbc.ca/news/canada/toronto/ontario-stage-3-reopening-prospects-covid-19-1.5632829"
       heading="Stage 3 of Ontario's COVID-19 reopening plan looms nearer" />,
-    <FlipScreen 
+    <FlipScreen
       image={img2}
       link="https://toronto.ctvnews.ca/ontario-reports-fourth-straight-day-with-fewer-than-200-new-covid-19-cases-1.5009525"
       heading="Ontario reports fourth straight day with fewer than 200 new COVID-19 cases" />,
-    <FlipScreen 
+    <FlipScreen
       image={img3}
       link="https://www.ctvnews.ca/health/coronavirus/canadian-led-research-casts-doubt-on-accuracy-of-covid-19-antibody-tests-1.5007343"
-      heading="Canadian-led research casts doubt on accuracy of COVID-19 antibody tests" /> 
+      heading="Canadian-led research casts doubt on accuracy of COVID-19 antibody tests" />
   ]
 
   render() {
@@ -100,8 +100,8 @@ class Home extends Component {
           </Grid>
 
         </Grid>
-        
-        <CreatePagination flipCollection={this.flipCollection}/>
+
+        <CreatePagination flipCollection={this.flipCollection} />
 
         {this.state.selectPopup ?
           <Popup
