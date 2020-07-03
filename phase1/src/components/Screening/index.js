@@ -75,7 +75,7 @@ class Screening extends Component {
         <h1>COVID-19 Screening Tool</h1>
         <p>Based on your response, you should call 911.</p>
         <Button type="submit" onClick={this.restart} variant="outlined" color="primary" className={useStyles.button}>
-          Restart
+          Ok
         </Button>
       </div>
       )
@@ -148,6 +148,9 @@ class Screening extends Component {
         <div>
           <h1>COVID-19 Screening Tool</h1>
           <p>Based on your response, you do NOT need a COVID-19 test.</p>
+          <Button type="submit" onClick={this.restart} variant="outlined" color="primary" className={useStyles.button}>
+          Ok
+        </Button>
         </div>
         )
     } else {
@@ -155,6 +158,9 @@ class Screening extends Component {
         <div>
           <h1>COVID-19 Screening Tool</h1>
           <p>Based on your response, you need a COVID-19 test, plase book an appointment using the website.</p>
+          <Button type="submit" onClick={this.restart} variant="outlined" color="primary" className={useStyles.button}>
+          Ok
+        </Button>
         </div>
         )
     }
