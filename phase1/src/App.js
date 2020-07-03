@@ -11,7 +11,7 @@ import Signin from './components/Signin';
 import Signup from './components/Signup';
 import Profile from './components/Profile';
 import Booking from './components/Booking';
-import Screening from './components/Screening';
+import Screening from './components/Screening/index';
 import FAQs from './components/FAQs';
 import AssessmentCentres from './components/Centre';
 
