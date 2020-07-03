@@ -7,14 +7,17 @@ import CustomizedSnackbar from './../CustomizedSnackbar';
 
 const useStyles = makeStyles({
   words: {
-    padding: '10px',
-    color: "black",
+    //padding: '10px',
+    color: "white",
   },
   linkStyle:{
     textDecoration: 'none'
   },
   divStyle:{
-     background: "#3b6978"
+     background: "#204051"
+  },
+  iconStyle:{
+    color: "white"
   }
 });
 
@@ -65,7 +68,7 @@ export default function Header(props) {
         </Grid>
 
         <Grid item>
-          <IconButton edge="end" onClick={handleMenuClick}>
+          <IconButton edge="end" className={classes.iconStyle} onClick={handleMenuClick}>
 
             <AccountCircleIcon
               fontSize="large"
