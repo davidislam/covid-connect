@@ -26,9 +26,9 @@ class App extends Component {
   }
 
   state = {
-    isLoggedIn: true,
+    isLoggedIn: false,
     isAdmin: false,
-    username: 'user',
+    username: '',
     appointments: [],
   }
 
