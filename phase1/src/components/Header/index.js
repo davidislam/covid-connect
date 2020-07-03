@@ -9,6 +9,10 @@ const useStyles = makeStyles({
   words: {
     //padding: '10px',
     color: "white",
+    alignItems: "centre"
+  },
+  wordsExpanded: {
+    color: "black"
   },
   linkStyle:{
     textDecoration: 'none'
@@ -83,18 +87,18 @@ export default function Header(props) {
             {!props.loggedIn ? (
               <div>
                 <Link to="/Signin" className={classes.linkStyle}>
-                  <MenuItem className={classes.words}>Sign In</MenuItem>
+                  <MenuItem className={classes.wordsExpanded}>Sign In</MenuItem>
                 </Link>
 
                 <Link to="/Signup" className={classes.linkStyle}>
-                  <MenuItem className={classes.words}>Sign Up</MenuItem>
+                  <MenuItem className={classes.wordsExpanded}>Sign Up</MenuItem>
                 </Link>
               </div>
 
             ) : (
                 <div>
                   <Link to="/Profile" className={classes.linkStyle}>
-                    <MenuItem className={classes.words}>Profile</MenuItem>
+                    <MenuItem className={classes.wordsExpanded}>Profile</MenuItem>
                   </Link>
 
                   <Link
@@ -102,7 +106,7 @@ export default function Header(props) {
                     className={classes.linkStyle}
                   >
                     <MenuItem
-                      className={classes.words}
+                      className={classes.wordsExpanded}
                       onClick={handleSignoutClick}
                     >Sign Out</MenuItem>
                   </Link>
