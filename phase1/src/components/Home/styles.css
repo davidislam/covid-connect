@@ -42,8 +42,10 @@
     top: 15%;
     bottom: 35%;
     margin: auto;
+    padding-left: 0ch;
+    padding-right: 0ch;
 
-    height: 200px;
+    height: 250px;
     background: white;
  }
 
@@ -55,4 +57,9 @@
  .flip_image {
     margin: auto;
     height: 250px;
+ }
+
+ .flip_link {
+    background: white;
+    /*text-decoration: none;*/
  }

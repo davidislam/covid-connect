@@ -82,15 +82,15 @@ class Home extends Component {
     <FlipScreen 
       image={img1}
       link="https://www.cbc.ca/news/canada/toronto/ontario-stage-3-reopening-prospects-covid-19-1.5632829"
-      heading="Example 1" />,
+      heading="Stage 3 of Ontario's COVID-19 reopening plan looms nearer" />,
     <FlipScreen 
       image={img2}
       link="https://toronto.ctvnews.ca/ontario-reports-fourth-straight-day-with-fewer-than-200-new-covid-19-cases-1.5009525"
-      heading="Example 2" />,
+      heading="Ontario reports fourth straight day with fewer than 200 new COVID-19 cases" />,
     <FlipScreen 
       image={img3}
       link="https://www.ctvnews.ca/health/coronavirus/canadian-led-research-casts-doubt-on-accuracy-of-covid-19-antibody-tests-1.5007343"
-      heading="Example 3" /> 
+      heading="Canadian-led research casts doubt on accuracy of COVID-19 antibody tests" /> 
   ]
 
   render() {
@@ -133,7 +133,8 @@ class Home extends Component {
         {this.state.selectPopup ?
           <Popup
             heading="Important Alerts"
-            innertext="This is the important information to know!"
+            innertext="Toronto City Council has approved a temporary bylaw mandating masks in enclosed public spaces."
+            moreinfolink="https://www.toronto.ca/home/covid-19/covid-19-what-you-should-do/covid-19-orders-directives-by-laws/"
             closePopup={this.togglePop.bind(this)}
           />
           : null
