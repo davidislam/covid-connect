@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
 import './App.css';
 
 import { addAppointment, deleteAppointment } from './actions/app';
 
 import Header from './components/Header'
-import Home from './components/Home';
+import Home from './components/Home/index';
 import Signin from './components/Signin';
 import Signup from './components/Signup';
 import Profile from './components/Profile';
@@ -24,9 +25,9 @@ class App extends Component {
   }
 
   state = {
-    isLoggedIn: false,
-    isAdmin: false,
-    username: '',
+    isLoggedIn: true,
+    isAdmin: true,
+    username: 'admin',
     appointments: [],
   }
 
