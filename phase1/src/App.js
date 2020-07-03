@@ -19,13 +19,15 @@ class App extends Component {
   initState = {
     isLoggedIn: false,
     isAdmin: false,
-    username: ''
+    username: '',
+    appointments: []
   }
 
   state = {
     isLoggedIn: false,
     isAdmin: false,
-    username: ''
+    username: '',
+    appointments: []
   }
 
   handleLogin = () => {
@@ -47,23 +49,24 @@ class App extends Component {
   changeUsername = username => this.setState({ username });
 
   render() {
+    const { isLoggedIn, isAdmin, username, appointments } = this.state;
     return (
       <div className="App">
         <Router>
-          <Header loggedIn={this.state.isLoggedIn} onSignout={this.handleLogout} />
+          <Header loggedIn={isLoggedIn} onSignout={this.handleLogout} />
           <Switch>
             <Route path='/' exact render={() => (
-              <Home username={this.state.username} isLoggedIn={this.state.isLoggedIn} />
+              <Home username={username} isLoggedIn={isLoggedIn} />
             )} />
             <Route path='/signin' render={() => (
               <Signin onLogin={this.handleLogin} onAdmin={this.handleAdmin} changeUsername={this.changeUsername} />
             )} />
             <Route path='/signup' component={Signup} />
             <Route path='/profile' render={() => (
-              <Profile username={this.state.username} />
+              <Profile username={username} appointments={appointments} isAdmin={isAdmin} />
             )} />
             <Route path='/booking' render={() => (
-              <Booking isLoggedIn={this.state.isLoggedIn} username={this.state.username} />
+              <Booking isLoggedIn={isLoggedIn} username={username} />
             )} />
             <Route path='/screening' component={Screening} />
             <Route path='/policies' component={Policies} />
