@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
 import { Grid, TextField, Button, Typography } from "@material-ui/core"
+import CustomizedSnackbar from './../CustomizedSnackbar';
 
 /* A reusable profile view componenet */
 
 export default function ProfileView(props) {
 
   const [changeState, setChangeState] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleClick = () => {
+    if (changeState === true) {
+      setOpen(true);
+    }
     setChangeState(!changeState);
   }
 
@@ -130,6 +135,7 @@ export default function ProfileView(props) {
           </div>
         }
       </Grid>
+      <CustomizedSnackbar message='Profile updated' severity='success' open={open} toggleSnackbar={() => setOpen(false)} />
     </div>
   )
 
