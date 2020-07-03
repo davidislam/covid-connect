@@ -58,24 +58,12 @@ function CreatePagination(props) {
 class Home extends Component {
   state = {
     selectPopup: false,
-    //viewScreen: 0,
-    //number: 1,
   }
-  
 
   togglePop = () => {
     this.setState({
       selectPopup: !this.state.selectPopup
     });
-  }
-
-  handlePagination = (event, value) =>{
-    const total = 2 // articles - 1
-    if (this.state.viewScreen === total) {
-      this.setState({viewScreen: 0})
-    } else {
-      this.setState({viewScreen: this.state.viewScreen + 1})
-    }
   }
 
   flipCollection = [
@@ -107,28 +95,7 @@ class Home extends Component {
         <div>
           <h3>News Highlights This Week:</h3>
           <CreatePagination flipCollection={this.flipCollection}/>
-
-          {/*{this.flipCollection[` ${this.state.number} `]}*/}
-
-          {/*
-          <p>
-            {` ${this.state.number} ` }
-          </p>
-          */}
-
-          {/*
-          <Pagination 
-            count={3} 
-            variant="outlined" 
-            color="primary" 
-            page={page}
-            onChange={this.handleChange.bind(this)}
-            //onChange={this.handlePagination.bind(this)} 
-            //onChange={number => this.setState({number})}
-            />
-          */}
         </div>
-
 
         {this.state.selectPopup ?
           <Popup
