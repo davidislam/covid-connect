@@ -27,18 +27,30 @@ export default class HoursForm extends Component {
       return;
     }
 
-    // Update timeslot's <is_taken> value
-    this.setState({
-      timeslots: this.state.timeslots.map(t => {
-        if (this.selected_times.has(t.time)) {
-          t.is_taken = true;
-        }
-        return t;
-      })
+    // Update timeslots' <is_taken> value
+    const updatedTimeslots = this.state.timeslots.map(t => {
+      if (this.selected_times.has(t.time)) {
+        t.is_taken = true;
+      }
+      return t;
     })
 
-    // Pass selected timeslots into User's profile
+    this.setState({
+      timeslots: updatedTimeslots
+    })
 
+    // Get only the selected ones
+    const selectedTimeslots = updatedTimeslots.filter(timeslot => {
+      return this.selected_times.has(timeslot.time)
+    })
+
+    // Add appointment to user's appt list for each selected timeslot
+    selectedTimeslots.forEach(timeslot => {
+      const appt = { date: this.props.formattedDate, timeslot: timeslot, address: this.props.formattedAddress }
+      this.props.addAppt(appt);
+    });
+
+    // Reset props
     this.selected_times = new Set();
     this.setState({ errorMessage: '', showSnackbar: true });
   }

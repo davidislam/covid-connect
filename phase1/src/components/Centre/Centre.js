@@ -39,6 +39,10 @@ function Url(props) {
   )
 }
 
+function formattedAddress(location) {
+  return `${location.address}, ${location.city}, ON ${location.postal_code}`
+}
+
 class Centre extends Component {
   state = {}
   render() {
@@ -52,7 +56,14 @@ class Centre extends Component {
           <Address location={centre.location} className='item' />
           <Number phone={centre.number} className='item' />
           <Url link={centre.website} className='item' />
-          <HoursForm heading="Details" timeslots={centre.hours} className='item' />
+          <HoursForm
+            heading="Details"
+            timeslots={centre.hours}
+            className='item'
+            formattedDate={this.props.formattedDate}
+            formattedAddress={formattedAddress(centre.location)}
+            addAppt={appt => this.props.addAppt(appt)}
+          />
         </AccordionDetails>
       </Accordion>
     );

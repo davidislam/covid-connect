@@ -52,7 +52,7 @@ const CENTRES = [
     days: everyday,
     hours: [
       { time: "9:00 - 10:00 AM", is_taken: false },
-      { time: "11:00 - 12:00 AM", is_taken: true },
+      { time: "11:00 - 12:00 PM", is_taken: false },
       { time: "1:00 - 2:00 PM", is_taken: false },
       { time: "2:00 - 3:00 PM", is_taken: false }
     ]
@@ -70,7 +70,7 @@ const CENTRES = [
     hours: [
       { time: "5:00 - 6:00 PM", is_taken: false },
       { time: "6:00 - 7:00 PM", is_taken: false },
-      { time: "8:00 - 9:00 PM", is_taken: true },
+      { time: "8:00 - 9:00 PM", is_taken: false },
       { time: "10:00 - 11:00 PM", is_taken: false }
     ]
   },
@@ -85,8 +85,8 @@ const CENTRES = [
     website: "https://www.sinaihealth.ca/covid19/",
     days: workdays,
     hours: [
-      { time: "8:00 - 9:00 AM", is_taken: true },
-      { time: "9:00 - 10:00 AM", is_taken: true },
+      { time: "8:00 - 9:00 AM", is_taken: false },
+      { time: "9:00 - 10:00 AM", is_taken: false },
       { time: "10:00 - 11:00 AM", is_taken: false },
       { time: "11:00 - 12:00 PM", is_taken: false }
     ]
@@ -103,7 +103,7 @@ const CENTRES = [
     days: everyday,
     hours: [
       { time: "9:00 - 10:00 AM", is_taken: false },
-      { time: "11:00 - 12:00 AM", is_taken: true },
+      { time: "11:00 - 12:00 AM", is_taken: false },
       { time: "1:00 - 2:00 PM", is_taken: false },
       { time: "2:00 - 3:00 PM", is_taken: false }
     ]

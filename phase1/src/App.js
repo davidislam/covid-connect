@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 
+import { addAppointment, deleteAppointment } from './actions/app';
+
 import Header from './components/Header'
 import Home from './components/Home';
 import Signin from './components/Signin';
@@ -24,9 +26,9 @@ class App extends Component {
   }
 
   state = {
-    isLoggedIn: false,
+    isLoggedIn: true,
     isAdmin: false,
-    username: '',
+    username: 'user',
     appointments: []
   }
 
@@ -63,7 +65,12 @@ class App extends Component {
             )} />
             <Route path='/signup' component={Signup} />
             <Route path='/profile' render={() => (
-              <Profile username={username} appointments={appointments} isAdmin={isAdmin} />
+              <Profile
+                username={username}
+                appointments={appointments}
+                isAdmin={isAdmin}
+                deleteAppt={appt => deleteAppointment(appt, this)}
+              />
             )} />
             <Route path='/booking' render={() => (
               <Booking isLoggedIn={isLoggedIn} username={username} />
@@ -72,7 +79,9 @@ class App extends Component {
             <Route path='/policies' component={Policies} />
             <Route path='/faqs' component={FAQs} />
             <Route path='/news' component={News} />
-            <Route path='/centres' component={AssessmentCentres} />
+            <Route path='/centres' render={(props) => (
+              <AssessmentCentres {...props} addAppt={(appt) => addAppointment(appt, this)} />
+            )} />
             <Route path="/" render={() => <div>404</div>} />
           </Switch>
         </Router>

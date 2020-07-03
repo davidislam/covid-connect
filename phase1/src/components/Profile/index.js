@@ -8,7 +8,7 @@ function Profile(props) {
   if (props.isAdmin) {
     element = <Admin username={props.username} />
   } else {
-    element = <User username={props.username} />
+    element = <User username={props.username} appointments={props.appointments} deleteAppt={appt => props.deleteAppt(appt)} />
   }
 
   return element;
