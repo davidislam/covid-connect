@@ -3,14 +3,14 @@ import Button from '@material-ui/core/Button';
 import DatePicker from './DatePicker';
 import CitySelect from './CitySelect';
 import { Link } from 'react-router-dom';
+import { CITIES } from './../data';
 
 import './styles.css'
 
 class Booking extends Component {
   state = {
     date: new Date(),
-    city: '',
-    cities: ["Brampton", "Hamilton", "Mississauga", "Ottawa", "Sudbury", "Toronto", "Waterloo"]
+    city: ''
   }
 
   componentDidMount() {
@@ -24,7 +24,7 @@ class Booking extends Component {
   }
 
   render() {
-    const { city, date, cities } = this.state;
+    const { city, date } = this.state;
     return (
       <div>
         <h1>Hi {this.props.username}!</h1>
@@ -33,7 +33,7 @@ class Booking extends Component {
         <p>Call the assessment centre or your <a href="http://www.health.gov.on.ca/en/common/system/services/phu/locations.aspx">local public health unit</a> if you have questions or cannot find a centre near you.</p>
         <h2>Schedule an appointment</h2>
         <DatePicker label="Choose date" value={date} onChange={(date) => this.setState({ date })} />
-        <CitySelect label="City" value={city} cities={cities} onChange={this.handleChange} />
+        <CitySelect label="City" value={city} cities={CITIES} onChange={this.handleChange} />
         <div className="container">
           <Link to={{
             pathname: '/centres',

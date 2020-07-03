@@ -18,28 +18,9 @@ const workdays = {
   sunday: false
 }
 
-// const variant1 = [
-//   { time: "9:00 - 10:00 AM", is_taken: false },
-//   { time: "11:00 - 12:00 AM", is_taken: true },
-//   { time: "1:00 - 2:00 PM", is_taken: false },
-//   { time: "2:00 - 3:00 PM", is_taken: false }
-// ]
+export const CITIES = ["Brampton", "Hamilton", "Mississauga", "Ottawa", "Sudbury", "Toronto", "Waterloo"]
 
-// const variant2 = [
-//   { time: "8:00 - 9:00 AM", is_taken: true },
-//   { time: "9:00 - 10:00 AM", is_taken: true },
-//   { time: "10:00 - 11:00 AM", is_taken: false },
-//   { time: "11:00 - 12:00 PM", is_taken: false }
-// ]
-
-// const variant3 = [
-//   { time: "5:00 - 6:00 PM", is_taken: false },
-//   { time: "6:00 - 7:00 PM", is_taken: false },
-//   { time: "8:00 - 9:00 PM", is_taken: true },
-//   { time: "10:00 - 11:00 PM", is_taken: false }
-// ]
-
-const CENTRES = [
+export const CENTRES = [
   {
     name: "Humber River Hospital Assessment Centre",
     location: {
@@ -109,5 +90,3 @@ const CENTRES = [
     ]
   }
 ]
-
-export default CENTRES;
