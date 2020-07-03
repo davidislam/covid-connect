@@ -11,10 +11,6 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import "./styles.css";
 
 class FAQs extends Component {
-  state = {
-
-  }
-
 
   render() {
     return (
