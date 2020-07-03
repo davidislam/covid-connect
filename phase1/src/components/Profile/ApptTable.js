@@ -50,6 +50,7 @@ export default class ApptTable extends Component {
                 <TableCell align="center">Date</TableCell>
                 <TableCell align="center">Time</TableCell>
                 <TableCell align="center">Address</TableCell>
+                <TableCell align="center">Test Result</TableCell>
                 <TableCell align="center">Cancel</TableCell>
               </TableRow>
             </TableHead>
@@ -61,6 +62,7 @@ export default class ApptTable extends Component {
                   </TableCell>
                   <TableCell align="center">{appt.timeslot.time}</TableCell>
                   <TableCell align="center">{appt.address}</TableCell>
+                  <TableCell align="center">Pending</TableCell>
                   <TableCell align="center">
                     <Button color="secondary" onClick={() => this.handleClick(appt)}>
                       Cancel
