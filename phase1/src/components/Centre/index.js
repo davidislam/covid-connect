@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import CentreList from './CentreList';
-import { CENTRES } from './../data';
+import { CENTRES } from './../../data';
 
 import './styles.css';
 

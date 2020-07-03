@@ -3,7 +3,7 @@ import Button from '@material-ui/core/Button';
 import DatePicker from './DatePicker';
 import CitySelect from './CitySelect';
 import { Link } from 'react-router-dom';
-import { CITIES } from './../data';
+import { CITIES } from './../../data';
 
 import './styles.css'
 

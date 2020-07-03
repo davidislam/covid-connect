@@ -33,7 +33,7 @@ export default function CustomizedSnackbar(props) {
 
   return (
     <div className={classes.root}>
-      <Snackbar open={props.open} autoHideDuration={5000} onClose={handleClose}>
+      <Snackbar open={props.open} autoHideDuration={4000} onClose={handleClose}>
         <Alert onClose={handleClose} severity={props.severity}>
           {props.message}
         </Alert>
