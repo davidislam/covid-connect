@@ -45,7 +45,7 @@ export default function Header(props) {
 
   return (
     <div className= {classes.divStyle}>
-      <Grid container spacing={2} direction="row" justify="space-around" alignItems="center">
+      <Grid container spacing={0} direction="row" justify="space-around" alignItems="center" >
 
         <Grid item>
           <Link to="/" className={classes.linkStyle}>

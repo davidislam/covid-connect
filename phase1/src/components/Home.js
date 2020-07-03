@@ -7,7 +7,7 @@ import FlipScreen from "./Home/FlipScreen.js";
 import img1 from "./Home/covid_img1.jpg";
 import img2 from "./Home/covid_img2.jpg";
 import img3 from "./Home/covid_img3.jpg";
-import { makeStyles } from '@material-ui/core';
+import { makeStyles, Grid } from '@material-ui/core';
 
 function UserGreeting(props) {
   return <h4 className="greetingText">You are signed in as {props.username}</h4>;
@@ -87,15 +87,21 @@ class Home extends Component {
       <div>
         <h1>Welcome</h1>
         <Greeting isLoggedIn={this.props.isLoggedIn} username={this.props.username} />
-        <div>
-          <button onClick={this.togglePop.bind(this)} className="button__yellow ">
-            <img src={yellowMark} className="yellowLogo" alt='' />
-          </button>
-        </div>
-        <div>
-          <h3>News Highlights This Week:</h3>
-          <CreatePagination flipCollection={this.flipCollection}/>
-        </div>
+        <Grid container spacing={0} direction="row" justify="center" alignItems="center" >
+
+          <Grid item>
+            <h3>News Highlights This Week:</h3>
+          </Grid>
+
+          <Grid item>
+            <button onClick={this.togglePop.bind(this)} className="button__yellow ">
+              <img src={yellowMark} className="yellowLogo" alt='' />
+            </button>
+          </Grid>
+
+        </Grid>
+        
+        <CreatePagination flipCollection={this.flipCollection}/>
 
         {this.state.selectPopup ?
           <Popup
