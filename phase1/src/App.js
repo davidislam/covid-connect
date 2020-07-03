@@ -10,7 +10,7 @@ import Signin from './components/Signin';
 import Signup from './components/Signup';
 import Profile from './components/Profile';
 import Booking from './components/Booking';
-import Screening from './components/Screening/index';
+import Screening from './components/Screening';
 import Policies from './components/Policies';
 import FAQs from './components/FAQs';
 import News from './components/News';
@@ -26,13 +26,11 @@ class App extends Component {
   }
 
   state = {
-    isLoggedIn: true,
+    isLoggedIn: false,
     isAdmin: false,
-    username: 'user',
+    username: '',
     appointments: [],
   }
-
-
 
   handleLogin = () => {
     this.setState({
@@ -50,11 +48,10 @@ class App extends Component {
     this.setState(this.initState);
   }
 
-
   changeUsername = username => this.setState({ username });
 
   render() {
-    const { isLoggedIn, isAdmin, username, appointments} = this.state;
+    const { isLoggedIn, isAdmin, username, appointments } = this.state;
     return (
       <div className="App">
         <Router>
@@ -69,19 +66,19 @@ class App extends Component {
             <Route path='/signup' component={Signup} />
             <Route path='/profile' render={() => (
               <Profile
-              username={username}
+                username={username}
                 appointments={appointments}
                 isAdmin={isAdmin}
                 deleteAppt={appt => deleteAppointment(appt, this)}
-
+                changeUsername={this.changeUsername}
               />
             )} />
             <Route path='/booking' render={() => (
               <Booking isLoggedIn={isLoggedIn}
-              username={username}
-              isAdmin={isAdmin}
-               />
-            )} />8
+                username={username}
+                isAdmin={isAdmin}
+              />
+            )} />
             <Route path='/screening' component={Screening} />
             <Route path='/policies' component={Policies} />
             <Route path='/faqs' component={FAQs} />

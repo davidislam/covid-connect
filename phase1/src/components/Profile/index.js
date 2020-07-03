@@ -1,41 +1,53 @@
-import React, {useState} from 'react';
-import UserProfileComponent from './User';
-import AdminProfileComponent from './Admin';
+import React, { useState } from 'react';
+import ProfileView from './ProfileView';
+import ApptTable from './ApptTable';
+import Typography from '@material-ui/core/Typography';
 
 
 function Profile(props) {
-  let element;
 
-  const [info,setInfo] = useState({
-    email: 'kkk@mail.com',
-    name: 'Louis',
-    age: 11,
+  const [info, setInfo] = useState({
+    username: props.username,
+    email: 'example@gmail.com',
+    name: 'John Doe',
+    age: 25,
     healthCardNum: '12345',
     phoneNumber: '6472823993',
     address: '5 Random Cres'
-
   });
 
   const handleChange = (prop) => (event) => {
     setInfo({ ...info, [prop]: event.target.value });
   };
 
-  if (props.isAdmin) {
-    element = <AdminProfileComponent username={props.username} />
-  } else {
-    element = <UserProfileComponent username={props.username}
-    appointments={props.appointments}
-    deleteAppt={appt => props.deleteAppt(appt)}
+  const handleUsername = (e) => {
+    const newUsername = e.target.value;
+    props.changeUsername(newUsername);
+  }
+
+  let element = <ProfileView
+    username={props.username}
     email={info.email}
     name={info.name}
     age={info.age}
     healthCardNum={info.healthCardNum}
     phoneNumber={info.phoneNumber}
     address={info.address}
-    changeInfo={handleChange}/>
-  }
+    changeInfo={handleChange}
+    handleUsername={handleUsername}
+  />
 
-  return element;
+  if (props.isAdmin) {
+    return element;
+  } else {
+    return (
+      <div>
+        {element}
+        <Typography variant="h4" className='apptsLabel'> Scheduled Appointments </Typography>
+        <ApptTable appointments={props.appointments} deleteAppt={appt => props.deleteAppt(appt)} />
+      </div>
+    )
+  }
 }
 
 export default Profile;

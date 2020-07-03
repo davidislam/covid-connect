@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
-import ApptTable from './ApptTable';
-import { Divider, Grid, TextField, Button, Typography } from "@material-ui/core"
+import { Grid, TextField, Button, Typography } from "@material-ui/core"
 
+/* A reusable profile view componenet */
 
-
-export default function UserProfileComponent(props) {
+export default function ProfileView(props) {
 
   const [changeState, setChangeState] = useState(false);
-
 
   const handleClick = () => {
     setChangeState(!changeState);
@@ -17,7 +15,7 @@ export default function UserProfileComponent(props) {
     <div>
       <Grid container direction="column" justify="center" alignItems="center" spacing={2}>
         <Grid item>
-          <Typography variant="h4">User Info: </Typography>
+          <Typography variant="h4">{props.username} Info: </Typography>
         </Grid>
 
         {!changeState ? (
@@ -26,11 +24,11 @@ export default function UserProfileComponent(props) {
               <Button variant="contained"
                 color="default"
                 onClick={handleClick}>
-                Click to change information
+                Click to change profile information
             </Button>
             </Grid>
             <Grid item>
-              <Typography variant="h6">User Name: {props.username}</Typography>
+              <Typography variant="h6">Username: {props.username}</Typography>
             </Grid>
 
             <Grid item>
@@ -46,7 +44,7 @@ export default function UserProfileComponent(props) {
             </Grid>
 
             <Grid item>
-              <Typography variant="h6">health Card Number: {props.healthCardNum}</Typography>
+              <Typography variant="h6">Health Card number: {props.healthCardNum}</Typography>
             </Grid>
 
             <Grid item>
@@ -65,6 +63,15 @@ export default function UserProfileComponent(props) {
                 onClick={handleClick}>
                 Click to save your change
               </Button>
+            </Grid>
+
+            <Grid item>
+              <TextField
+                id="username"
+                label="Username"
+                value={props.username}
+                onChange={props.handleUsername}
+              />
             </Grid>
 
             <Grid item>
@@ -90,6 +97,7 @@ export default function UserProfileComponent(props) {
                 id="age"
                 label="Age"
                 value={props.age}
+                onChange={props.changeInfo('age')}
               />
             </Grid>
 
@@ -120,16 +128,7 @@ export default function UserProfileComponent(props) {
               />
             </Grid>
           </div>
-
         }
-
-        <Divider />
-        <Grid item>
-          <Typography variant="h3">appointments</Typography>
-        </Grid>
-        <Grid item>
-          <ApptTable appointments={props.appointments} deleteAppt={appt => props.deleteAppt(appt)} />
-        </Grid>
       </Grid>
     </div>
   )
