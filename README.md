@@ -13,7 +13,7 @@ COVID-Connect is an online application that helps a user to obtain information a
 ## Instruction:
   User:
   1. User can use the Screening System to see if they need any tests.
-  2. User can also check the available centre on any given date.
+  2. User MUST be logged in to check the available centre on any given date.
   3. User can view the recent hightlighted news on home page, and could click the link the obtain more information.
   4. User can also check the FAQs.
   5. User MUST sign in in order to book a assessment.
