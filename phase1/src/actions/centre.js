@@ -16,3 +16,9 @@ export function addCentre(centre, days) {
   }
   CENTRES.push(newCentre);
 }
+
+export function removeCentre(i) {
+  const removedCentre = CENTRES.splice(i, 1);
+  // TODO: notify registered users at the centre
+  console.log("A centre has been removed", removedCentre);
+}

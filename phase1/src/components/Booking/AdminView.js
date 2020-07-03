@@ -9,8 +9,9 @@ class AdminView extends Component {
     const { username } = this.props;
     return (
       <div>
-        <h1>Hi {username}!</h1>
+        <h1>Hi {username}! What would you like to do today?</h1>
         <AddCentre />
+        <hr style={{ maxWidth: '50%', marginTop: '30px', marginBottom: '30px' }} />
         <RemoveCentre />
       </div>
     );
