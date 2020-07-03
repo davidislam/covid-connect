@@ -30,8 +30,6 @@ class App extends Component {
     appointments: [],
   }
 
-
-
   handleLogin = () => {
     this.setState({
       isLoggedIn: true
@@ -48,11 +46,10 @@ class App extends Component {
     this.setState(this.initState);
   }
 
-
   changeUsername = username => this.setState({ username });
 
   render() {
-    const { isLoggedIn, isAdmin, username, appointments} = this.state;
+    const { isLoggedIn, isAdmin, username, appointments } = this.state;
     return (
       <div className="App">
         <Router>
@@ -67,19 +64,19 @@ class App extends Component {
             <Route path='/signup' component={Signup} />
             <Route path='/profile' render={() => (
               <Profile
-              username={username}
+                username={username}
                 appointments={appointments}
                 isAdmin={isAdmin}
                 deleteAppt={appt => deleteAppointment(appt, this)}
-
+                changeUsername={this.changeUsername}
               />
             )} />
             <Route path='/booking' render={() => (
               <Booking isLoggedIn={isLoggedIn}
-              username={username}
-              isAdmin={isAdmin}
-               />
-            )} />8
+                username={username}
+                isAdmin={isAdmin}
+              />
+            )} />
             <Route path='/screening' component={Screening} />
             <Route path='/faqs' component={FAQs} />
             <Route path='/centres' render={(props) => (

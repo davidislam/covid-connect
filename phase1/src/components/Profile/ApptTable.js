@@ -9,6 +9,7 @@ import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 
 import { uid } from 'react-uid';
+import './styles.css';
 
 
 export default class ApptTable extends Component {
@@ -19,7 +20,7 @@ export default class ApptTable extends Component {
   render() {
     return (
       this.props.appointments.length === 0 ? <h3>No appointments scheduled</h3> :
-        <TableContainer component={Paper} style={tableStyle}>
+        <TableContainer component={Paper} className='apptTable'>
           <Table aria-label="simple table" size='small'>
             <TableHead>
               <TableRow>
@@ -51,11 +52,4 @@ export default class ApptTable extends Component {
         </TableContainer>
     );
   }
-}
-
-const tableStyle = {
-  // maxWidth: '70%',
-  // marginLeft: '15%',
-  // marginRight: '15%',
-  marginTop: '30px'
 }

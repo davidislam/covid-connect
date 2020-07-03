@@ -1,0 +1,10 @@
+.MuiTableContainer-root.apptTable {
+  margin-top: 15px;
+  max-width: 70%;
+  margin-left: 15%;
+  margin-right: 15%;
+}
+
+.MuiTypography-root.apptsLabel {
+  margin-top: 20px;
+}

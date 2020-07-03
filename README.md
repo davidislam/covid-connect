@@ -40,4 +40,4 @@ Default User Account:
 New User accounts can be created through Sign up page, but no admin account can be made.
 
 ## Libraries
-The App is building mainly on [Material-UI](https://material-ui.com/) and [React](https://reactjs.org/)
+The App is built mainly on [Material-UI](https://material-ui.com/) and [React](https://reactjs.org/)
