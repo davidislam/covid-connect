@@ -11,9 +11,7 @@ import Signup from './components/Signup';
 import Profile from './components/Profile';
 import Booking from './components/Booking';
 import Screening from './components/Screening/index';
-import Policies from './components/Policies';
 import FAQs from './components/FAQs';
-import News from './components/News';
 import AssessmentCentres from './components/Centre';
 
 class App extends Component {
@@ -83,9 +81,7 @@ class App extends Component {
                />
             )} />8
             <Route path='/screening' component={Screening} />
-            <Route path='/policies' component={Policies} />
             <Route path='/faqs' component={FAQs} />
-            <Route path='/news' component={News} />
             <Route path='/centres' render={(props) => (
               <AssessmentCentres {...props} addAppt={(appt) => addAppointment(appt, this)} />
             )} />
