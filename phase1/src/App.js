@@ -10,7 +10,7 @@ import Signin from './components/Signin';
 import Signup from './components/Signup';
 import Profile from './components/Profile';
 import Booking from './components/Booking';
-import Screening from './components/Screening';
+import Screening from './components/Screening/index';
 import Policies from './components/Policies';
 import FAQs from './components/FAQs';
 import News from './components/News';
@@ -22,15 +22,17 @@ class App extends Component {
     isLoggedIn: false,
     isAdmin: false,
     username: '',
-    appointments: []
+    appointments: [],
   }
 
   state = {
     isLoggedIn: true,
-    isAdmin: true,
-    username: 'admin',
-    appointments: []
+    isAdmin: false,
+    username: 'user',
+    appointments: [],
   }
+
+
 
   handleLogin = () => {
     this.setState({
@@ -48,10 +50,11 @@ class App extends Component {
     this.setState(this.initState);
   }
 
+
   changeUsername = username => this.setState({ username });
 
   render() {
-    const { isLoggedIn, isAdmin, username, appointments } = this.state;
+    const { isLoggedIn, isAdmin, username, appointments} = this.state;
     return (
       <div className="App">
         <Router>
@@ -66,15 +69,19 @@ class App extends Component {
             <Route path='/signup' component={Signup} />
             <Route path='/profile' render={() => (
               <Profile
-                username={username}
+              username={username}
                 appointments={appointments}
                 isAdmin={isAdmin}
                 deleteAppt={appt => deleteAppointment(appt, this)}
+
               />
             )} />
             <Route path='/booking' render={() => (
-              <Booking isLoggedIn={isLoggedIn} username={username} isAdmin={isAdmin} />
-            )} />
+              <Booking isLoggedIn={isLoggedIn}
+              username={username}
+              isAdmin={isAdmin}
+               />
+            )} />8
             <Route path='/screening' component={Screening} />
             <Route path='/policies' component={Policies} />
             <Route path='/faqs' component={FAQs} />

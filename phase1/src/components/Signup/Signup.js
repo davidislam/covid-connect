@@ -24,8 +24,7 @@ export default function SignupComponent(){
     username:'',
     email:'',
     gender:'',
-    firstName:'',
-    lastName:'',
+    name: '',
     age:0,
     healthCardNum:'',
     phoneNumber:'' ,
@@ -63,20 +62,13 @@ export default function SignupComponent(){
         <br />
 
         <TextField
-        id="FirstName"
-        label="First Name"
+        id="Name"
+        label="Name"
         variant="outlined"
-        onChange={()=>handleChange("firstName")}
+        onChange={()=>handleChange("name")}
         required />
         <br />
 
-        <TextField
-        id="Lastname"
-        label="Last name"
-        variant="outlined"
-        onChange={()=>handleChange("lastName")}
-        required />
-        <br />
 
         <FormControl>
           <RadioGroup
