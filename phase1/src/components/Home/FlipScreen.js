@@ -5,14 +5,14 @@ import "./styles.css";
 export default class FlipScreen extends Component {
   render() {
     return (
-        <div className="flip">
+        //<div className="flip">
             <div className="flip_inner">
                 <img src={this.props.image} className="flip_image" />
                 <a href={this.props.link}>
-                    <h1>{this.props.heading}</h1>
+                    <h3>{this.props.heading}</h3>
                 </a>
             </div>
-        </div>
+        //</div>
     );
   }
 }

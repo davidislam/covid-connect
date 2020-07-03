@@ -7,6 +7,7 @@ import FlipScreen from "./Home/FlipScreen.js";
 import img1 from "./Home/covid_img1.jpg";
 import img2 from "./Home/covid_img2.jpg";
 import img3 from "./Home/covid_img3.jpg";
+import { makeStyles } from '@material-ui/core';
 
 function UserGreeting(props) {
   return <h3>You are signed in as {props.username}</h3>;
@@ -25,6 +26,13 @@ function Greeting(props) {
 }
 
 function CreatePagination(props) {
+  const useStyles = makeStyles(theme => ({
+      paginator: {
+        justifyContent: "center",
+      }
+    }));
+    
+  const classes = useStyles();
   const [page, setPage] = React.useState(1);
   const handleChange = (event, value) => {
     setPage(value);
@@ -34,13 +42,16 @@ function CreatePagination(props) {
   return <div>
       {collection[page - 1]}
 
-      <Pagination
-        count={3} 
-        variant="outlined" 
-        color="primary" 
-        page={page}
-        onChange={handleChange}
-      />
+      <div className='page_styles'>
+        <Pagination
+          classes={{ ul: classes.paginator }}
+          variant="outlined"
+          color="primary"
+          count={3} 
+          page={page}
+          onChange={handleChange}
+        />
+      </div>
     </div>
 }
 
@@ -94,6 +105,7 @@ class Home extends Component {
           </button>
         </div>
         <div>
+          <h3>News Highlights This Week:</h3>
           <CreatePagination flipCollection={this.flipCollection}/>
 
           {/*{this.flipCollection[` ${this.state.number} `]}*/}
