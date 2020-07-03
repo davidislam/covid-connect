@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import Radio from '@material-ui/core/Radio';
-import FormLabel from '@material-ui/core/FormLabel';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormGroup from '@material-ui/core/FormGroup';
-import Button from '@material-ui/core/Button';
-import { useStyles } from '@material-ui/pickers/views/Calendar/SlideTransition';
-import Checkbox from '@material-ui/core/Checkbox';
+
+import QuestionOne from './QuestionOne'
+import QuestionTwo from './QuestionTwo'
+import QuestionThree from './QuestionThree'
+import Introduction from './Introduction'
+import Emergency from './Emergency'
+import NeedTest from './NeedTest'
+import NotNeedTest from './NotNeedTest'
 
 class Screening extends Component {
   constructor(props) {
@@ -44,133 +43,34 @@ class Screening extends Component {
   render() {
     if (!this.state.started) {
       return (
-        <div>
-          <h1>COVID-19 Screening Tool</h1>
-          <p>This tool can help you understand what if you feel you are exposed to COVID-19. </p>
-          <p>Let’s all look out for each other! Know your own condition, try not to infect others, and reserve care for those in need.</p>
-          <Button type="button" onClick={this.startScreen} variant="outlined" color="primary" className={useStyles.button}> Start Screening</Button>
-        </div>
+        <Introduction startScreen={this.startScreen}/>
       );
     } else if (this.state.numAnswered === 0) {
       return (
-        <div>
-          <h1>COVID-19 Screening Tool</h1>
-          <FormControl component="fieldset">
-            <FormLabel component="legend">Is this an emergency?</FormLabel>
-            <RadioGroup aria-label="q1" name="q1" onChange={this.handleChange}>
-              <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-              <FormControlLabel value="No" control={<Radio />} label="No" />
-            </RadioGroup>
-            <Button type="submit" onClick={this.restart} variant="outlined" color="primary" className={useStyles.button}>
-              Restart
-            </Button>
-            <Button type="submit" onClick={this.nextQuestion} variant="outlined" color="primary" className={useStyles.button}>
-              Next
-            </Button>
-          </FormControl>
-        </div>
+        <QuestionOne restart={this.restart} nextQuestion={this.nextQuestion} handleChange={this.handleChange}/>
       );
     } else if (this.state.q1 === "Yes") {
       return (
-      <div>
-        <h1>COVID-19 Screening Tool</h1>
-        <p>Based on your response, you should call 911.</p>
-        <Button type="submit" onClick={this.restart} variant="outlined" color="primary" className={useStyles.button}>
-          Ok
-        </Button>
-      </div>
+        <Emergency restart={this.restart}/>
       )
     } else if (this.state.numAnswered === 1) {
       return (
-        <div>
-          <h1>COVID-19 Screening Tool</h1>
-          <FormControl component="fieldset">
-            <FormLabel component="legend">Have you recently started experiencing any of these symptoms? If not, click next without checking any boxes.</FormLabel>
-            <FormGroup>
-            <FormControlLabel
-              control={<Checkbox onChange={this.handleChange} />}
-              label="Fever or chills"
-            />
-            <FormControlLabel
-              control={<Checkbox onChange={this.handleChange} />}
-              label="Mild or moderate difficulty breathing"
-            />
-            <FormControlLabel
-              control={<Checkbox onChange={this.handleChange} />}
-              label="New or worsening cough"
-            />
-            <FormControlLabel
-              control={<Checkbox onChange={this.handleChange} />}
-              label="Sustained loss of smell, taste, or appetite"
-            />
-            <FormControlLabel
-              control={<Checkbox onChange={this.handleChange} />}
-              label="Sore throat"
-            />
-            <FormControlLabel
-              control={<Checkbox onChange={this.handleChange} />}
-              label="Vomiting or diarrhea"
-            />
-            <FormControlLabel
-              control={<Checkbox onChange={this.handleChange} />}
-              label="Aching throughout the body"
-            />
-          </FormGroup>
-          <Button type="submit" onClick={this.restart} variant="outlined" color="primary" className={useStyles.button}>
-              Restart
-            </Button>
-          <Button type="submit" onClick={this.nextQuestion} variant="outlined" color="primary" className={useStyles.button}>
-              Next
-          </Button>
-          </FormControl>
-        </div>
+        <QuestionTwo handleChange={this.handleChange} restart={this.restart} nextQuestion={this.nextQuestion}/>
       )
     } else if (this.state.numAnswered === 2) {
       return (
-        <div>
-          <h1>COVID-19 Screening Tool</h1>
-          <FormControl component="fieldset">
-            <FormLabel component="legend">In the last 14 days, have you traveled internationally?</FormLabel>
-            <RadioGroup aria-label="q1" name="q1" onChange={this.handleChange}>
-              <FormControlLabel value="Yes" control={<Radio />} label="I have traveled internationally" />
-              <FormControlLabel value="No" control={<Radio />} label="I have not traveled internationally" />
-            </RadioGroup>
-            <Button type="submit" onClick={this.restart} variant="outlined" color="primary" className={useStyles.button}>
-              Restart
-            </Button>
-            <Button type="submit" onClick={this.nextQuestion} variant="outlined" color="primary" className={useStyles.button}>
-              Submit
-            </Button>
-          </FormControl>
-        </div>
+        <QuestionThree handleChange={this.handleChange} restart={this.restart} nextQuestion={this.nextQuestion}/>
       );
     } else if (this.state.numAnswered === 3 && this.state.q2 === 0) {
       return (
-        <div>
-          <h1>COVID-19 Screening Tool</h1>
-          <p>Based on your response, you do not need a COVID-19 test at the moment.</p>
-          <Button type="submit" onClick={this.restart} variant="outlined" color="primary" className={useStyles.button}>
-          Ok
-        </Button>
-        </div>
+        <NeedTest restart={this.restart}/>
         )
     } else {
       return (
-        <div>
-          <h1>COVID-19 Screening Tool</h1>
-          <p>Based on your response, you should take a COVID-19 test. Please create an account and make a booking now.</p>
-          <Button type="submit" onClick={this.restart} variant="outlined" color="primary" className={useStyles.button}>
-          Ok
-        </Button>
-        </div>
+        <NotNeedTest restart={this.restart}/>
         )
     }
-    
   }
-
-
 }
-
-
 
 export default Screening;

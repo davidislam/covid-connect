@@ -42,8 +42,9 @@
     top: 15%;
     bottom: 35%;
     margin: auto;
-    padding-left: 0ch;
-    padding-right: 0ch;
+
+    padding-left: 20px;
+    padding-right: 20px;
 
     height: 250px;
     background: white;
@@ -60,10 +61,15 @@
  }
 
  .flip_link {
-    background: white;
-    /*text-decoration: none;*/
+    color: black;
+    font-style: italic;
+    text-decoration: none;
  }
 
  .greetingText {
     font-style: italic;
+ }
+
+ hr.style {
+    width: 700px;
  }

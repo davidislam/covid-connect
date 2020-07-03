@@ -7,14 +7,21 @@ import CustomizedSnackbar from './../CustomizedSnackbar';
 
 const useStyles = makeStyles({
   words: {
-    padding: '10px',
-    color: "black",
+    //padding: '10px',
+    color: "white",
+    alignItems: "centre"
+  },
+  wordsExpanded: {
+    color: "black"
   },
   linkStyle:{
     textDecoration: 'none'
   },
   divStyle:{
-     background: "#3b6978"
+     background: "#204051"
+  },
+  iconStyle:{
+    color: "white"
   }
 });
 
@@ -38,7 +45,7 @@ export default function Header(props) {
 
   return (
     <div className= {classes.divStyle}>
-      <Grid container spacing={2} direction="row" justify="space-around" alignItems="center">
+      <Grid container spacing={0} direction="row" justify="space-around" alignItems="center" >
 
         <Grid item>
           <Link to="/" className={classes.linkStyle}>
@@ -65,7 +72,7 @@ export default function Header(props) {
         </Grid>
 
         <Grid item>
-          <IconButton edge="end" onClick={handleMenuClick}>
+          <IconButton edge="end" className={classes.iconStyle} onClick={handleMenuClick}>
 
             <AccountCircleIcon
               fontSize="large"
@@ -80,18 +87,18 @@ export default function Header(props) {
             {!props.loggedIn ? (
               <div>
                 <Link to="/Signin" className={classes.linkStyle}>
-                  <MenuItem className={classes.words}>Sign In</MenuItem>
+                  <MenuItem className={classes.wordsExpanded}>Sign In</MenuItem>
                 </Link>
 
                 <Link to="/Signup" className={classes.linkStyle}>
-                  <MenuItem className={classes.words}>Sign Up</MenuItem>
+                  <MenuItem className={classes.wordsExpanded}>Sign Up</MenuItem>
                 </Link>
               </div>
 
             ) : (
                 <div>
                   <Link to="/Profile" className={classes.linkStyle}>
-                    <MenuItem className={classes.words}>Profile</MenuItem>
+                    <MenuItem className={classes.wordsExpanded}>Profile</MenuItem>
                   </Link>
 
                   <Link
@@ -99,7 +106,7 @@ export default function Header(props) {
                     className={classes.linkStyle}
                   >
                     <MenuItem
-                      className={classes.words}
+                      className={classes.wordsExpanded}
                       onClick={handleSignoutClick}
                     >Sign Out</MenuItem>
                   </Link>
