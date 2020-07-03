@@ -5,7 +5,7 @@ import AdminProfileComponent from './Admin';
 
 function Profile(props) {
   let element;
-
+  // loding data from database
   const [info,setInfo] = useState({
     email: 'kkk@mail.com',
     name: 'Louis',
