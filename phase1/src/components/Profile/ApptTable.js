@@ -54,8 +54,8 @@ export default class ApptTable extends Component {
 }
 
 const tableStyle = {
-  maxWidth: '70%',
-  marginLeft: '15%',
-  marginRight: '15%',
+  // maxWidth: '70%',
+  // marginLeft: '15%',
+  // marginRight: '15%',
   marginTop: '30px'
 }
