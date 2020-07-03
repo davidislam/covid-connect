@@ -10,11 +10,11 @@ import img3 from "./Home/covid_img3.jpg";
 import { makeStyles } from '@material-ui/core';
 
 function UserGreeting(props) {
-  return <h3>You are signed in as {props.username}</h3>;
+  return <h4 className="greetingText">You are signed in as {props.username}</h4>;
 }
 
 function GuestGreeting(props) {
-  return <h3>You are not signed in</h3>;
+  return <h4 className="greetingText">You are not signed in</h4>;
 }
 
 function Greeting(props) {

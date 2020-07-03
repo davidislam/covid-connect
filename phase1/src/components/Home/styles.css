@@ -63,3 +63,7 @@
     background: white;
     /*text-decoration: none;*/
  }
+
+ .greetingText {
+    font-style: italic;
+ }
