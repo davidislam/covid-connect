@@ -6,6 +6,7 @@ import {
 } from "@material-ui/core"
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import { uid } from 'react-uid';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -106,7 +107,7 @@ export default function SignupComponent() {
             style={{ width: '10ch' }}>
 
             {populateAge().map(num =>
-              <MenuItem value={num}>{num}</MenuItem>)
+              <MenuItem key={uid(num)} value={num}>{num}</MenuItem>)
             }
           </Select>
         </FormControl>
