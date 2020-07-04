@@ -49,7 +49,8 @@ class AssessmentCentres extends Component {
           <CentreList
             centres={this.state.centres}
             addAppt={(appt) => this.props.addAppt(appt)}
-            formattedDate={formattedDate(selected_date)} /> :
+            formattedDate={formattedDate(selected_date)}
+            isLoggedIn={this.props.isLoggedIn} /> :
           <h3>No centres found</h3>}
       </div>
     );

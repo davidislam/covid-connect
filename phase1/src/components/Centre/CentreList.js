@@ -6,7 +6,10 @@ import Centre from './Centre';
 function CentreList(props) {
   return (
     props.centres.map(centre => (
-      <Centre key={uid(centre)} centre={centre} addAppt={appt => props.addAppt(appt)} formattedDate={props.formattedDate} />
+      <Centre key={uid(centre)} centre={centre}
+        addAppt={appt => props.addAppt(appt)}
+        formattedDate={props.formattedDate}
+        isLoggedIn={props.isLoggedIn} />
     ))
   )
 }

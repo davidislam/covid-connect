@@ -63,6 +63,7 @@ class Centre extends Component {
             formattedDate={this.props.formattedDate}
             formattedAddress={formattedAddress(centre.location)}
             addAppt={appt => this.props.addAppt(appt)}
+            isLoggedIn={this.props.isLoggedIn}
           />
         </AccordionDetails>
       </Accordion>

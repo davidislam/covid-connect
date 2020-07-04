@@ -12,7 +12,9 @@ export default class HoursForm extends Component {
   state = {
     timeslots: this.props.timeslots,
     errorMessage: "",
-    showSnackbar: false
+    showSnackbar: false,
+    snackbarMessage: '',
+    snackbarSeverity: ''
   }
 
   componentDidMount() {
@@ -24,6 +26,14 @@ export default class HoursForm extends Component {
 
     if (this.selected_times.size === 0) {
       this.setState({ errorMessage: 'Please choose a timeslot' });
+      return;
+    }
+
+    if (!this.props.isLoggedIn) {
+      this.setState({
+        snackbarMessage: 'You must be logged in to book an appointment',
+        snackbarSeverity: 'error', showSnackbar: true
+      });
       return;
     }
 
@@ -52,7 +62,10 @@ export default class HoursForm extends Component {
 
     // Reset props
     this.selected_times = new Set();
-    this.setState({ errorMessage: '', showSnackbar: true });
+    this.setState({
+      errorMessage: '', showSnackbar: true,
+      snackbarMessage: "Appointment details have been added to your profile", snackbarSeverity: 'success'
+    });
   }
 
   toggleCheckbox = time => {
@@ -79,7 +92,11 @@ export default class HoursForm extends Component {
         <Button type='submit' variant="contained" color="primary">
           Confirm
         </Button>
-        <CustomizedSnackbar message="Appointment details have been added to your profile" severity='success' open={this.state.showSnackbar} toggleSnackbar={this.toggleSnackbar} />
+        <CustomizedSnackbar
+          message={this.state.snackbarMessage}
+          severity={this.state.snackbarSeverity}
+          open={this.state.showSnackbar}
+          toggleSnackbar={this.toggleSnackbar} />
       </form>
     )
   }

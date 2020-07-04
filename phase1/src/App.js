@@ -25,9 +25,9 @@ class App extends Component {
   }
 
   state = {
-    isLoggedIn: true,
-    isAdmin: true,
-    username: 'admin',
+    isLoggedIn: false,
+    isAdmin: false,
+    username: '',
     appointments: [],
   }
 
@@ -73,15 +73,17 @@ class App extends Component {
               />
             )} />
             <Route path='/booking' render={() => (
-              <Booking isLoggedIn={isLoggedIn}
+              <Booking
                 username={username}
                 isAdmin={isAdmin}
+                isLoggedIn={isLoggedIn}
               />
             )} />
             <Route path='/screening' component={Screening} />
             <Route path='/faqs' component={FAQs} />
             <Route path='/centres' render={(props) => (
-              <AssessmentCentres {...props} addAppt={(appt) => addAppointment(appt, this)} />
+              <AssessmentCentres {...props} addAppt={(appt) => addAppointment(appt, this)}
+                isLoggedIn={isLoggedIn} />
             )} />
             <Route path="/" render={() => <div>404</div>} />
           </Switch>

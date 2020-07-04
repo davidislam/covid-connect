@@ -27,7 +27,7 @@ class Booking extends Component {
     const { city, date } = this.state;
     return (
       <div>
-        <h1>Hi {this.props.username}!</h1>
+        {this.props.isLoggedIn ? <h1>Hi {this.props.username}!</h1> : <h1>Hi!</h1>}
         <p>Find your closest Ontario assessment centre to get a COVID-19 (coronavirus) test.</p>
         <p>All assessment centres will test you if you would like to be tested. Testing is a free service.</p>
         <p>Call the assessment centre or your <a href="http://www.health.gov.on.ca/en/common/system/services/phu/locations.aspx">local public health unit</a> if you have questions or cannot find a centre near you.</p>
