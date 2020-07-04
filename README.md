@@ -1,6 +1,6 @@
 # COVID-Connect
 
-COVID-Connect is an online application that helps a user to obtain information about COVID-19, and to solve any common issues one might find such as booking Assessment Centre, learning about COVID-19, frequently asked questions, and testing survey.
+COVID-Connect is an online application that primarily helps a user book appointments to test for COVID-19 at one of the applicable Assessment Centres. Supplementary services include checking appointments, learning about COVID-19, frequently asked questions, and a testing survey that can be conducted at home.
 
 ## Features
 
@@ -26,7 +26,7 @@ User:
 
 Admin:
 
-1. There exists only one admin, who when logged in, can add/remove the available assessment centre.
+1. There exists one admin account. When logged in, they can add/remove the assessment centres.
 2. Like the user, admin can modify their profile info.
 
 ## account

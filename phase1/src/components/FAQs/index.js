@@ -41,7 +41,7 @@ class FAQs extends Component {
               {<p>Who can visit an assessment centre?</p>}
             </AccordionSummary>
             <AccordionDetails>
-              {<p>Anyone can be tested. Testing is a free service. If possible, bring your Ontario health card to the appointent. <strong className='links'><Link to="/booking">Find a centre now.</Link></strong></p>}
+              {<p>Anyone can be tested. Testing is a free service. If possible, bring your Ontario health card to the appointent. <Link to="/booking">Find a centre now.</Link></p>}
             </AccordionDetails>
           </Accordion>
 
