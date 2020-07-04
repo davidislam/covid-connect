@@ -2,6 +2,7 @@
 import { CENTRES } from '../data';
 
 export function addCentre(centre, days) {
+  // Code below requires server call
   const newCentre = {
     name: centre.name,
     location: {

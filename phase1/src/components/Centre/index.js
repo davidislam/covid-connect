@@ -17,7 +17,7 @@ class AssessmentCentres extends Component {
   }
 
   componentDidMount() {
-    // Fetch centres data
+    // Fetch centres data from server
     this.filterCentres();
   }
 

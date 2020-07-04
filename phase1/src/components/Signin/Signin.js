@@ -38,6 +38,7 @@ export default function SigninComponent(props) {
   };
 
   const handleClick = () => {
+    // code below requires server call
     if (value.username === 'user' && value.password === 'user') {
       helper();
     } else if (value.username === 'admin' && value.password === 'admin') {

@@ -120,6 +120,7 @@ export default class AddCentre extends Component {
 
   handleSubmit = () => {
     // TODO: Validate input
+    // code below requires server call
     addCentre(this.state, this.days);
     this.setState(this.submitState);
   };

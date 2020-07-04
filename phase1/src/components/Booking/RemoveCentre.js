@@ -17,6 +17,7 @@ class RemoveCentre extends Component {
   }
 
   handleClick = () => {
+    // code below requires server call
     const { name } = this.state
     const msg = `${name} has been removed`;
     removeCentre(this._getIndex(name));

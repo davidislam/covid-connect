@@ -20,6 +20,7 @@ const workdays = {
 
 export const CITIES = ["Brampton", "Hamilton", "Mississauga", "Ottawa", "Sudbury", "Toronto", "Waterloo"]
 
+// Obtain centres info from server
 export const CENTRES = [
   {
     name: "Humber River Hospital Assessment Centre",
