@@ -37,7 +37,8 @@ export default function SigninComponent(props) {
     setValue({ ...value, showPassword: !value.showPassword })
   };
 
-  const handleClick = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     // code below requires server call
     if (value.username === 'user' && value.password === 'user') {
       helper();
@@ -61,7 +62,7 @@ export default function SigninComponent(props) {
 
   return (
     <div>
-      <form className={classes.root}>
+      <form className={classes.root} onSubmit={handleSubmit}>
         <TextField
           id="Username"
           label="Username"
@@ -86,7 +87,7 @@ export default function SigninComponent(props) {
           }}
           required />
         <br />
-        <Button variant="contained" color="primary" onClick={handleClick}>
+        <Button variant="contained" color="primary" type="submit">
           Sign in
         </Button>
         <CustomizedSnackbar message={value.message} severity={value.severity} open={value.showSnackbar} toggleSnackbar={toggleSnackbar} />
