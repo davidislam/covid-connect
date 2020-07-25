@@ -13,15 +13,21 @@ class RemoveCentre extends Component {
   state = {
     name: '',
     snackbarOpen: false,
-    snackbarMessage: ''
+    snackbarMessage: '',
+    snackbarSeverity: ''
   }
 
   handleClick = () => {
     // code below requires server call
     const { name } = this.state
-    const msg = `${name} has been removed`;
-    removeCentre(this._getIndex(name));
-    this.setState({ snackbarOpen: true, snackbarMessage: msg, name: '' });
+    if (name !== '') {
+      const msg = `${name} has been removed`;
+      removeCentre(this._getIndex(name));
+      this.setState({ snackbarOpen: true, snackbarMessage: msg, snackbarSeverity: 'success', name: '' });
+    } else {
+      const msg = 'Please select an assessment centre';
+      this.setState({ snackbarOpen: true, snackbarMessage: msg, snackbarSeverity: 'warning' });
+    }
   }
 
   _getIndex = (name) => {
@@ -33,8 +39,8 @@ class RemoveCentre extends Component {
   }
 
   render() {
-    const { name, snackbarOpen, snackbarMessage } = this.state;
-    const snackbarSeverity = 'success';
+    const { name, snackbarOpen, snackbarMessage, snackbarSeverity } = this.state;
+    // const snackbarSeverity = 'success';
     return (
       <div>
         <CustomizedSelect
@@ -55,7 +61,7 @@ class RemoveCentre extends Component {
         </div>
         <CustomizedSnackbar
           message={snackbarMessage}
-          snackbarSeverity={snackbarSeverity}
+          severity={snackbarSeverity}
           open={snackbarOpen}
           toggleSnackbar={() => toggle(this, 'snackbarOpen')}
         />
