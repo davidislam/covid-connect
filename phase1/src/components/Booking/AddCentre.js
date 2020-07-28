@@ -118,7 +118,8 @@ export default class AddCentre extends Component {
     });
   }
 
-  handleSubmit = () => {
+  handleSubmit = (e) => {
+    e.preventDefault();
     // TODO: Validate input
     // code below requires server call
     addCentre(this.state, this.days);
@@ -178,13 +179,13 @@ export default class AddCentre extends Component {
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <DialogTitle id="form-dialog-title">Add Centre</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              To add an assessment centre to this website, please fill out the
-              form below.
+          <form onSubmit={this.handleSubmit}>
+            <DialogTitle id="form-dialog-title">Add Centre</DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                To add an assessment centre to this website, please fill out the
+                form below.
             </DialogContentText>
-            <form>
               <div style={inputStyle}>
                 <TextField
                   label="Name"
@@ -274,16 +275,16 @@ export default class AddCentre extends Component {
                 Add timeslot
               </Button>
 
-            </form>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
-              Cancel
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={this.handleClose} color="primary">
+                Cancel
             </Button>
-            <Button onClick={this.handleSubmit} color="primary" >
-              Submit
+              <Button type="submit" color="primary">
+                Submit
             </Button>
-          </DialogActions>
+            </DialogActions>
+          </form>
         </Dialog>
         <CustomizedSnackbar
           message={snackbarMessage}
