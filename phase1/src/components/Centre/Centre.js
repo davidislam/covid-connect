@@ -34,7 +34,7 @@ function Url(props) {
   return (
     <div>
       <h4> <LinkIcon color='primary' fontSize='small' className='icon' /> Website</h4>
-      <a href={props.link}>{props.link}</a>
+      <div id="url"> <a href={props.link}>{props.link}</a> </div>
     </div>
   )
 }
