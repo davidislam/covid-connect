@@ -1,0 +1,25 @@
+{
+  "name": "team31",
+  "version": "1.0.0",
+  "description": "covidconnect",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/csc309-summer-2020/team31.git"
+  },
+  "author": "David Islam",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/csc309-summer-2020/team31/issues"
+  },
+  "homepage": "https://github.com/csc309-summer-2020/team31#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mongodb": "^3.6.0",
+    "mongoose": "^5.9.27"
+  }
+}
