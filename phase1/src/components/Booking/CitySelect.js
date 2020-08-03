@@ -16,7 +16,6 @@ export default function CitySelect(props) {
           value={props.value}
           name="city"
           onChange={props.onChange}
-          required
         >
           {props.cities.map(c => (
             <MenuItem key={uid(c)} value={c}>{c}</MenuItem>

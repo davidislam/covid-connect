@@ -8,6 +8,7 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import { uid } from 'react-uid';
 
+
 const useStyles = makeStyles(theme => ({
   root: {
     '& > *': {
@@ -53,123 +54,123 @@ export default function SignupComponent() {
     return ageArr;
   }
 
-  const handleClick = () => {
+  const handleSubmit = (e) => {
     // Send info to server
+    // Validate inputs if needed
+    alert("User registered");
   }
 
   return (
-    <div>
-      <form className={classes.root}>
-        <TextField
-          id="Username"
-          label="Username"
-          variant="outlined"
-          onChange={() => handleChange("username")}
-          required />
-        <br />
+    <form className={classes.root} onSubmit={handleSubmit}>
+      <TextField
+        id="Username"
+        label="Username"
+        variant="outlined"
+        onChange={() => handleChange("username")}
+        required />
+      <br />
 
-        <TextField
-          id="Name"
-          label="Name"
-          variant="outlined"
-          onChange={() => handleChange("name")}
-          required />
-        <br />
+      <TextField
+        id="Name"
+        label="Name"
+        variant="outlined"
+        onChange={() => handleChange("name")}
+        required />
+      <br />
+
+      <FormControl>
+        <RadioGroup
+          name="gender"
+          onChange={() => handleChange("gender")}
+          row
+          required>
+
+          <FormControlLabel
+            value="male"
+            control={<Radio color="primary" />}
+            label="male" />
+
+          <FormControlLabel
+            value="female"
+            control={<Radio color="secondary" />}
+            label="female" />
+
+        </RadioGroup>
+      </FormControl>
+      <br />
+
+      <FormControl variant="outlined">
+        <InputLabel id="ageLabel">Age</InputLabel>
+        <Select
+          labelId="ageLabel"
+          id="age"
+          onChange={handleChange("age")}
+          style={{ width: '10ch' }}>
+
+          {populateAge().map(num =>
+            <MenuItem key={uid(num)} value={num}>{num}</MenuItem>)
+          }
+        </Select>
+      </FormControl>
+      <br />
+
+      <TextField
+        id="Password"
+        label="Password"
+        variant="outlined"
+        type={value.showPassword ? "text" : "password"}
+        value={value.password}
+        onChange={handleChange("password")}
+        InputProps={{
+          endAdornment: <InputAdornment position="end">
+            <IconButton onClick={() => handleShowPass()} >
+              {value.showPassword ? <VisibilityOff /> : <Visibility />}
+            </IconButton>
+          </InputAdornment>,
+        }}
+        required />
+      <br />
+
+      <TextField
+        id="healthCardNum"
+        label="Health Card Number(optional)"
+        variant="outlined"
+        onChange={() => handleChange("healthCardNum")}
+      />
+      <br />
+
+      <TextField
+        id="phoneNumber"
+        label="Phone Number"
+        variant="outlined"
+        onChange={() => handleChange("phoneNumber")}
+        required
+      />
+      <br />
+
+      <TextField
+        id="address"
+        label="Address(optional)"
+        variant="outlined"
+        onChange={() => handleChange("address")}
+      />
+      <br />
+
+      <TextField
+        id="Email"
+        label="E-mail(optional)"
+        variant="outlined"
+        type="email"
+        onChange={() => handleChange("email")}
+      />
+      <br />
 
 
-        <FormControl>
-          <RadioGroup
-            name="gender"
-            onChange={() => handleChange("gender")}
-            row
-            required>
+      <Button variant="contained" color="primary" type="submit">
+        Register
+      </Button>
 
-            <FormControlLabel
-              value="male"
-              control={<Radio color="primary" />}
-              label="male" />
-
-            <FormControlLabel
-              value="female"
-              control={<Radio color="secondary" />}
-              label="female" />
-
-          </RadioGroup>
-        </FormControl>
-        <br />
-
-        <FormControl variant="outlined">
-          <InputLabel id="ageLabel">Age</InputLabel>
-          <Select
-            labelId="ageLabel"
-            id="age"
-            onChange={handleChange("age")}
-            style={{ width: '10ch' }}>
-
-            {populateAge().map(num =>
-              <MenuItem key={uid(num)} value={num}>{num}</MenuItem>)
-            }
-          </Select>
-        </FormControl>
-        <br />
-
-        <TextField
-          id="Password"
-          label="Password"
-          variant="outlined"
-          type={value.showPassword ? "text" : "password"}
-          value={value.password}
-          onChange={handleChange("password")}
-          InputProps={{
-            endAdornment: <InputAdornment position="end">
-              <IconButton onClick={() => handleShowPass()} >
-                {value.showPassword ? <VisibilityOff /> : <Visibility />}
-              </IconButton>
-            </InputAdornment>,
-          }}
-          required />
-        <br />
-
-        <TextField
-          id="healthCardNum"
-          label="Health Card Number(optional)"
-          variant="outlined"
-          onChange={() => handleChange("healthCardNum")}
-        />
-        <br />
-
-        <TextField
-          id="phoneNumber"
-          label="Phone Number"
-          variant="outlined"
-          onChange={() => handleChange("phoneNumber")}
-          required
-        />
-        <br />
-
-        <TextField
-          id="address"
-          label="Address(optional)"
-          variant="outlined"
-          onChange={() => handleChange("address")}
-        />
-        <br />
-
-        <TextField
-          id="Email"
-          label="E-mail(optional)"
-          variant="outlined"
-          onChange={() => handleChange("email")}
-        />
-        <br />
-
-
-        <Button variant="contained" color="primary" onClick={handleClick}>
-          Register
-        </Button>
-
-      </form>
-    </div>
+    </form>
 
   );
 
