@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
 import FormControl from "@material-ui/core/FormControl";
 import FormGroup from "@material-ui/core/FormGroup";
 import Select from "@material-ui/core/Select";
@@ -18,6 +17,8 @@ import { CITIES } from '../../data';
 import { uid } from "react-uid";
 import CustomizedSnackbar from './../CustomizedSnackbar';
 import { addCentre } from './../../actions/centre';
+
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 
 
 export default class AddCentre extends Component {
@@ -108,7 +109,10 @@ export default class AddCentre extends Component {
 
   handleClick = () => {
     const { startTime, startMeridiem, endTime, endMeridiem } = this.state;
-    // TODO: Validate input
+    if (startTime === "" || startMeridiem === "" || endTime === "" || endMeridiem === "") {
+      this.setState({ snackbarOpen: true, snackbarMessage: "Please choose a time", snackbarSeverity: "warning" })
+      return;
+    }
     const formattedTime = `${startTime} ${startMeridiem} - ${endTime} ${endMeridiem}`;
     const timeslot = { time: formattedTime, is_taken: false };
     this.setState({
@@ -120,7 +124,32 @@ export default class AddCentre extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    // TODO: Validate input
+
+    if (this.state.city === "") {
+      this.setState({ snackbarOpen: true, snackbarMessage: "Please select a city", snackbarSeverity: "warning" });
+      return;
+    }
+
+    // At least one day must be selected
+    const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+    let daySelected = false;
+    for (let i = 0; i < days.length; i++) {
+      if (this.days[days[i]]) {
+        daySelected = true;
+        break;
+      }
+    }
+    if (!daySelected) {
+      this.setState({ snackbarOpen: true, snackbarMessage: "Please choose a day", snackbarSeverity: "warning" });
+      return;
+    }
+
+    // At least one timeslot must be added
+    if (this.state.hours.length === 0) {
+      this.setState({ snackbarOpen: true, snackbarMessage: "Please add a timeslot", snackbarSeverity: "warning" });
+      return;
+    }
+
     // code below requires server call
     addCentre(this.state, this.days);
     this.setState(this.submitState);
@@ -165,6 +194,7 @@ export default class AddCentre extends Component {
       "Saturday",
       "Sunday"
     ];
+    const requiredMsg = "this field is required";
     return (
       <div>
         <Button
@@ -179,7 +209,7 @@ export default class AddCentre extends Component {
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <form onSubmit={this.handleSubmit}>
+          <ValidatorForm onSubmit={this.handleSubmit}>
             <DialogTitle id="form-dialog-title">Add Centre</DialogTitle>
             <DialogContent>
               <DialogContentText>
@@ -187,37 +217,41 @@ export default class AddCentre extends Component {
                 form below.
             </DialogContentText>
               <div style={inputStyle}>
-                <TextField
+                <TextValidator
                   label="Name"
                   name="name"
                   value={name}
                   onChange={this.handleInputChange}
-                  required
+                  validators={['required', 'minStringLength:5']}
+                  errorMessages={[requiredMsg, 'name must be at least five characters']}
                 />
-                <TextField
+                <TextValidator
                   label="Address"
                   name="address"
                   value={address}
                   onChange={this.handleInputChange}
-                  required
+                  validators={['required', 'minStringLength:5']}
+                  errorMessages={[requiredMsg, 'address must be at least five characters']}
                 />
-                <TextField
+                <TextValidator
                   label="Postal code"
                   name="postal_code"
                   value={postal_code}
                   onChange={this.handleInputChange}
-                  required
+                  validators={['required', 'matchRegexp:^[A-Za-z][0-9][A-Za-z][ -]?[0-9][A-Za-z][0-9]$']}
+                  errorMessages={[requiredMsg, 'invalid postal code']}
                 />
                 <CitySelect label='City' value={city} onChange={this.handleInputChange} cities={CITIES} />
-                <TextField
+                <TextValidator
                   label="Phone number"
                   name="number"
                   value={number}
                   onChange={this.handleInputChange}
                 />
-                <TextField
+                <TextValidator
                   label="Website url"
                   name="website"
+                  type="url"
                   value={website}
                   onChange={this.handleInputChange}
                 />
@@ -240,7 +274,7 @@ export default class AddCentre extends Component {
               </DialogContentText>
 
               <div style={timeStyles}>
-                <FormControl required>
+                <FormControl >
                   <InputLabel>From</InputLabel>
                   <Select value={startTime} name="startTime" onChange={this.handleInputChange} style={{ width: '10ch' }}>
                     {this.populateTime().map(time =>
@@ -248,14 +282,14 @@ export default class AddCentre extends Component {
                   </Select>
                 </FormControl>
 
-                <FormControl required>
+                <FormControl >
                   <Select value={startMeridiem} name="startMeridiem" onChange={this.handleInputChange} style={{ width: '10ch' }}>
                     <MenuItem value='AM'>AM</MenuItem>
                     <MenuItem value='PM'>PM</MenuItem>
                   </Select>
                 </FormControl>
 
-                <FormControl required>
+                <FormControl >
                   <InputLabel>To</InputLabel>
                   <Select value={endTime} name="endTime" onChange={this.handleInputChange} style={{ width: '10ch' }}>
                     {this.populateTime().map(time =>
@@ -263,7 +297,7 @@ export default class AddCentre extends Component {
                   </Select>
                 </FormControl>
 
-                <FormControl required>
+                <FormControl >
                   <Select value={endMeridiem} name="endMeridiem" onChange={this.handleInputChange} style={{ width: '10ch' }}>
                     <MenuItem value='AM'>AM</MenuItem>
                     <MenuItem value='PM'>PM</MenuItem>
@@ -284,7 +318,7 @@ export default class AddCentre extends Component {
                 Submit
             </Button>
             </DialogActions>
-          </form>
+          </ValidatorForm>
         </Dialog>
         <CustomizedSnackbar
           message={snackbarMessage}

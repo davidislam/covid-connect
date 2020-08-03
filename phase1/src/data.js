@@ -27,7 +27,9 @@ export const CENTRES = [
     location: {
       city: "Toronto",
       address: "2111 Finch Avenue West",
-      postal_code: "M3N 1N1"
+      postal_code: "M3N 1N1",
+      latitude: 43.754540,
+      longitude: -79.525770
     },
     number: "416-747-6740",
     website: "https://www.hrh.ca/covid-19/",
@@ -44,7 +46,9 @@ export const CENTRES = [
     location: {
       city: "Toronto",
       address: "825 Coxwell Avenue",
-      postal_code: "M4C 3E7"
+      postal_code: "M4C 3E7",
+      latitude: 43.692340,
+      longitude: -79.327290
     },
     number: "416-469-6858",
     website: "https://www.tehn.ca/programs-services/covid-19-assessment-centre",
@@ -61,7 +65,9 @@ export const CENTRES = [
     location: {
       city: "Toronto",
       address: "600 University Avenue",
-      postal_code: "M5G 1X5"
+      postal_code: "M5G 1X5",
+      latitude: 43.657269,
+      longitude: -79.390266
     },
     number: "416-586-4800",
     website: "https://www.sinaihealth.ca/covid19/",
@@ -78,7 +84,9 @@ export const CENTRES = [
     location: {
       city: "Mississauga",
       address: "15 Bronte College Court",
-      postal_code: "L5B 1M9"
+      postal_code: "L5B 1M9",
+      latitude: 43.572180,
+      longitude: -79.605780
     },
     number: "",
     website: "https://trilliumhealthpartners.ca/covid-19/A/assessment.html#starthere",
@@ -95,7 +103,9 @@ export const CENTRES = [
     location: {
       city: "Brampton",
       address: "500 Ray Lawson Boulevard",
-      postal_code: "L6W 2Z8"
+      postal_code: "L6W 2Z8",
+      latitude: 43.652218,
+      longitude: -79.735083
     },
     number: "",
     website: "https://www.williamoslerhs.ca/patients-and-families/preparing-for-your-visit-or-stay/coronavirus-information-for-patients-families/assessment-centre-for-covid-19",
@@ -112,7 +122,9 @@ export const CENTRES = [
     location: {
       city: "Hamilton",
       address: "25 Hester Street",
-      postal_code: "L9A 2N3"
+      postal_code: "L9A 2N3",
+      latitude: 43.224648,
+      longitude: -79.881459
     },
     number: "905-974-9848",
     website: "https://www.hamilton.ca/coronavirus/assessment-centres",
@@ -129,7 +141,9 @@ export const CENTRES = [
     location: {
       city: "Hamilton",
       address: "690 Main Street West",
-      postal_code: "L8S 1A4"
+      postal_code: "L8S 1A4",
+      latitude: 43.25997,
+      longitude: -79.898067
     },
     number: "905-974-9848",
     website: "https://www.hamilton.ca/coronavirus/assessment-centres",
@@ -146,7 +160,9 @@ export const CENTRES = [
     location: {
       city: "Ottawa",
       address: "151 Brewer Way",
-      postal_code: "K1S 5T1"
+      postal_code: "K1S 5T1",
+      latitude: 45.389189,
+      longitude: -75.691072
     },
     number: "",
     website: "https://www.ottawapublichealth.ca/en/public-health-topics/novel-coronavirus.aspx",
@@ -163,7 +179,9 @@ export const CENTRES = [
     location: {
       city: "Ottawa",
       address: "595 Moodie Drive",
-      postal_code: "K2H 8A8"
+      postal_code: "K2H 8A8",
+      latitude: 45.309481,
+      longitude: -75.825836
     },
     number: "",
     website: "https://www.ottawapublichealth.ca/en/public-health-topics/novel-coronavirus.aspx",
@@ -180,7 +198,9 @@ export const CENTRES = [
     location: {
       city: "Sudbury",
       address: "885 Prete Street",
-      postal_code: "P3E 3X9"
+      postal_code: "P3E 3X9",
+      latitude: 46.473006,
+      longitude: -81.005973
     },
     number: "705-671-7373",
     website: "https://www.hsnsudbury.ca/portalen/Patients-and-Visitors/COVID-19/COVID-19-Assessment-Centre",
@@ -197,7 +217,9 @@ export const CENTRES = [
     location: {
       city: "Sudbury",
       address: "1485 Lasalle Boulevard",
-      postal_code: "P3A 1Z8"
+      postal_code: "P3A 1Z8",
+      latitude: 46.522044,
+      longitude: -80.940311
     },
     number: "705-671-7373",
     website: "https://www.hsnsudbury.ca/portalen/Patients-and-Visitors/COVID-19/COVID-19-Assessment-Centre",
@@ -214,7 +236,9 @@ export const CENTRES = [
     location: {
       city: "Waterloo",
       address: "50 Bathurst Drive, Unit 1",
-      postal_code: "N2V 2C5"
+      postal_code: "N2V 2C5",
+      latitude: 43.507664,
+      longitude: -80.537881
     },
     number: "519-885-9517",
     website: "https://www.smgh.ca/covid-19-testing-available-for-k-w-residents-with-symptoms-starting-may-16",

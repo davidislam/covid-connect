@@ -16,6 +16,9 @@ function Profile(props) {
     address: '5 Random Cres'
   });
 
+  const [changeState, setChangeState] = useState(false);
+  const [open, setOpen] = useState(false);
+
   const handleChange = (prop) => (event) => {
     setInfo({ ...info, [prop]: event.target.value });
   };
@@ -23,6 +26,17 @@ function Profile(props) {
   const handleUsername = (e) => {
     const newUsername = e.target.value;
     props.changeUsername(newUsername);
+  }
+
+  const handleSubmit = e => {
+    // Code below requires a server call
+    e.preventDefault();
+    setChangeState(!changeState);
+    setOpen(true);
+  }
+
+  const handleClick = () => {
+    setChangeState(!changeState);
   }
 
   let element = <ProfileView
@@ -35,6 +49,11 @@ function Profile(props) {
     address={info.address}
     changeInfo={handleChange}
     handleUsername={handleUsername}
+    handleSubmit={handleSubmit}
+    handleClick={handleClick}
+    open={open}
+    setOpen={setOpen}
+    changeState={changeState}
   />
 
   if (props.isAdmin) {

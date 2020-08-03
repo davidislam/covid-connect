@@ -1,21 +1,12 @@
-import React, { useState } from 'react';
-import { Grid, TextField, Button, Typography } from "@material-ui/core"
+import React from 'react';
+import { Grid, Button, Typography } from "@material-ui/core"
 import CustomizedSnackbar from './../CustomizedSnackbar';
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 
-/* A reusable profile view componenet */
+/* A reusable controlled profile view componenet */
 
 export default function ProfileView(props) {
-
-  const [changeState, setChangeState] = useState(false);
-  const [open, setOpen] = useState(false);
-
-  const handleClick = () => {
-    if (changeState === true) {
-      setOpen(true);
-    }
-    setChangeState(!changeState);
-  }
-
+  const requiredMsg = 'this field is required';
   return (
     <div>
       <Grid container direction="column" justify="center" alignItems="center" spacing={2}>
@@ -23,14 +14,14 @@ export default function ProfileView(props) {
           <Typography variant="h4">{props.username} Info: </Typography>
         </Grid>
 
-        {!changeState ? (
+        {!props.changeState ? (
           <div>
             <Grid item>
               <Button variant="contained"
                 color="default"
-                onClick={handleClick}>
+                onClick={props.handleClick}>
                 Click to change profile information
-            </Button>
+              </Button>
             </Grid>
             <Grid item>
               <Typography variant="h6">Username: {props.username}</Typography>
@@ -60,63 +51,75 @@ export default function ProfileView(props) {
               <Typography variant="h6">Address: {props.address}</Typography>
             </Grid>
           </div>) :
-          <div>
+
+          <ValidatorForm onSubmit={props.handleSubmit}>
 
             <Grid item>
               <Button variant="contained"
                 color="primary"
-                onClick={handleClick}>
-                Click to save your change
+                type="submit"
+              >
+                Click to save your changes
               </Button>
             </Grid>
 
             <Grid item>
-              <TextField
+              <TextValidator
                 id="username"
                 label="Username"
                 value={props.username}
                 onChange={props.handleUsername}
+                validators={['required', 'minStringLength:4']}
+                errorMessages={[{ requiredMsg }, 'your username must be at least 4 characters long']}
               />
             </Grid>
 
             <Grid item>
-              <TextField
+              <TextValidator
                 id="email"
                 label="Email"
                 value={props.email}
                 onChange={props.changeInfo('email')}
+                validators={['required', 'isEmail']}
+                errorMessages={[{ requiredMsg }, 'invalid email']}
               />
             </Grid>
 
             <Grid item>
-              <TextField
+              <TextValidator
                 id="name"
                 label="Name"
                 value={props.name}
                 onChange={props.changeInfo('name')}
+                validators={['required', 'minStringLength:3']}
+                errorMessages={[{ requiredMsg }, 'your name must be at least 3 characters long']}
               />
             </Grid>
 
             <Grid>
-              <TextField
+              <TextValidator
                 id="age"
                 label="Age"
                 value={props.age}
                 onChange={props.changeInfo('age')}
+                validators={['required', 'isNumber']}
+                errorMessages={[{ requiredMsg }, 'invalid age']}
               />
             </Grid>
 
             <Grid>
-              <TextField
+              <TextValidator
                 id="healthCardNum"
                 label="Health Card Number"
                 value={props.healthCardNum}
                 onChange={props.changeInfo('healthCardNum')}
+                validators={['isNumber']}
+                errorMessages={['invalid health card number']}
               />
             </Grid>
 
             <Grid>
-              <TextField
+              <TextValidator
                 id="phoneNumber"
                 label="Phone Number"
                 value={props.phoneNumber}
@@ -125,17 +128,19 @@ export default function ProfileView(props) {
             </Grid>
 
             <Grid>
-              <TextField
+              <TextValidator
                 id="address"
                 label="Address"
                 value={props.address}
                 onChange={props.changeInfo('address')}
+                validators={['minStringLength:5']}
+                errorMessages={['your address must be at least 5 characters long']}
               />
             </Grid>
-          </div>
+          </ValidatorForm>
         }
       </Grid>
-      <CustomizedSnackbar message='Profile updated' severity='success' open={open} toggleSnackbar={() => setOpen(false)} />
+      <CustomizedSnackbar message='Profile successfully updated' severity='success' open={props.open} toggleSnackbar={() => props.setOpen(false)} />
     </div>
   )
 

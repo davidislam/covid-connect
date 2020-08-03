@@ -1,40 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
+import Radio from '@material-ui/core/Radio';
+
 
 export default function Timeslot(props) {
-  const [state, setState] = useState({ isChecked: false })
-  const { timeslot, handleCheckboxChange } = props;
-
-  const handleChange = () => {
-    setState({ ...state, isChecked: !state.isChecked });
-    handleCheckboxChange(timeslot.time);
-  }
+  const { timeslot } = props;
 
   let element;
   if (timeslot.is_taken) {
     element = <FormControlLabel
       disabled
-      control={
-        <Checkbox
-          checked={true}
-          name='checked'
-          color='primary'
-        />
-      }
+      checked
+      control={<Radio />}
       label={timeslot.time}
+      value={timeslot.time}
     />
   } else {
     element = <FormControlLabel
-      control={
-        <Checkbox
-          onChange={handleChange}
-          name='isChecked'
-          color='primary'
-          checked={state.isChecked}
-        />
-      }
+      control={<Radio />}
       label={timeslot.time}
+      value={timeslot.time}
     />
   }
 
