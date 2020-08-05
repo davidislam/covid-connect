@@ -20,6 +20,8 @@ import { addCentre } from './../../actions/centre';
 
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 
+const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+
 
 export default class AddCentre extends Component {
   initState = {
@@ -27,14 +29,22 @@ export default class AddCentre extends Component {
     name: "",
     city: "",
     address: "",
-    postal_code: "",
+    postalCode: "",
     number: "",
-    website: "",
+    url: "",
     startTime: "",
     startMeridiem: "",
     endTime: "",
     endMeridiem: "",
-    hours: [],
+    // days: [
+    //   {name: 'monday', isChecked: false},
+    //   {name: 'tuesday', isChecked: false},
+    //   {name: 'wednesday', isChecked: false},
+    //   {name: 'thursday', isChecked: false},
+    //   {name: 'friday', isChecked: false},
+    //   {name: 'saturday', isChecked: false},
+    //   {name: 'sunday', isChecked: false}
+    // ],
     snackbarMessage: "",
     snackbarSeverity: "",
     snackbarOpen: false,
@@ -45,14 +55,22 @@ export default class AddCentre extends Component {
     name: "",
     city: "",
     address: "",
-    postal_code: "",
+    postalCode: "",
     number: "",
-    website: "",
+    url: "",
     startTime: "",
     startMeridiem: "",
     endTime: "",
     endMeridiem: "",
-    hours: [],
+    // days: [
+    //   {name: 'monday', isChecked: false},
+    //   {name: 'tuesday', isChecked: false},
+    //   {name: 'wednesday', isChecked: false},
+    //   {name: 'thursday', isChecked: false},
+    //   {name: 'friday', isChecked: false},
+    //   {name: 'saturday', isChecked: false},
+    //   {name: 'sunday', isChecked: false}
+    // ],
     snackbarMessage: "Assessment centre added",
     snackbarSeverity: "success",
     snackbarOpen: true,
@@ -63,14 +81,22 @@ export default class AddCentre extends Component {
     name: "",
     city: "",
     address: "",
-    postal_code: "",
+    postalCode: "",
     number: "",
-    website: "",
+    url: "",
     startTime: "",
     startMeridiem: "",
     endTime: "",
     endMeridiem: "",
-    hours: [],
+    // days: [
+    //   {name: 'monday', isChecked: false},
+    //   {name: 'tuesday', isChecked: false},
+    //   {name: 'wednesday', isChecked: false},
+    //   {name: 'thursday', isChecked: false},
+    //   {name: 'friday', isChecked: false},
+    //   {name: 'saturday', isChecked: false},
+    //   {name: 'sunday', isChecked: false}
+    // ],
     snackbarMessage: "",
     snackbarSeverity: "",
     snackbarOpen: false,
@@ -80,6 +106,10 @@ export default class AddCentre extends Component {
     this.days = {
       monday: false, tuesday: false, wednesday: false, thursday: false, friday: false,
       saturday: false, sunday: false
+    }; // Used for checkboxes
+    this.hours = {
+      monday: [], tuesday: [], wednesday: [], thursday: [], friday: [],
+      saturday: [], sunday: []
     };
   }
 
@@ -99,24 +129,28 @@ export default class AddCentre extends Component {
 
   handleCheckboxChange = e => {
     const target = e.target;
-    if (target.checked) {
-      this.days[target.name] = true;
-    } else {
-      this.days[target.name] = false;
-    }
-    // console.log(this.days);
+    this.days[target.name] = !this.days[target.name];
   }
 
+  /* Add timeslot */
   handleClick = () => {
     const { startTime, startMeridiem, endTime, endMeridiem } = this.state;
     if (startTime === "" || startMeridiem === "" || endTime === "" || endMeridiem === "") {
       this.setState({ snackbarOpen: true, snackbarMessage: "Please choose a time", snackbarSeverity: "warning" })
       return;
     }
-    const formattedTime = `${startTime} ${startMeridiem} - ${endTime} ${endMeridiem}`;
-    const timeslot = { time: formattedTime, is_taken: false };
+    // const formattedTime = `${startTime} ${startMeridiem} - ${endTime} ${endMeridiem}`;
+    const formattedTime = `${startTime} - ${endTime} ${endMeridiem}`;
+    const timeslot = { time: formattedTime, isTaken: false };
+
+    // Add <timeslot> to checked days
+    days.forEach(day => {
+      if (this.days[day]) {
+        this.hours[day].push(timeslot);
+      }
+    })
+
     this.setState({
-      hours: [...this.state.hours, timeslot],
       startTime: '', startMeridiem: '', endTime: '', endMeridiem: '',
       snackbarOpen: true, snackbarMessage: "Timeslot added", snackbarSeverity: 'info'
     });
@@ -131,7 +165,6 @@ export default class AddCentre extends Component {
     }
 
     // At least one day must be selected
-    const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
     let daySelected = false;
     for (let i = 0; i < days.length; i++) {
       if (this.days[days[i]]) {
@@ -145,13 +178,20 @@ export default class AddCentre extends Component {
     }
 
     // At least one timeslot must be added
-    if (this.state.hours.length === 0) {
+    let addedTimeslot = false;
+    for (let i = 0; i < days.length; i++) {
+      if (this.hours[days[i]].length !== 0) {
+        addedTimeslot = true;
+        break;
+      }
+    }
+    if (!addedTimeslot) {
       this.setState({ snackbarOpen: true, snackbarMessage: "Please add a timeslot", snackbarSeverity: "warning" });
       return;
     }
 
     // code below requires server call
-    addCentre(this.state, this.days);
+    addCentre(this.state, this.hours);
     this.setState(this.submitState);
   };
 
@@ -174,9 +214,9 @@ export default class AddCentre extends Component {
       name,
       city,
       address,
-      postal_code,
+      postalCode,
       number,
-      website,
+      url,
       startMeridiem,
       startTime,
       endTime,
@@ -185,7 +225,7 @@ export default class AddCentre extends Component {
       snackbarOpen,
       snackbarSeverity
     } = this.state;
-    const days = [
+    const daysCapitalized = [
       "Monday",
       "Tuesday",
       "Wednesday",
@@ -235,8 +275,8 @@ export default class AddCentre extends Component {
                 />
                 <TextValidator
                   label="Postal code"
-                  name="postal_code"
-                  value={postal_code}
+                  name="postalCode"
+                  value={postalCode}
                   onChange={this.handleInputChange}
                   validators={['required', 'matchRegexp:^[A-Za-z][0-9][A-Za-z][ -]?[0-9][A-Za-z][0-9]$']}
                   errorMessages={[requiredMsg, 'invalid postal code']}
@@ -249,10 +289,10 @@ export default class AddCentre extends Component {
                   onChange={this.handleInputChange}
                 />
                 <TextValidator
-                  label="Website url"
-                  name="website"
+                  label="website url"
+                  name="url"
                   type="url"
-                  value={website}
+                  value={url}
                   onChange={this.handleInputChange}
                 />
               </div>
@@ -260,7 +300,7 @@ export default class AddCentre extends Component {
                 Select the days of availability.
               </DialogContentText>
               <FormGroup row required>
-                {days.map(day => (
+                {daysCapitalized.map(day => (
                   <FormControlLabel key={uid(day)}
                     control={
                       <Checkbox name={day.toLowerCase()} color="primary" onChange={this.handleCheckboxChange} />
@@ -270,7 +310,7 @@ export default class AddCentre extends Component {
                 ))}
               </FormGroup>
               <DialogContentText>
-                Choose the times of availability.
+                Choose the times for the selected days.
               </DialogContentText>
 
               <div style={timeStyles}>

@@ -9,6 +9,7 @@ function CentreList(props) {
       <Centre key={uid(centre)} centre={centre}
         addAppt={appt => props.addAppt(appt)}
         formattedDate={props.formattedDate}
+        day={props.day}
         isLoggedIn={props.isLoggedIn} />
     ))
   )

@@ -10,13 +10,13 @@ import LinkIcon from '@material-ui/icons/Link';
 import HoursForm from './HoursForm';
 
 function Address(props) {
-  const { address, city, postal_code } = props.location;
+  const { address, city, postalCode } = props.location;
   return (
     <div>
       <h4> <LocationOnIcon color='primary' fontSize='small' className='icon' /> Address</h4>
       <p>{address}</p>
       <p>{city}</p>
-      <p>{postal_code}</p>
+      <p>{postalCode}</p>
     </div>
   )
 }
@@ -40,7 +40,7 @@ function Url(props) {
 }
 
 function formattedAddress(location) {
-  return `${location.address}, ${location.city}, ON ${location.postal_code}`
+  return `${location.address}, ${location.city}, ON ${location.postalCode}`
 }
 
 class Centre extends Component {
@@ -54,11 +54,11 @@ class Centre extends Component {
         </AccordionSummary>
         <AccordionDetails className='container'>
           <Address location={centre.location} className='item' />
-          <Number phone={centre.number} className='item' />
-          <Url link={centre.website} className='item' />
+          <Number phone={centre.phoneNumber} className='item' />
+          <Url link={centre.url} className='item' />
           <HoursForm
             heading="Details"
-            timeslots={centre.hours}
+            timeslots={centre.hours[this.props.day]}
             className='item'
             formattedDate={this.props.formattedDate}
             formattedAddress={formattedAddress(centre.location)}

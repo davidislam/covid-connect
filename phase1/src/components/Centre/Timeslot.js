@@ -7,7 +7,7 @@ export default function Timeslot(props) {
   const { timeslot } = props;
 
   let element;
-  if (timeslot.is_taken) {
+  if (timeslot.isTaken) {
     element = <FormControlLabel
       disabled
       checked

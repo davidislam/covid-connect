@@ -39,7 +39,7 @@ export default class HoursForm extends Component {
     // Update chosen timeslot's <is_taken> value
     const updatedTimeslots = this.state.timeslots.map(t => {
       if (t.time === this.state.chosenTime) {
-        t.is_taken = true;
+        t.isTaken = true;
         chosenTimeslot = t;
       }
       return t;

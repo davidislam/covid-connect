@@ -11,6 +11,10 @@ function formattedDate(date) {
   return `${monthName} ${date.getDate()}, ${date.getFullYear()}`
 }
 
+function getDay(date) {
+  return days[date.getDay()].toLowerCase();
+}
+
 class AssessmentCentres extends Component {
   state = {
     centres: []
@@ -27,9 +31,9 @@ class AssessmentCentres extends Component {
       return;
     }
     let { selected_date, selected_city } = this.props.location.state;
-    const day = days[selected_date.getDay()].toLowerCase();
+    const day = getDay(selected_date);
     const filteredCentres = CENTRES.filter(c => {
-      return c.days[day] && c.location.city === selected_city;
+      return c.hours[day].length !== 0 && c.location.city === selected_city;
     })
     this.setState({
       centres: filteredCentres
@@ -50,6 +54,7 @@ class AssessmentCentres extends Component {
             centres={this.state.centres}
             addAppt={(appt) => this.props.addAppt(appt)}
             formattedDate={formattedDate(selected_date)}
+            day={getDay(selected_date)}
             isLoggedIn={this.props.isLoggedIn} /> :
           <h3>No centres found</h3>}
       </div>
