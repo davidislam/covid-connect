@@ -81,7 +81,50 @@ app.get("/users/check-session", (req, res) => {
 
 /*********************************************************/
 
-/*** API Routes below ************************************/
+/*** User / API Routes below ************************************/
+
+// POST create new account
+app.post("/signup", (req, res) => {
+  const user = new User ({
+    username: req.body.username,
+    email: req.body.email,
+    password: req.body.password
+  })
+
+  user.save().then(
+    user => {res.send(user)},
+    error => {res.status(400).send(error)}
+  )
+})
+
+// GET get all accounts
+app.get("/users", (req, res) => {
+  User.find().then(
+    users => {res.send(users)},
+    error => {res.status(500).send(error)}
+  )
+})
+
+// GET by ID
+app.get("/users/:id", (req, res) => {
+    const id = req.params.id
+
+    if (!ObjectID.isValid(id)) {
+      res.status(404).send(); // if invalid id, definitely can't find resource, 404.
+      return;
+  }
+
+  User.findById(id).then(user => {
+    if (!user) {
+      res.status(404).send()
+    } else {
+      res.send(user)
+    }
+  }).catch(error => {
+    res.status(500).send(); // server error
+  });
+
+})
 
 
 

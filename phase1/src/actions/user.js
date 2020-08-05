@@ -30,9 +30,9 @@ export const updateLoginForm = (loginComp, field) => {
     });
 };
 
-// A function to send a POST request with the user to be logged in
+// Send POST to login
 export const login = (loginComp, app) => {
-    // Create our request constructor with all the parameters we need
+    // Request constructor
     const request = new Request("/users/login", {
         method: "post",
         body: JSON.stringify(loginComp.state),
@@ -59,7 +59,7 @@ export const login = (loginComp, app) => {
         });
 };
 
-// A function to send a GET request to logout the current user
+// send GET to logout
 export const logout = (app) => {
     const url = "/users/logout";
 
