@@ -5,6 +5,13 @@ const validator = require('validator')
 const bcrypt = require('bcryptjs') // "slow hash", more secure
 
 const UserSchema = new mongoose.Schema({
+    username: {
+		type: String,
+		required: true,
+        minlength: 6,
+        trim: true,
+        unique: true,
+    },
 	email: {
 		type: String,
 		required: true,
@@ -47,6 +54,27 @@ UserSchema.statics.findByEmailPassword = function(email, password) {
 
 	// Find the user by email
 	return User.findOne({ email: email }).then((user) => {
+		if (!user) {
+			return Promise.reject()  // a rejected promise
+		}
+		// if the user exists, make sure their password is correct
+		return new Promise((resolve, reject) => {
+			bcrypt.compare(password, user.password, (err, result) => {
+				if (result) {
+					resolve(user)
+				} else {
+					reject()
+				}
+			})
+		})
+	})
+}
+
+UserSchema.statics.findByUsernamePassword = function(username, password) {
+	const User = this
+
+	// Find the user by username
+	return User.findOne({ username: username }).then((user) => {
 		if (!user) {
 			return Promise.reject()  // a rejected promise
 		}
