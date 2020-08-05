@@ -1,19 +1,18 @@
 /* Methods to add/remove assessment centres */
 import { CENTRES } from '../data';
 
-export function addCentre(centre, days) {
+export function addCentre(centre, hours) {
   // Code below requires server call
   const newCentre = {
     name: centre.name,
     location: {
       city: centre.city,
       address: centre.address,
-      postal_code: centre.postal_code
+      postalCode: centre.postalCode
     },
-    number: centre.number,
-    website: centre.website,
-    days,
-    hours: centre.hours
+    phoneNumber: centre.number,
+    url: centre.url,
+    hours,
   }
   CENTRES.push(newCentre);
 }

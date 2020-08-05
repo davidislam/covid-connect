@@ -5,6 +5,6 @@ export const addAppointment = (appt, app) => {
 }
 
 export const deleteAppointment = (appt, app) => {
-  appt.timeslot.is_taken = false;
+  appt.timeslot.isTaken = false;
   app.setState(state => ({ appointments: state.appointments.filter(a => { return a !== appt }) }))
 }

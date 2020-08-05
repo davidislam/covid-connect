@@ -1,23 +1,3 @@
-const everyday = {
-  monday: true,
-  tuesday: true,
-  wednesday: true,
-  thursday: true,
-  friday: true,
-  saturday: true,
-  sunday: true
-}
-
-const workdays = {
-  monday: true,
-  tuesday: true,
-  wednesday: true,
-  thursday: true,
-  friday: true,
-  saturday: false,
-  sunday: false
-}
-
 export const CITIES = ["Brampton", "Hamilton", "Mississauga", "Ottawa", "Sudbury", "Toronto", "Waterloo"]
 
 // Obtain centres info from server
@@ -27,227 +7,621 @@ export const CENTRES = [
     location: {
       city: "Toronto",
       address: "2111 Finch Avenue West",
-      postal_code: "M3N 1N1",
+      postalCode: "M3N 1N1",
       latitude: 43.754540,
       longitude: -79.525770
     },
-    number: "416-747-6740",
-    website: "https://www.hrh.ca/covid-19/",
-    days: everyday,
-    hours: [
-      { time: "9:00 - 10:00 AM", is_taken: false },
-      { time: "11:00 - 12:00 PM", is_taken: false },
-      { time: "1:00 - 2:00 PM", is_taken: false },
-      { time: "2:00 - 3:00 PM", is_taken: false }
-    ]
+    phoneNumber: "416-747-6740",
+    url: "https://www.hrh.ca/covid-19/",
+    hours: {
+      monday: [
+        { time: "9:00 - 10:00 AM", isTaken: false },
+        { time: "11:00 - 12:00 PM", isTaken: false },
+        { time: "1:00 - 2:00 PM", isTaken: false },
+        { time: "2:00 - 3:00 PM", isTaken: false }
+      ],
+      tuesday: [
+        { time: "9:00 - 10:00 AM", isTaken: false },
+        { time: "11:00 - 12:00 PM", isTaken: false },
+        { time: "1:00 - 2:00 PM", isTaken: false },
+        { time: "2:00 - 3:00 PM", isTaken: false }
+      ],
+      wednesday: [
+        { time: "9:00 - 10:00 AM", isTaken: false },
+        { time: "11:00 - 12:00 PM", isTaken: false },
+        { time: "1:00 - 2:00 PM", isTaken: false },
+        { time: "2:00 - 3:00 PM", isTaken: false }
+      ],
+      thursday: [
+        { time: "9:00 - 10:00 AM", isTaken: false },
+        { time: "11:00 - 12:00 PM", isTaken: false },
+        { time: "1:00 - 2:00 PM", isTaken: false },
+        { time: "2:00 - 3:00 PM", isTaken: false }
+      ],
+      friday: [
+        { time: "9:00 - 10:00 AM", isTaken: false },
+        { time: "11:00 - 12:00 PM", isTaken: false },
+        { time: "1:00 - 2:00 PM", isTaken: false },
+        { time: "2:00 - 3:00 PM", isTaken: false }
+      ],
+      saturday: [
+        { time: "9:00 - 10:00 AM", isTaken: false },
+        { time: "11:00 - 12:00 PM", isTaken: false },
+        { time: "1:00 - 2:00 PM", isTaken: false },
+        { time: "2:00 - 3:00 PM", isTaken: false }
+      ],
+      sunday: [
+        { time: "9:00 - 10:00 AM", isTaken: false },
+        { time: "11:00 - 12:00 PM", isTaken: false },
+        { time: "1:00 - 2:00 PM", isTaken: false },
+        { time: "2:00 - 3:00 PM", isTaken: false }
+      ],
+    }
   },
   {
     name: "Michael Garron Hospital - Emergency Department",
     location: {
       city: "Toronto",
       address: "825 Coxwell Avenue",
-      postal_code: "M4C 3E7",
+      postalCode: "M4C 3E7",
       latitude: 43.692340,
       longitude: -79.327290
     },
-    number: "416-469-6858",
-    website: "https://www.tehn.ca/programs-services/covid-19-assessment-centre",
-    days: everyday,
-    hours: [
-      { time: "5:00 - 6:00 PM", is_taken: false },
-      { time: "6:00 - 7:00 PM", is_taken: false },
-      { time: "8:00 - 9:00 PM", is_taken: false },
-      { time: "10:00 - 11:00 PM", is_taken: false }
-    ]
+    phoneNumber: "416-469-6858",
+    url: "https://www.tehn.ca/programs-services/covid-19-assessment-centre",
+    hours: {
+      monday: [
+        { time: "5:00 - 6:00 PM", isTaken: false },
+        { time: "6:00 - 7:00 PM", isTaken: false },
+        { time: "8:00 - 9:00 PM", isTaken: false },
+        { time: "10:00 - 11:00 PM", isTaken: false }
+      ],
+      tuesday: [
+        { time: "5:00 - 6:00 PM", isTaken: false },
+        { time: "6:00 - 7:00 PM", isTaken: false },
+        { time: "8:00 - 9:00 PM", isTaken: false },
+        { time: "10:00 - 11:00 PM", isTaken: false }
+      ],
+      wednesday: [
+        { time: "5:00 - 6:00 PM", isTaken: false },
+        { time: "6:00 - 7:00 PM", isTaken: false },
+        { time: "8:00 - 9:00 PM", isTaken: false },
+        { time: "10:00 - 11:00 PM", isTaken: false }
+      ],
+      thursday: [
+        { time: "5:00 - 6:00 PM", isTaken: false },
+        { time: "6:00 - 7:00 PM", isTaken: false },
+        { time: "8:00 - 9:00 PM", isTaken: false },
+        { time: "10:00 - 11:00 PM", isTaken: false }
+      ],
+      friday: [
+        { time: "5:00 - 6:00 PM", isTaken: false },
+        { time: "6:00 - 7:00 PM", isTaken: false },
+        { time: "8:00 - 9:00 PM", isTaken: false },
+        { time: "10:00 - 11:00 PM", isTaken: false }
+      ],
+      saturday: [
+        { time: "5:00 - 6:00 PM", isTaken: false },
+        { time: "6:00 - 7:00 PM", isTaken: false },
+        { time: "8:00 - 9:00 PM", isTaken: false },
+        { time: "10:00 - 11:00 PM", isTaken: false }
+      ],
+      sunday: [
+        { time: "5:00 - 6:00 PM", isTaken: false },
+        { time: "6:00 - 7:00 PM", isTaken: false },
+        { time: "8:00 - 9:00 PM", isTaken: false },
+        { time: "10:00 - 11:00 PM", isTaken: false }
+      ],
+    }
   },
   {
     name: "Mount Sinai Hospital",
     location: {
       city: "Toronto",
       address: "600 University Avenue",
-      postal_code: "M5G 1X5",
+      postalCode: "M5G 1X5",
       latitude: 43.657269,
       longitude: -79.390266
     },
-    number: "416-586-4800",
-    website: "https://www.sinaihealth.ca/covid19/",
-    days: workdays,
-    hours: [
-      { time: "8:00 - 9:00 AM", is_taken: false },
-      { time: "9:00 - 10:00 AM", is_taken: false },
-      { time: "10:00 - 11:00 AM", is_taken: false },
-      { time: "11:00 - 12:00 PM", is_taken: false }
-    ]
+    phoneNumber: "416-586-4800",
+    url: "https://www.sinaihealth.ca/covid19/",
+    hours: {
+      monday: [
+        { time: "8:00 - 9:00 AM", isTaken: false },
+        { time: "9:00 - 10:00 AM", isTaken: false },
+        { time: "10:00 - 11:00 AM", isTaken: false },
+        { time: "11:00 - 12:00 PM", isTaken: false }
+      ],
+      tuesday: [
+        { time: "8:00 - 9:00 AM", isTaken: false },
+        { time: "9:00 - 10:00 AM", isTaken: false },
+        { time: "10:00 - 11:00 AM", isTaken: false },
+        { time: "11:00 - 12:00 PM", isTaken: false }
+      ],
+      wednesday: [
+        { time: "8:00 - 9:00 AM", isTaken: false },
+        { time: "9:00 - 10:00 AM", isTaken: false },
+        { time: "10:00 - 11:00 AM", isTaken: false },
+        { time: "11:00 - 12:00 PM", isTaken: false }
+      ],
+      thursday: [
+        { time: "8:00 - 9:00 AM", isTaken: false },
+        { time: "9:00 - 10:00 AM", isTaken: false },
+        { time: "10:00 - 11:00 AM", isTaken: false },
+        { time: "11:00 - 12:00 PM", isTaken: false }
+      ],
+      friday: [
+        { time: "8:00 - 9:00 AM", isTaken: false },
+        { time: "9:00 - 10:00 AM", isTaken: false },
+        { time: "10:00 - 11:00 AM", isTaken: false },
+        { time: "11:00 - 12:00 PM", isTaken: false }
+      ],
+      saturday: [
+        { time: "8:00 - 9:00 AM", isTaken: false },
+        { time: "9:00 - 10:00 AM", isTaken: false },
+        { time: "10:00 - 11:00 AM", isTaken: false },
+        { time: "11:00 - 12:00 PM", isTaken: false }
+      ],
+      sunday: [
+        { time: "8:00 - 9:00 AM", isTaken: false },
+        { time: "9:00 - 10:00 AM", isTaken: false },
+        { time: "10:00 - 11:00 AM", isTaken: false },
+        { time: "11:00 - 12:00 PM", isTaken: false }
+      ],
+    }
   },
   {
     name: "Trillium Health Partners",
     location: {
       city: "Mississauga",
       address: "15 Bronte College Court",
-      postal_code: "L5B 1M9",
+      postalCode: "L5B 1M9",
       latitude: 43.572180,
       longitude: -79.605780
     },
-    number: "",
-    website: "https://trilliumhealthpartners.ca/covid-19/A/assessment.html#starthere",
-    days: everyday,
-    hours: [
-      { time: "9:00 - 10:00 AM", is_taken: false },
-      { time: "11:00 - 12:00 PM", is_taken: false },
-      { time: "1:00 - 2:00 PM", is_taken: false },
-      { time: "2:00 - 3:00 PM", is_taken: false }
-    ]
+    phoneNumber: "",
+    url: "https://trilliumhealthpartners.ca/covid-19/A/assessment.html#starthere",
+    hours: {
+      monday: [
+        { time: "9:00 - 10:00 AM", isTaken: false },
+        { time: "11:00 - 12:00 PM", isTaken: false },
+        { time: "1:00 - 2:00 PM", isTaken: false },
+        { time: "2:00 - 3:00 PM", isTaken: false }
+      ],
+      tuesday: [
+        { time: "9:00 - 10:00 AM", isTaken: false },
+        { time: "11:00 - 12:00 PM", isTaken: false },
+        { time: "1:00 - 2:00 PM", isTaken: false },
+        { time: "2:00 - 3:00 PM", isTaken: false }
+      ],
+      wednesday: [
+        { time: "9:00 - 10:00 AM", isTaken: false },
+        { time: "11:00 - 12:00 PM", isTaken: false },
+        { time: "1:00 - 2:00 PM", isTaken: false },
+        { time: "2:00 - 3:00 PM", isTaken: false }
+      ],
+      thursday: [
+        { time: "9:00 - 10:00 AM", isTaken: false },
+        { time: "11:00 - 12:00 PM", isTaken: false },
+        { time: "1:00 - 2:00 PM", isTaken: false },
+        { time: "2:00 - 3:00 PM", isTaken: false }
+      ],
+      friday: [
+        { time: "9:00 - 10:00 AM", isTaken: false },
+        { time: "11:00 - 12:00 PM", isTaken: false },
+        { time: "1:00 - 2:00 PM", isTaken: false },
+        { time: "2:00 - 3:00 PM", isTaken: false }
+      ],
+      saturday: [
+        { time: "9:00 - 10:00 AM", isTaken: false },
+        { time: "11:00 - 12:00 PM", isTaken: false },
+        { time: "1:00 - 2:00 PM", isTaken: false },
+        { time: "2:00 - 3:00 PM", isTaken: false }
+      ],
+      sunday: [
+        { time: "9:00 - 10:00 AM", isTaken: false },
+        { time: "11:00 - 12:00 PM", isTaken: false },
+        { time: "1:00 - 2:00 PM", isTaken: false },
+        { time: "2:00 - 3:00 PM", isTaken: false }
+      ],
+    }
   },
   {
     name: "William Osler Health System",
     location: {
       city: "Brampton",
       address: "500 Ray Lawson Boulevard",
-      postal_code: "L6W 2Z8",
+      postalCode: "L6W 2Z8",
       latitude: 43.652218,
       longitude: -79.735083
     },
-    number: "",
-    website: "https://www.williamoslerhs.ca/patients-and-families/preparing-for-your-visit-or-stay/coronavirus-information-for-patients-families/assessment-centre-for-covid-19",
-    days: everyday,
-    hours: [
-      { time: "7:00 - 8:00 AM", is_taken: false },
-      { time: "11:00 - 12:00 PM", is_taken: false },
-      { time: "1:00 - 2:00 PM", is_taken: false },
-      { time: "5:00 - 6:00 PM", is_taken: false }
-    ]
+    phoneNumber: "",
+    url: "https://www.williamoslerhs.ca/patients-and-families/preparing-for-your-visit-or-stay/coronavirus-information-for-patients-families/assessment-centre-for-covid-19",
+    hours: {
+      monday: [
+        { time: "7:00 - 8:00 AM", isTaken: false },
+        { time: "11:00 - 12:00 PM", isTaken: false },
+        { time: "1:00 - 2:00 PM", isTaken: false },
+        { time: "5:00 - 6:00 PM", isTaken: false }
+      ],
+      tuesday: [
+        { time: "7:00 - 8:00 AM", isTaken: false },
+        { time: "11:00 - 12:00 PM", isTaken: false },
+        { time: "1:00 - 2:00 PM", isTaken: false },
+        { time: "5:00 - 6:00 PM", isTaken: false }
+      ],
+      wednesday: [
+        { time: "7:00 - 8:00 AM", isTaken: false },
+        { time: "11:00 - 12:00 PM", isTaken: false },
+        { time: "1:00 - 2:00 PM", isTaken: false },
+        { time: "5:00 - 6:00 PM", isTaken: false }
+      ],
+      thursday: [
+        { time: "7:00 - 8:00 AM", isTaken: false },
+        { time: "11:00 - 12:00 PM", isTaken: false },
+        { time: "1:00 - 2:00 PM", isTaken: false },
+        { time: "5:00 - 6:00 PM", isTaken: false }
+      ],
+      friday: [
+        { time: "7:00 - 8:00 AM", isTaken: false },
+        { time: "11:00 - 12:00 PM", isTaken: false },
+        { time: "1:00 - 2:00 PM", isTaken: false },
+        { time: "5:00 - 6:00 PM", isTaken: false }
+      ],
+      saturday: [
+        { time: "7:00 - 8:00 AM", isTaken: false },
+        { time: "11:00 - 12:00 PM", isTaken: false },
+        { time: "1:00 - 2:00 PM", isTaken: false },
+        { time: "5:00 - 6:00 PM", isTaken: false }
+      ],
+      sunday: [
+        { time: "7:00 - 8:00 AM", isTaken: false },
+        { time: "11:00 - 12:00 PM", isTaken: false },
+        { time: "1:00 - 2:00 PM", isTaken: false },
+        { time: "5:00 - 6:00 PM", isTaken: false }
+      ],
+    }
   },
   {
     name: "Dave Andreychuk Mountain Arena Assessment Centre",
     location: {
       city: "Hamilton",
       address: "25 Hester Street",
-      postal_code: "L9A 2N3",
+      postalCode: "L9A 2N3",
       latitude: 43.224648,
       longitude: -79.881459
     },
-    number: "905-974-9848",
-    website: "https://www.hamilton.ca/coronavirus/assessment-centres",
-    days: everyday,
-    hours: [
-      { time: "10:00 - 11:00 AM", is_taken: false },
-      { time: "11:00 - 12:00 PM", is_taken: false },
-      { time: "1:00 - 2:00 PM", is_taken: false },
-      { time: "6:00 - 7:00 PM", is_taken: false }
-    ]
+    phoneNumber: "905-974-9848",
+    url: "https://www.hamilton.ca/coronavirus/assessment-centres",
+    hours: {
+      monday: [
+        { time: "10:00 - 11:00 AM", isTaken: false },
+        { time: "11:00 - 12:00 PM", isTaken: false },
+        { time: "1:00 - 2:00 PM", isTaken: false },
+        { time: "6:00 - 7:00 PM", isTaken: false }
+      ],
+      tuesday: [
+        { time: "10:00 - 11:00 AM", isTaken: false },
+        { time: "11:00 - 12:00 PM", isTaken: false },
+        { time: "1:00 - 2:00 PM", isTaken: false },
+        { time: "6:00 - 7:00 PM", isTaken: false }
+      ],
+      wednesday: [
+        { time: "10:00 - 11:00 AM", isTaken: false },
+        { time: "11:00 - 12:00 PM", isTaken: false },
+        { time: "1:00 - 2:00 PM", isTaken: false },
+        { time: "6:00 - 7:00 PM", isTaken: false }
+      ],
+      thursday: [
+        { time: "10:00 - 11:00 AM", isTaken: false },
+        { time: "11:00 - 12:00 PM", isTaken: false },
+        { time: "1:00 - 2:00 PM", isTaken: false },
+        { time: "6:00 - 7:00 PM", isTaken: false }
+      ],
+      friday: [
+        { time: "10:00 - 11:00 AM", isTaken: false },
+        { time: "11:00 - 12:00 PM", isTaken: false },
+        { time: "1:00 - 2:00 PM", isTaken: false },
+        { time: "6:00 - 7:00 PM", isTaken: false }
+      ],
+      saturday: [],
+      sunday: [],
+    }
   },
   {
     name: "Hamilton Health Sciences",
     location: {
       city: "Hamilton",
       address: "690 Main Street West",
-      postal_code: "L8S 1A4",
+      postalCode: "L8S 1A4",
       latitude: 43.25997,
       longitude: -79.898067
     },
-    number: "905-974-9848",
-    website: "https://www.hamilton.ca/coronavirus/assessment-centres",
-    days: workdays,
-    hours: [
-      { time: "7:00 - 8:00 AM", is_taken: false },
-      { time: "8:00 - 9:00 AM", is_taken: false },
-      { time: "1:00 - 2:00 PM", is_taken: false },
-      { time: "2:00 - 3:00 PM", is_taken: false }
-    ]
+    phoneNumber: "905-974-9848",
+    url: "https://www.hamilton.ca/coronavirus/assessment-centres",
+    hours: {
+      monday: [
+        { time: "7:00 - 8:00 AM", isTaken: false },
+        { time: "8:00 - 9:00 AM", isTaken: false },
+        { time: "1:00 - 2:00 PM", isTaken: false },
+        { time: "2:00 - 3:00 PM", isTaken: false }
+      ],
+      tuesday: [
+        { time: "7:00 - 8:00 AM", isTaken: false },
+        { time: "8:00 - 9:00 AM", isTaken: false },
+        { time: "1:00 - 2:00 PM", isTaken: false },
+        { time: "2:00 - 3:00 PM", isTaken: false }
+      ],
+      wednesday: [
+        { time: "7:00 - 8:00 AM", isTaken: false },
+        { time: "8:00 - 9:00 AM", isTaken: false },
+        { time: "1:00 - 2:00 PM", isTaken: false },
+        { time: "2:00 - 3:00 PM", isTaken: false }
+      ],
+      thursday: [
+        { time: "7:00 - 8:00 AM", isTaken: false },
+        { time: "8:00 - 9:00 AM", isTaken: false },
+        { time: "1:00 - 2:00 PM", isTaken: false },
+        { time: "2:00 - 3:00 PM", isTaken: false }
+      ],
+      friday: [
+        { time: "7:00 - 8:00 AM", isTaken: false },
+        { time: "8:00 - 9:00 AM", isTaken: false },
+        { time: "1:00 - 2:00 PM", isTaken: false },
+        { time: "2:00 - 3:00 PM", isTaken: false }
+      ],
+      saturday: [
+        { time: "7:00 - 8:00 AM", isTaken: false },
+        { time: "8:00 - 9:00 AM", isTaken: false },
+        { time: "1:00 - 2:00 PM", isTaken: false },
+        { time: "2:00 - 3:00 PM", isTaken: false }
+      ],
+      sunday: [
+        { time: "7:00 - 8:00 AM", isTaken: false },
+        { time: "8:00 - 9:00 AM", isTaken: false },
+        { time: "1:00 - 2:00 PM", isTaken: false },
+        { time: "2:00 - 3:00 PM", isTaken: false }
+      ],
+    }
   },
   {
     name: "Brewer Park Arena",
     location: {
       city: "Ottawa",
       address: "151 Brewer Way",
-      postal_code: "K1S 5T1",
+      postalCode: "K1S 5T1",
       latitude: 45.389189,
       longitude: -75.691072
     },
-    number: "",
-    website: "https://www.ottawapublichealth.ca/en/public-health-topics/novel-coronavirus.aspx",
-    days: everyday,
-    hours: [
-      { time: "7:00 - 8:00 AM", is_taken: false },
-      { time: "8:00 - 9:00 AM", is_taken: false },
-      { time: "1:00 - 2:00 PM", is_taken: false },
-      { time: "2:00 - 3:00 PM", is_taken: false }
-    ]
+    phoneNumber: "",
+    url: "https://www.ottawapublichealth.ca/en/public-health-topics/novel-coronavirus.aspx",
+    hours: {
+      monday: [
+        { time: "7:00 - 8:00 AM", isTaken: false },
+        { time: "8:00 - 9:00 AM", isTaken: false },
+        { time: "1:00 - 2:00 PM", isTaken: false },
+        { time: "2:00 - 3:00 PM", isTaken: false }
+      ],
+      tuesday: [
+        { time: "7:00 - 8:00 AM", isTaken: false },
+        { time: "8:00 - 9:00 AM", isTaken: false },
+        { time: "1:00 - 2:00 PM", isTaken: false },
+        { time: "2:00 - 3:00 PM", isTaken: false }
+      ],
+      wednesday: [
+        { time: "7:00 - 8:00 AM", isTaken: false },
+        { time: "8:00 - 9:00 AM", isTaken: false },
+        { time: "1:00 - 2:00 PM", isTaken: false },
+        { time: "2:00 - 3:00 PM", isTaken: false }
+      ],
+      thursday: [
+        { time: "7:00 - 8:00 AM", isTaken: false },
+        { time: "8:00 - 9:00 AM", isTaken: false },
+        { time: "1:00 - 2:00 PM", isTaken: false },
+        { time: "2:00 - 3:00 PM", isTaken: false }
+      ],
+      friday: [
+        { time: "7:00 - 8:00 AM", isTaken: false },
+        { time: "8:00 - 9:00 AM", isTaken: false },
+        { time: "1:00 - 2:00 PM", isTaken: false },
+        { time: "2:00 - 3:00 PM", isTaken: false }
+      ],
+      saturday: [],
+      sunday: [],
+    }
   },
   {
     name: "Queensway Carlton Hospital",
     location: {
       city: "Ottawa",
       address: "595 Moodie Drive",
-      postal_code: "K2H 8A8",
+      postalCode: "K2H 8A8",
       latitude: 45.309481,
       longitude: -75.825836
     },
-    number: "",
-    website: "https://www.ottawapublichealth.ca/en/public-health-topics/novel-coronavirus.aspx",
-    days: workdays,
-    hours: [
-      { time: "9:00 - 10:00 AM", is_taken: false },
-      { time: "10:00 - 11:00 AM", is_taken: false },
-      { time: "3:00 - 4:00 PM", is_taken: false },
-      { time: "4:00 - 5:00 PM", is_taken: false }
-    ]
+    phoneNumber: "",
+    url: "https://www.ottawapublichealth.ca/en/public-health-topics/novel-coronavirus.aspx",
+    hours: {
+      monday: [
+        { time: "9:00 - 10:00 AM", isTaken: false },
+        { time: "10:00 - 11:00 AM", isTaken: false },
+        { time: "3:00 - 4:00 PM", isTaken: false },
+        { time: "4:00 - 5:00 PM", isTaken: false }
+      ],
+      tuesday: [],
+      wednesday: [
+        { time: "9:00 - 10:00 AM", isTaken: false },
+        { time: "10:00 - 11:00 AM", isTaken: false },
+        { time: "3:00 - 4:00 PM", isTaken: false },
+        { time: "4:00 - 5:00 PM", isTaken: false }
+      ],
+      thursday: [],
+      friday: [
+        { time: "9:00 - 10:00 AM", isTaken: false },
+        { time: "10:00 - 11:00 AM", isTaken: false },
+        { time: "3:00 - 4:00 PM", isTaken: false },
+        { time: "4:00 - 5:00 PM", isTaken: false }
+      ],
+      saturday: [],
+      sunday: [],
+    }
   },
   {
     name: "NEOMO Medical",
     location: {
       city: "Sudbury",
       address: "885 Prete Street",
-      postal_code: "P3E 3X9",
+      postalCode: "P3E 3X9",
       latitude: 46.473006,
       longitude: -81.005973
     },
-    number: "705-671-7373",
-    website: "https://www.hsnsudbury.ca/portalen/Patients-and-Visitors/COVID-19/COVID-19-Assessment-Centre",
-    days: everyday,
-    hours: [
-      { time: "9:00 - 10:00 AM", is_taken: false },
-      { time: "10:00 - 11:00 AM", is_taken: false },
-      { time: "6:00 - 7:00 PM", is_taken: false },
-      { time: "8:00 - 9:00 PM", is_taken: false }
-    ]
+    phoneNumber: "705-671-7373",
+    url: "https://www.hsnsudbury.ca/portalen/Patients-and-Visitors/COVID-19/COVID-19-Assessment-Centre",
+    hours: {
+      monday: [
+        { time: "9:00 - 10:00 AM", isTaken: false },
+        { time: "10:00 - 11:00 AM", isTaken: false },
+        { time: "6:00 - 7:00 PM", isTaken: false },
+        { time: "8:00 - 9:00 PM", isTaken: false }
+      ],
+      tuesday: [
+        { time: "9:00 - 10:00 AM", isTaken: false },
+        { time: "10:00 - 11:00 AM", isTaken: false },
+        { time: "6:00 - 7:00 PM", isTaken: false },
+        { time: "8:00 - 9:00 PM", isTaken: false }
+      ],
+      wednesday: [
+        { time: "9:00 - 10:00 AM", isTaken: false },
+        { time: "10:00 - 11:00 AM", isTaken: false },
+        { time: "6:00 - 7:00 PM", isTaken: false },
+        { time: "8:00 - 9:00 PM", isTaken: false }
+      ],
+      thursday: [
+        { time: "9:00 - 10:00 AM", isTaken: false },
+        { time: "10:00 - 11:00 AM", isTaken: false },
+        { time: "6:00 - 7:00 PM", isTaken: false },
+        { time: "8:00 - 9:00 PM", isTaken: false }
+      ],
+      friday: [
+        { time: "9:00 - 10:00 AM", isTaken: false },
+        { time: "10:00 - 11:00 AM", isTaken: false },
+        { time: "6:00 - 7:00 PM", isTaken: false },
+        { time: "8:00 - 9:00 PM", isTaken: false }
+      ],
+      saturday: [
+        { time: "9:00 - 10:00 AM", isTaken: false },
+        { time: "10:00 - 11:00 AM", isTaken: false },
+        { time: "6:00 - 7:00 PM", isTaken: false },
+        { time: "8:00 - 9:00 PM", isTaken: false }
+      ],
+      sunday: [
+        { time: "9:00 - 10:00 AM", isTaken: false },
+        { time: "10:00 - 11:00 AM", isTaken: false },
+        { time: "6:00 - 7:00 PM", isTaken: false },
+        { time: "8:00 - 9:00 PM", isTaken: false }
+      ],
+    }
   },
   {
     name: "Primacy Medical Centre",
     location: {
       city: "Sudbury",
       address: "1485 Lasalle Boulevard",
-      postal_code: "P3A 1Z8",
+      postalCode: "P3A 1Z8",
       latitude: 46.522044,
       longitude: -80.940311
     },
-    number: "705-671-7373",
-    website: "https://www.hsnsudbury.ca/portalen/Patients-and-Visitors/COVID-19/COVID-19-Assessment-Centre",
-    days: everyday,
-    hours: [
-      { time: "6:00 - 7:00 AM", is_taken: false },
-      { time: "7:00 - 8:00 AM", is_taken: false },
-      { time: "1:00 - 2:00 PM", is_taken: false },
-      { time: "4:00 - 5:00 PM", is_taken: false }
-    ]
+    phoneNumber: "705-671-7373",
+    url: "https://www.hsnsudbury.ca/portalen/Patients-and-Visitors/COVID-19/COVID-19-Assessment-Centre",
+    hours: {
+      monday: [
+        { time: "6:00 - 7:00 AM", isTaken: false },
+        { time: "7:00 - 8:00 AM", isTaken: false },
+        { time: "1:00 - 2:00 PM", isTaken: false },
+        { time: "4:00 - 5:00 PM", isTaken: false }
+      ],
+      tuesday: [
+        { time: "6:00 - 7:00 AM", isTaken: false },
+        { time: "7:00 - 8:00 AM", isTaken: false },
+        { time: "1:00 - 2:00 PM", isTaken: false },
+        { time: "4:00 - 5:00 PM", isTaken: false }
+      ],
+      wednesday: [
+        { time: "6:00 - 7:00 AM", isTaken: false },
+        { time: "7:00 - 8:00 AM", isTaken: false },
+        { time: "1:00 - 2:00 PM", isTaken: false },
+        { time: "4:00 - 5:00 PM", isTaken: false }
+      ],
+      thursday: [
+        { time: "6:00 - 7:00 AM", isTaken: false },
+        { time: "7:00 - 8:00 AM", isTaken: false },
+        { time: "1:00 - 2:00 PM", isTaken: false },
+        { time: "4:00 - 5:00 PM", isTaken: false }
+      ],
+      friday: [
+        { time: "6:00 - 7:00 AM", isTaken: false },
+        { time: "7:00 - 8:00 AM", isTaken: false },
+        { time: "1:00 - 2:00 PM", isTaken: false },
+        { time: "4:00 - 5:00 PM", isTaken: false }
+      ],
+      saturday: [],
+      sunday: [],
+    }
   },
   {
     name: "St. Mary's General Hospital - Bathurst Site",
     location: {
       city: "Waterloo",
       address: "50 Bathurst Drive, Unit 1",
-      postal_code: "N2V 2C5",
+      postalCode: "N2V 2C5",
       latitude: 43.507664,
       longitude: -80.537881
     },
-    number: "519-885-9517",
-    website: "https://www.smgh.ca/covid-19-testing-available-for-k-w-residents-with-symptoms-starting-may-16",
-    days: everyday,
-    hours: [
-      { time: "6:00 - 7:00 AM", is_taken: false },
-      { time: "7:00 - 8:00 AM", is_taken: false },
-      { time: "8:00 - 9:00 AM", is_taken: false },
-      { time: "9:00 - 10:00 AM", is_taken: false }
-    ]
+    phoneNumber: "519-885-9517",
+    url: "https://www.smgh.ca/covid-19-testing-available-for-k-w-residents-with-symptoms-starting-may-16",
+    hours: {
+      monday: [
+        { time: "6:00 - 7:00 AM", isTaken: false },
+        { time: "7:00 - 8:00 AM", isTaken: false },
+        { time: "8:00 - 9:00 AM", isTaken: false },
+        { time: "9:00 - 10:00 AM", isTaken: false }
+      ],
+      tuesday: [
+        { time: "6:00 - 7:00 AM", isTaken: false },
+        { time: "7:00 - 8:00 AM", isTaken: false },
+        { time: "8:00 - 9:00 AM", isTaken: false },
+        { time: "9:00 - 10:00 AM", isTaken: false }
+      ],
+      wednesday: [
+        { time: "6:00 - 7:00 AM", isTaken: false },
+        { time: "7:00 - 8:00 AM", isTaken: false },
+        { time: "8:00 - 9:00 AM", isTaken: false },
+        { time: "9:00 - 10:00 AM", isTaken: false }
+      ],
+      thursday: [
+        { time: "6:00 - 7:00 AM", isTaken: false },
+        { time: "7:00 - 8:00 AM", isTaken: false },
+        { time: "8:00 - 9:00 AM", isTaken: false },
+        { time: "9:00 - 10:00 AM", isTaken: false }
+      ],
+      friday: [
+        { time: "6:00 - 7:00 AM", isTaken: false },
+        { time: "7:00 - 8:00 AM", isTaken: false },
+        { time: "8:00 - 9:00 AM", isTaken: false },
+        { time: "9:00 - 10:00 AM", isTaken: false }
+      ],
+      saturday: [
+        { time: "6:00 - 7:00 AM", isTaken: false },
+        { time: "7:00 - 8:00 AM", isTaken: false },
+        { time: "8:00 - 9:00 AM", isTaken: false },
+        { time: "9:00 - 10:00 AM", isTaken: false }
+      ],
+      sunday: [
+        { time: "6:00 - 7:00 AM", isTaken: false },
+        { time: "7:00 - 8:00 AM", isTaken: false },
+        { time: "8:00 - 9:00 AM", isTaken: false },
+        { time: "9:00 - 10:00 AM", isTaken: false }
+      ],
+    }
   }
 ]
