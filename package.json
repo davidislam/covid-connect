@@ -1,9 +1,13 @@
 {
   "name": "team31",
   "version": "1.0.0",
-  "description": "covidconnect",
+  "description": "A web app that allows users to book a COVID-19 test in Ontario",
   "main": "server.js",
   "scripts": {
+    "setup": "npm install && cd client && npm install && cd ..",
+    "build-run": "cd client && npm run build && cd .. && node server.js",
+    "start": "node server.js",
+    "heroku-postbuild": "cd client && npm install && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
