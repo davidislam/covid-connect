@@ -34,10 +34,10 @@ const CentreSchema = new mongoose.Schema({
       type: String,
       required: true,
       minlength: 6,
-      validate: {
-        validator: validator.isPostalCode(s, "CA"),
-        message: 'Invalid postal code'
-      }
+      // validate: {
+      //   validator: validator.isPostalCode(v, "CA"),
+      //   message: 'Invalid postal code'
+      // }
     },
     lattitude: {
       type: Number,
