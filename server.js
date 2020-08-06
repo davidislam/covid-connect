@@ -144,25 +144,88 @@ app.get("/users/:id", (req, res) => {
 // a POST route to *create* an assessment centre
 app.post('/centres', mongoChecker, (req, res) => {
   log(req.body);
-  res.send("good");
-  // // Create a new centre using the Centre mongoose model
-  // const centre = new Centre(req.body)
+  // Create a new centre using the Centre mongoose model
+  const centre = new Centre(req.body);
 
-  // // Save student to the database
-  // student.save().then((result) => {
-  // 	res.send(result)
-  // }).catch((error) => {
-  // 	if (isMongoError(error)) { // check for if mongo server suddenly dissconnected before this request.
-  // 		res.status(500).send('Internal server error')
-  // 	} else {
-  // 		log(error) // log server error to the console, not to the client.
-  // 		res.status(400).send('Bad Request') // 400 for bad request gets sent to client.
-  // 	}
-  // })
+  // Save centre to the database
+  centre.save().then((result) => {
+    res.send(result)
+  }).catch((error) => {
+    if (isMongoError(error)) { // check for if mongo server suddenly dissconnected before this request.
+      res.status(500).send('Internal server error')
+    } else {
+      log(error) // log server error to the console, not to the client.
+      res.status(400).send('Bad Request') // 400 for bad request gets sent to client.
+    }
+  })
 })
 
+// a GET route to get all centres
+app.get('/centres', mongoChecker, (req, res) => {
+  Centre.find({}).then((centres) => {
+    res.send(centres);
+  })
+    .catch((error) => {
+      log(error)
+      res.status(500).send("Internal Server Error")
+    })
+})
 
+// a GET route to get a centre by their id.
+app.get('/centres/:id', mongoChecker, (req, res) => {
+  const id = req.params.id
 
+  if (!ObjectID.isValid(id)) {
+    res.status(404).send()  // if invalid id, definitely can't find resource, 404.
+    return;  // so that we don't run the rest of the handler.
+  }
+
+  // If id valid, findById
+  Centre.findOne({ _id: id }).then((centre) => {
+    if (!centre) {
+      res.status(404).send('Resource not found')  // could not find this centre
+    } else {
+      res.send(centre)
+    }
+  })
+    .catch((error) => {
+      log(error)
+      res.status(500).send('Internal Server Error')  // server error
+    })
+
+})
+
+// a GET route to get a list of centres by city.
+app.get('/centres/city/:city', mongoChecker, (req, res) => {
+  const city = req.params.city
+  // log(city);
+
+  Centre.find({ 'location.city': city }).then((centres) => {
+    res.send(centres)
+  })
+    .catch((error) => {
+      log(error)
+      res.status(500).send('Internal Server Error')  // server error
+    })
+})
+
+// a DELETE route to remove a centre by its name.
+app.delete('/centres/:name', mongoChecker, (req, res) => {
+  const name = req.params.name
+
+  // Delete a centre by its name
+  Centre.findOneAndDelete({ name }).then((centre) => {
+    if (!centre) {
+      res.status(404).send()
+    } else {
+      res.send(centre)
+    }
+  })
+    .catch((error) => {
+      log(error)
+      res.status(500).send() // server error, could not delete.
+    })
+})
 
 
 /*************************************************/

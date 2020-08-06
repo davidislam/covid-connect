@@ -39,7 +39,7 @@ const CentreSchema = new mongoose.Schema({
       //   message: 'Invalid postal code'
       // }
     },
-    lattitude: {
+    latitude: {
       type: Number,
       required: true,
     },
