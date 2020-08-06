@@ -29,7 +29,7 @@ function isMongoError(error) { // checks for first error returned by promise rej
 // Session cookie
 app.use(
   session({
-      secret: "oursecret",
+      secret: "thissecret",
       resave: false,
       saveUninitialized: false,
       cookie: {
