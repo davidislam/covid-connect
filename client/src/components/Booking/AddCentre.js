@@ -12,13 +12,18 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import CitySelect from './CitySelect';
-import { CITIES } from '../../data';
 import { uid } from "react-uid";
 import CustomizedSnackbar from './../CustomizedSnackbar';
 import { addCentre } from './../../actions/centre';
 
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+
+// Geocoding library
+import Geocode from 'react-geocode';
+Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
+Geocode.setRegion('ca');
+Geocode.enableDebug();
+
 
 const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
 
@@ -157,9 +162,10 @@ export default class AddCentre extends Component {
   }
 
   handleSubmit = (e) => {
+    const { address, city, postalCode } = this.state;
     e.preventDefault();
 
-    if (this.state.city === "") {
+    if (city === "") {
       this.setState({ snackbarOpen: true, snackbarMessage: "Please select a city", snackbarSeverity: "warning" });
       return;
     }
@@ -190,9 +196,20 @@ export default class AddCentre extends Component {
       return;
     }
 
-    // code below requires server call
-    addCentre(this.state, this.hours);
-    this.setState(this.submitState);
+    const addr = `${address}, ${city}, Ontario, Canada ${postalCode}`;
+    Geocode.fromAddress(addr).then(
+      response => {
+        const { lat, lng } = response.results[0].geometry.location;
+        // console.log(lat, lng);
+        addCentre(this.state, this.hours, lat, lng);
+        this.setState(this.submitState);
+      },
+      error => {
+        console.error(error);
+        this.setState({ snackbarOpen: true, snackbarMessage: "Incomplete address", snackbarSeverity: "warning" });
+      }
+    );
+
   };
 
   populateTime = () => {
