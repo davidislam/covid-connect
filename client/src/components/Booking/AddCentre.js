@@ -281,7 +281,15 @@ export default class AddCentre extends Component {
                   validators={['required', 'matchRegexp:^[A-Za-z][0-9][A-Za-z][ -]?[0-9][A-Za-z][0-9]$']}
                   errorMessages={[requiredMsg, 'invalid postal code']}
                 />
-                <CitySelect label='City' value={city} onChange={this.handleInputChange} cities={CITIES} />
+                <TextValidator
+                  label="City"
+                  name="city"
+                  value={city}
+                  onChange={this.handleInputChange}
+                  validators={['required']}
+                  errorMessages={[requiredMsg]}
+                />
+                {/* <CitySelect label='City' value={city} onChange={this.handleInputChange} cities={CITIES} /> */}
                 <TextValidator
                   label="Phone number"
                   name="number"
