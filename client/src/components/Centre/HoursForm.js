@@ -52,6 +52,7 @@ export default class HoursForm extends Component {
 
     // Add appointment to user's appt list
     // *Code below requires a server call*
+    // Add id
     const appt = { date: this.props.formattedDate, timeslot: chosenTimeslot, address: this.props.formattedAddress }
     this.props.addAppt(appt);
 

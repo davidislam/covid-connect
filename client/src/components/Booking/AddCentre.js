@@ -144,6 +144,20 @@ export default class AddCentre extends Component {
       this.setState({ snackbarOpen: true, snackbarMessage: "Please choose a time", snackbarSeverity: "warning" })
       return;
     }
+
+    // At least one day must be selected
+    let daySelected = false;
+    for (let i = 0; i < days.length; i++) {
+      if (this.days[days[i]]) {
+        daySelected = true;
+        break;
+      }
+    }
+    if (!daySelected) {
+      this.setState({ snackbarOpen: true, snackbarMessage: "Please choose a day", snackbarSeverity: "warning" });
+      return;
+    }
+
     // const formattedTime = `${startTime} ${startMeridiem} - ${endTime} ${endMeridiem}`;
     const formattedTime = `${startTime} - ${endTime} ${endMeridiem}`;
     const timeslot = { time: formattedTime, isTaken: false };

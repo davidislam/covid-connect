@@ -1,8 +1,11 @@
+import { v4 as uuidv4 } from 'uuid';
+
 export const CITIES = ["Brampton", "Hamilton", "Mississauga", "Ottawa", "Sudbury", "Toronto", "Waterloo"]
 
 // Obtain centres info from server
 export const CENTRES = [
   {
+    _id: uuidv4(),
     name: "Humber River Hospital Assessment Centre",
     location: {
       city: "Toronto",
@@ -15,50 +18,51 @@ export const CENTRES = [
     url: "https://www.hrh.ca/covid-19/",
     hours: {
       monday: [
-        { time: "9:00 - 10:00 AM", isTaken: false },
-        { time: "11:00 - 12:00 PM", isTaken: false },
-        { time: "1:00 - 2:00 PM", isTaken: false },
-        { time: "2:00 - 3:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "9:00 - 10:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "11:00 - 12:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "1:00 - 2:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "2:00 - 3:00 PM", isTaken: false }
       ],
       tuesday: [
-        { time: "9:00 - 10:00 AM", isTaken: false },
-        { time: "11:00 - 12:00 PM", isTaken: false },
-        { time: "1:00 - 2:00 PM", isTaken: false },
-        { time: "2:00 - 3:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "9:00 - 10:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "11:00 - 12:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "1:00 - 2:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "2:00 - 3:00 PM", isTaken: false }
       ],
       wednesday: [
-        { time: "9:00 - 10:00 AM", isTaken: false },
-        { time: "11:00 - 12:00 PM", isTaken: false },
-        { time: "1:00 - 2:00 PM", isTaken: false },
-        { time: "2:00 - 3:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "9:00 - 10:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "11:00 - 12:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "1:00 - 2:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "2:00 - 3:00 PM", isTaken: false }
       ],
       thursday: [
-        { time: "9:00 - 10:00 AM", isTaken: false },
-        { time: "11:00 - 12:00 PM", isTaken: false },
-        { time: "1:00 - 2:00 PM", isTaken: false },
-        { time: "2:00 - 3:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "9:00 - 10:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "11:00 - 12:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "1:00 - 2:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "2:00 - 3:00 PM", isTaken: false }
       ],
       friday: [
-        { time: "9:00 - 10:00 AM", isTaken: false },
-        { time: "11:00 - 12:00 PM", isTaken: false },
-        { time: "1:00 - 2:00 PM", isTaken: false },
-        { time: "2:00 - 3:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "9:00 - 10:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "11:00 - 12:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "1:00 - 2:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "2:00 - 3:00 PM", isTaken: false }
       ],
       saturday: [
-        { time: "9:00 - 10:00 AM", isTaken: false },
-        { time: "11:00 - 12:00 PM", isTaken: false },
-        { time: "1:00 - 2:00 PM", isTaken: false },
-        { time: "2:00 - 3:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "9:00 - 10:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "11:00 - 12:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "1:00 - 2:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "2:00 - 3:00 PM", isTaken: false }
       ],
       sunday: [
-        { time: "9:00 - 10:00 AM", isTaken: false },
-        { time: "11:00 - 12:00 PM", isTaken: false },
-        { time: "1:00 - 2:00 PM", isTaken: false },
-        { time: "2:00 - 3:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "9:00 - 10:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "11:00 - 12:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "1:00 - 2:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "2:00 - 3:00 PM", isTaken: false }
       ],
     }
   },
   {
+    _id: uuidv4(),
     name: "Michael Garron Hospital - Emergency Department",
     location: {
       city: "Toronto",
@@ -71,50 +75,51 @@ export const CENTRES = [
     url: "https://www.tehn.ca/programs-services/covid-19-assessment-centre",
     hours: {
       monday: [
-        { time: "5:00 - 6:00 PM", isTaken: false },
-        { time: "6:00 - 7:00 PM", isTaken: false },
-        { time: "8:00 - 9:00 PM", isTaken: false },
-        { time: "10:00 - 11:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "5:00 - 6:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "6:00 - 7:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "8:00 - 9:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "10:00 - 11:00 PM", isTaken: false }
       ],
       tuesday: [
-        { time: "5:00 - 6:00 PM", isTaken: false },
-        { time: "6:00 - 7:00 PM", isTaken: false },
-        { time: "8:00 - 9:00 PM", isTaken: false },
-        { time: "10:00 - 11:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "5:00 - 6:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "6:00 - 7:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "8:00 - 9:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "10:00 - 11:00 PM", isTaken: false }
       ],
       wednesday: [
-        { time: "5:00 - 6:00 PM", isTaken: false },
-        { time: "6:00 - 7:00 PM", isTaken: false },
-        { time: "8:00 - 9:00 PM", isTaken: false },
-        { time: "10:00 - 11:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "5:00 - 6:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "6:00 - 7:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "8:00 - 9:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "10:00 - 11:00 PM", isTaken: false }
       ],
       thursday: [
-        { time: "5:00 - 6:00 PM", isTaken: false },
-        { time: "6:00 - 7:00 PM", isTaken: false },
-        { time: "8:00 - 9:00 PM", isTaken: false },
-        { time: "10:00 - 11:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "5:00 - 6:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "6:00 - 7:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "8:00 - 9:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "10:00 - 11:00 PM", isTaken: false }
       ],
       friday: [
-        { time: "5:00 - 6:00 PM", isTaken: false },
-        { time: "6:00 - 7:00 PM", isTaken: false },
-        { time: "8:00 - 9:00 PM", isTaken: false },
-        { time: "10:00 - 11:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "5:00 - 6:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "6:00 - 7:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "8:00 - 9:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "10:00 - 11:00 PM", isTaken: false }
       ],
       saturday: [
-        { time: "5:00 - 6:00 PM", isTaken: false },
-        { time: "6:00 - 7:00 PM", isTaken: false },
-        { time: "8:00 - 9:00 PM", isTaken: false },
-        { time: "10:00 - 11:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "5:00 - 6:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "6:00 - 7:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "8:00 - 9:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "10:00 - 11:00 PM", isTaken: false }
       ],
       sunday: [
-        { time: "5:00 - 6:00 PM", isTaken: false },
-        { time: "6:00 - 7:00 PM", isTaken: false },
-        { time: "8:00 - 9:00 PM", isTaken: false },
-        { time: "10:00 - 11:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "5:00 - 6:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "6:00 - 7:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "8:00 - 9:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "10:00 - 11:00 PM", isTaken: false }
       ],
     }
   },
   {
+    _id: uuidv4(),
     name: "Mount Sinai Hospital",
     location: {
       city: "Toronto",
@@ -127,50 +132,51 @@ export const CENTRES = [
     url: "https://www.sinaihealth.ca/covid19/",
     hours: {
       monday: [
-        { time: "8:00 - 9:00 AM", isTaken: false },
-        { time: "9:00 - 10:00 AM", isTaken: false },
-        { time: "10:00 - 11:00 AM", isTaken: false },
-        { time: "11:00 - 12:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "8:00 - 9:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "9:00 - 10:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "10:00 - 11:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "11:00 - 12:00 PM", isTaken: false }
       ],
       tuesday: [
-        { time: "8:00 - 9:00 AM", isTaken: false },
-        { time: "9:00 - 10:00 AM", isTaken: false },
-        { time: "10:00 - 11:00 AM", isTaken: false },
-        { time: "11:00 - 12:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "8:00 - 9:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "9:00 - 10:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "10:00 - 11:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "11:00 - 12:00 PM", isTaken: false }
       ],
       wednesday: [
-        { time: "8:00 - 9:00 AM", isTaken: false },
-        { time: "9:00 - 10:00 AM", isTaken: false },
-        { time: "10:00 - 11:00 AM", isTaken: false },
-        { time: "11:00 - 12:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "8:00 - 9:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "9:00 - 10:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "10:00 - 11:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "11:00 - 12:00 PM", isTaken: false }
       ],
       thursday: [
-        { time: "8:00 - 9:00 AM", isTaken: false },
-        { time: "9:00 - 10:00 AM", isTaken: false },
-        { time: "10:00 - 11:00 AM", isTaken: false },
-        { time: "11:00 - 12:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "8:00 - 9:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "9:00 - 10:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "10:00 - 11:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "11:00 - 12:00 PM", isTaken: false }
       ],
       friday: [
-        { time: "8:00 - 9:00 AM", isTaken: false },
-        { time: "9:00 - 10:00 AM", isTaken: false },
-        { time: "10:00 - 11:00 AM", isTaken: false },
-        { time: "11:00 - 12:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "8:00 - 9:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "9:00 - 10:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "10:00 - 11:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "11:00 - 12:00 PM", isTaken: false }
       ],
       saturday: [
-        { time: "8:00 - 9:00 AM", isTaken: false },
-        { time: "9:00 - 10:00 AM", isTaken: false },
-        { time: "10:00 - 11:00 AM", isTaken: false },
-        { time: "11:00 - 12:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "8:00 - 9:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "9:00 - 10:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "10:00 - 11:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "11:00 - 12:00 PM", isTaken: false }
       ],
       sunday: [
-        { time: "8:00 - 9:00 AM", isTaken: false },
-        { time: "9:00 - 10:00 AM", isTaken: false },
-        { time: "10:00 - 11:00 AM", isTaken: false },
-        { time: "11:00 - 12:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "8:00 - 9:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "9:00 - 10:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "10:00 - 11:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "11:00 - 12:00 PM", isTaken: false }
       ],
     }
   },
   {
+    _id: uuidv4(),
     name: "Trillium Health Partners",
     location: {
       city: "Mississauga",
@@ -183,50 +189,51 @@ export const CENTRES = [
     url: "https://trilliumhealthpartners.ca/covid-19/A/assessment.html#starthere",
     hours: {
       monday: [
-        { time: "9:00 - 10:00 AM", isTaken: false },
-        { time: "11:00 - 12:00 PM", isTaken: false },
-        { time: "1:00 - 2:00 PM", isTaken: false },
-        { time: "2:00 - 3:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "9:00 - 10:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "11:00 - 12:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "1:00 - 2:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "2:00 - 3:00 PM", isTaken: false }
       ],
       tuesday: [
-        { time: "9:00 - 10:00 AM", isTaken: false },
-        { time: "11:00 - 12:00 PM", isTaken: false },
-        { time: "1:00 - 2:00 PM", isTaken: false },
-        { time: "2:00 - 3:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "9:00 - 10:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "11:00 - 12:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "1:00 - 2:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "2:00 - 3:00 PM", isTaken: false }
       ],
       wednesday: [
-        { time: "9:00 - 10:00 AM", isTaken: false },
-        { time: "11:00 - 12:00 PM", isTaken: false },
-        { time: "1:00 - 2:00 PM", isTaken: false },
-        { time: "2:00 - 3:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "9:00 - 10:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "11:00 - 12:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "1:00 - 2:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "2:00 - 3:00 PM", isTaken: false }
       ],
       thursday: [
-        { time: "9:00 - 10:00 AM", isTaken: false },
-        { time: "11:00 - 12:00 PM", isTaken: false },
-        { time: "1:00 - 2:00 PM", isTaken: false },
-        { time: "2:00 - 3:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "9:00 - 10:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "11:00 - 12:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "1:00 - 2:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "2:00 - 3:00 PM", isTaken: false }
       ],
       friday: [
-        { time: "9:00 - 10:00 AM", isTaken: false },
-        { time: "11:00 - 12:00 PM", isTaken: false },
-        { time: "1:00 - 2:00 PM", isTaken: false },
-        { time: "2:00 - 3:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "9:00 - 10:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "11:00 - 12:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "1:00 - 2:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "2:00 - 3:00 PM", isTaken: false }
       ],
       saturday: [
-        { time: "9:00 - 10:00 AM", isTaken: false },
-        { time: "11:00 - 12:00 PM", isTaken: false },
-        { time: "1:00 - 2:00 PM", isTaken: false },
-        { time: "2:00 - 3:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "9:00 - 10:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "11:00 - 12:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "1:00 - 2:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "2:00 - 3:00 PM", isTaken: false }
       ],
       sunday: [
-        { time: "9:00 - 10:00 AM", isTaken: false },
-        { time: "11:00 - 12:00 PM", isTaken: false },
-        { time: "1:00 - 2:00 PM", isTaken: false },
-        { time: "2:00 - 3:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "9:00 - 10:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "11:00 - 12:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "1:00 - 2:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "2:00 - 3:00 PM", isTaken: false }
       ],
     }
   },
   {
+    _id: uuidv4(),
     name: "William Osler Health System",
     location: {
       city: "Brampton",
@@ -239,50 +246,51 @@ export const CENTRES = [
     url: "https://www.williamoslerhs.ca/patients-and-families/preparing-for-your-visit-or-stay/coronavirus-information-for-patients-families/assessment-centre-for-covid-19",
     hours: {
       monday: [
-        { time: "7:00 - 8:00 AM", isTaken: false },
-        { time: "11:00 - 12:00 PM", isTaken: false },
-        { time: "1:00 - 2:00 PM", isTaken: false },
-        { time: "5:00 - 6:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "7:00 - 8:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "11:00 - 12:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "1:00 - 2:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "5:00 - 6:00 PM", isTaken: false }
       ],
       tuesday: [
-        { time: "7:00 - 8:00 AM", isTaken: false },
-        { time: "11:00 - 12:00 PM", isTaken: false },
-        { time: "1:00 - 2:00 PM", isTaken: false },
-        { time: "5:00 - 6:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "7:00 - 8:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "11:00 - 12:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "1:00 - 2:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "5:00 - 6:00 PM", isTaken: false }
       ],
       wednesday: [
-        { time: "7:00 - 8:00 AM", isTaken: false },
-        { time: "11:00 - 12:00 PM", isTaken: false },
-        { time: "1:00 - 2:00 PM", isTaken: false },
-        { time: "5:00 - 6:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "7:00 - 8:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "11:00 - 12:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "1:00 - 2:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "5:00 - 6:00 PM", isTaken: false }
       ],
       thursday: [
-        { time: "7:00 - 8:00 AM", isTaken: false },
-        { time: "11:00 - 12:00 PM", isTaken: false },
-        { time: "1:00 - 2:00 PM", isTaken: false },
-        { time: "5:00 - 6:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "7:00 - 8:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "11:00 - 12:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "1:00 - 2:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "5:00 - 6:00 PM", isTaken: false }
       ],
       friday: [
-        { time: "7:00 - 8:00 AM", isTaken: false },
-        { time: "11:00 - 12:00 PM", isTaken: false },
-        { time: "1:00 - 2:00 PM", isTaken: false },
-        { time: "5:00 - 6:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "7:00 - 8:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "11:00 - 12:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "1:00 - 2:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "5:00 - 6:00 PM", isTaken: false }
       ],
       saturday: [
-        { time: "7:00 - 8:00 AM", isTaken: false },
-        { time: "11:00 - 12:00 PM", isTaken: false },
-        { time: "1:00 - 2:00 PM", isTaken: false },
-        { time: "5:00 - 6:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "7:00 - 8:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "11:00 - 12:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "1:00 - 2:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "5:00 - 6:00 PM", isTaken: false }
       ],
       sunday: [
-        { time: "7:00 - 8:00 AM", isTaken: false },
-        { time: "11:00 - 12:00 PM", isTaken: false },
-        { time: "1:00 - 2:00 PM", isTaken: false },
-        { time: "5:00 - 6:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "7:00 - 8:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "11:00 - 12:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "1:00 - 2:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "5:00 - 6:00 PM", isTaken: false }
       ],
     }
   },
   {
+    _id: uuidv4(),
     name: "Dave Andreychuk Mountain Arena Assessment Centre",
     location: {
       city: "Hamilton",
@@ -295,40 +303,41 @@ export const CENTRES = [
     url: "https://www.hamilton.ca/coronavirus/assessment-centres",
     hours: {
       monday: [
-        { time: "10:00 - 11:00 AM", isTaken: false },
-        { time: "11:00 - 12:00 PM", isTaken: false },
-        { time: "1:00 - 2:00 PM", isTaken: false },
-        { time: "6:00 - 7:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "10:00 - 11:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "11:00 - 12:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "1:00 - 2:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "6:00 - 7:00 PM", isTaken: false }
       ],
       tuesday: [
-        { time: "10:00 - 11:00 AM", isTaken: false },
-        { time: "11:00 - 12:00 PM", isTaken: false },
-        { time: "1:00 - 2:00 PM", isTaken: false },
-        { time: "6:00 - 7:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "10:00 - 11:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "11:00 - 12:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "1:00 - 2:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "6:00 - 7:00 PM", isTaken: false }
       ],
       wednesday: [
-        { time: "10:00 - 11:00 AM", isTaken: false },
-        { time: "11:00 - 12:00 PM", isTaken: false },
-        { time: "1:00 - 2:00 PM", isTaken: false },
-        { time: "6:00 - 7:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "10:00 - 11:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "11:00 - 12:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "1:00 - 2:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "6:00 - 7:00 PM", isTaken: false }
       ],
       thursday: [
-        { time: "10:00 - 11:00 AM", isTaken: false },
-        { time: "11:00 - 12:00 PM", isTaken: false },
-        { time: "1:00 - 2:00 PM", isTaken: false },
-        { time: "6:00 - 7:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "10:00 - 11:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "11:00 - 12:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "1:00 - 2:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "6:00 - 7:00 PM", isTaken: false }
       ],
       friday: [
-        { time: "10:00 - 11:00 AM", isTaken: false },
-        { time: "11:00 - 12:00 PM", isTaken: false },
-        { time: "1:00 - 2:00 PM", isTaken: false },
-        { time: "6:00 - 7:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "10:00 - 11:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "11:00 - 12:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "1:00 - 2:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "6:00 - 7:00 PM", isTaken: false }
       ],
       saturday: [],
       sunday: [],
     }
   },
   {
+    _id: uuidv4(),
     name: "Hamilton Health Sciences",
     location: {
       city: "Hamilton",
@@ -341,50 +350,51 @@ export const CENTRES = [
     url: "https://www.hamilton.ca/coronavirus/assessment-centres",
     hours: {
       monday: [
-        { time: "7:00 - 8:00 AM", isTaken: false },
-        { time: "8:00 - 9:00 AM", isTaken: false },
-        { time: "1:00 - 2:00 PM", isTaken: false },
-        { time: "2:00 - 3:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "7:00 - 8:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "8:00 - 9:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "1:00 - 2:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "2:00 - 3:00 PM", isTaken: false }
       ],
       tuesday: [
-        { time: "7:00 - 8:00 AM", isTaken: false },
-        { time: "8:00 - 9:00 AM", isTaken: false },
-        { time: "1:00 - 2:00 PM", isTaken: false },
-        { time: "2:00 - 3:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "7:00 - 8:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "8:00 - 9:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "1:00 - 2:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "2:00 - 3:00 PM", isTaken: false }
       ],
       wednesday: [
-        { time: "7:00 - 8:00 AM", isTaken: false },
-        { time: "8:00 - 9:00 AM", isTaken: false },
-        { time: "1:00 - 2:00 PM", isTaken: false },
-        { time: "2:00 - 3:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "7:00 - 8:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "8:00 - 9:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "1:00 - 2:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "2:00 - 3:00 PM", isTaken: false }
       ],
       thursday: [
-        { time: "7:00 - 8:00 AM", isTaken: false },
-        { time: "8:00 - 9:00 AM", isTaken: false },
-        { time: "1:00 - 2:00 PM", isTaken: false },
-        { time: "2:00 - 3:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "7:00 - 8:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "8:00 - 9:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "1:00 - 2:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "2:00 - 3:00 PM", isTaken: false }
       ],
       friday: [
-        { time: "7:00 - 8:00 AM", isTaken: false },
-        { time: "8:00 - 9:00 AM", isTaken: false },
-        { time: "1:00 - 2:00 PM", isTaken: false },
-        { time: "2:00 - 3:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "7:00 - 8:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "8:00 - 9:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "1:00 - 2:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "2:00 - 3:00 PM", isTaken: false }
       ],
       saturday: [
-        { time: "7:00 - 8:00 AM", isTaken: false },
-        { time: "8:00 - 9:00 AM", isTaken: false },
-        { time: "1:00 - 2:00 PM", isTaken: false },
-        { time: "2:00 - 3:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "7:00 - 8:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "8:00 - 9:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "1:00 - 2:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "2:00 - 3:00 PM", isTaken: false }
       ],
       sunday: [
-        { time: "7:00 - 8:00 AM", isTaken: false },
-        { time: "8:00 - 9:00 AM", isTaken: false },
-        { time: "1:00 - 2:00 PM", isTaken: false },
-        { time: "2:00 - 3:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "7:00 - 8:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "8:00 - 9:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "1:00 - 2:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "2:00 - 3:00 PM", isTaken: false }
       ],
     }
   },
   {
+    _id: uuidv4(),
     name: "Brewer Park Arena",
     location: {
       city: "Ottawa",
@@ -397,40 +407,41 @@ export const CENTRES = [
     url: "https://www.ottawapublichealth.ca/en/public-health-topics/novel-coronavirus.aspx",
     hours: {
       monday: [
-        { time: "7:00 - 8:00 AM", isTaken: false },
-        { time: "8:00 - 9:00 AM", isTaken: false },
-        { time: "1:00 - 2:00 PM", isTaken: false },
-        { time: "2:00 - 3:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "7:00 - 8:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "8:00 - 9:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "1:00 - 2:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "2:00 - 3:00 PM", isTaken: false }
       ],
       tuesday: [
-        { time: "7:00 - 8:00 AM", isTaken: false },
-        { time: "8:00 - 9:00 AM", isTaken: false },
-        { time: "1:00 - 2:00 PM", isTaken: false },
-        { time: "2:00 - 3:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "7:00 - 8:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "8:00 - 9:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "1:00 - 2:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "2:00 - 3:00 PM", isTaken: false }
       ],
       wednesday: [
-        { time: "7:00 - 8:00 AM", isTaken: false },
-        { time: "8:00 - 9:00 AM", isTaken: false },
-        { time: "1:00 - 2:00 PM", isTaken: false },
-        { time: "2:00 - 3:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "7:00 - 8:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "8:00 - 9:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "1:00 - 2:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "2:00 - 3:00 PM", isTaken: false }
       ],
       thursday: [
-        { time: "7:00 - 8:00 AM", isTaken: false },
-        { time: "8:00 - 9:00 AM", isTaken: false },
-        { time: "1:00 - 2:00 PM", isTaken: false },
-        { time: "2:00 - 3:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "7:00 - 8:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "8:00 - 9:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "1:00 - 2:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "2:00 - 3:00 PM", isTaken: false }
       ],
       friday: [
-        { time: "7:00 - 8:00 AM", isTaken: false },
-        { time: "8:00 - 9:00 AM", isTaken: false },
-        { time: "1:00 - 2:00 PM", isTaken: false },
-        { time: "2:00 - 3:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "7:00 - 8:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "8:00 - 9:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "1:00 - 2:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "2:00 - 3:00 PM", isTaken: false }
       ],
       saturday: [],
       sunday: [],
     }
   },
   {
+    _id: uuidv4(),
     name: "Queensway Carlton Hospital",
     location: {
       city: "Ottawa",
@@ -443,30 +454,31 @@ export const CENTRES = [
     url: "https://www.ottawapublichealth.ca/en/public-health-topics/novel-coronavirus.aspx",
     hours: {
       monday: [
-        { time: "9:00 - 10:00 AM", isTaken: false },
-        { time: "10:00 - 11:00 AM", isTaken: false },
-        { time: "3:00 - 4:00 PM", isTaken: false },
-        { time: "4:00 - 5:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "9:00 - 10:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "10:00 - 11:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "3:00 - 4:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "4:00 - 5:00 PM", isTaken: false }
       ],
       tuesday: [],
       wednesday: [
-        { time: "9:00 - 10:00 AM", isTaken: false },
-        { time: "10:00 - 11:00 AM", isTaken: false },
-        { time: "3:00 - 4:00 PM", isTaken: false },
-        { time: "4:00 - 5:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "9:00 - 10:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "10:00 - 11:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "3:00 - 4:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "4:00 - 5:00 PM", isTaken: false }
       ],
       thursday: [],
       friday: [
-        { time: "9:00 - 10:00 AM", isTaken: false },
-        { time: "10:00 - 11:00 AM", isTaken: false },
-        { time: "3:00 - 4:00 PM", isTaken: false },
-        { time: "4:00 - 5:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "9:00 - 10:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "10:00 - 11:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "3:00 - 4:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "4:00 - 5:00 PM", isTaken: false }
       ],
       saturday: [],
       sunday: [],
     }
   },
   {
+    _id: uuidv4(),
     name: "NEOMO Medical",
     location: {
       city: "Sudbury",
@@ -479,50 +491,51 @@ export const CENTRES = [
     url: "https://www.hsnsudbury.ca/portalen/Patients-and-Visitors/COVID-19/COVID-19-Assessment-Centre",
     hours: {
       monday: [
-        { time: "9:00 - 10:00 AM", isTaken: false },
-        { time: "10:00 - 11:00 AM", isTaken: false },
-        { time: "6:00 - 7:00 PM", isTaken: false },
-        { time: "8:00 - 9:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "9:00 - 10:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "10:00 - 11:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "6:00 - 7:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "8:00 - 9:00 PM", isTaken: false }
       ],
       tuesday: [
-        { time: "9:00 - 10:00 AM", isTaken: false },
-        { time: "10:00 - 11:00 AM", isTaken: false },
-        { time: "6:00 - 7:00 PM", isTaken: false },
-        { time: "8:00 - 9:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "9:00 - 10:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "10:00 - 11:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "6:00 - 7:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "8:00 - 9:00 PM", isTaken: false }
       ],
       wednesday: [
-        { time: "9:00 - 10:00 AM", isTaken: false },
-        { time: "10:00 - 11:00 AM", isTaken: false },
-        { time: "6:00 - 7:00 PM", isTaken: false },
-        { time: "8:00 - 9:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "9:00 - 10:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "10:00 - 11:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "6:00 - 7:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "8:00 - 9:00 PM", isTaken: false }
       ],
       thursday: [
-        { time: "9:00 - 10:00 AM", isTaken: false },
-        { time: "10:00 - 11:00 AM", isTaken: false },
-        { time: "6:00 - 7:00 PM", isTaken: false },
-        { time: "8:00 - 9:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "9:00 - 10:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "10:00 - 11:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "6:00 - 7:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "8:00 - 9:00 PM", isTaken: false }
       ],
       friday: [
-        { time: "9:00 - 10:00 AM", isTaken: false },
-        { time: "10:00 - 11:00 AM", isTaken: false },
-        { time: "6:00 - 7:00 PM", isTaken: false },
-        { time: "8:00 - 9:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "9:00 - 10:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "10:00 - 11:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "6:00 - 7:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "8:00 - 9:00 PM", isTaken: false }
       ],
       saturday: [
-        { time: "9:00 - 10:00 AM", isTaken: false },
-        { time: "10:00 - 11:00 AM", isTaken: false },
-        { time: "6:00 - 7:00 PM", isTaken: false },
-        { time: "8:00 - 9:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "9:00 - 10:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "10:00 - 11:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "6:00 - 7:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "8:00 - 9:00 PM", isTaken: false }
       ],
       sunday: [
-        { time: "9:00 - 10:00 AM", isTaken: false },
-        { time: "10:00 - 11:00 AM", isTaken: false },
-        { time: "6:00 - 7:00 PM", isTaken: false },
-        { time: "8:00 - 9:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "9:00 - 10:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "10:00 - 11:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "6:00 - 7:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "8:00 - 9:00 PM", isTaken: false }
       ],
     }
   },
   {
+    _id: uuidv4(),
     name: "Primacy Medical Centre",
     location: {
       city: "Sudbury",
@@ -535,40 +548,41 @@ export const CENTRES = [
     url: "https://www.hsnsudbury.ca/portalen/Patients-and-Visitors/COVID-19/COVID-19-Assessment-Centre",
     hours: {
       monday: [
-        { time: "6:00 - 7:00 AM", isTaken: false },
-        { time: "7:00 - 8:00 AM", isTaken: false },
-        { time: "1:00 - 2:00 PM", isTaken: false },
-        { time: "4:00 - 5:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "6:00 - 7:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "7:00 - 8:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "1:00 - 2:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "4:00 - 5:00 PM", isTaken: false }
       ],
       tuesday: [
-        { time: "6:00 - 7:00 AM", isTaken: false },
-        { time: "7:00 - 8:00 AM", isTaken: false },
-        { time: "1:00 - 2:00 PM", isTaken: false },
-        { time: "4:00 - 5:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "6:00 - 7:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "7:00 - 8:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "1:00 - 2:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "4:00 - 5:00 PM", isTaken: false }
       ],
       wednesday: [
-        { time: "6:00 - 7:00 AM", isTaken: false },
-        { time: "7:00 - 8:00 AM", isTaken: false },
-        { time: "1:00 - 2:00 PM", isTaken: false },
-        { time: "4:00 - 5:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "6:00 - 7:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "7:00 - 8:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "1:00 - 2:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "4:00 - 5:00 PM", isTaken: false }
       ],
       thursday: [
-        { time: "6:00 - 7:00 AM", isTaken: false },
-        { time: "7:00 - 8:00 AM", isTaken: false },
-        { time: "1:00 - 2:00 PM", isTaken: false },
-        { time: "4:00 - 5:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "6:00 - 7:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "7:00 - 8:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "1:00 - 2:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "4:00 - 5:00 PM", isTaken: false }
       ],
       friday: [
-        { time: "6:00 - 7:00 AM", isTaken: false },
-        { time: "7:00 - 8:00 AM", isTaken: false },
-        { time: "1:00 - 2:00 PM", isTaken: false },
-        { time: "4:00 - 5:00 PM", isTaken: false }
+        { _id: uuidv4(), time: "6:00 - 7:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "7:00 - 8:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "1:00 - 2:00 PM", isTaken: false },
+        { _id: uuidv4(), time: "4:00 - 5:00 PM", isTaken: false }
       ],
       saturday: [],
       sunday: [],
     }
   },
   {
+    _id: uuidv4(),
     name: "St. Mary's General Hospital - Bathurst Site",
     location: {
       city: "Waterloo",
@@ -581,46 +595,46 @@ export const CENTRES = [
     url: "https://www.smgh.ca/covid-19-testing-available-for-k-w-residents-with-symptoms-starting-may-16",
     hours: {
       monday: [
-        { time: "6:00 - 7:00 AM", isTaken: false },
-        { time: "7:00 - 8:00 AM", isTaken: false },
-        { time: "8:00 - 9:00 AM", isTaken: false },
-        { time: "9:00 - 10:00 AM", isTaken: false }
+        { _id: uuidv4(), time: "6:00 - 7:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "7:00 - 8:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "8:00 - 9:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "9:00 - 10:00 AM", isTaken: false }
       ],
       tuesday: [
-        { time: "6:00 - 7:00 AM", isTaken: false },
-        { time: "7:00 - 8:00 AM", isTaken: false },
-        { time: "8:00 - 9:00 AM", isTaken: false },
-        { time: "9:00 - 10:00 AM", isTaken: false }
+        { _id: uuidv4(), time: "6:00 - 7:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "7:00 - 8:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "8:00 - 9:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "9:00 - 10:00 AM", isTaken: false }
       ],
       wednesday: [
-        { time: "6:00 - 7:00 AM", isTaken: false },
-        { time: "7:00 - 8:00 AM", isTaken: false },
-        { time: "8:00 - 9:00 AM", isTaken: false },
-        { time: "9:00 - 10:00 AM", isTaken: false }
+        { _id: uuidv4(), time: "6:00 - 7:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "7:00 - 8:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "8:00 - 9:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "9:00 - 10:00 AM", isTaken: false }
       ],
       thursday: [
-        { time: "6:00 - 7:00 AM", isTaken: false },
-        { time: "7:00 - 8:00 AM", isTaken: false },
-        { time: "8:00 - 9:00 AM", isTaken: false },
-        { time: "9:00 - 10:00 AM", isTaken: false }
+        { _id: uuidv4(), time: "6:00 - 7:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "7:00 - 8:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "8:00 - 9:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "9:00 - 10:00 AM", isTaken: false }
       ],
       friday: [
-        { time: "6:00 - 7:00 AM", isTaken: false },
-        { time: "7:00 - 8:00 AM", isTaken: false },
-        { time: "8:00 - 9:00 AM", isTaken: false },
-        { time: "9:00 - 10:00 AM", isTaken: false }
+        { _id: uuidv4(), time: "6:00 - 7:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "7:00 - 8:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "8:00 - 9:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "9:00 - 10:00 AM", isTaken: false }
       ],
       saturday: [
-        { time: "6:00 - 7:00 AM", isTaken: false },
-        { time: "7:00 - 8:00 AM", isTaken: false },
-        { time: "8:00 - 9:00 AM", isTaken: false },
-        { time: "9:00 - 10:00 AM", isTaken: false }
+        { _id: uuidv4(), time: "6:00 - 7:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "7:00 - 8:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "8:00 - 9:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "9:00 - 10:00 AM", isTaken: false }
       ],
       sunday: [
-        { time: "6:00 - 7:00 AM", isTaken: false },
-        { time: "7:00 - 8:00 AM", isTaken: false },
-        { time: "8:00 - 9:00 AM", isTaken: false },
-        { time: "9:00 - 10:00 AM", isTaken: false }
+        { _id: uuidv4(), time: "6:00 - 7:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "7:00 - 8:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "8:00 - 9:00 AM", isTaken: false },
+        { _id: uuidv4(), time: "9:00 - 10:00 AM", isTaken: false }
       ],
     }
   }
