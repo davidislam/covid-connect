@@ -27,7 +27,6 @@
     "express-session": "^1.17.0",
     "mongodb": "^3.6.0",
     "mongoose": "^5.9.27",
-    "react-geocode": "^0.2.1",
     "validator": "^13.1.1"
   }
 }
