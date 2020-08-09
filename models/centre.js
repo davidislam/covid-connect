@@ -34,10 +34,12 @@ const CentreSchema = new mongoose.Schema({
       type: String,
       required: true,
       minlength: 6,
-      // validate: {
-      //   validator: validator.isPostalCode(v, "CA"),
-      //   message: 'Invalid postal code'
-      // }
+      validate: {
+        validator: function (v) {
+          return validator.isPostalCode(v, "CA")
+        },
+        message: 'Invalid postal code'
+      }
     },
     latitude: {
       type: Number,
@@ -68,7 +70,8 @@ const CentreSchema = new mongoose.Schema({
     friday: [TimeslotSchema],
     saturday: [TimeslotSchema],
     sunday: [TimeslotSchema],
-  }
+  },
+  info: String
 })
 
 const Centre = mongoose.model('Centre', CentreSchema);

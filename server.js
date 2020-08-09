@@ -21,6 +21,9 @@ app.use(bodyParser.json());
 const session = require("express-session");
 app.use(bodyParser.urlencoded({ extended: true }));
 
+const cors = require('cors');
+app.use(cors());
+
 function isMongoError(error) { // checks for first error returned by promise rejection if Mongo database suddently disconnects
   return typeof error === 'object' && error !== null && error.name === "MongoNetworkError"
 }
@@ -143,7 +146,7 @@ app.get("/users/:id", (req, res) => {
 
 // a POST route to *create* an assessment centre
 app.post('/centres', mongoChecker, (req, res) => {
-  log(req.body);
+  // log(req.body);
   // Create a new centre using the Centre mongoose model
   const centre = new Centre(req.body);
 
@@ -160,6 +163,7 @@ app.post('/centres', mongoChecker, (req, res) => {
   })
 })
 
+
 // a GET route to get all centres
 app.get('/centres', mongoChecker, (req, res) => {
   Centre.find({}).then((centres) => {
@@ -171,7 +175,7 @@ app.get('/centres', mongoChecker, (req, res) => {
     })
 })
 
-// a GET route to get a centre by their id.
+// a GET route to get a centre by its id.
 app.get('/centres/:id', mongoChecker, (req, res) => {
   const id = req.params.id
 
@@ -209,12 +213,12 @@ app.get('/centres/city/:city', mongoChecker, (req, res) => {
     })
 })
 
-// a DELETE route to remove a centre by its name.
-app.delete('/centres/:name', mongoChecker, (req, res) => {
-  const name = req.params.name
+// a DELETE route to remove a centre by its id.
+app.delete('/centres/:id', mongoChecker, (req, res) => {
+  const id = req.params.id
 
-  // Delete a centre by its name
-  Centre.findOneAndDelete({ name }).then((centre) => {
+  // Delete a centre by its id
+  Centre.findOneAndDelete({ _id: id }).then((centre) => {
     if (!centre) {
       res.status(404).send()
     } else {
@@ -224,6 +228,47 @@ app.delete('/centres/:name', mongoChecker, (req, res) => {
     .catch((error) => {
       log(error)
       res.status(500).send() // server error, could not delete.
+    })
+})
+
+// a PUT route for replacing an *entire* resource.
+//  The body should contain *all* of the required fields of the resource.
+app.put('/centres/:id', mongoChecker, (req, res) => {
+  const id = req.params.id
+
+  if (!ObjectID.isValid(id)) {
+    res.status(404).send('Resource not found')
+    return;  // so that we don't run the rest of the handler.
+  }
+
+  // Replace the centre by its id using req.body
+  Centre.findOneAndReplace({ _id: id }, req.body, { new: true, useFindAndModify: false })
+    .then((centre) => {
+      if (!centre) {
+        res.status(404).send()
+      } else {
+        res.send(centre)
+      }
+    })
+    .catch((error) => {
+      if (isMongoError(error)) { // check for if mongo server suddenly disconnected before this request.
+        res.status(500).send('Internal server error')
+      } else {
+        log(error)
+        res.status(400).send('Bad Request') // bad request for changing the centre.
+      }
+    })
+})
+
+/* GET a list of all unique city names from centres data */
+app.get('/city', mongoChecker, (req, res) => {
+  Centre.distinct('location.city')
+    .then(result => {
+      res.send(result.sort());
+    })
+    .catch(err => {
+      log(err);
+      res.status(500).send("Internal Server Error");
     })
 })
 

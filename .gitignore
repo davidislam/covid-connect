@@ -3,3 +3,4 @@ node_modules/
 mongo-data/
 *.txt
 build
+*.json
