@@ -55,26 +55,31 @@ app.use(
   })
 );
 
-// Login
+// A route to login and create a session
 app.post("/users/login", (req, res) => {
-  const email = req.body.email;
+  const username = req.body.username;
   const password = req.body.password;
 
-  log(email, password);
-
-  User.findByEmailPassword(email, password)
+  // Use the static method on the User model to find a user
+  // by their username and password
+  User.findByUsernamePassword(username, password)
     .then(user => {
-      // Add user ID
+      // Add the user's id to the session cookie.
+      // We can check later if this exists to ensure we are logged in.
       req.session.user = user._id;
-      req.session.email = user.email;
-      res.send({ currentUser: user.email });
+      req.session.username = user.username;
+      res.send({ currentUser: user.username });
     })
     .catch(error => {
-      res.status(400).send()
+      if (isMongoError(error)) {
+        res.status(500).send();
+      } else {
+        res.status(400).send()
+      }
     });
 });
 
-// Logout
+// A route to logout a user
 app.get("/users/logout", (req, res) => {
   // Remove the session
   req.session.destroy(error => {
@@ -86,10 +91,10 @@ app.get("/users/logout", (req, res) => {
   });
 });
 
-// Check status
+// A route to check if a user is logged in on the session cookie
 app.get("/users/check-session", (req, res) => {
   if (req.session.user) {
-    res.send({ currentUser: req.session.email });
+    res.send({ currentUser: req.session.username });
   } else {
     res.status(401).send();
   }
@@ -99,22 +104,46 @@ app.get("/users/check-session", (req, res) => {
 
 /*** User / API Routes below ************************************/
 
-// POST create new account
-app.post("/signup", (req, res) => {
+// POST create a new user
+app.post("/users", mongoChecker, (req, res) => {
   const user = new User({
     username: req.body.username,
-    email: req.body.email,
     password: req.body.password
   })
 
   user.save().then(
     user => { res.send(user) },
-    error => { res.status(400).send(error) }
+    error => {
+      if (isMongoError(error)) {
+        res.status(500).send('Internal server error');
+      } else {
+        log(error);
+        res.status(400).send('Bad Request');
+      }
+    }
   )
 })
 
-// GET get all accounts
-app.get("/users", (req, res) => {
+// Middleware for authentication of resources
+const authenticate = (req, res, next) => {
+  if (req.session.user) {
+    User.findById(req.session.user).then((user) => {
+      if (!user) {
+        return Promise.reject()
+      } else {
+        req.user = user
+        next()
+      }
+    }).catch((error) => {
+      res.status(401).send("Unauthorized")
+    })
+  } else {
+    res.status(401).send("Unauthorized")
+  }
+}
+
+// GET get all users
+app.get("/users", mongoChecker, (req, res) => {
   User.find().then(
     users => { res.send(users) },
     error => { res.status(500).send(error) }
@@ -122,7 +151,7 @@ app.get("/users", (req, res) => {
 })
 
 // GET by ID
-app.get("/users/:id", (req, res) => {
+app.get("/users/:id", mongoChecker, (req, res) => {
   const id = req.params.id
 
   if (!ObjectID.isValid(id)) {
