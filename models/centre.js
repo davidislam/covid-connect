@@ -72,7 +72,7 @@ const CentreSchema = new mongoose.Schema({
     sunday: [TimeslotSchema],
   },
   info: String
-})
+}, { timestamps: true });
 
 const Centre = mongoose.model('Centre', CentreSchema);
 module.exports = { Centre };
