@@ -3,32 +3,59 @@
 const mongoose = require('mongoose');
 const validator = require('validator')
 const bcrypt = require('bcryptjs') // "slow hash", more secure
+const uniqueValidator = require('mongoose-unique-validator');
 
 const UserSchema = new mongoose.Schema({
 	username: {
 		type: String,
-		required: true,
+		lowercase: true,
+		required: [true, "can't be blank"],
 		minlength: 1,
 		trim: true,
-		unique: true
+		unique: true,
+		match: [/^[a-zA-Z0-9]+$/, 'is invalid'],
+		index: true
 	},
-	// email: {
-	// 	type: String,
-	// 	required: true,
-	// 	minlength: 1,
-	// 	trim: true,
-	// 	unique: true,
-	// 	validate: {
-	// 		validator: validator.isEmail,
-	// 		message: 'Not valid email'
-	// 	}
-	// }, 
 	password: {
 		type: String,
 		required: true,
-		minlength: 6
-	}
-})
+		minlength: [6, "password must be at least 6 characters"]
+	},
+	email: {
+		type: String,
+		minlength: 1,
+		lowercase: true,
+		trim: true,
+		unique: true,
+		validate: {
+			validator: validator.isEmail,
+			message: 'Invalid email'
+		}
+	},
+	name: {
+		type: String,
+		required: true,
+		validate: {
+			validator: validator.isAlphanumeric,
+			message: 'Invalid name'
+		}
+	},
+	gender: {
+		type: String,
+		required: true,
+		enum: ['male', 'female']
+	},
+	age: {
+		type: Number,
+		min: 1,
+		max: 99
+	},
+	healthCardNumber: Number,
+	phoneNumber: String,
+	address: String
+}, { timestamps: true });
+
+UserSchema.plugin(uniqueValidator, { message: 'is already taken' });
 
 // Hashing, security, exports before saving to database
 UserSchema.pre('save', function (next) {
@@ -49,27 +76,6 @@ UserSchema.pre('save', function (next) {
 })
 
 // METHODS -----------------------------------------------------------
-// UserSchema.statics.findByEmailPassword = function(email, password) {
-// 	const User = this
-
-// 	// Find the user by email
-// 	return User.findOne({ email: email }).then((user) => {
-// 		if (!user) {
-// 			return Promise.reject()  // a rejected promise
-// 		}
-// 		// if the user exists, make sure their password is correct
-// 		return new Promise((resolve, reject) => {
-// 			bcrypt.compare(password, user.password, (err, result) => {
-// 				if (result) {
-// 					resolve(user)
-// 				} else {
-// 					reject()
-// 				}
-// 			})
-// 		})
-// 	})
-// }
-
 UserSchema.statics.findByUsernamePassword = function (username, password) {
 	const User = this
 
