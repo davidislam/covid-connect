@@ -106,10 +106,7 @@ app.get("/users/check-session", (req, res) => {
 
 // POST create a new user
 app.post("/users", mongoChecker, (req, res) => {
-  const user = new User({
-    username: req.body.username,
-    password: req.body.password
-  })
+  const user = new User(req.body);
 
   user.save().then(
     user => { res.send(user) },
