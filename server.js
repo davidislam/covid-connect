@@ -11,6 +11,7 @@ mongoose.set('useFindAndModify', false); // for some deprecation issues
 
 const { User } = require("./models/user");
 const { Centre } = require('./models/centre');
+const { Appointment } = require('./models/appointment');
 
 const { ObjectID } = require('mongodb');
 
@@ -298,6 +299,57 @@ app.get('/city', mongoChecker, (req, res) => {
     })
 })
 
+// A PATCH route to update a timeslot's <isTaken> value
+app.patch('/centres/timeslot/:id', (req, rest) => {
+
+})
+
+/*** Appointment API Routes below ************************************/
+
+// A POST route to create an appointment
+app.post('/appointment', mongoChecker, authenticate, (req, res) => {
+  const appt = new Appointment({
+    date: req.body.date,
+    time: req.body.time,
+    address: req.body.address,
+    creator: req.user._id,
+    timeslot: req.body.timeslot
+  });
+
+  appt.save().then(result => {
+    res.send(result);
+  }).catch(error => {
+    if (isMongoError(error)) {
+      res.status(500).send('Internal server error');
+    } else {
+      log(error);
+      res.status(400).send('Bad Request');
+    }
+  })
+})
+
+// A DELETE route to cancel an appointment
+app.delete('/appointment/:id', mongoChecker, authenticate, (req, res) => {
+  const id = req.params.id;
+
+  // Validate id
+  if (!ObjectID.isValid(id)) {
+    res.status(404).send('Resource not found')
+    return;
+  }
+
+  Appointment.findOneAndDelete({ _id: id, creator: req.user._id }).then(appt => {
+    if (!appt) {
+      res.status(404).send();
+    } else {
+      res.send(appt);
+    }
+  })
+    .catch(error => {
+      log(error);
+      res.status(500).send('Server error');
+    })
+})
 
 /*************************************************/
 // Express server listening...
