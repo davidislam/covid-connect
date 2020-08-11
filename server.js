@@ -353,6 +353,39 @@ app.get('/appointments', mongoChecker, authenticate, (req, res) => {
   })
 })
 
+// A GET route to get all appointments in the collection. Useful for an admin.
+app.get('/_appointments', mongoChecker, authenticate, (req, res) => {
+  Appointment.find({
+  }).then(appts => {
+    res.send(appts);
+  }).catch(error => {
+    log(error);
+    res.status(500).send('Internal server error');
+  })
+})
+
+// a GET route to get an appointment by its id for a user
+app.get('/appointments/:id', mongoChecker, authenticate, (req, res) => {
+  const id = req.params.id
+
+  if (!ObjectID.isValid(id)) {
+    res.status(404).send()
+    return;
+  }
+
+  Appointment.findOne({ _id: id, creator: req.user._id }).then((appt) => {
+    if (!appt) {
+      res.status(404).send('Resource not found')
+    } else {
+      res.send(appt)
+    }
+  })
+    .catch((error) => {
+      log(error)
+      res.status(500).send('Internal Server Error')
+    })
+})
+
 // A POST route to create an appointment
 app.post('/appointments', mongoChecker, authenticate, (req, res) => {
   const appt = new Appointment({
