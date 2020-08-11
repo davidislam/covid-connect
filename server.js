@@ -172,7 +172,7 @@ app.get("/users/:id", mongoChecker, (req, res) => {
 /*** Centre API Routes below ************************************/
 
 // a POST route to *create* an assessment centre
-app.post('/centres', mongoChecker, (req, res) => {
+app.post('/centres', mongoChecker, authenticate, (req, res) => {
   // log(req.body);
   // Create a new centre using the Centre mongoose model
   const centre = new Centre(req.body);
@@ -241,7 +241,7 @@ app.get('/centres/city/:city', mongoChecker, (req, res) => {
 })
 
 // a DELETE route to remove a centre by its id.
-app.delete('/centres/:id', mongoChecker, (req, res) => {
+app.delete('/centres/:id', mongoChecker, authenticate, (req, res) => {
   const id = req.params.id
 
   // Delete a centre by its id
@@ -260,7 +260,7 @@ app.delete('/centres/:id', mongoChecker, (req, res) => {
 
 // a PUT route for replacing an *entire* resource.
 //  The body should contain *all* of the required fields of the resource.
-app.put('/centres/:id', mongoChecker, (req, res) => {
+app.put('/centres/:id', mongoChecker, authenticate, (req, res) => {
   const id = req.params.id
 
   if (!ObjectID.isValid(id)) {
@@ -300,14 +300,49 @@ app.get('/city', mongoChecker, (req, res) => {
 })
 
 // A PATCH route to update a timeslot's <isTaken> value
-app.patch('/centres/timeslot/:id', (req, rest) => {
+/*
+  { "op": "replace", "path": "/isTaken", "value": true/false },
+*/
+// app.patch('/centres/:id/:day/:tid', mongoChecker, (req, res) => {
+//   log(req.params);
+//   const id = req.params.id;
+//   const day = req.params.day;
+//   const tid = req.params.tid;
 
-})
+//   if (!ObjectID.isValid(id) || !ObjectID.isValid(tid)) {
+//     res.status(404).send()
+//     return;  // so that we don't run the rest of the handler.
+//   }
+
+//   // Find the fields to update and their values.
+//   const fieldsToUpdate = {}
+//   req.body.map((change) => {
+//     const propertyToChange = change.path.substr(1) // getting rid of the '/' character
+//     fieldsToUpdate[propertyToChange] = change.value
+//   })
+
+//   // Update timeslot by id
+//   Centre.findOneAndUpdate({ _id: id }, { $set: fieldsToUpdate }, { new: true, useFindAndModify: false })
+//     .then(ts => {
+//       if (!ts) {
+//         res.status(400).send('Resource not found');
+//       } else {
+//         res.send(ts);
+//       }
+//     }).catch(error => {
+//       if (isMongoError(error)) { // check for if mongo server suddenly dissconnected before this request.
+//         res.status(500).send('Internal server error')
+//       } else {
+//         log(error)
+//         res.status(400).send('Bad Request') // bad request for changing the timeslot.
+//       }
+//     })
+// })
 
 /*** Appointment API Routes below ************************************/
 
 // A GET route to get all appointments for a user
-app.get('/appointment', mongoChecker, authenticate, (req, res) => {
+app.get('/appointments', mongoChecker, authenticate, (req, res) => {
   Appointment.find({
     creator: req.user._id
   }).then(appts => {
@@ -319,7 +354,7 @@ app.get('/appointment', mongoChecker, authenticate, (req, res) => {
 })
 
 // A POST route to create an appointment
-app.post('/appointment', mongoChecker, authenticate, (req, res) => {
+app.post('/appointments', mongoChecker, authenticate, (req, res) => {
   const appt = new Appointment({
     date: req.body.date,
     time: req.body.time,
@@ -341,7 +376,7 @@ app.post('/appointment', mongoChecker, authenticate, (req, res) => {
 })
 
 // A DELETE route to cancel an appointment
-app.delete('/appointment/:id', mongoChecker, authenticate, (req, res) => {
+app.delete('/appointments/:id', mongoChecker, authenticate, (req, res) => {
   const id = req.params.id;
 
   // Validate id
