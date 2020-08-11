@@ -306,6 +306,18 @@ app.patch('/centres/timeslot/:id', (req, rest) => {
 
 /*** Appointment API Routes below ************************************/
 
+// A GET route to get all appointments for a user
+app.get('/appointment', mongoChecker, authenticate, (req, res) => {
+  Appointment.find({
+    creator: req.user._id
+  }).then(appts => {
+    res.send(appts);
+  }).catch(error => {
+    log(error);
+    res.status(500).send('Internal server error');
+  })
+})
+
 // A POST route to create an appointment
 app.post('/appointment', mongoChecker, authenticate, (req, res) => {
   const appt = new Appointment({
