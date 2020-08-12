@@ -170,33 +170,25 @@ app.get("/users/:id", mongoChecker, (req, res) => {
 
 })
 
-// a PUT route for replacing an *entire* resource.
-// The body should contain *all* of the required fields of the resource.
-app.put('/users/:id', mongoChecker, authenticate, (req, res) => {
-  const id = req.params.id
+app.patch('/users/:id', mongoChecker, authenticate, (req, res) => {
+  const id = req.params.id;
 
   if (!ObjectID.isValid(id)) {
-    res.status(404).send('Resource not found')
-    return;  // so that we don't run the rest of the handler.
+    res.status(404).send();
+    return;
   }
 
-  // Replace the user by its id using req.body
-  User.findOneAndReplace({ _id: id }, req.body, { new: true, useFindAndModify: false, timestamps: false })
-    .then((user) => {
+  User.findByIdAndUpdate(id, { $set: req.body }, { new: true })
+    .then(user => {
       if (!user) {
-        res.status(404).send()
+        res.status(404).send();
       } else {
-        res.send(user)
+        res.send(user);
       }
     })
-    .catch((error) => {
-      if (isMongoError(error)) { // check for if mongo server suddenly disconnected before this request.
-        res.status(500).send('Internal server error')
-      } else {
-        log(error)
-        res.status(400).send('Bad Request') // bad request for changing the user.
-      }
-    })
+    .catch(error => {
+      res.status(400).send();
+    });
 })
 
 /*** Centre API Routes below ************************************/
@@ -302,34 +294,25 @@ app.delete('/centres/:id', mongoChecker, authenticate, (req, res) => {
     })
 })
 
-// a PUT route for replacing an *entire* resource.
-//  The body should contain *all* of the required fields of the resource.
-// Maybe less desirable than a patch? 
-app.put('/centres/:id', mongoChecker, authenticate, (req, res) => {
-  const id = req.params.id
+app.patch('/centres/:id', mongoChecker, authenticate, (req, res) => {
+  const id = req.params.id;
 
   if (!ObjectID.isValid(id)) {
-    res.status(404).send('Resource not found')
-    return;  // so that we don't run the rest of the handler.
+    res.status(404).send();
+    return;
   }
 
-  // Replace the centre by its id using req.body
-  Centre.findOneAndReplace({ _id: id }, req.body, { new: true, useFindAndModify: false })
-    .then((centre) => {
+  Centre.findByIdAndUpdate(id, { $set: req.body }, { new: true })
+    .then(centre => {
       if (!centre) {
-        res.status(404).send()
+        res.status(404).send();
       } else {
-        res.send(centre)
+        res.send(centre);
       }
     })
-    .catch((error) => {
-      if (isMongoError(error)) { // check for if mongo server suddenly disconnected before this request.
-        res.status(500).send('Internal server error')
-      } else {
-        log(error)
-        res.status(400).send('Bad Request') // bad request for changing the centre.
-      }
-    })
+    .catch(error => {
+      res.status(400).send();
+    });
 })
 
 /* GET a list of all unique city names from centres data */
