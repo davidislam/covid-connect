@@ -299,45 +299,40 @@ app.get('/city', mongoChecker, (req, res) => {
     })
 })
 
-// A PATCH route to update a timeslot's <isTaken> value
-/*
-  { "op": "replace", "path": "/isTaken", "value": true/false },
-*/
-// app.patch('/centres/:id/:day/:tid', mongoChecker, (req, res) => {
-//   log(req.params);
-//   const id = req.params.id;
-//   const day = req.params.day;
-//   const tid = req.params.tid;
+// A PATCH route to toggle a timeslot's <isTaken> value
+app.patch('/centres/:id/:day/:tid', mongoChecker, (req, res) => {
+  // log(req.params);
+  const id = req.params.id;
+  const day = req.params.day;
+  const tid = req.params.tid;
 
-//   if (!ObjectID.isValid(id) || !ObjectID.isValid(tid)) {
-//     res.status(404).send()
-//     return;  // so that we don't run the rest of the handler.
-//   }
+  if (!ObjectID.isValid(id) || !ObjectID.isValid(tid)) {
+    res.status(404).send()
+    return;  // so that we don't run the rest of the handler.
+  }
 
-//   // Find the fields to update and their values.
-//   const fieldsToUpdate = {}
-//   req.body.map((change) => {
-//     const propertyToChange = change.path.substr(1) // getting rid of the '/' character
-//     fieldsToUpdate[propertyToChange] = change.value
-//   })
-
-//   // Update timeslot by id
-//   Centre.findOneAndUpdate({ _id: id }, { $set: fieldsToUpdate }, { new: true, useFindAndModify: false })
-//     .then(ts => {
-//       if (!ts) {
-//         res.status(400).send('Resource not found');
-//       } else {
-//         res.send(ts);
-//       }
-//     }).catch(error => {
-//       if (isMongoError(error)) { // check for if mongo server suddenly dissconnected before this request.
-//         res.status(500).send('Internal server error')
-//       } else {
-//         log(error)
-//         res.status(400).send('Bad Request') // bad request for changing the timeslot.
-//       }
-//     })
-// })
+  Centre.findById(id).then(centre => {
+    if (!centre) {
+      res.status(404).send("Centre not found");
+    } else {
+      const ts = centre.hours[day].id(tid);
+      if (!ts) {
+        res.status(404).send("Timeslot not found");
+      } else {
+        ts.isTaken = !ts.isTaken;
+        centre.save().then(c => {
+          res.send({ "timeslot": ts, "centre": c })
+        }).catch(error => {
+          log(error);
+          res.status(500).send('Internal Server Error');
+        })
+      }
+    }
+  }).catch(error => {
+    log(error);
+    res.status(500).send('Internal Server Error');
+  })
+})
 
 /*** Appointment API Routes below ************************************/
 
@@ -354,7 +349,7 @@ app.get('/appointments', mongoChecker, authenticate, (req, res) => {
 })
 
 // A GET route to get all appointments in the collection. Useful for an admin.
-app.get('/_appointments', mongoChecker, authenticate, (req, res) => {
+app.get('/admin/appointments', mongoChecker, authenticate, (req, res) => {
   Appointment.find({
   }).then(appts => {
     res.send(appts);
