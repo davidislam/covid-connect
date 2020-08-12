@@ -221,7 +221,7 @@ app.post('/centres', mongoChecker, authenticate, (req, res) => {
 })
 
 // Used to batch insert centres
-app.post('/_centres', mongoChecker, (req, res) => {
+app.post('/admin/centres', mongoChecker, authenticate, (req, res) => {
   Centre.insertMany(req.body)
     .then(result => res.send(result))
     .catch(error => {
@@ -433,7 +433,8 @@ app.post('/appointments', mongoChecker, authenticate, (req, res) => {
     time: req.body.time,
     address: req.body.address,
     creator: req.user._id,
-    timeslot: req.body.timeslot
+    timeslot: req.body.timeslot,
+    status: 'Pending'
   });
 
   appt.save().then(result => {
@@ -448,7 +449,7 @@ app.post('/appointments', mongoChecker, authenticate, (req, res) => {
   })
 })
 
-// A DELETE route to cancel an appointment
+// A DELETE route to cancel an appointment by id
 app.delete('/appointments/:id', mongoChecker, authenticate, (req, res) => {
   const id = req.params.id;
 
@@ -468,6 +469,32 @@ app.delete('/appointments/:id', mongoChecker, authenticate, (req, res) => {
     .catch(error => {
       log(error);
       res.status(500).send('Server error');
+    })
+})
+
+// A PATCH route to update the status of an appointment
+app.patch('/appointments/:id', mongoChecker, authenticate, (req, res) => {
+  const id = req.params.id;
+
+  const { status } = req.body;
+  const body = { status };
+
+  if (!ObjectID.isValid(id)) {
+    res.status(404).send();
+    return;
+  }
+
+  Appointment.findByIdAndUpdate(id, { $set: body }, { new: true })
+    .then(appt => {
+      if (!appt) {
+        res.status(404).send();
+      } else {
+        res.send(appt);
+      }
+    })
+    .catch(error => {
+      log(error);
+      res.status(400).send();
     })
 })
 
