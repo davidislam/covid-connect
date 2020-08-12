@@ -371,7 +371,8 @@ app.patch('/centres/:id/:day/:tid', mongoChecker, authenticate, (req, res) => {
       } else {
         ts.isTaken = !ts.isTaken;
         centre.save().then(c => {
-          res.send({ "timeslot": ts, "centre": c })
+          // res.send({ "timeslot": ts, "centre": c })
+          res.send(c.hours[day]);
         }).catch(error => {
           log(error);
           res.status(500).send('Internal Server Error');
