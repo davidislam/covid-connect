@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 const validator = require('validator')
 const bcrypt = require('bcryptjs') // "slow hash", more secure
-const uniqueValidator = require('mongoose-unique-validator');
+// const uniqueValidator = require('mongoose-unique-validator');
 
 const UserSchema = new mongoose.Schema({
 	username: {
@@ -55,7 +55,7 @@ const UserSchema = new mongoose.Schema({
 	address: String
 }, { timestamps: true });
 
-UserSchema.plugin(uniqueValidator, { message: 'is already taken' });
+// UserSchema.plugin(uniqueValidator, { message: 'is already taken' });
 
 // Hashing, security, exports before saving to database
 UserSchema.pre('save', function (next) {
