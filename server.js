@@ -51,7 +51,7 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      expires: 60000,
+      // maxAge: 3600000,
       httpOnly: true
     }
   })
@@ -61,6 +61,7 @@ app.use(
 app.post("/users/login", (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
+  const isAdmin = username === 'admin' && password === 'admin';
 
   // Use the static method on the User model to find a user
   // by their username and password
@@ -70,6 +71,7 @@ app.post("/users/login", (req, res) => {
       // We can check later if this exists to ensure we are logged in.
       req.session.user = user._id;
       req.session.username = user.username;
+      req.session.isAdmin = isAdmin ? true : false;
       res.send({ currentUser: user.username });
     })
     .catch(error => {
@@ -123,7 +125,7 @@ app.post("/users", mongoChecker, (req, res) => {
   )
 })
 
-// Middleware for authentication of resources
+// Middleware for authentication of resources for regular users
 const authenticate = (req, res, next) => {
   if (req.session.user) {
     User.findById(req.session.user).then((user) => {
@@ -141,8 +143,26 @@ const authenticate = (req, res, next) => {
   }
 }
 
+// Middleware for authentication of resources for admin
+const authenticateAdmin = (req, res, next) => {
+  if (req.session.user && req.session.isAdmin) {
+    User.findById(req.session.user).then((admin) => {
+      if (!admin) {
+        return Promise.reject()
+      } else {
+        req.admin = admin
+        next()
+      }
+    }).catch((error) => {
+      res.status(401).send("Unauthorized")
+    })
+  } else {
+    res.status(401).send("Unauthorized")
+  }
+}
+
 // GET get all users
-app.get("/users", mongoChecker, (req, res) => {
+app.get("/users", mongoChecker, authenticateAdmin, (req, res) => {
   User.find().then(
     users => { res.send(users) },
     error => { res.status(500).send(error) }
@@ -150,7 +170,7 @@ app.get("/users", mongoChecker, (req, res) => {
 })
 
 // GET by ID
-app.get("/users/:id", mongoChecker, (req, res) => {
+app.get("/users/:id", mongoChecker, authenticateAdmin, (req, res) => {
   const id = req.params.id
 
   if (!ObjectID.isValid(id)) {
@@ -170,6 +190,7 @@ app.get("/users/:id", mongoChecker, (req, res) => {
 
 })
 
+// A PATCH route to update a user
 app.patch('/users/:id', mongoChecker, authenticate, (req, res) => {
   const id = req.params.id;
 
@@ -194,7 +215,7 @@ app.patch('/users/:id', mongoChecker, authenticate, (req, res) => {
 /*** Centre API Routes below ************************************/
 
 // a POST route to *create* an assessment centre
-app.post('/centres', mongoChecker, authenticate, (req, res) => {
+app.post('/centres', mongoChecker, authenticateAdmin, (req, res) => {
   // log(req.body);
   // Create a new centre using the Centre mongoose model
   const centre = new Centre(req.body);
@@ -213,7 +234,7 @@ app.post('/centres', mongoChecker, authenticate, (req, res) => {
 })
 
 // Used to batch insert centres
-app.post('/admin/centres', mongoChecker, authenticate, (req, res) => {
+app.post('/admin/centres', mongoChecker, authenticateAdmin, (req, res) => {
   Centre.insertMany(req.body)
     .then(result => res.send(result))
     .catch(error => {
@@ -277,7 +298,7 @@ app.get('/centres/city/:city', mongoChecker, (req, res) => {
 })
 
 // a DELETE route to remove a centre by its id.
-app.delete('/centres/:id', mongoChecker, authenticate, (req, res) => {
+app.delete('/centres/:id', mongoChecker, authenticateAdmin, (req, res) => {
   const id = req.params.id
 
   // Delete a centre by its id
@@ -294,7 +315,8 @@ app.delete('/centres/:id', mongoChecker, authenticate, (req, res) => {
     })
 })
 
-app.patch('/centres/:id', mongoChecker, authenticate, (req, res) => {
+// A PATCH route to update a centre
+app.patch('/centres/:id', mongoChecker, authenticateAdmin, (req, res) => {
   const id = req.params.id;
 
   if (!ObjectID.isValid(id)) {
@@ -328,7 +350,7 @@ app.get('/city', mongoChecker, (req, res) => {
 })
 
 // A PATCH route to toggle a timeslot's <isTaken> value
-app.patch('/centres/:id/:day/:tid', mongoChecker, (req, res) => {
+app.patch('/centres/:id/:day/:tid', mongoChecker, authenticate, (req, res) => {
   // log(req.params);
   const id = req.params.id;
   const day = req.params.day;
@@ -377,7 +399,7 @@ app.get('/appointments', mongoChecker, authenticate, (req, res) => {
 })
 
 // A GET route to get all appointments in the collection. Useful for an admin.
-app.get('/admin/appointments', mongoChecker, authenticate, (req, res) => {
+app.get('/admin/appointments', mongoChecker, authenticateAdmin, (req, res) => {
   Appointment.find({
   }).then(appts => {
     res.send(appts);
@@ -456,7 +478,7 @@ app.delete('/appointments/:id', mongoChecker, authenticate, (req, res) => {
 })
 
 // A PATCH route to update the status of an appointment
-app.patch('/appointments/:id', mongoChecker, authenticate, (req, res) => {
+app.patch('/appointments/:id', mongoChecker, authenticateAdmin, (req, res) => {
   const id = req.params.id;
 
   const { status } = req.body;
