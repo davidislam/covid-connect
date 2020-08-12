@@ -100,27 +100,20 @@ export function addTimeslot(centre, day, time) {
   // /centres/:id/:day/:time
 }
 
-// Returns a formatted date
+// Returns a formatted date in the form "<month> <day>, <year>"
 export function formattedDate(date) {
   const monthNum = date.getMonth();
   const monthName = months[monthNum];
   return `${monthName} ${date.getDate()}, ${date.getFullYear()}`
 }
 
-// Returns a day of the week
+// Returns a day of the week in lowercase
 export function getDay(date) {
   return days[date.getDay()].toLowerCase();
 }
 
-
-
-
-
-
-
-
-
-
-
-
+// Returns a formatted address in the form "<addr>, <city>, ON <postal code>""
+export function formattedAddress(location) {
+  return `${location.address}, ${location.city}, ON ${location.postalCode}`
+}
 
