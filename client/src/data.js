@@ -1,8 +1,8 @@
+/* Hard-coded data for phase 1 */
 import { v4 as uuidv4 } from 'uuid';
 
 export const CITIES = ["Brampton", "Hamilton", "Mississauga", "Ottawa", "Sudbury", "Toronto", "Waterloo"]
 
-// Obtain centres info from server
 export const CENTRES = [
   {
     _id: uuidv4(),
