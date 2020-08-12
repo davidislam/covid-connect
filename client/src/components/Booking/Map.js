@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api';
-// import { CENTRES } from './../../data';
-// import { uid } from 'react-uid';
 import axios from 'axios';
 
 const api = axios.create({
   baseURL: 'http://localhost:5000/centres'
 })
 
-// const log = console.log;
 
 const containerStyle = {
   width: '800px',
@@ -39,6 +36,9 @@ export default function Map() {
   useEffect(() => {
     api.get('/').then(result => {
       setCentres(result.data);
+    }).catch(error => {
+      alert("Could not get centres");
+      console.log(error);
     })
   })
 

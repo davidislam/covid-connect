@@ -1,7 +1,11 @@
-/* Server calls for assessment centres */
 import { CENTRES } from '../data';
+import axios from 'axios';
+import { handleError } from './../utils';
 
-// Functions below require server calls
+
+const api = axios.create({
+  baseURL: 'http://localhost:5000'
+})
 
 export function modifyCentre(centre, hours, lat, lng) {
   const centreToModify = CENTRES.filter(c => c._id === centre.centreID)[0];
@@ -40,9 +44,26 @@ export function getCentreNames() {
   return;
 }
 
-// Returns a list of unique city names
-export function getCityNames() {
-  return;
+export function getCityNames(booking) {
+  api.get('/city')
+    .then(res => {
+      booking.setState({ cities: res.data });
+    })
+    .catch(error => {
+      alert("Could not get city names");
+      handleError(error);
+    })
+}
+
+export function getCentres(comp) {
+  api.get('/centres')
+    .then(res => {
+      comp.setState({ centres: res.data })
+    })
+    .catch(error => {
+      alert("Could not get centres");
+      handleError(error);
+    })
 }
 
 // Returns centre with name <name>
