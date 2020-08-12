@@ -23,6 +23,11 @@ const AppointmentSchema = new mongoose.Schema({
   timeslot: {
     type: mongoose.Schema.Types.ObjectId,
     required: true
+  },
+  status: {
+    type: String,
+    required: true,
+    enum: ['Pending', 'Positive', 'Negative']
   }
 }, { timestamps: true });
 
