@@ -1,7 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api';
-import { CENTRES } from './../../data';
-import { uid } from 'react-uid';
+// import { CENTRES } from './../../data';
+// import { uid } from 'react-uid';
+import axios from 'axios';
+
+const api = axios.create({
+  baseURL: 'http://localhost:5000/centres'
+})
 
 // const log = console.log;
 
@@ -29,15 +34,22 @@ export default function Map() {
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
   })
   const [selectedCentre, setSelectedCentre] = useState(null);
+  const [centres, setCentres] = useState([]);
+
+  useEffect(() => {
+    api.get('/').then(result => {
+      setCentres(result.data);
+    })
+  })
 
   if (loadError) return "Error loading maps";
   if (!isLoaded) return "Loading maps...";
 
   return (
     <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={8} options={options}>
-      {CENTRES.map(centre =>
+      {centres.map(centre =>
         <Marker
-          key={uid(centre)}
+          key={centre._id}
           position={{
             lat: centre.location.latitude,
             lng: centre.location.longitude
@@ -54,6 +66,7 @@ export default function Map() {
         >
           <div>
             <h2>{selectedCentre.name}</h2>
+            <p>{selectedCentre.info === undefined ? '' : selectedCentre.info}</p>
           </div>
         </InfoWindow>
       )}
