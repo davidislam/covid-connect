@@ -1,6 +1,7 @@
 'use strict';
 const log = console.log;
 const path = require('path');
+const fs = require('fs');
 
 const express = require('express');
 const app = express();
@@ -218,6 +219,20 @@ app.post('/centres', mongoChecker, authenticate, (req, res) => {
       res.status(400).send('Bad Request') // 400 for bad request gets sent to client.
     }
   })
+})
+
+// Used to batch insert centres
+app.post('/_centres', mongoChecker, (req, res) => {
+  Centre.insertMany(req.body)
+    .then(result => res.send(result))
+    .catch(error => {
+      if (isMongoError(error)) {
+        res.status(500).send('Internal server error')
+      } else {
+        log(error);
+        res.status(400).send('Bad Request');
+      }
+    })
 })
 
 

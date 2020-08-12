@@ -52,11 +52,11 @@ const CentreSchema = new mongoose.Schema({
   },
   phoneNumber: {
     type: String,
-    minlength: 10,
+    // minlength: 10,
   },
   url: {
     type: String,
-    minlength: 1,
+    // minlength: 1,
     validate: {
       validator: validator.isURL,
       message: 'Invalid url'
