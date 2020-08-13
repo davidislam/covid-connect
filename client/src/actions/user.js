@@ -21,13 +21,14 @@ export const readCookie = (app) => {
 };
 
 // A function to send a POST request with the user to be logged in
-export const login = (signinComp, app) => {
-    api.post('/login', signinComp)
+export const login = (credentials, app, signin) => {
+    api.post('/login', credentials)
         .then(res => {
             if (res.data.currentUser !== undefined)
                 app.setState(res.data)
         })
         .catch(error => {
+            signin.setState({ showSnackbar: true, message: "Incorrect username/password", severity: 'error' })
             handleError(error);
         })
 };

@@ -85,7 +85,7 @@ export default function Header(props) {
             anchorEl={anchorEl}
             open={Boolean(anchorEl)}
             onClose={handleMenuClosed}>
-            {!props.app.currentUser ? (
+            {!props.isLoggedIn ? (
               <div>
                 <Link to="/signin" className={classes.linkStyle}>
                   <MenuItem className={classes.wordsExpanded}>Sign In</MenuItem>

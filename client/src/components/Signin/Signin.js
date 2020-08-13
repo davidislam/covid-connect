@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { TextField, makeStyles, Button, InputAdornment, IconButton } from "@material-ui/core"
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import CustomizedSnackbar from './../CustomizedSnackbar';
 import { login } from '../../actions/user';
 
 
@@ -22,9 +21,6 @@ export default function SigninComponent(props) {
     password: '',
     showPassword: false,
     username: '',
-    showSnackbar: false,
-    message: '',
-    severity: ''
   })
 
   const handleChange = (prop) => (event) => {
@@ -37,10 +33,8 @@ export default function SigninComponent(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    login({ username: value.username, password: value.password }, props.app)
+    login({ username: value.username, password: value.password }, props.app, props.signin);
   }
-
-  const toggleSnackbar = () => setValue({ ...value, showSnackbar: !value.showSnackbar });
 
   return (
     <div>
@@ -72,7 +66,6 @@ export default function SigninComponent(props) {
         <Button variant="contained" color="primary" type="submit">
           Sign in
         </Button>
-        <CustomizedSnackbar message={value.message} severity={value.severity} open={value.showSnackbar} toggleSnackbar={toggleSnackbar} />
       </form>
     </div>
   );
