@@ -2,7 +2,7 @@
 const express = require('express');
 let router = express.Router();
 
-const { User } = require("./models/user");
+const { User } = require("./../models/user");
 const { ObjectID } = require('mongodb');
 
 const { isMongoError, authenticate, authenticateAdmin } = require('./../utils');
