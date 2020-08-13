@@ -34,7 +34,7 @@ class App extends Component {
         <Switch>
           <Route
             exact path={['/', '/signin', '/signup', '/profile', '/booking', '/centres', '/screening', '/faqs']}
-            render={(props, { history }) => (
+            render={({ history }) => (
               <div className="App">
                 <Home history={history} app={this} />
                 <Signin history={history} app={this} />
@@ -43,7 +43,7 @@ class App extends Component {
                 <Booking history={history} app={this} />
                 <Screening history={history} app={this} />
                 <FAQs history={history} app={this} />
-                <AssessmentCentres {...props} history={history} app={this} />
+                <AssessmentCentres history={history} app={this} />
               </div>
             )}
           />
