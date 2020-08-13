@@ -1,16 +1,26 @@
 import React, { Component } from 'react';
-import SigninComponent from './Signin'
-import SignupButton from './SignupButton'
+import SigninComponent from './Signin';
+import SignupButton from './SignupButton';
+import CustomizedSnackbar from './../CustomizedSnackbar';
+import { toggle } from './../../utils';
+
 
 class Signin extends Component {
-  state = {}
+  state = {
+    showSnackbar: false,
+    message: '',
+    severity: ''
+  }
+
   render() {
+    const { message, showSnackbar, severity } = this.state;
     return (
-      <div>
+      <React.Fragment>
         <h1>Sign In</h1>
-        <SigninComponent onLogin={this.props.onLogin} changeUsername={this.props.changeUsername} onAdmin={this.props.onAdmin} />
+        <SigninComponent app={this.props.app} signin={this} />
         <SignupButton />
-      </div>
+        <CustomizedSnackbar message={message} severity={severity} open={showSnackbar} toggleSnackbar={() => toggle(this, "showSnackbar")} />
+      </React.Fragment>
     );
   }
 }

@@ -8,19 +8,21 @@ export default function Timeslot(props) {
 
   let element;
   if (timeslot.isTaken) {
-    element = <FormControlLabel
-      disabled
-      checked
-      control={<Radio />}
-      label={timeslot.time}
-      value={timeslot.time}
-    />
+    element =
+      <FormControlLabel
+        disabled
+        checked
+        control={<Radio />}
+        label={timeslot.time}
+        value={timeslot._id}
+      />
   } else {
-    element = <FormControlLabel
-      control={<Radio />}
-      label={timeslot.time}
-      value={timeslot.time}
-    />
+    element =
+      <FormControlLabel
+        control={<Radio />}
+        label={timeslot.time}
+        value={timeslot._id}
+      />
   }
 
   return element;

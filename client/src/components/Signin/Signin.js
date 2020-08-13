@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import { TextField, makeStyles, Button, InputAdornment, IconButton } from "@material-ui/core"
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import CustomizedSnackbar from './../CustomizedSnackbar';
-
-import { useHistory } from 'react-router-dom';
+import { login } from '../../actions/user';
 
 
 const useStyles = makeStyles(theme => ({
@@ -18,47 +16,22 @@ const useStyles = makeStyles(theme => ({
 
 export default function SigninComponent(props) {
   const classes = useStyles();
-  let history = useHistory()
 
   const [value, setValue] = useState({
     password: '',
-    showPassword: false,
     username: '',
-    showSnackbar: false,
-    message: '',
-    severity: ''
   })
+  const [showPass, setShowPass] = useState(false);
 
   const handleChange = (prop) => (event) => {
     setValue({ ...value, [prop]: event.target.value });
   };
 
-  const handleShowPass = () => {
-    setValue({ ...value, showPassword: !value.showPassword })
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // code below requires server call
-    if (value.username === 'user' && value.password === 'user') {
-      helper();
-    } else if (value.username === 'admin' && value.password === 'admin') {
-      props.onAdmin();
-      helper();
-    } else {
-      setValue({ ...value, showSnackbar: true, message: "Incorrect username/password", severity: 'error' })
-    }
+    login(value, props.app, props.signin);
   }
-
-  const helper = () => {
-    props.onLogin();
-    props.changeUsername(value.username);
-    // setValue({ ...value, showSnackbar: true, message: "Logged in successfully as " + value.username, severity: 'success' })
-    history.push('/');
-    // alert("Logged in successfully as " + value.username);
-  }
-
-  const toggleSnackbar = () => setValue({ ...value, showSnackbar: !value.showSnackbar });
 
   return (
     <div>
@@ -75,13 +48,13 @@ export default function SigninComponent(props) {
           id="Password"
           label="Password"
           variant="outlined"
-          type={value.showPassword ? "text" : "password"}
+          type={showPass ? "text" : "password"}
           value={value.password}
           onChange={handleChange("password")}
           InputProps={{
             endAdornment: <InputAdornment position="end">
-              <IconButton onClick={() => handleShowPass()} >
-                {value.showPassword ? <VisibilityOff /> : <Visibility />}
+              <IconButton onClick={() => setShowPass(!showPass)} >
+                {showPass ? <VisibilityOff /> : <Visibility />}
               </IconButton>
             </InputAdornment>,
           }}
@@ -90,7 +63,6 @@ export default function SigninComponent(props) {
         <Button variant="contained" color="primary" type="submit">
           Sign in
         </Button>
-        <CustomizedSnackbar message={value.message} severity={value.severity} open={value.showSnackbar} toggleSnackbar={toggleSnackbar} />
       </form>
     </div>
   );

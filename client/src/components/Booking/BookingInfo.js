@@ -3,16 +3,11 @@ import Button from '@material-ui/core/Button';
 import DatePicker from './DatePicker';
 import CitySelect from './CitySelect';
 import { Link } from 'react-router-dom';
-// import { CITIES } from './../../data';
 import Map from './Map';
-import axios from 'axios';
+import { handleChange } from './../../utils';
+import { getCityNames } from './../../actions/centre';
 
 import './styles.css'
-
-const api = axios.create({
-  baseURL: 'http://localhost:5000'
-})
-
 
 class Booking extends Component {
   state = {
@@ -22,16 +17,8 @@ class Booking extends Component {
   }
 
   componentDidMount() {
-    api.get('/city')
-      .then(res => {
-        this.setState({ cities: res.data });
-      })
-  }
-
-  handleChange = e => {
-    /* Generic handler */
-    const { name, value } = e.target;
-    this.setState({ [name]: value });
+    // Make server call
+    getCityNames(this);
   }
 
   render() {
@@ -42,10 +29,10 @@ class Booking extends Component {
         <p>Find your closest Ontario assessment centre to get a COVID-19 (coronavirus) test.</p>
         <p>All assessment centres will test you if you would like to be tested. Testing is a free service.</p>
         <p>Call the assessment centre or your <a href="http://www.health.gov.on.ca/en/common/system/services/phu/locations.aspx">local public health unit</a> if you have questions or cannot find a centre near you.</p>
-        <Map />
+        {/* <Map /> */}
         <h2>Schedule an appointment</h2>
         <DatePicker label="Choose date" value={date} onChange={(date) => this.setState({ date })} />
-        <CitySelect label="City" value={city} cities={cities} onChange={this.handleChange} />
+        <CitySelect label="City" value={city} cities={cities} onChange={(e) => handleChange(this, e)} />
         <div className="container">
           <Link to={{
             pathname: '/centres',

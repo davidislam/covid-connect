@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import { Typography, makeStyles, Grid, IconButton, MenuItem, Menu } from "@material-ui/core";
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-
 import CustomizedSnackbar from './../CustomizedSnackbar';
+import { logout } from '../../actions/user';
+
 
 const useStyles = makeStyles({
   words: {
@@ -14,13 +15,13 @@ const useStyles = makeStyles({
   wordsExpanded: {
     color: "black"
   },
-  linkStyle:{
+  linkStyle: {
     textDecoration: 'none'
   },
-  divStyle:{
-     background: "#204051"
+  divStyle: {
+    background: "#204051"
   },
-  iconStyle:{
+  iconStyle: {
     color: "white"
   }
 });
@@ -39,12 +40,12 @@ export default function Header(props) {
   }
 
   const handleSignoutClick = () => {
-    props.onSignout();
+    logout(props.app);
     setSnackbar(true);
   }
 
   return (
-    <div className= {classes.divStyle}>
+    <div className={classes.divStyle}>
       <Grid container spacing={0} direction="row" justify="space-around" alignItems="center" >
 
         <Grid item>
@@ -60,13 +61,13 @@ export default function Header(props) {
         </Grid>
 
         <Grid item>
-          <Link to="/Screening" className={classes.linkStyle}>
+          <Link to="/screening" className={classes.linkStyle}>
             <Typography variant="h6" className={classes.words}>Screening</Typography>
           </Link>
         </Grid>
 
         <Grid item>
-          <Link to="/FAQs" className={classes.linkStyle}>
+          <Link to="/faqs" className={classes.linkStyle}>
             <Typography variant="h6" className={classes.words}>FAQs</Typography>
           </Link>
         </Grid>
@@ -84,20 +85,20 @@ export default function Header(props) {
             anchorEl={anchorEl}
             open={Boolean(anchorEl)}
             onClose={handleMenuClosed}>
-            {!props.loggedIn ? (
+            {!props.isLoggedIn ? (
               <div>
-                <Link to="/Signin" className={classes.linkStyle}>
+                <Link to="/signin" className={classes.linkStyle}>
                   <MenuItem className={classes.wordsExpanded}>Sign In</MenuItem>
                 </Link>
 
-                <Link to="/Signup" className={classes.linkStyle}>
+                <Link to="/signup" className={classes.linkStyle}>
                   <MenuItem className={classes.wordsExpanded}>Sign Up</MenuItem>
                 </Link>
               </div>
 
             ) : (
                 <div>
-                  <Link to="/Profile" className={classes.linkStyle}>
+                  <Link to="/profile" className={classes.linkStyle}>
                     <MenuItem className={classes.wordsExpanded}>Profile</MenuItem>
                   </Link>
 

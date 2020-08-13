@@ -1,76 +1,58 @@
-/* User Methods */
+import axios from 'axios';
+import { handleError } from './../utils';
 
-// check session cookie (is user logged)
+const log = console.log;
+
+const api = axios.create({
+    baseURL: 'http://localhost:5000/users'
+})
+
+
+// A function to check if a user is logged in on the session cookie
 export const readCookie = (app) => {
-    const url = "/users/check-session";
-
-    fetch(url)
+    api.get('/check-session')
         .then(res => {
-            if (res.status === 200) {
-                return res.json();
-            }
-        })
-        .then(json => {
-            if (json && json.currentUser) {
-                app.setState({ currentUser: json.currentUser });
-            }
+            if (res.data.currentUser)
+                app.setState({ currentUser: res.data.currentUser })
         })
         .catch(error => {
-            console.log(error);
-        });
-};
-
-// Update login form
-export const updateLoginForm = (loginComp, field) => {
-    const value = field.value;
-    const name = field.name;
-
-    loginComp.setState({
-        [name]: value
-    });
-};
-
-// Send POST to login
-export const login = (loginComp, app) => {
-    // Request constructor
-    const request = new Request("/users/login", {
-        method: "post",
-        body: JSON.stringify(loginComp.state),
-        headers: {
-            Accept: "application/json, text/plain, */*",
-            "Content-Type": "application/json"
-        }
-    });
-
-    // Send the request with fetch()
-    fetch(request)
-        .then(res => {
-            if (res.status === 200) {
-                return res.json();
-            }
+            handleError(error);
         })
-        .then(json => {
-            if (json.currentUser !== undefined) {
-                app.setState({ currentUser: json.currentUser });
-            }
+};
+
+// A function to send a POST request with the user to be logged in
+export const login = (credentials, app, signin) => {
+    api.post('/login', credentials)
+        .then(res => {
+            if (res.data.currentUser !== undefined)
+                app.setState(res.data)
         })
         .catch(error => {
-            console.log(error);
-        });
+            signin.setState({ showSnackbar: true, message: "Incorrect username/password", severity: 'error' })
+            handleError(error);
+        })
 };
 
-// send GET to logout
+// A function to send a GET request to logout the current user
 export const logout = (app) => {
-    const url = "/users/logout";
-
-    fetch(url)
+    api.get('/logout')
         .then(res => {
-            app.setState({
-                currentUser: null,
-                message: { type: "", body: "" }
-            });
+            app.setState({ currentUser: null, isAdmin: false })
         })
         .catch(error => {
-            console.log(error);
-        });
+            handleError(error);
+        })
 };
+
+
+// A function to send a POST request to signup the current user
+export const signup = (signupComp, info) => {
+    api.post('/', info)
+        .then(res => {
+            log(res);
+            signupComp.setState({ showSnackbar: true, message: "Signed up successfully", severity: 'success' })
+        })
+        .catch(error => {
+            handleError(error);
+        })
+}
