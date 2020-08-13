@@ -57,6 +57,12 @@ app.use(
   })
 );
 
+
+
+/*********************************************************/
+
+/*** User / API Routes below ************************************/
+
 // A route to login and create a session
 app.post("/users/login", (req, res) => {
   const username = req.body.username;
@@ -68,9 +74,21 @@ app.post("/users/login", (req, res) => {
     .then(user => {
       // Add the user's id to the session cookie.
       // We can check later if this exists to ensure we are logged in.
-      req.session.user = user._id;
-      req.session.username = user.username;
-      res.send({ currentUser: user.username });
+      if (!user){
+        //!!!!not showing message!!!!
+
+        //linking with the message bar to show that
+        // incorrect username or password.
+        res.json({message:"Incorrect username/password"})
+
+      }
+      else{
+        req.session.user = user._id;
+        req.session.username = user.username;
+        //change later
+        res.json({message:"successfully logged in"})
+
+      }
     })
     .catch(error => {
       if (isMongoError(error)) {
@@ -101,10 +119,6 @@ app.get("/users/check-session", (req, res) => {
     res.status(401).send();
   }
 });
-
-/*********************************************************/
-
-/*** User / API Routes below ************************************/
 
 // POST create a new user
 app.post("/users", mongoChecker, (req, res) => {
@@ -304,7 +318,7 @@ app.delete('/centres/:id', mongoChecker, authenticate, (req, res) => {
 
 // a PUT route for replacing an *entire* resource.
 //  The body should contain *all* of the required fields of the resource.
-// Maybe less desirable than a patch? 
+// Maybe less desirable than a patch?
 app.put('/centres/:id', mongoChecker, authenticate, (req, res) => {
   const id = req.params.id
 
