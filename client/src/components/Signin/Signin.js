@@ -3,8 +3,7 @@ import { TextField, makeStyles, Button, InputAdornment, IconButton } from "@mate
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import CustomizedSnackbar from './../CustomizedSnackbar';
-
-import { useHistory } from 'react-router-dom';
+import { login } from '../../actions/user';
 
 
 const useStyles = makeStyles(theme => ({
@@ -18,7 +17,6 @@ const useStyles = makeStyles(theme => ({
 
 export default function SigninComponent(props) {
   const classes = useStyles();
-  let history = useHistory()
 
   const [value, setValue] = useState({
     password: '',
@@ -39,23 +37,7 @@ export default function SigninComponent(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // code below requires server call
-    if (value.username === 'user' && value.password === 'user') {
-      helper();
-    } else if (value.username === 'admin' && value.password === 'admin') {
-      props.onAdmin();
-      helper();
-    } else {
-      setValue({ ...value, showSnackbar: true, message: "Incorrect username/password", severity: 'error' })
-    }
-  }
-
-  const helper = () => {
-    props.onLogin();
-    props.changeUsername(value.username);
-    // setValue({ ...value, showSnackbar: true, message: "Logged in successfully as " + value.username, severity: 'success' })
-    history.push('/');
-    // alert("Logged in successfully as " + value.username);
+    login({ username, password }, props.app)
   }
 
   const toggleSnackbar = () => setValue({ ...value, showSnackbar: !value.showSnackbar });

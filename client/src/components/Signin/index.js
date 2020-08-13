@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
-import SigninComponent from './Signin'
-import SignupButton from './SignupButton'
+import SigninComponent from './Signin';
+import SignupButton from './SignupButton';
+
 
 class Signin extends Component {
-  state = {}
+  constructor(props) {
+    super(props);
+    this.props.history.push('/signin');
+  }
+
   render() {
     return (
       <div>
         <h1>Sign In</h1>
-        <SigninComponent onLogin={this.props.onLogin} changeUsername={this.props.changeUsername} onAdmin={this.props.onAdmin} />
+        <SigninComponent app={this.props.app} />
         <SignupButton />
       </div>
     );
