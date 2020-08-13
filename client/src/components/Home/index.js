@@ -91,7 +91,7 @@ class Home extends Component {
     return (
       <div>
         <h1>Welcome</h1>
-        <Greeting isLoggedIn={this.props.app.currentUser ? true : false} username={this.app.state.currentUser} />
+        <Greeting isLoggedIn={this.props.app.currentUser ? true : false} username={this.props.app.state.currentUser} />
         <Grid container spacing={0} direction="row" justify="center" alignItems="center" >
 
           <Grid item>

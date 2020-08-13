@@ -37,7 +37,7 @@ export default function SigninComponent(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    login({ username, password }, props.app)
+    login({ username: value.username, password: value.password }, props.app)
   }
 
   const toggleSnackbar = () => setValue({ ...value, showSnackbar: !value.showSnackbar });
