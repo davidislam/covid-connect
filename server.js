@@ -24,6 +24,7 @@ const session = require("express-session");
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const cors = require('cors');
+const { NewsArticles } = require('./models/news');
 app.use(cors());
 
 function isMongoError(error) { // checks for first error returned by promise rejection if Mongo database suddently disconnects
@@ -533,6 +534,31 @@ app.patch('/appointments/:id', mongoChecker, authenticateAdmin, (req, res) => {
       res.status(400).send();
     })
 })
+
+/*** NewsArticles API Routes below ************************************/
+
+/// Route for getting all newsarticles information.
+// GET /newsarticles
+app.get('/newsarticles', (req, res) => {
+
+	// check connection
+	if (mongoose.connection.readyState != 1) {
+		log('Issue with mongoose connection')
+		res.status(500).send('Internal server error')
+		return;
+	} 
+
+	NewsArticle.find().then((newsarticles) => {
+		res.send(newsarticles)
+	})
+	.catch((error) => {
+		log(error)
+		res.status(500).send("Internal Server Error")
+	})
+
+})
+
+
 
 /*************************************************/
 // Express server listening...
