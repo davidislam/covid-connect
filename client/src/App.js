@@ -3,10 +3,6 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import './App.css';
 
-//
-import { addAppointment, deleteAppointment } from './actions/app';
-//
-
 import { readCookie } from './actions/user';
 
 import Header from './components/Header';
@@ -20,88 +16,40 @@ import FAQs from './components/FAQs';
 import AssessmentCentres from './components/Centre';
 
 class App extends Component {
-  //
-  initState = {
-    isLoggedIn: false, // X
-    isAdmin: false, // X
-    username: '',
-    appointments: [], // X
+  constructor(props) {
+    super(props);
+    readCookie(this);
   }
-  //
 
   state = {
-    isLoggedIn: false, // X
-    isAdmin: false, // X
-    username: '',
-    appointments: [], // X
+    isAdmin: false,
+    currentUser: null,
   }
-
-  //
-  handleLogin = () => {
-    this.setState({
-      isLoggedIn: true
-    })
-  }
-  //
-
-  //
-  handleAdmin = () => {
-    this.setState({
-      isAdmin: true
-    })
-  }
-  //
-
-  //
-  handleLogout = () => {
-    this.setState(this.initState);
-  }
-  //
-
-  //
-  changeUsername = username => this.setState({ username });
-  //
 
   render() {
-    const { isLoggedIn, isAdmin, username, appointments } = this.state;
+    const { isAdmin, currentUser } = this.state;
     return (
-      <div className="App">
-        <Router>
-          <Header loggedIn={isLoggedIn} onSignout={this.handleLogout} />
-          <Switch>
-            <Route path='/' exact render={() => (
-              <Home username={username} isLoggedIn={isLoggedIn} />
-            )} />
-            <Route path='/signin' render={() => (
-              <Signin onLogin={this.handleLogin} onAdmin={this.handleAdmin} changeUsername={this.changeUsername} />
-            )} />
-            <Route path='/signup' component={Signup} />
-            <Route path='/profile' render={() => (
-              <Profile
-                username={username}
-                appointments={appointments}
-                isAdmin={isAdmin}
-                deleteAppt={appt => deleteAppointment(appt, this)}
-                changeUsername={this.changeUsername}
-              />
-            )} />
-            <Route path='/booking' render={() => (
-              <Booking
-                username={username}
-                isAdmin={isAdmin}
-                isLoggedIn={isLoggedIn}
-              />
-            )} />
-            <Route path='/screening' component={Screening} />
-            <Route path='/faqs' component={FAQs} />
-            <Route path='/centres' render={(props) => (
-              <AssessmentCentres {...props} addAppt={(appt) => addAppointment(appt, this)}
-                isLoggedIn={isLoggedIn} />
-            )} />
-            <Route path="/" render={() => <div>404</div>} />
-          </Switch>
-        </Router>
-      </div>
+      <Router>
+        <Header loggedIn={isLoggedIn} onSignout={this.handleLogout} />
+        <Switch>
+          <Route
+            exact path={['/', '/signin', '/signup', '/profile', '/booking', '/centres', '/screening', '/faqs']}
+            render={(props, { history }) => (
+              <div className="App">
+                <Home history={history} app={this} />
+                <Signin history={history} app={this} />
+                <Signup history={history} app={this} />
+                <Profile history={history} app={this} />
+                <Booking history={history} app={this} />
+                <Screening history={history} app={this} />
+                <FAQs history={history} app={this} />
+                <AssessmentCentres {...props} history={history} app={this} />
+              </div>
+            )}
+          />
+          <Route render={() => <div>404 Page Not Found</div>} />
+        </Switch>
+      </Router>
     );
   }
 }
