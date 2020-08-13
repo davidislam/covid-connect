@@ -6,7 +6,8 @@ import {
 } from "@material-ui/core"
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import { uid } from 'react-uid';
+import { signup } from '../../actions/user';
+import { Redirect } from 'react-router-dom';
 
 
 const useStyles = makeStyles(theme => ({
@@ -16,7 +17,6 @@ const useStyles = makeStyles(theme => ({
       width: '35ch',
     },
   }
-
 }));
 
 
@@ -30,18 +30,15 @@ export default function SignupComponent() {
     gender: '',
     name: '',
     age: 0,
-    healthCardNum: '',
+    healthCardNumber: '',
     phoneNumber: '',
     address: '',
-    showPassword: ''
   })
-
-  const handleShowPass = () => {
-    setValue({ ...value, showPassword: !value.showPassword })
-  };
+  const [showPass, setShowPass] = useState(false);
 
   const handleChange = (prop) => (event) => {
     setValue({ ...value, [prop]: event.target.value });
+    <Redirect to='/signin' />
   };
 
   const populateAge = () => {
@@ -55,10 +52,11 @@ export default function SignupComponent() {
   }
 
   const handleSubmit = (e) => {
-    // Send info to server
-    // Validate inputs if needed
-    alert("User registered");
+    e.preventDefault();
+    signup(props.signup, value);
   }
+
+  const ageArray = populateAge();
 
   return (
     <form className={classes.root} onSubmit={handleSubmit}>
@@ -107,8 +105,8 @@ export default function SignupComponent() {
           onChange={handleChange("age")}
           style={{ width: '10ch' }}>
 
-          {populateAge().map(num =>
-            <MenuItem key={uid(num)} value={num}>{num}</MenuItem>)
+          {ageArray.map(num =>
+            <MenuItem key={num} value={num}>{num}</MenuItem>)
           }
         </Select>
       </FormControl>
@@ -118,13 +116,13 @@ export default function SignupComponent() {
         id="Password"
         label="Password"
         variant="outlined"
-        type={value.showPassword ? "text" : "password"}
+        type={showPass ? "text" : "password"}
         value={value.password}
         onChange={handleChange("password")}
         InputProps={{
           endAdornment: <InputAdornment position="end">
-            <IconButton onClick={() => handleShowPass()} >
-              {value.showPassword ? <VisibilityOff /> : <Visibility />}
+            <IconButton onClick={() => setShowPass(!showPass)} >
+              {showPass ? <VisibilityOff /> : <Visibility />}
             </IconButton>
           </InputAdornment>,
         }}
@@ -133,9 +131,9 @@ export default function SignupComponent() {
 
       <TextField
         id="healthCardNum"
-        label="Health Card Number(optional)"
+        label="Health Card Number (optional)"
         variant="outlined"
-        onChange={() => handleChange("healthCardNum")}
+        onChange={() => handleChange("healthCardNumber")}
       />
       <br />
 
@@ -150,7 +148,7 @@ export default function SignupComponent() {
 
       <TextField
         id="address"
-        label="Address(optional)"
+        label="Address (optional)"
         variant="outlined"
         onChange={() => handleChange("address")}
       />
@@ -158,7 +156,7 @@ export default function SignupComponent() {
 
       <TextField
         id="Email"
-        label="E-mail(optional)"
+        label="E-mail (optional)"
         variant="outlined"
         type="email"
         onChange={() => handleChange("email")}

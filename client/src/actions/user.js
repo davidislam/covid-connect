@@ -43,3 +43,16 @@ export const logout = (app) => {
             handleError(error);
         })
 };
+
+
+// A function to send a POST request to signup the current user
+export const signup = (signupComp, info) => {
+    api.post('/', info)
+        .then(res => {
+            log(res);
+            signupComp.setState({ showSnackbar: true, message: "Signed up successfully", severity: 'success' })
+        })
+        .catch(error => {
+            handleError(error);
+        })
+}

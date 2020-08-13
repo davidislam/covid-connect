@@ -19,21 +19,18 @@ export default function SigninComponent(props) {
 
   const [value, setValue] = useState({
     password: '',
-    showPassword: false,
     username: '',
   })
+  const [showPass, setShowPass] = useState(false);
 
   const handleChange = (prop) => (event) => {
     setValue({ ...value, [prop]: event.target.value });
   };
 
-  const handleShowPass = () => {
-    setValue({ ...value, showPassword: !value.showPassword })
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    login({ username: value.username, password: value.password }, props.app, props.signin);
+    login(value, props.app, props.signin);
   }
 
   return (
@@ -51,13 +48,13 @@ export default function SigninComponent(props) {
           id="Password"
           label="Password"
           variant="outlined"
-          type={value.showPassword ? "text" : "password"}
+          type={showPass ? "text" : "password"}
           value={value.password}
           onChange={handleChange("password")}
           InputProps={{
             endAdornment: <InputAdornment position="end">
-              <IconButton onClick={() => handleShowPass()} >
-                {value.showPassword ? <VisibilityOff /> : <Visibility />}
+              <IconButton onClick={() => setShowPass(!showPass)} >
+                {showPass ? <VisibilityOff /> : <Visibility />}
               </IconButton>
             </InputAdornment>,
           }}

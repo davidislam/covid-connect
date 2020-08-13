@@ -38,9 +38,11 @@ class App extends Component {
               <Home username={currentUser} isLoggedIn={isLoggedIn} />
             )} />
             <Route path='/signin'>
-              {isLoggedIn ? <Redirect to='/' /> : <Signin app={this} isLoggedIn={isLoggedIn} />}
+              {isLoggedIn ? <Redirect to='/' /> : <Signin app={this} />}
             </Route>
-            <Route path='/signup' component={Signup} />
+            <Route path='/signup'>
+              {isLoggedIn ? <Redirect to='/' /> : <Signup app={this} />}
+            </Route>
             <Route path='/profile' render={() => (
               <Profile
                 username={username}
