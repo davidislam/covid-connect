@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import yellowMark from "./static/yellowMark.png";
 import Popup from "./Popup.js";
 import { Pagination } from '@material-ui/lab';
@@ -8,6 +7,7 @@ import img1 from "./static/covid_img1.jpg";
 import img2 from "./static/covid_img2.jpg";
 import img3 from "./static/covid_img3.jpg";
 import { makeStyles, Grid } from '@material-ui/core';
+
 
 function UserGreeting(props) {
   return <h4 className="greetingText">You are signed in as {props.username}</h4>;
@@ -60,6 +60,11 @@ class Home extends Component {
     selectPopup: false,
   }
 
+  constructor(props) {
+    super(props);
+    this.props.history.push('/');
+  }
+
   togglePop = () => {
     this.setState({
       selectPopup: !this.state.selectPopup
@@ -83,11 +88,10 @@ class Home extends Component {
   ]
 
   render() {
-
     return (
       <div>
         <h1>Welcome</h1>
-        <Greeting isLoggedIn={this.props.isLoggedIn} username={this.props.username} />
+        <Greeting isLoggedIn={this.props.app.currentUser ? true : false} username={this.app.state.currentUser} />
         <Grid container spacing={0} direction="row" justify="center" alignItems="center" >
 
           <Grid item>
