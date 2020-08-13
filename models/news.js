@@ -3,7 +3,6 @@
 const mongoose = require('mongoose');
 
 const NewsArticleSchema = new mongoose.Schema({
-
   link: {
     type: String,
     required: true
@@ -16,8 +15,7 @@ const NewsArticleSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-
 });
 
-const NewsArticle  = mongoose.model('NewsArticle', NewsArticleSchema)
+const NewsArticle = mongoose.model('NewsArticle', NewsArticleSchema)
 module.exports = { NewsArticle }

@@ -5,6 +5,8 @@ let router = express.Router();
 const { Appointment } = require('./../models/appointment');
 const { ObjectID } = require('mongodb');
 
+const log = console.log;
+
 const { isMongoError, authenticate, authenticateAdmin } = require('./../utils');
 
 router
