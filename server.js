@@ -190,7 +190,34 @@ app.get("/users/:id", mongoChecker, authenticateAdmin, (req, res) => {
 
 })
 
-// A PATCH route to update a user
+// A route to GET profile for the current user
+app.get('/users/user', mongoChecker, authenticate, (req, res) => {
+  User.find({
+    _id: req.user._id
+  }).then(user => {
+    res.send(user);
+  }).catch(error => {
+    log(error);
+    res.status(500).send('Internal server error');
+  })
+})
+
+// A PATCH route to update the current user
+app.patch('/users/user', mongoChecker, authenticate, (req, res) => {
+  User.findOneAndUpdate({ _id: req.user._id }, { $set: req.body }, { new: true })
+    .then(user => {
+      if (!user) {
+        res.status(404).send();
+      } else {
+        res.send(user);
+      }
+    })
+    .catch(error => {
+      res.status(400).send();
+    });
+})
+
+// A PATCH route to update a user by id
 app.patch('/users/:id', mongoChecker, authenticate, (req, res) => {
   const id = req.params.id;
 

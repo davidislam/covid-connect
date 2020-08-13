@@ -43,15 +43,10 @@ class App extends Component {
             <Route path='/signup'>
               {isLoggedIn ? <Redirect to='/' /> : <Signup app={this} />}
             </Route>
-            <Route path='/profile' render={() => (
-              <Profile
-                username={username}
-                appointments={appointments}
-                isAdmin={isAdmin}
-                deleteAppt={appt => deleteAppointment(appt, this)}
-                changeUsername={this.changeUsername}
-              />
-            )} />
+            <Route path='/profile'>
+              {!isLoggedIn ? <Redirect to='/' /> : <Profile isAdmin={isAdmin} app={this} />}
+            </Route>
+
             <Route path='/booking' render={() => (
               <Booking
                 username={username}

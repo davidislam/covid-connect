@@ -3,12 +3,11 @@ import { Grid, Button, Typography } from "@material-ui/core"
 import CustomizedSnackbar from './../CustomizedSnackbar';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 
-/* A reusable controlled profile view componenet */
 
 export default function ProfileView(props) {
   const requiredMsg = 'this field is required';
   return (
-    <div>
+    <React.Fragment>
       <Grid container direction="column" justify="center" alignItems="center" spacing={2}>
         <Grid item>
           <Typography variant="h4">{props.username} Info: </Typography>
@@ -40,7 +39,7 @@ export default function ProfileView(props) {
             </Grid>
 
             <Grid item>
-              <Typography variant="h6">Health Card number: {props.healthCardNum}</Typography>
+              <Typography variant="h6">Health Card Number: {props.healthCardNumber}</Typography>
             </Grid>
 
             <Grid item>
@@ -68,7 +67,7 @@ export default function ProfileView(props) {
                 id="username"
                 label="Username"
                 value={props.username}
-                onChange={props.handleUsername}
+                onChange={props.changeInfo('username')}
                 validators={['required', 'minStringLength:4']}
                 errorMessages={[{ requiredMsg }, 'your username must be at least 4 characters long']}
               />
@@ -112,9 +111,7 @@ export default function ProfileView(props) {
                 id="healthCardNum"
                 label="Health Card Number"
                 value={props.healthCardNum}
-                onChange={props.changeInfo('healthCardNum')}
-                validators={['isNumber']}
-                errorMessages={['invalid health card number']}
+                onChange={props.changeInfo('healthCardNumber')}
               />
             </Grid>
 
@@ -141,7 +138,7 @@ export default function ProfileView(props) {
         }
       </Grid>
       <CustomizedSnackbar message='Profile successfully updated' severity='success' open={props.open} toggleSnackbar={() => props.setOpen(false)} />
-    </div>
+    </React.Fragment>
   )
 
 }

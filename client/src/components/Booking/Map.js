@@ -40,7 +40,7 @@ export default function Map() {
       alert("Could not get centres");
       console.log(error);
     })
-  })
+  }, [])
 
   if (loadError) return "Error loading maps";
   if (!isLoaded) return "Loading maps...";

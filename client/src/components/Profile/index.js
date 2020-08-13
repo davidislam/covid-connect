@@ -1,19 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ProfileView from './ProfileView';
 import ApptTable from './ApptTable';
 import Typography from '@material-ui/core/Typography';
+import { updateProfileForCurrentUser, getProfileForCurrentUser } from '../../actions/user';
 
 
 function Profile(props) {
 
+  useEffect(() => {
+    getProfileForCurrentUser(setInfo);
+  }, [])
+
   const [info, setInfo] = useState({
-    username: props.username,
-    email: 'example@gmail.com',
-    name: 'John Doe',
-    age: 25,
-    healthCardNum: '12345',
-    phoneNumber: '6472823993',
-    address: '5 Random Cres'
+    username: '',
+    email: '',
+    name: '',
+    age: null,
+    healthCardNumber: '',
+    phoneNumber: '',
+    address: ''
   });
 
   const [changeState, setChangeState] = useState(false);
@@ -23,16 +28,10 @@ function Profile(props) {
     setInfo({ ...info, [prop]: event.target.value });
   };
 
-  const handleUsername = (e) => {
-    const newUsername = e.target.value;
-    props.changeUsername(newUsername);
-  }
-
   const handleSubmit = e => {
-    // Code below requires a server call
     e.preventDefault();
+    updateProfileForCurrentUser(info, props.app);
     setChangeState(!changeState);
-    setOpen(true);
   }
 
   const handleClick = () => {
@@ -40,15 +39,14 @@ function Profile(props) {
   }
 
   let element = <ProfileView
-    username={props.username}
+    username={info.username}
     email={info.email}
     name={info.name}
     age={info.age}
-    healthCardNum={info.healthCardNum}
+    healthCardNumber={info.healthCardNumber}
     phoneNumber={info.phoneNumber}
     address={info.address}
     changeInfo={handleChange}
-    handleUsername={handleUsername}
     handleSubmit={handleSubmit}
     handleClick={handleClick}
     open={open}
@@ -60,11 +58,11 @@ function Profile(props) {
     return element;
   } else {
     return (
-      <div>
+      <React.Fragment>
         {element}
         <Typography variant="h4" className='apptsLabel'> Scheduled Appointments </Typography>
-        <ApptTable appointments={props.appointments} deleteAppt={appt => props.deleteAppt(appt)} />
-      </div>
+        <ApptTable />
+      </React.Fragment>
     )
   }
 }

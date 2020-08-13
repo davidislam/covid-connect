@@ -12,8 +12,7 @@ const api = axios.create({
 export const readCookie = (app) => {
     api.get('/check-session')
         .then(res => {
-            if (res.data.currentUser)
-                app.setState({ currentUser: res.data.currentUser })
+            app.setState({ currentUser: res.data.currentUser })
         })
         .catch(error => {
             handleError(error);
@@ -56,3 +55,53 @@ export const signup = (signupComp, info) => {
             handleError(error);
         })
 }
+
+// A function to GET profile data for user with id <id>
+export const getProfile = (id, setInfo) => {
+    api.get(`/${id}`)
+        .then(res => {
+            setInfo(res.data);
+        })
+        .catch(error => {
+            handleError(error);
+        })
+}
+
+// A function to GET profile data for current user
+export const getProfileForCurrentUser = (setInfo) => {
+    api.get(`/user`)
+        .then(res => {
+            setInfo(res.data);
+        })
+        .catch(error => {
+            handleError(error);
+        })
+}
+
+// A function to PATCH profile data for user with id <id>
+export const updateProfile = (id, info, app) => {
+    api.patch(`/${id}`, info)
+        .then(res => {
+            log(res);
+            app.setState({ currentUser: res.data.username });
+            setOpen(true);
+        })
+        .catch(error => {
+            handleError(error);
+        })
+}
+
+// A function to PATCH profile data for current user
+export const updateProfileForCurrentUser = (info, app) => {
+    api.patch(`/user`, info)
+        .then(res => {
+            log(res);
+            app.setState({ currentUser: res.data.username });
+            setOpen(true);
+        })
+        .catch(error => {
+            handleError(error);
+        })
+}
+
+

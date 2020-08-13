@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-export default function SignupComponent() {
+export default function SignupComponent(props) {
   const classes = useStyles();
 
   const [value, setValue] = useState({
@@ -38,7 +38,6 @@ export default function SignupComponent() {
 
   const handleChange = (prop) => (event) => {
     setValue({ ...value, [prop]: event.target.value });
-    <Redirect to='/signin' />
   };
 
   const populateAge = () => {
@@ -54,6 +53,7 @@ export default function SignupComponent() {
   const handleSubmit = (e) => {
     e.preventDefault();
     signup(props.signup, value);
+    <Redirect to='/signin' />
   }
 
   const ageArray = populateAge();
