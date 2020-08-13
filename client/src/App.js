@@ -30,7 +30,7 @@ class App extends Component {
     const { isAdmin, currentUser } = this.state;
     return (
       <Router>
-        <Header loggedIn={isLoggedIn} onSignout={this.handleLogout} />
+        <Header app={this} />
         <Switch>
           <Route
             exact path={['/', '/signin', '/signup', '/profile', '/booking', '/centres', '/screening', '/faqs']}
