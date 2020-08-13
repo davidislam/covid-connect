@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { handleError } from './../utils';
 
+const log = console.log;
 
 const api = axios.create({
   baseURL: 'http://localhost:5000'

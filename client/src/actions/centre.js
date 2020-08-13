@@ -96,34 +96,6 @@ export function getCentreByName(name) {
   return CENTRES.filter(centre => centre.name === name)[0];
 }
 
-function changeTimeslotIsTaken(form, cid, day, tid) {
-  api.patch(`/centres/${cid}/${day}/${tid}`)
-  // .then(res => {
-  //   form.setState({ timeslots: res.data })
-  // })
-}
-
-function bookAppointment(date, time, address, tid) {
-  api.post('/appointments', { date, time, address, tid })
-}
-
-export function addAppointment(hoursForm, cid, day, appt) {
-  const { date, time, address, tid } = appt;
-  axios.all([changeTimeslotIsTaken(cid, day, tid), bookAppointment(date, time, address, tid)])
-    .then(axios.spread((ts, appt) => {
-      // Both requests are now complete
-      log(ts, appt);
-      hoursForm.setState({
-        errorMessage: '', showSnackbar: true,
-        snackbarMessage: "Appointment details have been added to your profile", snackbarSeverity: 'success'
-      })
-    }))
-    .catch(error => {
-      alert("Could not schedule appointment");
-      handleError(error);
-    })
-}
-
 // Returns a formatted date in the form "<month> <day>, <year>"
 export function formattedDate(date) {
   const monthNum = date.getMonth();

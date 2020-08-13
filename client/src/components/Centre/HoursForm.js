@@ -6,7 +6,7 @@ import WatchLaterIcon from '@material-ui/icons/WatchLater';
 import CustomizedSnackbar from './../CustomizedSnackbar';
 import Timeslot from './Timeslot';
 import { handleChange, toggle } from './../../utils';
-import { addAppointment } from './../../actions/centre';
+import { addAppointment } from './../../actions/appointment';
 
 
 export default class HoursForm extends Component {

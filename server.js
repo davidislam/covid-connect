@@ -71,8 +71,8 @@ app.post("/users/login", (req, res) => {
       // We can check later if this exists to ensure we are logged in.
       req.session.user = user._id;
       req.session.username = user.username;
-      req.session.isAdmin = isAdmin ? true : false;
-      res.send({ currentUser: user.username });
+      req.session.isAdmin = isAdmin;
+      res.send({ currentUser: user.username, isAdmin });
     })
     .catch(error => {
       if (isMongoError(error)) {

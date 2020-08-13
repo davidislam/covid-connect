@@ -1,7 +1,3 @@
-/* Methods to add/remove an appointment for a user 
-Require server calls
-*/
-
 export const addAppointment = (appt, app) => {
   app.setState(state => ({ appointments: state.appointments.concat([appt]) }))
 }
