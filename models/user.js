@@ -50,9 +50,18 @@ const UserSchema = new mongoose.Schema({
 		min: 1,
 		max: 99
 	},
-	healthCardNumber: String,
-	phoneNumber: String,
-	address: String
+	healthCardNumber: {
+		type:Number,
+		default: 0
+	},
+	phoneNumber: {
+		type:String,
+		required: true
+	},
+	address:{
+		type: String,
+		default: ""
+	},
 }, { timestamps: true });
 
 UserSchema.plugin(uniqueValidator, { message: 'is already taken' });

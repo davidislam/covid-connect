@@ -57,6 +57,12 @@ app.use(
   })
 );
 
+
+
+/*********************************************************/
+
+/*** User / API Routes below ************************************/
+
 // A route to login and create a session
 app.post("/users/login", (req, res) => {
   const username = req.body.username;
@@ -69,10 +75,28 @@ app.post("/users/login", (req, res) => {
     .then(user => {
       // Add the user's id to the session cookie.
       // We can check later if this exists to ensure we are logged in.
+<<<<<<< HEAD
+      if (!user){
+        //!!!!not showing message!!!!
+
+        //linking with the message bar to show that
+        // incorrect username or password.
+        res.json({message:"Incorrect username/password"})
+
+      }
+      else{
+        req.session.user = user._id;
+        req.session.username = user.username;
+        //change later
+        res.json({message:"successfully logged in"})
+
+      }
+=======
       req.session.user = user._id;
       req.session.username = user.username;
       req.session.isAdmin = isAdmin;
       res.send({ currentUser: user.username, isAdmin });
+>>>>>>> dbf7a8e0fd60c7280f741f0199f32b0738bba3d3
     })
     .catch(error => {
       if (isMongoError(error)) {
@@ -103,10 +127,6 @@ app.get("/users/check-session", (req, res) => {
     res.status(401).send();
   }
 });
-
-/*********************************************************/
-
-/*** User / API Routes below ************************************/
 
 // POST create a new user
 app.post("/users", mongoChecker, (req, res) => {
@@ -342,9 +362,17 @@ app.delete('/centres/:id', mongoChecker, authenticateAdmin, (req, res) => {
     })
 })
 
+<<<<<<< HEAD
+// a PUT route for replacing an *entire* resource.
+//  The body should contain *all* of the required fields of the resource.
+// Maybe less desirable than a patch?
+app.put('/centres/:id', mongoChecker, authenticate, (req, res) => {
+  const id = req.params.id
+=======
 // A PATCH route to update a centre
 app.patch('/centres/:id', mongoChecker, authenticateAdmin, (req, res) => {
   const id = req.params.id;
+>>>>>>> dbf7a8e0fd60c7280f741f0199f32b0738bba3d3
 
   if (!ObjectID.isValid(id)) {
     res.status(404).send();
