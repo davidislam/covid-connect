@@ -24,6 +24,9 @@ const session = require("express-session");
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const cors = require('cors');
+const { NewsArticles } = require('./models/news');
+const { allowedNodeEnvironmentFlags } = require('process');
+const { mongo } = require('mongoose');
 app.use(cors());
 
 function isMongoError(error) { // checks for first error returned by promise rejection if Mongo database suddently disconnects
@@ -535,6 +538,112 @@ app.patch('/appointments/:id', mongoChecker, authenticateAdmin, (req, res) => {
       res.status(400).send();
     })
 })
+
+/*** NewsArticles API Routes below ************************************/
+
+/// A GET route for getting all newsarticles information.
+app.get('/newsarticles', mongoChecker, authenticateAdmin, (req, res) => {
+
+	NewsArticle.find().then((newsarticles) => {
+		res.send(newsarticles)
+	})
+	.catch((error) => {
+		log(error)
+		res.status(500).send("Internal Server Error")
+	})
+
+})
+
+// A GET route to get a news article by its ID
+app.get('/newsarticles/:id', mongoChecker, authenticateAdmin, (req, res) => {
+
+  const id = req.params.id
+
+  if (!ObjectID.isValid(id)) {
+    res.status(404).send();
+    return;
+  }
+
+  NewsArticle.findById(id)
+  .then(newsarticle => {
+      if (!newsarticle) {
+          res.status(404).send();
+      } else {
+          res.send(newsarticle);
+      }
+  })
+  .catch(error => {
+      res.status(500).send(); // server error
+  });
+
+})
+
+// A POST route to create a news article
+app.post("/newsarticles", mongoChecker, authenticateAdmin, (req, res) => {
+
+  const newsarticle = new NewsArticle({
+      link: req.body.link,
+      image: req.body.image,
+      heading: req.body.heading
+  });
+
+  newsarticle.save().then(
+      result => {
+          res.send(result);
+      },
+      error => {
+          res.status(400).send(error)
+      }
+  );
+});
+
+/// a DELETE route to remove a news article by its ID
+app.delete("/newsarticles/:id", mongoChecker, authenticateAdmin, (req, res) => {
+  const id = req.params.id;
+
+  if (!ObjectID.isValid(id)) {
+      res.status(404).send();
+      return;
+  }
+
+  NewsArticle.findByIdAndRemove(id)
+      .then(newsarticle => {
+          if (!newsarticle) {
+              res.status(404).send();
+          } else {
+              res.send(newsarticle);
+          }
+      })
+      .catch(error => {
+          res.status(500).send(); // server error, could not delete.
+      });
+});
+
+// A PATCH route to change news article information by ID
+app.patch("/newsarticles/:id", mongoChecker, authenticateAdmin, (req, res) => {
+  const id = req.params.id;
+
+  const { link, image, heading } = req.body;
+  const body = { link, image, heading };
+
+  if (!ObjectID.isValid(id)) {
+      res.status(404).send();
+      return;
+  }
+
+  NewsArticle.findByIdAndUpdate(id, { $set: body }, { new: true })
+      .then(newsarticle => {
+          if (!newsarticle) {
+              res.status(404).send();
+          } else {
+              res.send(newsarticle);
+          }
+      })
+      .catch(error => {
+          res.status(400).send(); // bad request for changing the student.
+      });
+});
+
 
 /*************************************************/
 // Express server listening...

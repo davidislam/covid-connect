@@ -2,7 +2,7 @@
 
 const mongoose = require('mongoose');
 
-const NewsSchema = new mongoose.Schema({
+const NewsArticleSchema = new mongoose.Schema({
 
   link: {
     type: String,
@@ -19,5 +19,5 @@ const NewsSchema = new mongoose.Schema({
 
 });
 
-const News  = mongoose.model('News', NewsSchema)
-module.exports = { News }
+const NewsArticle  = mongoose.model('NewsArticle', NewsArticleSchema)
+module.exports = { NewsArticle }

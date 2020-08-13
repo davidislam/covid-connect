@@ -1,8 +1,8 @@
 // A function to send a GET request to the web server,
-// and then loop through them and add a list element for each news article
-export const getNews = (newsList) => {
+// and then loop through them and add a list element for each newsarticles article
+export const getNewsArticles = (newsarticleList) => {
     // the URL for the request
-    const url = "/news";
+    const url = "/newsarticles";
 
     // Since this is a GET request, simply call fetch on the URL
     fetch(url)
@@ -11,30 +11,30 @@ export const getNews = (newsList) => {
                 // return a promise that resolves with the JSON body
                 return res.json();
             } else {
-                alert("Could not get news");
+                alert("Could not get news articles");
             }
         })
         .then(json => {
             // the resolved promise with the JSON body
-            newsList.setState({ newsList: json.students });
+            newsarticleList.setState({ newsarticleList: json.newsarticles });
         })
         .catch(error => {
             console.log(error);
         });
 };
 
-// A function to send a POST request with a new news article
-export const addNews = (formComp, dashboardComp) => {
+// A function to send a POST request with a new newsarticles article
+export const addNewsArticle = (formComp, dashboardComp) => {
     // the URL for the request
-    const url = "/news";
+    const url = "/newsarticles";
 
     // The data we are going to send in our request
-    const news = formComp.state
+    const newsarticle = formComp.state
 
     // Create our request constructor with all the parameters we need
     const request = new Request(url, {
         method: "post",
-        body: JSON.stringify(news),
+        body: JSON.stringify(newsarticle),
         headers: {
             Accept: "application/json, text/plain, */*",
             "Content-Type": "application/json"
