@@ -470,7 +470,9 @@ app.post('/appointments', mongoChecker, authenticate, (req, res) => {
     address: req.body.address,
     creator: req.user._id,
     timeslot: req.body.timeslot,
-    status: 'Pending'
+    status: 'Pending',
+    cid: req.body.cid,
+    day: req.body.day
   });
 
   appt.save().then(result => {

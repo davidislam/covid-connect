@@ -30,7 +30,7 @@ function Profile(props) {
 
   const handleSubmit = e => {
     e.preventDefault();
-    updateProfileForCurrentUser(info, props.app);
+    updateProfileForCurrentUser(info, props.app, setOpen);
     setChangeState(!changeState);
   }
 

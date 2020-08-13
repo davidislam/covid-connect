@@ -79,7 +79,7 @@ export const getProfileForCurrentUser = (setInfo) => {
 }
 
 // A function to PATCH profile data for user with id <id>
-export const updateProfile = (id, info, app) => {
+export const updateProfile = (id, info, app, setOpen) => {
     api.patch(`/${id}`, info)
         .then(res => {
             log(res);
@@ -92,7 +92,7 @@ export const updateProfile = (id, info, app) => {
 }
 
 // A function to PATCH profile data for current user
-export const updateProfileForCurrentUser = (info, app) => {
+export const updateProfileForCurrentUser = (info, app, setOpen) => {
     api.patch(`/user`, info)
         .then(res => {
             log(res);

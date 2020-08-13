@@ -28,7 +28,6 @@ class Centre extends Component {
             className='item'
             formattedDate={this.props.formattedDate}
             formattedAddress={formattedAddress(centre.location)}
-            addAppt={appt => this.props.addAppt(appt)}
             isLoggedIn={this.props.isLoggedIn}
             cid={centre._id}
             day={this.props.day}

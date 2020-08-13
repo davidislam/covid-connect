@@ -23,7 +23,6 @@ class AssessmentCentres extends Component {
         <h3>{this.state.message}</h3>
         <CentreList
           centres={this.state.centres}
-          addAppt={(appt) => this.props.addAppt(appt)}
           formattedDate={formattedDate(selected_date)}
           day={getDay(selected_date)}
           isLoggedIn={this.props.isLoggedIn} />

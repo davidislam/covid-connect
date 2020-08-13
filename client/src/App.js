@@ -46,10 +46,9 @@ class App extends Component {
             <Route path='/profile'>
               {!isLoggedIn ? <Redirect to='/' /> : <Profile isAdmin={isAdmin} app={this} />}
             </Route>
-
             <Route path='/booking' render={() => (
               <Booking
-                username={username}
+                username={currentUser}
                 isAdmin={isAdmin}
                 isLoggedIn={isLoggedIn}
               />
@@ -57,7 +56,7 @@ class App extends Component {
             <Route path='/screening' component={Screening} />
             <Route path='/faqs' component={FAQs} />
             <Route path='/centres' render={(props) => (
-              <AssessmentCentres {...props} addAppt={(appt) => addAppointment(appt, this)}
+              <AssessmentCentres {...props}
                 isLoggedIn={isLoggedIn} />
             )} />
             <Route path="/" render={() => <div>404</div>} />

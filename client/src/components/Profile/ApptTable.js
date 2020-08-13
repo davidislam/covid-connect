@@ -7,19 +7,31 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
+import { getAppointments, deleteAppointment } from './../../actions/appointment';
 
-import { uid } from 'react-uid';
+
 import './styles.css';
 
 
 export default class ApptTable extends Component {
+  state = {
+    appointments: []
+  }
+
+  constructor(props) {
+    super(props);
+    getAppointments(this);
+  }
+
+
   handleClick = (appt) => {
-    this.props.deleteAppt(appt);
+    const { _id, timeslot, cid, day } = appt;
+    deleteAppointment(_id, cid, day, timeslot, this);
   }
 
   render() {
     return (
-      this.props.appointments.length === 0 ? <h3>No appointments scheduled</h3> :
+      this.state.appointments.length === 0 ? <h3>No appointments scheduled</h3> :
         <TableContainer component={Paper} className='apptTable'>
           <Table aria-label="simple table" size='small'>
             <TableHead>
@@ -32,14 +44,14 @@ export default class ApptTable extends Component {
               </TableRow>
             </TableHead>
             <TableBody>
-              {this.props.appointments.map((appt) => (
-                <TableRow key={uid(appt)}>
+              {this.state.appointments.map((appt) => (
+                <TableRow key={appt._id}>
                   <TableCell component="th" scope="row" align="center">
                     {appt.date}
                   </TableCell>
-                  <TableCell align="center">{appt.timeslot.time}</TableCell>
+                  <TableCell align="center">{appt.time}</TableCell>
                   <TableCell align="center">{appt.address}</TableCell>
-                  <TableCell align="center">Pending</TableCell>
+                  <TableCell align="center">{appt.status}</TableCell>
                   <TableCell align="center">
                     <Button color="secondary" onClick={() => this.handleClick(appt)}>
                       Cancel

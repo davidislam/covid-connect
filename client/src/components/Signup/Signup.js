@@ -7,7 +7,7 @@ import {
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import { signup } from '../../actions/user';
-import { Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 
 const useStyles = makeStyles(theme => ({
@@ -22,6 +22,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function SignupComponent(props) {
   const classes = useStyles();
+  let history = useHistory();
 
   const [value, setValue] = useState({
     password: '',
@@ -53,7 +54,7 @@ export default function SignupComponent(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     signup(props.signup, value);
-    <Redirect to='/signin' />
+    history.push('/');
   }
 
   const ageArray = populateAge();
