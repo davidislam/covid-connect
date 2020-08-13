@@ -45,8 +45,7 @@ export default function SignupComponent(props) {
     let i = 0;
     let ageArr = [];
     while (i < 99) {
-      i++;
-      ageArr.push(i);
+      ageArr.push(i++);
     }
     return ageArr;
   }
@@ -101,6 +100,7 @@ export default function SignupComponent(props) {
       <FormControl variant="outlined">
         <InputLabel id="ageLabel">Age</InputLabel>
         <Select
+          value={value.age}
           labelId="ageLabel"
           id="age"
           onChange={handleChange("age")}
