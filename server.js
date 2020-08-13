@@ -75,28 +75,10 @@ app.post("/users/login", (req, res) => {
     .then(user => {
       // Add the user's id to the session cookie.
       // We can check later if this exists to ensure we are logged in.
-<<<<<<< HEAD
-      if (!user){
-        //!!!!not showing message!!!!
-
-        //linking with the message bar to show that
-        // incorrect username or password.
-        res.json({message:"Incorrect username/password"})
-
-      }
-      else{
-        req.session.user = user._id;
-        req.session.username = user.username;
-        //change later
-        res.json({message:"successfully logged in"})
-
-      }
-=======
       req.session.user = user._id;
       req.session.username = user.username;
       req.session.isAdmin = isAdmin;
       res.send({ currentUser: user.username, isAdmin });
->>>>>>> dbf7a8e0fd60c7280f741f0199f32b0738bba3d3
     })
     .catch(error => {
       if (isMongoError(error)) {
@@ -156,10 +138,11 @@ const authenticate = (req, res, next) => {
         next()
       }
     }).catch((error) => {
-      res.status(401).send("Unauthorized")
+      log(error);
+      res.status(401).send("Unauthorized");
     })
   } else {
-    res.status(401).send("Unauthorized")
+    res.status(401).send("Unauthorized");
   }
 }
 
@@ -189,6 +172,18 @@ app.get("/users", mongoChecker, authenticateAdmin, (req, res) => {
   )
 })
 
+// A route to GET profile for the current user
+app.get('/users/user', mongoChecker, authenticate, (req, res) => {
+  User.findOne({
+    _id: req.user._id
+  }).then(user => {
+    res.send(user);
+  }).catch(error => {
+    log(error);
+    res.status(500).send('Internal server error');
+  })
+})
+
 // GET by ID
 app.get("/users/:id", mongoChecker, authenticateAdmin, (req, res) => {
   const id = req.params.id
@@ -210,18 +205,6 @@ app.get("/users/:id", mongoChecker, authenticateAdmin, (req, res) => {
 
 })
 
-// A route to GET profile for the current user
-app.get('/users/user', mongoChecker, authenticate, (req, res) => {
-  User.find({
-    _id: req.user._id
-  }).then(user => {
-    res.send(user);
-  }).catch(error => {
-    log(error);
-    res.status(500).send('Internal server error');
-  })
-})
-
 // A PATCH route to update the current user
 app.patch('/users/user', mongoChecker, authenticate, (req, res) => {
   User.findOneAndUpdate({ _id: req.user._id }, { $set: req.body }, { new: true })
@@ -238,7 +221,7 @@ app.patch('/users/user', mongoChecker, authenticate, (req, res) => {
 })
 
 // A PATCH route to update a user by id
-app.patch('/users/:id', mongoChecker, authenticate, (req, res) => {
+app.patch('/users/:id', mongoChecker, authenticateAdmin, (req, res) => {
   const id = req.params.id;
 
   if (!ObjectID.isValid(id)) {
@@ -362,17 +345,9 @@ app.delete('/centres/:id', mongoChecker, authenticateAdmin, (req, res) => {
     })
 })
 
-<<<<<<< HEAD
-// a PUT route for replacing an *entire* resource.
-//  The body should contain *all* of the required fields of the resource.
-// Maybe less desirable than a patch?
-app.put('/centres/:id', mongoChecker, authenticate, (req, res) => {
-  const id = req.params.id
-=======
 // A PATCH route to update a centre
 app.patch('/centres/:id', mongoChecker, authenticateAdmin, (req, res) => {
   const id = req.params.id;
->>>>>>> dbf7a8e0fd60c7280f741f0199f32b0738bba3d3
 
   if (!ObjectID.isValid(id)) {
     res.status(404).send();
