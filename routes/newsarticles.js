@@ -78,7 +78,7 @@ router
       .catch(error => {
         res.status(500).send(); // server error, could not delete.
       });
-  });
+  })
   .patch(authenticateAdmin, (req, res) => {
     const id = req.params.id;
 
