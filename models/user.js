@@ -26,12 +26,12 @@ const UserSchema = new mongoose.Schema({
 		minlength: 1,
 		lowercase: true,
 		trim: true,
+		required: true,
 		unique: true,
 		validate: {
 			validator: validator.isEmail,
 			message: 'Invalid email'
-		},
-		default: 'example@gmail.com'
+		}
 	},
 	name: {
 		type: String,
@@ -53,8 +53,8 @@ const UserSchema = new mongoose.Schema({
 		default: 1
 	},
 	healthCardNumber: {
-		type: Number,
-		default: 0
+		type: String,
+		default: ''
 	},
 	phoneNumber: {
 		type: String,

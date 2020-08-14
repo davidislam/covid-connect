@@ -48,10 +48,11 @@ export const logout = (app) => {
 export const signup = (signupComp, info) => {
     api.post('/', info)
         .then(res => {
-            log(res);
+            // log(res);
             signupComp.setState({ showSnackbar: true, message: "Signed up successfully", severity: 'success' })
         })
         .catch(error => {
+            signupComp.setState({ showSnackbar: true, message: "Sorry there was a registration problem", severity: 'error' })
             handleError(error);
         })
 }
