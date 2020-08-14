@@ -18,8 +18,7 @@ const session = require("express-session");
 const cors = require('cors');
 app.use(cors());
 
-// middleware for mongo connection error for routes that need it
-const mongoChecker = (req, res, next) => {
+app.use((req, res, next) => {
   // check mongoose connection established.
   if (mongoose.connection.readyState != 1) {
     log('Issue with mongoose connection')
@@ -28,9 +27,7 @@ const mongoChecker = (req, res, next) => {
   } else {
     next()
   }
-}
-
-app.use(mongoChecker());
+});
 
 // Session cookie
 app.use(

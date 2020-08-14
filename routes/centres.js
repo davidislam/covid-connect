@@ -39,6 +39,19 @@ router
   })
 
 router
+  .route('/city-names')
+  .get((req, res) => {
+    Centre.distinct('location.city')
+      .then(result => {
+        res.send(result.sort());
+      })
+      .catch(err => {
+        log(err);
+        res.status(500).send("Internal Server Error");
+      })
+  })
+
+router
   .route('/:id')
   .get((req, res) => {
     const id = req.params.id
@@ -99,7 +112,7 @@ router
   })
 
 router
-  .route('city/:city')
+  .route('/city/:city')
   .get((req, res) => {
     const city = req.params.city
 
@@ -109,19 +122,6 @@ router
       .catch((error) => {
         log(error)
         res.status(500).send('Internal Server Error')  // server error
-      })
-  })
-
-router
-  .route('/city')
-  .get((req, res) => {
-    Centre.distinct('location.city')
-      .then(result => {
-        res.send(result.sort());
-      })
-      .catch(err => {
-        log(err);
-        res.status(500).send("Internal Server Error");
       })
   })
 

@@ -1,4 +1,4 @@
-const User = require('./models/user');
+const { User } = require('./models/user');
 
 function isMongoError(error) { // checks for first error returned by promise rejection if Mongo database suddently disconnects
   return typeof error === 'object' && error !== null && error.name === "MongoNetworkError"
