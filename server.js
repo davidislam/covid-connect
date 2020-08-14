@@ -29,6 +29,7 @@ const mongoChecker = (req, res, next) => {
     next()
   }
 }
+
 app.use(mongoChecker());
 
 // Session cookie
