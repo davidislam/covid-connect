@@ -30,7 +30,8 @@ const UserSchema = new mongoose.Schema({
 		validate: {
 			validator: validator.isEmail,
 			message: 'Invalid email'
-		}
+		},
+		default: 'example@gmail.com'
 	},
 	name: {
 		type: String,
@@ -48,17 +49,18 @@ const UserSchema = new mongoose.Schema({
 	age: {
 		type: Number,
 		min: 1,
-		max: 99
+		max: 99,
+		default: 1
 	},
 	healthCardNumber: {
-		type:Number,
+		type: Number,
 		default: 0
 	},
 	phoneNumber: {
-		type:String,
+		type: String,
 		required: true
 	},
-	address:{
+	address: {
 		type: String,
 		default: ""
 	},
