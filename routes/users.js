@@ -24,6 +24,8 @@ router
         req.session.user = user._id;
         req.session.username = user.username;
         req.session.isAdmin = isAdmin;
+        connsole.log('From login');
+        console.log(req.session);
         res.send({ currentUser: user.username, isAdmin });
       })
       .catch(error => {
@@ -49,8 +51,10 @@ router
 
 router
   .get("/check-session", (req, res) => {
+    console.log('from check session')
+    console.log(req.session);
     if (req.session.user) {
-      res.send({ currentUser: req.session.username });
+      res.send({ currentUser: req.session.username, isAdmin: req.session.isAdmin });
     } else {
       res.status(401).send();
     }

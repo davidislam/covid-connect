@@ -16,8 +16,12 @@ import FAQs from './components/FAQs';
 import AssessmentCentres from './components/Centre';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
+
+  componentDidMount() {
+    readCookie(this);
+  }
+
+  componentDidUpdate() {
     readCookie(this);
   }
 
