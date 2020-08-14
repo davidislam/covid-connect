@@ -60,7 +60,7 @@ class App extends Component {
               <AssessmentCentres {...props}
                 isLoggedIn={isLoggedIn} />
             )} />
-            <Route path="/" render={() => <div>404</div>} />
+            <Route path="/" render={() => <div>404 Page Not Found</div>} />
           </Switch>
         </div>
       </Router>
