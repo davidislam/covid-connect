@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { TextField, makeStyles, Button, InputAdornment, IconButton } from "@material-ui/core"
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import { login } from '../../actions/user';
-import appointment from '../../../../models/appointment';
+//import appointment from '../../../../models/appointment';
 import { updateLoginForm, login } from "../../actions/user";
 
 
@@ -37,7 +36,7 @@ export default function SigninComponent(props) {
 
   return (
     <div>
-      <form className={classes.root} onSubmit={handleSubmit}>
+      <form className={classes.root} onSubmit={() => login(this, props.app)}>
         <TextField
           id="Username"
           label="Username"
@@ -68,7 +67,8 @@ export default function SigninComponent(props) {
           variant="contained" 
           color="primary" 
           type="submit"
-          onClick={() => login(this, app)}> {/* C */}
+          //onClick={() => login(this, app)} {/* C */}
+          > 
           Sign in
         </Button>
       </form>
