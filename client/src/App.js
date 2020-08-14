@@ -19,12 +19,12 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    readCookie(this);
+    // readCookie(this);
   }
 
   state = {
-    isAdmin: false,
-    currentUser: null,
+    isAdmin: true,
+    currentUser: "admin",
   }
 
   render() {

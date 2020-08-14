@@ -5,18 +5,18 @@ import ModifyCentre from './ModifyCentre';
 
 
 class AdminView extends Component {
-  state = {}
   render() {
     const { username } = this.props;
     return (
-      <div>
+      <React.Fragment>
         <h1>Hi {username}! What would you like to do today?</h1>
         <AddCentre />
         <br />
-        <ModifyCentre />
+        {/* <ModifyCentre /> */}
         <hr style={{ maxWidth: '50%', marginTop: '30px', marginBottom: '30px' }} />
-        <RemoveCentre />
-      </div>
+        {/* <RemoveCentre /> */}
+        {/* Show a list of timeslots */}
+      </React.Fragment>
     );
   }
 }

@@ -14,7 +14,8 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { uid } from "react-uid";
 import CustomizedSnackbar from './../CustomizedSnackbar';
-import { addCentre } from './../../actions/centre';
+import { createCentre } from './../../actions/centre';
+import { handleChange, toggle } from './../../utils';
 
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 
@@ -41,44 +42,16 @@ export default class AddCentre extends Component {
     startMeridiem: "",
     endTime: "",
     endMeridiem: "",
-    // days: [
-    //   {name: 'monday', isChecked: false},
-    //   {name: 'tuesday', isChecked: false},
-    //   {name: 'wednesday', isChecked: false},
-    //   {name: 'thursday', isChecked: false},
-    //   {name: 'friday', isChecked: false},
-    //   {name: 'saturday', isChecked: false},
-    //   {name: 'sunday', isChecked: false}
-    // ],
+    monday: false,
+    tuesday: false,
+    wednesday: false,
+    thursday: false,
+    friday: false,
+    saturday: false,
+    sunday: false,
     snackbarMessage: "",
     snackbarSeverity: "",
     snackbarOpen: false,
-  };
-
-  submitState = {
-    open: false,
-    name: "",
-    city: "",
-    address: "",
-    postalCode: "",
-    number: "",
-    url: "",
-    startTime: "",
-    startMeridiem: "",
-    endTime: "",
-    endMeridiem: "",
-    // days: [
-    //   {name: 'monday', isChecked: false},
-    //   {name: 'tuesday', isChecked: false},
-    //   {name: 'wednesday', isChecked: false},
-    //   {name: 'thursday', isChecked: false},
-    //   {name: 'friday', isChecked: false},
-    //   {name: 'saturday', isChecked: false},
-    //   {name: 'sunday', isChecked: false}
-    // ],
-    snackbarMessage: "Assessment centre added",
-    snackbarSeverity: "success",
-    snackbarOpen: true,
   };
 
   state = {
@@ -93,52 +66,26 @@ export default class AddCentre extends Component {
     startMeridiem: "",
     endTime: "",
     endMeridiem: "",
-    // days: [
-    //   {name: 'monday', isChecked: false},
-    //   {name: 'tuesday', isChecked: false},
-    //   {name: 'wednesday', isChecked: false},
-    //   {name: 'thursday', isChecked: false},
-    //   {name: 'friday', isChecked: false},
-    //   {name: 'saturday', isChecked: false},
-    //   {name: 'sunday', isChecked: false}
-    // ],
+    monday: false,
+    tuesday: false,
+    wednesday: false,
+    thursday: false,
+    friday: false,
+    saturday: false,
+    sunday: false,
     snackbarMessage: "",
     snackbarSeverity: "",
     snackbarOpen: false,
   };
 
   componentDidMount() {
-    this.days = {
-      monday: false, tuesday: false, wednesday: false, thursday: false, friday: false,
-      saturday: false, sunday: false
-    }; // Used for checkboxes
     this.hours = {
       monday: [], tuesday: [], wednesday: [], thursday: [], friday: [],
       saturday: [], sunday: []
     };
   }
 
-  handleClickOpen = () => {
-    this.setState({ open: true });
-  };
-
-  handleClose = () => {
-    this.setState({ open: false });
-  };
-
-  handleInputChange = e => {
-    const name = e.target.name;
-    const value = e.target.value;
-    this.setState({ [name]: value });
-  };
-
-  handleCheckboxChange = e => {
-    const target = e.target;
-    this.days[target.name] = !this.days[target.name];
-  }
-
-  /* Add timeslot */
-  handleClick = () => {
+  addTimeslot = () => {
     const { startTime, startMeridiem, endTime, endMeridiem } = this.state;
     if (startTime === "" || startMeridiem === "" || endTime === "" || endMeridiem === "") {
       this.setState({ snackbarOpen: true, snackbarMessage: "Please choose a time", snackbarSeverity: "warning" })
@@ -148,7 +95,7 @@ export default class AddCentre extends Component {
     // At least one day must be selected
     let daySelected = false;
     for (let i = 0; i < days.length; i++) {
-      if (this.days[days[i]]) {
+      if (this.state[days[i]]) {
         daySelected = true;
         break;
       }
@@ -158,44 +105,28 @@ export default class AddCentre extends Component {
       return;
     }
 
-    // const formattedTime = `${startTime} ${startMeridiem} - ${endTime} ${endMeridiem}`;
     const formattedTime = `${startTime} - ${endTime} ${endMeridiem}`;
     const timeslot = { time: formattedTime, isTaken: false };
 
     // Add <timeslot> to checked days
     days.forEach(day => {
-      if (this.days[day]) {
+      if (this.state[day]) {
         this.hours[day].push(timeslot);
       }
     })
 
+    // console.log(this.hours);
+
     this.setState({
       startTime: '', startMeridiem: '', endTime: '', endMeridiem: '',
-      snackbarOpen: true, snackbarMessage: "Timeslot added", snackbarSeverity: 'info'
+      snackbarOpen: true, snackbarMessage: "Timeslot added", snackbarSeverity: 'info',
+      monday: false, tuesday: false, wednesday: false, thursday: false, friday: false, saturday: false, sunday: false
     });
   }
 
   handleSubmit = (e) => {
-    const { address, city, postalCode } = this.state;
     e.preventDefault();
-
-    if (city === "") {
-      this.setState({ snackbarOpen: true, snackbarMessage: "Please select a city", snackbarSeverity: "warning" });
-      return;
-    }
-
-    // At least one day must be selected
-    let daySelected = false;
-    for (let i = 0; i < days.length; i++) {
-      if (this.days[days[i]]) {
-        daySelected = true;
-        break;
-      }
-    }
-    if (!daySelected) {
-      this.setState({ snackbarOpen: true, snackbarMessage: "Please choose a day", snackbarSeverity: "warning" });
-      return;
-    }
+    const { name, address, city, postalCode, number, url } = this.state;
 
     // At least one timeslot must be added
     let addedTimeslot = false;
@@ -215,8 +146,9 @@ export default class AddCentre extends Component {
       response => {
         const { lat, lng } = response.results[0].geometry.location;
         // console.log(lat, lng);
-        addCentre(this.state, this.hours, lat, lng);
-        this.setState(this.submitState);
+        const location = { address, city, postalCode, latitude: lat, longitude: lng };
+        const newCentre = { name, location, phoneNumber: number, url, hours: this.hours };
+        createCentre(this, newCentre);
       },
       error => {
         console.error(error);
@@ -235,9 +167,9 @@ export default class AddCentre extends Component {
     return timeArr;
   }
 
-  toggleSnackbar = () => {
-    this.setState(state => ({ snackbarOpen: !state.snackbarOpen }))
-  };
+  // toggleSnackbar = () => {
+  //   this.setState(state => ({ snackbarOpen: !state.snackbarOpen }))
+  // };
 
   render() {
     const {
@@ -271,13 +203,13 @@ export default class AddCentre extends Component {
         <Button
           variant="contained"
           color="primary"
-          onClick={this.handleClickOpen}
+          onClick={() => toggle(this, "open")}
         >
           Add Assessment Centre
         </Button>
         <Dialog
           open={open}
-          onClose={this.handleClose}
+          onClose={() => toggle(this, "open")}
           aria-labelledby="form-dialog-title"
         >
           <ValidatorForm onSubmit={this.handleSubmit}>
@@ -292,7 +224,7 @@ export default class AddCentre extends Component {
                   label="Name"
                   name="name"
                   value={name}
-                  onChange={this.handleInputChange}
+                  onChange={e => handleChange(this, e)}
                   validators={['required', 'minStringLength:5']}
                   errorMessages={[requiredMsg, 'name must be at least five characters']}
                 />
@@ -300,7 +232,7 @@ export default class AddCentre extends Component {
                   label="Address"
                   name="address"
                   value={address}
-                  onChange={this.handleInputChange}
+                  onChange={e => handleChange(this, e)}
                   validators={['required', 'minStringLength:5']}
                   errorMessages={[requiredMsg, 'address must be at least five characters']}
                 />
@@ -308,7 +240,7 @@ export default class AddCentre extends Component {
                   label="Postal code"
                   name="postalCode"
                   value={postalCode}
-                  onChange={this.handleInputChange}
+                  onChange={e => handleChange(this, e)}
                   validators={['required', 'matchRegexp:^[A-Za-z][0-9][A-Za-z][ -]?[0-9][A-Za-z][0-9]$']}
                   errorMessages={[requiredMsg, 'invalid postal code']}
                 />
@@ -316,23 +248,22 @@ export default class AddCentre extends Component {
                   label="City"
                   name="city"
                   value={city}
-                  onChange={this.handleInputChange}
+                  onChange={e => handleChange(this, e)}
                   validators={['required']}
                   errorMessages={[requiredMsg]}
                 />
-                {/* <CitySelect label='City' value={city} onChange={this.handleInputChange} cities={CITIES} /> */}
                 <TextValidator
                   label="Phone number"
                   name="number"
                   value={number}
-                  onChange={this.handleInputChange}
+                  onChange={e => handleChange(this, e)}
                 />
                 <TextValidator
                   label="website url"
                   name="url"
                   type="url"
                   value={url}
-                  onChange={this.handleInputChange}
+                  onChange={e => handleChange(this, e)}
                 />
               </div>
               <DialogContentText>
@@ -342,7 +273,7 @@ export default class AddCentre extends Component {
                 {daysCapitalized.map(day => (
                   <FormControlLabel key={uid(day)}
                     control={
-                      <Checkbox name={day.toLowerCase()} color="primary" onChange={this.handleCheckboxChange} />
+                      <Checkbox name={day.toLowerCase()} checked={this.state[day.toLowerCase()]} color="primary" onChange={() => toggle(this, day.toLowerCase())} />
                     }
                     label={day}
                   />
@@ -355,14 +286,14 @@ export default class AddCentre extends Component {
               <div style={timeStyles}>
                 <FormControl >
                   <InputLabel>From</InputLabel>
-                  <Select value={startTime} name="startTime" onChange={this.handleInputChange} style={{ width: '10ch' }}>
+                  <Select value={startTime} name="startTime" onChange={(e) => handleChange(this, e)} style={{ width: '10ch' }}>
                     {this.populateTime().map(time =>
                       <MenuItem key={uid(time)} value={time}>{time}</MenuItem>)}
                   </Select>
                 </FormControl>
 
                 <FormControl >
-                  <Select value={startMeridiem} name="startMeridiem" onChange={this.handleInputChange} style={{ width: '10ch' }}>
+                  <Select value={startMeridiem} name="startMeridiem" onChange={(e) => handleChange(this, e)} style={{ width: '10ch' }}>
                     <MenuItem value='AM'>AM</MenuItem>
                     <MenuItem value='PM'>PM</MenuItem>
                   </Select>
@@ -370,27 +301,27 @@ export default class AddCentre extends Component {
 
                 <FormControl >
                   <InputLabel>To</InputLabel>
-                  <Select value={endTime} name="endTime" onChange={this.handleInputChange} style={{ width: '10ch' }}>
+                  <Select value={endTime} name="endTime" onChange={(e) => handleChange(this, e)} style={{ width: '10ch' }}>
                     {this.populateTime().map(time =>
                       <MenuItem key={uid(time)} value={time}>{time}</MenuItem>)}
                   </Select>
                 </FormControl>
 
                 <FormControl >
-                  <Select value={endMeridiem} name="endMeridiem" onChange={this.handleInputChange} style={{ width: '10ch' }}>
+                  <Select value={endMeridiem} name="endMeridiem" onChange={(e) => handleChange(this, e)} style={{ width: '10ch' }}>
                     <MenuItem value='AM'>AM</MenuItem>
                     <MenuItem value='PM'>PM</MenuItem>
                   </Select>
                 </FormControl>
               </div>
 
-              <Button color="secondary" onClick={this.handleClick} style={btnStyle}>
+              <Button color="secondary" onClick={this.addTimeslot} style={btnStyle}>
                 Add timeslot
               </Button>
 
             </DialogContent>
             <DialogActions>
-              <Button onClick={this.handleClose} color="primary">
+              <Button onClick={() => toggle(this, "open")} color="primary">
                 Cancel
             </Button>
               <Button type="submit" color="primary">
@@ -403,7 +334,7 @@ export default class AddCentre extends Component {
           message={snackbarMessage}
           severity={snackbarSeverity}
           open={snackbarOpen}
-          toggleSnackbar={this.toggleSnackbar}
+          toggleSnackbar={() => toggle(this, "snackbarOpen")}
         />
       </div>
     );

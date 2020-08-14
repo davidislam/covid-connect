@@ -8,13 +8,60 @@ const api = axios.create({
 
 const log = console.log;
 
-export function createCentre(centre) {
+///
+
+export function getCentreByName(name) {
+  return;
+}
+
+export function modifyCentre(centre) {
+  return;
+}
+
+export function removeCentre(centre) {
+  return;
+}
+
+export function addCentre(centre) {
+  return;
+}
+///
+
+export function createCentre(comp, centre) {
   api.post('/', centre)
     .then(res => {
       log(res);
+      comp.setState({
+        open: false,
+        name: "",
+        city: "",
+        address: "",
+        postalCode: "",
+        number: "",
+        url: "",
+        startTime: "",
+        startMeridiem: "",
+        endTime: "",
+        endMeridiem: "",
+        monday: false,
+        tuesday: false,
+        wednesday: false,
+        thursday: false,
+        friday: false,
+        saturday: false,
+        sunday: false,
+        snackbarMessage: "Assessment centre added",
+        snackbarSeverity: "success",
+        snackbarOpen: true,
+      })
     })
     .catch(error => {
       handleError(error);
+      comp.setState({
+        snackbarMessage: "Could not add centre",
+        snackbarSeverity: "error",
+        snackbarOpen: true
+      })
     })
 }
 
