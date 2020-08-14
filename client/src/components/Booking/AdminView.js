@@ -14,7 +14,7 @@ class AdminView extends Component {
         <br />
         {/* <ModifyCentre /> */}
         <hr style={{ maxWidth: '50%', marginTop: '30px', marginBottom: '30px' }} />
-        {/* <RemoveCentre /> */}
+        <RemoveCentre />
         {/* Show a list of timeslots */}
       </React.Fragment>
     );

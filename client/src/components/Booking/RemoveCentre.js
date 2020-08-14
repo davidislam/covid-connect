@@ -1,61 +1,53 @@
 import React, { Component } from 'react';
 import Button from "@material-ui/core/Button";
-import CustomizedSelect from './../CustomizedSelect';
 import CustomizedSnackbar from './../CustomizedSnackbar';
+import FormControl from "@material-ui/core/FormControl";
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
 
-import { removeCentre } from './../../actions/centre';
+import { removeCentreById, getCentres } from './../../actions/centre';
 import { handleChange, toggle } from './../../utils';
-
-import { CENTRES } from './../../data';
 
 
 class RemoveCentre extends Component {
   state = {
-    name: '',
+    cid: '',
+    centres: [],
     snackbarOpen: false,
     snackbarMessage: '',
     snackbarSeverity: ''
   }
 
-  handleClick = () => {
-    // code below requires server call
-    const { name } = this.state
-    if (name !== '') {
-      const msg = `${name} has been removed`;
-      removeCentre(this._getIndex(name));
-      this.setState({ snackbarOpen: true, snackbarMessage: msg, snackbarSeverity: 'success', name: '' });
+  componentDidMount() {
+    getCentres(this);
+  }
+
+  deleteCentre = () => {
+    const { cid } = this.state
+    if (cid !== '') {
+      removeCentreById(this, cid);
     } else {
       const msg = 'Please select an assessment centre';
       this.setState({ snackbarOpen: true, snackbarMessage: msg, snackbarSeverity: 'warning' });
     }
   }
 
-  _getIndex = (name) => {
-    for (let i = 0; i < CENTRES.length; i++) {
-      if (CENTRES[i].name === name) {
-        return i;
-      }
-    }
-  }
-
   render() {
-    const { name, snackbarOpen, snackbarMessage, snackbarSeverity } = this.state;
-    // const snackbarSeverity = 'success';
+    const { cid, centres, snackbarOpen, snackbarMessage, snackbarSeverity } = this.state;
     return (
-      <div>
-        <CustomizedSelect
-          label="Name"
-          value={name}
-          name="name"
-          onChange={(e) => handleChange(this, e)}
-          w="40ch"
-          arr={CENTRES.map((centre) => {
-            return centre.name
-          })}
-        />
+      <React.Fragment>
+        <h2>Delete a centre</h2>
+        <FormControl required>
+          <InputLabel>Name</InputLabel>
+          <Select value={cid} name="cid" onChange={(e) => handleChange(this, e)} autoWidth={true}>
+            {centres.map(centre =>
+              <MenuItem key={centre._id} value={centre._id}>{centre.name}</MenuItem>)}
+          </Select>
+        </FormControl>
         <div>
           <Button color='secondary' variant="contained"
-            onClick={this.handleClick} style={{ marginTop: '30px' }}>
+            onClick={this.deleteCentre} style={{ marginTop: '30px' }}>
             Delete Selected Centre
           </Button>
         </div>
@@ -65,7 +57,7 @@ class RemoveCentre extends Component {
           open={snackbarOpen}
           toggleSnackbar={() => toggle(this, 'snackbarOpen')}
         />
-      </div>
+      </React.Fragment>
     );
   }
 }

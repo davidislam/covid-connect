@@ -75,13 +75,24 @@ export function getCentreById(id) {
     })
 }
 
-export function removeCentreById(id) {
+export function removeCentreById(comp, id) {
   api.delete(`/${id}`)
     .then(res => {
-      log(res)
+      log(res);
+      comp.setState({
+        snackbarOpen: true,
+        snackbarMessage: `${res.data.name} has been removed from the database`,
+        snackbarSeverity: 'success',
+        cid: ''
+      })
     })
     .catch(error => {
       handleError(error);
+      comp.setState({
+        snackbarOpen: true,
+        snackbarMessage: 'Could not remove centre',
+        snackbarSeverity: 'error'
+      })
     })
 }
 
@@ -96,9 +107,21 @@ export function modifyCentreById(id) {
 }
 
 
-// Returns a list of assessment centre names
-export function getCentreNames() {
-  return;
+export function getCentreNames(comp) {
+  api.get('/', {
+    transformResponse: data => {
+      const centreNames = JSON.parse(data).map(centre => centre.name);
+      // log(centreNames);
+      return centreNames;
+    }
+  })
+    .then(res => {
+      comp.setState({ centres: res.data })
+    })
+    .catch(error => {
+      alert("Could not get centre names");
+      handleError(error);
+    })
 }
 
 export function getCityNames(booking) {
