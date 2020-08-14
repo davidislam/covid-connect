@@ -17,11 +17,8 @@ import AssessmentCentres from './components/Centre';
 
 class App extends Component {
 
-  componentDidMount() {
-    readCookie(this);
-  }
-
-  componentDidUpdate() {
+  constructor(props) {
+    super(props);
     readCookie(this);
   }
 
@@ -63,7 +60,7 @@ class App extends Component {
               <AssessmentCentres {...props}
                 isLoggedIn={isLoggedIn} />
             )} />
-            <Route path="/" render={() => <div>404</div>} />
+            <Route path="/" render={() => <div>404 Page Not Found</div>} />
           </Switch>
         </div>
       </Router>
