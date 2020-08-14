@@ -30,7 +30,7 @@ export default function SignupComponent(props) {
     email: '',
     gender: '',
     name: '',
-    age: 0,
+    age: 1,
     healthCardNumber: '',
     phoneNumber: '',
     address: '',
@@ -53,7 +53,7 @@ export default function SignupComponent(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     signup(props.signup, value);
-    history.push('/');
+    setTimeout(() => { history.push('/signin') }, 2000);
   }
 
   const ageArray = populateAge();
@@ -64,7 +64,7 @@ export default function SignupComponent(props) {
         id="Username"
         label="Username"
         variant="outlined"
-        onChange={() => handleChange("username")}
+        onChange={handleChange("username")}
         required />
       <br />
 
@@ -72,14 +72,14 @@ export default function SignupComponent(props) {
         id="Name"
         label="Name"
         variant="outlined"
-        onChange={() => handleChange("name")}
+        onChange={handleChange("name")}
         required />
       <br />
 
       <FormControl>
         <RadioGroup
           name="gender"
-          onChange={() => handleChange("gender")}
+          onChange={handleChange("gender")}
           row
           required>
 
@@ -134,7 +134,7 @@ export default function SignupComponent(props) {
         id="healthCardNum"
         label="Health Card Number (optional)"
         variant="outlined"
-        onChange={() => handleChange("healthCardNumber")}
+        onChange={handleChange("healthCardNumber")}
       />
       <br />
 
@@ -142,7 +142,7 @@ export default function SignupComponent(props) {
         id="phoneNumber"
         label="Phone Number"
         variant="outlined"
-        onChange={() => handleChange("phoneNumber")}
+        onChange={handleChange("phoneNumber")}
         required
       />
       <br />
@@ -151,16 +151,17 @@ export default function SignupComponent(props) {
         id="address"
         label="Address (optional)"
         variant="outlined"
-        onChange={() => handleChange("address")}
+        onChange={handleChange("address")}
       />
       <br />
 
       <TextField
+        required
         id="Email"
-        label="E-mail (optional)"
+        label="E-mail"
         variant="outlined"
         type="email"
-        onChange={() => handleChange("email")}
+        onChange={handleChange("email")}
       />
       <br />
 

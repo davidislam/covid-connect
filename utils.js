@@ -1,4 +1,5 @@
 const { User } = require('./models/user');
+const log = console.log;
 
 function isMongoError(error) { // checks for first error returned by promise rejection if Mongo database suddently disconnects
   return typeof error === 'object' && error !== null && error.name === "MongoNetworkError"
@@ -6,6 +7,8 @@ function isMongoError(error) { // checks for first error returned by promise rej
 
 // Middleware for authentication of resources for regular users
 const authenticate = (req, res, next) => {
+  log('From authenticate');
+  log(req.session);
   if (req.session.user) {
     User.findById(req.session.user).then((user) => {
       if (!user) {

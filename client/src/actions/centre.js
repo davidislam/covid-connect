@@ -4,7 +4,7 @@ import { handleError, days, months } from './../utils';
 
 
 const api = axios.create({
-  baseURL: 'http://localhost:5000'
+  baseURL: 'http://localhost:5000/centres'
 })
 
 const log = console.log;
@@ -47,7 +47,7 @@ export function getCentreNames() {
 }
 
 export function getCityNames(booking) {
-  api.get('/city')
+  api.get('/city-names')
     .then(res => {
       booking.setState({ cities: res.data });
     })
@@ -58,7 +58,7 @@ export function getCityNames(booking) {
 }
 
 export function getCentres(comp) {
-  api.get('/centres')
+  api.get('/')
     .then(res => {
       comp.setState({ centres: res.data })
     })
@@ -72,7 +72,7 @@ export function getCentresByCityForDay(comp, city, date) {
   const day = getDay(date);
   const dateStr = date.toLocaleDateString();
 
-  api.get(`/centres/city/${city}`, {
+  api.get(`/city/${city}`, {
     transformResponse: data => {
       const filteredCentres = JSON.parse(data).filter(centre => centre.hours[day].length !== 0)
       // log(filteredCentres);
