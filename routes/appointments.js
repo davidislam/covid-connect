@@ -27,7 +27,7 @@ router
       time: req.body.time,
       address: req.body.address,
       creator: req.user._id,
-      timeslot: req.body.timeslot,
+      tid: req.body.tid,
       status: 'Pending',
       cid: req.body.cid,
       day: req.body.day
@@ -47,7 +47,7 @@ router
 
 router
   .route('/:id')
-  .get(authenticate, (req, res) => {
+  .get(authenticateAdmin, (req, res) => {
     const id = req.params.id
 
     if (!ObjectID.isValid(id)) {
@@ -55,7 +55,7 @@ router
       return;
     }
 
-    Appointment.findOne({ _id: id, creator: req.user._id }).then((appt) => {
+    Appointment.findById(id).then((appt) => {
       if (!appt) {
         res.status(404).send('Resource not found')
       } else {

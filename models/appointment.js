@@ -20,7 +20,7 @@ const AppointmentSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  timeslot: {
+  tid: {
     type: mongoose.Schema.Types.ObjectId,
     required: true
   },
