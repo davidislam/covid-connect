@@ -126,42 +126,6 @@ router
   })
 
 router
-  .route('/:id/:day/:tid')
-  .patch(authenticate, (req, res) => {
-    const id = req.params.id;
-    const day = req.params.day;
-    const tid = req.params.tid;
-
-    if (!ObjectID.isValid(id) || !ObjectID.isValid(tid)) {
-      res.status(404).send()
-      return;  // so that we don't run the rest of the handler.
-    }
-
-    Centre.findById(id).then(centre => {
-      if (!centre) {
-        res.status(404).send("Centre not found");
-      } else {
-        const ts = centre.hours[day].id(tid);
-        if (!ts) {
-          res.status(404).send("Timeslot not found");
-        } else {
-          ts.isTaken = !ts.isTaken;
-          centre.save().then(c => {
-            // res.send({ "timeslot": ts, "centre": c })
-            res.send(c.hours[day]);
-          }).catch(error => {
-            log(error);
-            res.status(500).send('Internal Server Error');
-          })
-        }
-      }
-    }).catch(error => {
-      log(error);
-      res.status(500).send('Internal Server Error');
-    })
-  })
-
-router
   .route('/insert')
   .post(authenticateAdmin, (req, res) => {
     Centre.insertMany(req.body)

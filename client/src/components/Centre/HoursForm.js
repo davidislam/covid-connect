@@ -39,7 +39,6 @@ export default class HoursForm extends Component {
     const time = this.state.timeslots.filter(ts => ts._id === this.state.chosenTimeId)[0].time;
     const appt = { date: formattedDate, time, address: formattedAddress, tid: this.state.chosenTimeId, cid, day };
     addAppointment(this, appt);
-    // changeTimeslotIsTaken(this, cid, day, this.state.chosenTimeId);
   }
 
   render() {

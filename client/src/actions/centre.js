@@ -1,45 +1,53 @@
-import { CENTRES } from '../data';
 import axios from 'axios';
 import { handleError, days, months } from './../utils';
 
 
 const api = axios.create({
-  baseURL: 'http://localhost:5000/centres'
+  baseURL: '/centres'
 })
 
 const log = console.log;
 
-export function modifyCentre(centre, hours, lat, lng) {
-  const centreToModify = CENTRES.filter(c => c._id === centre.centreID)[0];
-  console.log(centreToModify);
-  // Modify details...
-  // centreToModify.name = centre.name;
-  // centreToModify.
+export function createCentre(centre) {
+  api.post('/', centre)
+    .then(res => {
+      log(res);
+    })
+    .catch(error => {
+      handleError(error);
+    })
 }
 
-export function addCentre(centre, hours, lat, lng) {
-  // Code below requires server call
-  const newCentre = {
-    name: centre.name,
-    location: {
-      city: centre.city,
-      address: centre.address,
-      postalCode: centre.postalCode,
-      latitude: lat,
-      longitude: lng,
-    },
-    phoneNumber: centre.number,
-    url: centre.url,
-    hours,
-  }
-  CENTRES.push(newCentre);
+export function getCentreById(id) {
+  api.get(`/${id}`)
+    .then(res => {
+      log(res);
+    })
+    .catch(error => {
+      handleError(error);
+    })
 }
 
-export function removeCentre(i) {
-  const removedCentre = CENTRES.splice(i, 1);
-  // TODO: notify registered users at the centre
-  console.log("A centre has been removed", removedCentre);
+export function removeCentreById(id) {
+  api.delete(`/${id}`)
+    .then(res => {
+      log(res)
+    })
+    .catch(error => {
+      handleError(error);
+    })
 }
+
+export function modifyCentreById(id) {
+  api.patch(`/${id}`)
+    .then(res => {
+      log(res)
+    })
+    .catch(error => {
+      handleError(error);
+    })
+}
+
 
 // Returns a list of assessment centre names
 export function getCentreNames() {
@@ -68,6 +76,17 @@ export function getCentres(comp) {
     })
 }
 
+export function getCentresForMap(setCentres) {
+  api.get('/')
+    .then(res => {
+      setCentres(res.data);
+    })
+    .catch(error => {
+      alert("Could not get centres");
+      handleError(error);
+    })
+}
+
 export function getCentresByCityForDay(comp, city, date) {
   const day = getDay(date);
   const dateStr = date.toLocaleDateString();
@@ -89,11 +108,6 @@ export function getCentresByCityForDay(comp, city, date) {
       alert(`Could not get centres in ${city} for ${dateStr}`);
       handleError(error);
     })
-}
-
-// Returns centre with name <name>
-export function getCentreByName(name) {
-  return CENTRES.filter(centre => centre.name === name)[0];
 }
 
 // Returns a formatted date in the form "<month> <day>, <year>"

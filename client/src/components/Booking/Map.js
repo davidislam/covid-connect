@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api';
-import axios from 'axios';
+import { getCentresForMap } from '../../actions/centre';
+// import axios from 'axios';
 
-const api = axios.create({
-  baseURL: 'http://localhost:5000/centres'
-})
+// const api = axios.create({
+//   baseURL: 'http://localhost:5000/centres'
+// })
 
 
 const containerStyle = {
@@ -34,12 +35,7 @@ export default function Map() {
   const [centres, setCentres] = useState([]);
 
   useEffect(() => {
-    api.get('/').then(result => {
-      setCentres(result.data);
-    }).catch(error => {
-      alert("Could not get centres");
-      console.log(error);
-    })
+    getCentresForMap(setCentres);
   }, [])
 
   if (loadError) return "Error loading maps";

@@ -4,11 +4,11 @@ import { handleError } from './../utils';
 const log = console.log;
 
 const api = axios.create({
-  baseURL: 'http://localhost:5000'
+  baseURL: '/appointments'
 })
 
-export function getAppointments(comp) {
-  api.get('/appointments')
+export function getAppointmentsForCurrentUser(comp) {
+  api.get('/user')
     .then(res => {
       comp.setState({ appointments: res.data })
     })
@@ -17,28 +17,56 @@ export function getAppointments(comp) {
     })
 }
 
-function _getAppointments() {
-  api.get('/appointments');
+// Requires admin auth
+export function getAppointmentById(id) {
+  api.get(`/${id}`)
+    .then(res => {
+      log(res);
+    })
+    .catch(error => {
+      handleError(error);
+    })
 }
 
-
-function changeTimeslotIsTaken(cid, day, tid) {
-  api.patch(`/centres/${cid}/${day}/${tid}`)
+// Requires admin auth
+export function changeAppointmentStatusById(id, status) {
+  api.patch(`/${id}`, { status })
+    .then(res => {
+      log(res);
+    })
+    .catch(error => {
+      handleError(error);
+    })
 }
 
-function bookAppointment(appt) {
-  api.post('/appointments', appt);
+// Requires admin auth
+export function getAllAppointments() {
+  api.get('/')
+    .then(res => {
+      log(res);
+    })
+    .catch(error => {
+      handleError(error);
+    })
 }
+
 
 export function addAppointment(hoursForm, appt) {
   const { cid, day, tid } = appt;
-  axios.all([changeTimeslotIsTaken(cid, day, tid), bookAppointment(appt)])
+  axios.all([
+    api.patch(`/${cid}/${day}/${tid}`),
+    api.post('/user', appt)
+  ])
     .then(axios.spread((ts, appt) => {
       // Both requests are now complete
-      log(ts, appt);
+      log(ts);
+      log(appt);
       hoursForm.setState({
-        errorMessage: '', showSnackbar: true,
-        snackbarMessage: "Appointment details have been added to your profile", snackbarSeverity: 'success'
+        errorMessage: '',
+        showSnackbar: true,
+        snackbarMessage: "Appointment details have been added to your profile",
+        snackbarSeverity: 'success',
+        timeslots: ts.data
       })
     }))
     .catch(error => {
@@ -47,15 +75,16 @@ export function addAppointment(hoursForm, appt) {
     })
 }
 
-function cancelAppointment(id) {
-  api.delete(`/appointments/${id}`)
-}
-
 export function deleteAppointment(aid, cid, day, tid, comp) {
-  axios.all([changeTimeslotIsTaken(cid, day, tid), cancelAppointment(aid), _getAppointments()])
+  axios.all([
+    api.patch(`/${cid}/${day}/${tid}`),
+    api.delete(`/${aid}`),
+    api.get('/user')
+  ])
     .then(axios.spread((ts, canceledAppt, appts) => {
-      // Both requests are now complete
-      log(ts, canceledAppt, appts);
+      log(ts);
+      log(canceledAppt);
+      log(appts);
       comp.setState({ appointments: appts.data });
     }))
     .catch(error => {

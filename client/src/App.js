@@ -17,11 +17,8 @@ import AssessmentCentres from './components/Centre';
 
 class App extends Component {
 
-  componentDidMount() {
-    readCookie(this);
-  }
-
-  componentDidUpdate() {
+  constructor(props) {
+    super(props);
     readCookie(this);
   }
 

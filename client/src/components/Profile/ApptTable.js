@@ -7,7 +7,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
-import { getAppointments, deleteAppointment } from './../../actions/appointment';
+import { getAppointmentsForCurrentUser, deleteAppointment } from './../../actions/appointment';
 
 
 import './styles.css';
@@ -20,13 +20,13 @@ export default class ApptTable extends Component {
 
   constructor(props) {
     super(props);
-    getAppointments(this);
+    getAppointmentsForCurrentUser(this);
   }
 
 
   handleClick = (appt) => {
-    const { _id, timeslot, cid, day } = appt;
-    deleteAppointment(_id, cid, day, timeslot, this);
+    const { _id, tid, cid, day } = appt;
+    deleteAppointment(_id, cid, day, tid, this);
   }
 
   render() {
