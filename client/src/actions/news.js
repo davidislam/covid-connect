@@ -90,7 +90,6 @@ export const addNewsArticle = (formComp, dashboardComp) => {
 export async function removeNewsById(comp, id) {
     try {
         const res = await api.delete(`/${id}`);
-        log(res);
         comp.setState({
             snackbarOpen: true,
             snackbarMessage: `${res.data.name} has been removed from the database`,
