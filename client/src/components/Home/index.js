@@ -8,6 +8,9 @@ import img2 from "./static/covid_img2.jpg";
 import img3 from "./static/covid_img3.jpg";
 import { makeStyles, Grid } from '@material-ui/core';
 
+// NEWS STUFF -----------------------------------------
+import { getNewsCount, getNewsArticles } from "./../../actions/news"
+
 
 function UserGreeting(props) {
   return <h4 className="greetingText">You are signed in as {props.username}</h4>;
@@ -47,10 +50,21 @@ function CreatePagination(props) {
         classes={{ ul: classes.paginator }}
         variant="outlined"
         color="primary"
+        count={getNewsCount(this)}
+        page={page}
+        onChange={handleChange}
+      />
+      
+      {/* BEFORE NEWS CHANGE
+      <Pagination
+        classes={{ ul: classes.paginator }}
+        variant="outlined"
+        color="primary"
         count={3}
         page={page}
         onChange={handleChange}
       />
+      */}
     </div>
   </div>
 }
