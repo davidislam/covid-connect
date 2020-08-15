@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
-import CustomizedSnackbar from '../../../CustomizedSnackbar';
+import CustomizedSnackbar from './../../CustomizedSnackbar';
 
-import { addNewsArticle } from '../../../../actions/news'
+import { addNewsArticle } from './../../../actions/news'
 //import { createCentre, timeslotAdded } from '../../../actions/centre';
-import { toggle, handleChange } from '../../../../utils';
+import { toggle, handleChange } from './../../../utils';
 import DialogWindowAddNews from './DialogWindowAddNews';
 
 export default class AddNews extends Component {
@@ -29,7 +29,7 @@ export default class AddNews extends Component {
     e.preventDefault();
     try {
       const { link, image, heading } = this.state;
-      const newArticle = {link, image, heading}
+      const newArticle = { link, image, heading }
       addNewsArticle(this, newArticle);
     } catch (error) {
       console.error(error);
@@ -48,7 +48,7 @@ export default class AddNews extends Component {
         >
           Add News Article
         </Button>
-        <DialogWindowAddCentre
+        <DialogWindowAddNews
           onClose={() => toggle(this, "open")}
           onChange={(e) => handleChange(this, e)}
           handleSubmit={this.handleSubmit}

@@ -1,10 +1,7 @@
 import axios from 'axios';
-import { handleError, days, daysCapitalized, months } from './../utils';
-const ObjectID = require("bson-objectid");
-
 
 const api = axios.create({
-  baseURL: '/newsarticles'
+    baseURL: '/newsarticles'
 })
 
 const log = console.log;
@@ -74,21 +71,21 @@ export const addNewsArticle = (formComp, dashboardComp) => {
 
 export async function removeNewsById(comp, id) {
     try {
-      const res = await api.delete(`/${id}`);
-      log(res);
-      comp.setState({
-        snackbarOpen: true,
-        snackbarMessage: `${res.data.name} has been removed from the database`,
-        snackbarSeverity: 'success',
-        cid: ''
-      })
-      getNewsArticles(comp);
+        const res = await api.delete(`/${id}`);
+        log(res);
+        comp.setState({
+            snackbarOpen: true,
+            snackbarMessage: `${res.data.name} has been removed from the database`,
+            snackbarSeverity: 'success',
+            cid: ''
+        })
+        getNewsArticles(comp);
     } catch (error) {
-      handleError(error);
-      comp.setState({
-        snackbarOpen: true,
-        snackbarMessage: 'Could not remove article',
-        snackbarSeverity: 'error'
-      })
+        log(error);
+        comp.setState({
+            snackbarOpen: true,
+            snackbarMessage: 'Could not remove article',
+            snackbarSeverity: 'error'
+        })
     }
-  }
+}
