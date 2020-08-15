@@ -1,6 +1,6 @@
 import React from 'react';
 import BookingInfo from './BookingInfo';
-import AdminView from './AdminView';
+import AdminView from './Admin/AdminView';
 
 import './styles.css';
 

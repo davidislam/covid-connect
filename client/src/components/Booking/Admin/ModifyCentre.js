@@ -38,8 +38,6 @@ export default class ModifyCentre extends Component {
     snackbarSeverity: "",
     snackbarOpen: false,
     visibility: "hidden",
-    timeslotId: '',
-    timeslotDay: '',
   };
 
   constructor(props) {
@@ -111,42 +109,6 @@ export default class ModifyCentre extends Component {
         />
 
       </React.Fragment>
-
-      // <Dialog
-      //   open={open}
-      //   onClose={this.handleClose}
-      //   aria-labelledby="form-dialog-title"
-      // >
-      //   <ValidatorForm onSubmit={this.handleSubmit}>
-      //     <DialogTitle id="form-dialog-title">Modify Centre</DialogTitle>
-      //     <DialogContent>
-      //       <DialogContentText>
-      //         Please choose an assessment centre and modify any details below.
-      //       </DialogContentText>
-      //       <CustomizedSelect
-      //         label="Centre"
-      //         value={centreName}
-      //         name="centreName"
-      //         onChange={(e) => this.handleSelectChange(e)}
-      //         w="20ch"
-      //         arr={CENTRES.map((centre) => {
-      //           return centre.name
-      //         })}
-      //       />
-
-      //     </DialogContent>
-      //     <DialogActions>
-      //       <Button onClick={this.handleClose} color="primary">
-      //         Cancel
-      //     </Button>
-      //       <Button type="submit" color="primary">
-      //         Modify
-      //     </Button>
-      //     </DialogActions>
-      //   </ValidatorForm>
-      // </Dialog>
-
-      // </div>
     );
   }
 }

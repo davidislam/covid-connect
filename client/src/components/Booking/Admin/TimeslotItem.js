@@ -1,32 +1,13 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 
-export class TodoItem extends Component {
-  getStyle = () => {
-    return {
-      background: "#f4f4f4",
-      padding: "10px",
-      borderBottom: "1px #ccc dotted",
-      textDecoration: this.props.todo.completed ? "line-through" : "none",
-    };
-  };
-
-  componentDidMount = (props) => {
-    console.log(this.props.todo);
-  };
-
+export default class TimeslotItem extends Component {
   render() {
-    const { id, title, completed } = this.props.todo;
+    const { id, title, day } = this.props.ts;
     return (
-      <div style={this.getStyle()}>
+      <div style={itemStyle}>
         <p>
-          <input
-            type="checkbox"
-            defaultChecked={completed}
-            onChange={this.props.markComplete.bind(this, id)}
-          />{" "}
           {title}
-          <button onClick={this.props.delTodo.bind(this, id)} style={btnStyle}>
+          <button onClick={() => this.props.delTimeslot(day, id)} style={btnStyle}>
             x
           </button>
         </p>
@@ -35,12 +16,11 @@ export class TodoItem extends Component {
   }
 }
 
-// PropTypes
-TodoItem.propTypes = {
-  todo: PropTypes.object.isRequired,
-  markComplete: PropTypes.func.isRequired,
-  delTodo: PropTypes.func.isRequired,
-};
+const itemStyle = {
+  background: "#f4f4f4",
+  padding: "10px",
+  borderBottom: "1px #ccc dotted"
+}
 
 const btnStyle = {
   background: "#ff0000",
@@ -51,5 +31,3 @@ const btnStyle = {
   cursor: "pointer",
   float: "right",
 };
-
-export default TodoItem;

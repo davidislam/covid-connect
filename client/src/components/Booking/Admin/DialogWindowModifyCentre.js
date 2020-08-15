@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -9,13 +13,13 @@ import { ValidatorForm } from 'react-material-ui-form-validator';
 import CentreInfo from './CentreInfo';
 import AddTimeslot from './AddTimeslot';
 import Timeslots from './Timeslots';
-import { handleSelectChange } from '../../actions/centre';
+import { handleSelectChange, getNonEmptyTimes } from '../../../actions/centre';
 
 
 export default class DialogWindowModifyCentre extends Component {
   render() {
     const { onClose, onChange, handleSubmit, title, heading, comp } = this.props;
-    const { open, selectedCentreID, centres } = comp.state;
+    const { open, selectedCentreID, centres, visibility } = comp.state;
     return (
       <Dialog
         open={open}
@@ -32,7 +36,7 @@ export default class DialogWindowModifyCentre extends Component {
 
             <FormControl required>
               <InputLabel>Centre</InputLabel>
-              <Select value={selectedCentreID} name="selectedCentreID" onChange={e => handleSelectChange(comp, e)} autoWidth={true}>
+              <Select value={selectedCentreID} name="selectedCentreID" onChange={e => handleSelectChange(comp, e)} style={{ width: '50ch' }}>
                 {centres.map(centre =>
                   <MenuItem key={centre._id} value={centre._id}>{centre.name}</MenuItem>)}
               </Select>

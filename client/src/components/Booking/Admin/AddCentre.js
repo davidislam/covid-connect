@@ -4,7 +4,7 @@ import CustomizedSnackbar from '../../CustomizedSnackbar';
 import { createCentre, timeslotAdded } from '../../../actions/centre';
 import { toggle, handleChange } from '../../../utils';
 import Geocode from 'react-geocode';
-import DialogWindowAddCentre from '../DialogWindowAddCentre';
+import DialogWindowAddCentre from './DialogWindowAddCentre';
 
 
 Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
@@ -80,7 +80,7 @@ export default class AddCentre extends Component {
           onChange={(e) => handleChange(this, e)}
           handleSubmit={this.handleSubmit}
           title='Add Centre'
-          heading='To add an assessment centre to this website, please fill out theform below.'
+          heading='To add an assessment centre to this website, please fill out the form below.'
           comp={this}
         />
         <CustomizedSnackbar

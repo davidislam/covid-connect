@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import Button from "@material-ui/core/Button";
-import CustomizedSnackbar from './../CustomizedSnackbar';
+import CustomizedSnackbar from './../../CustomizedSnackbar';
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 
-import { removeCentreById, getCentres } from './../../actions/centre';
-import { handleChange, toggle } from './../../utils';
+import { removeCentreById, getCentres } from './../../../actions/centre';
+import { handleChange, toggle } from './../../../utils';
 
 
 class RemoveCentre extends Component {
@@ -40,7 +40,7 @@ class RemoveCentre extends Component {
         <h2>Delete a centre</h2>
         <FormControl required>
           <InputLabel>Name</InputLabel>
-          <Select value={cid} name="cid" onChange={(e) => handleChange(this, e)} autoWidth={true}>
+          <Select value={cid} name="cid" onChange={(e) => handleChange(this, e)} style={{ width: '50ch' }}>
             {centres.map(centre =>
               <MenuItem key={centre._id} value={centre._id}>{centre.name}</MenuItem>)}
           </Select>

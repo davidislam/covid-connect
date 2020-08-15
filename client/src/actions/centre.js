@@ -1,9 +1,10 @@
 import axios from 'axios';
 import { handleError, days, daysCapitalized, months } from './../utils';
+var ObjectID = require("bson-objectid");
 
 
 const api = axios.create({
-  baseURL: '/centres'
+  baseURL: 'http://localhost:5000/centres'
 })
 
 const log = console.log;
@@ -247,7 +248,7 @@ export const addTimeslot = (comp) => {
   }
 
   const formattedTime = `${startTime} - ${endTime} ${endMeridiem}`;
-  const timeslot = { time: formattedTime, isTaken: false };
+  const timeslot = { time: formattedTime, isTaken: false, _id: ObjectID() };
 
   // Add <timeslot> to checked days
   days.forEach(day => {
@@ -256,7 +257,7 @@ export const addTimeslot = (comp) => {
     }
   })
 
-  log(comp.hours);
+  // log(comp.hours);
 
   comp.setState({
     startTime: '', startMeridiem: '', endTime: '', endMeridiem: '',
@@ -265,7 +266,6 @@ export const addTimeslot = (comp) => {
   });
   return true;
 }
-
 
 // Returns centre object with id <cid> upon success
 const getCentre = async (cid) => {
@@ -281,37 +281,37 @@ const getCentre = async (cid) => {
 // Get selected centre and update form fields with respect to the centre
 export const handleSelectChange = (comp, e) => {
   const value = e.target.value; // cid
-  const centre = getCentre(value);
-  if (!centre)
-    return;
-  const { _id, name, location, phoneNumber, url, hours } = centre;
-  const { city, address, postalCode } = location;
+  getCentre(value)
+    .then(centre => {
+      const { _id, name, location, phoneNumber, url, hours } = centre;
+      const { city, address, postalCode } = location;
 
-  comp.hours = hours;
+      comp.hours = hours;
 
-  comp.setState({
-    centreID: _id,
-    name,
-    city,
-    address,
-    postalCode,
-    number: phoneNumber,
-    url,
-    monday: false,
-    tuesday: false,
-    wednesday: false,
-    thursday: false,
-    friday: false,
-    saturday: false,
-    sunday: false,
-    startTime: "",
-    startMeridiem: "",
-    endTime: "",
-    endMeridiem: "",
-    visibility: 'visible',
-    timeslotId: '',
-    timeslotDay: ''
-  })
+      comp.setState({
+        selectedCentreID: _id,
+        name,
+        city,
+        address,
+        postalCode,
+        number: phoneNumber,
+        url,
+        monday: false,
+        tuesday: false,
+        wednesday: false,
+        thursday: false,
+        friday: false,
+        saturday: false,
+        sunday: false,
+        startTime: "",
+        startMeridiem: "",
+        endTime: "",
+        endMeridiem: "",
+        visibility: 'visible',
+        timeslotId: '',
+        timeslotDay: ''
+      })
+    })
 }
 
 
@@ -328,10 +328,17 @@ export const getNonEmptyTimes = (comp) => {
         const id = ts._id;
         const isBooked = ts.isTaken ? 'booked' : 'not booked';
         const title = `${day} ${ts.time}, ${isBooked}`;
-        rs.push({ id, title });
+        rs.push({ id, title, day: dayLowerCase });
       })
     }
   })
 
   return rs;
 }
+
+// Deletes clicked timeslot from state
+export const deleteTimeslot = (day, tid, comp) => {
+  comp.hours[day] = comp.hours[day].filter(ts => ts._id !== tid);
+  comp.setState({ snackbarOpen: true, snackbarMessage: 'Timeslot removed', snackbarSeverity: 'success' });
+}
+

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import Button from '@material-ui/core/Button';
-import { addTimeslot } from '../../actions/centre';
+import { addTimeslot } from '../../../actions/centre';
 import TimeSelect from './TimeSelect';
 import MeridiemSelect from './MeridiemSelect';
 import CheckDays from './CheckDays';
