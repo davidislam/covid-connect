@@ -8,8 +8,8 @@ import img2 from "./static/covid_img2.jpg";
 import img3 from "./static/covid_img3.jpg";
 import { makeStyles, Grid } from '@material-ui/core';
 
-// NEWS STUFF -----------------------------------------
-import { getNewsCount, getNewsArticles } from "./../../actions/news"
+// NEWS STUFF FOR INTEGRATION -----------------------------------------
+//import { getNewsCount, getNewsArticles } from "./../../actions/news"
 
 
 function UserGreeting(props) {
@@ -46,6 +46,8 @@ function CreatePagination(props) {
     {collection[page - 1]}
 
     <div className='page_styles'>
+
+      {/* FOR INTEGRATION
       <Pagination
         classes={{ ul: classes.paginator }}
         variant="outlined"
@@ -54,8 +56,8 @@ function CreatePagination(props) {
         page={page}
         onChange={handleChange}
       />
-      
-      {/* BEFORE NEWS CHANGE
+      */}
+
       <Pagination
         classes={{ ul: classes.paginator }}
         variant="outlined"
@@ -64,7 +66,7 @@ function CreatePagination(props) {
         page={page}
         onChange={handleChange}
       />
-      */}
+
     </div>
   </div>
 }
