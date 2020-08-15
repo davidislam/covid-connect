@@ -33,7 +33,7 @@ class NewsArticleList extends React.Component {
                                 key={uid(
                                     newsArticle
                                 )}
-                                newsScreen={newsArticle}
+                                newsarticle={newsArticle}
                             />
                         ))}
                     </TableBody>
