@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { handleError, days, daysCapitalized, months } from './../utils';
+import { days, daysCapitalized, months } from './../utils';
 const ObjectID = require("bson-objectid");
 
 
@@ -13,7 +13,6 @@ const log = console.log;
 export function createCentre(comp, centre) {
   api.post('/', centre)
     .then(res => {
-      log(res);
       comp.setState({
         open: false,
         name: "",
@@ -43,7 +42,7 @@ export function createCentre(comp, centre) {
       };
     })
     .catch(error => {
-      handleError(error);
+      log(error);
       comp.setState({
         snackbarMessage: "Could not add centre",
         snackbarSeverity: "error",
@@ -58,14 +57,13 @@ export function getCentreById(id) {
       log(res);
     })
     .catch(error => {
-      handleError(error);
+      log(error);
     })
 }
 
 export async function removeCentreById(comp, id) {
   try {
     const res = await api.delete(`/${id}`);
-    log(res);
     comp.setState({
       snackbarOpen: true,
       snackbarMessage: `${res.data.name} has been removed from the database`,
@@ -74,7 +72,7 @@ export async function removeCentreById(comp, id) {
     })
     getCentres(comp);
   } catch (error) {
-    handleError(error);
+    log(error);
     comp.setState({
       snackbarOpen: true,
       snackbarMessage: 'Could not remove centre',
@@ -86,7 +84,6 @@ export async function removeCentreById(comp, id) {
 export function modifyCentreById(id, centre, comp) {
   api.patch(`/${id}`, centre)
     .then(res => {
-      log(res)
       comp.setState({
         centres: [],
         selectedCentreID: "",
@@ -116,9 +113,13 @@ export function modifyCentreById(id, centre, comp) {
         timeslotId: '',
         timeslotDay: '',
       })
+      comp.hours = {
+        monday: [], tuesday: [], wednesday: [], thursday: [], friday: [],
+        saturday: [], sunday: []
+      };
     })
     .catch(error => {
-      handleError(error);
+      log(error);
       comp.setState({
         snackbarMessage: "Could not modify centre",
         snackbarSeverity: "error",
@@ -132,7 +133,6 @@ export function getCentreNames(comp) {
   api.get('/', {
     transformResponse: data => {
       const centreNames = JSON.parse(data).map(centre => centre.name);
-      // log(centreNames);
       return centreNames;
     }
   })
@@ -140,8 +140,7 @@ export function getCentreNames(comp) {
       comp.setState({ centres: res.data })
     })
     .catch(error => {
-      alert("Could not get centre names");
-      handleError(error);
+      log(error);
     })
 }
 
@@ -151,8 +150,7 @@ export function getCityNames(booking) {
       booking.setState({ cities: res.data });
     })
     .catch(error => {
-      alert("Could not get city names");
-      handleError(error);
+      log(error);
     })
 }
 
@@ -162,8 +160,7 @@ export function getCentres(comp) {
       comp.setState({ centres: res.data })
     })
     .catch(error => {
-      alert("Could not get centres");
-      handleError(error);
+      log(error);
     })
 }
 
@@ -173,8 +170,7 @@ export function getCentresForMap(setCentres) {
       setCentres(res.data);
     })
     .catch(error => {
-      alert("Could not get centres");
-      handleError(error);
+      log(error);
     })
 }
 
@@ -185,7 +181,6 @@ export function getCentresByCityForDay(comp, city, date) {
   api.get(`/city/${city}`, {
     transformResponse: data => {
       const filteredCentres = JSON.parse(data).filter(centre => centre.hours[day].length !== 0)
-      // log(filteredCentres);
       return filteredCentres;
     }
   })
@@ -196,8 +191,7 @@ export function getCentresByCityForDay(comp, city, date) {
       comp.setState({ centres, message })
     })
     .catch(error => {
-      alert(`Could not get centres in ${city} for ${dateStr}`);
-      handleError(error);
+      log(error);
     })
 }
 
@@ -276,7 +270,6 @@ const getCentre = async (cid) => {
     return centre;
   } catch (error) {
     log(error);
-    alert('Could not get centre')
   }
 }
 

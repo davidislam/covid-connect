@@ -24,14 +24,13 @@ router
         req.session.user = user._id;
         req.session.username = user.username;
         req.session.isAdmin = isAdmin;
-        log('From login');
-        log(req.session);
         res.send({ currentUser: user.username, isAdmin });
       })
       .catch(error => {
         if (isMongoError(error)) {
           res.status(500).send();
         } else {
+          log(error);
           res.status(400).send()
         }
       });
@@ -51,8 +50,6 @@ router
 
 router
   .get("/check-session", (req, res) => {
-    log('from check session');
-    log(req.session);
     if (req.session.user) {
       res.send({ currentUser: req.session.username, isAdmin: req.session.isAdmin });
     } else {
@@ -80,7 +77,7 @@ router
   .get(authenticateAdmin, (req, res) => {
     User.find().then(
       users => { res.send(users) },
-      error => { res.status(500).send(error) }
+      error => { res.status(500).send(); log(error) }
     )
   })
 
@@ -147,6 +144,7 @@ router
         }
       })
       .catch(error => {
+        log(error);
         res.status(400).send();
       });
   })

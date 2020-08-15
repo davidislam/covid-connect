@@ -149,7 +149,6 @@ router
         } else {
           ts.isTaken = !ts.isTaken;
           centre.save().then(c => {
-            // res.send({ "timeslot": ts, "centre": c })
             res.send(c.hours[day]);
           }).catch(error => {
             log(error);

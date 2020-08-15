@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api';
 import { getCentresForMap } from '../../actions/centre';
-// import axios from 'axios';
-
-// const api = axios.create({
-//   baseURL: 'http://localhost:5000/centres'
-// })
 
 
 const containerStyle = {

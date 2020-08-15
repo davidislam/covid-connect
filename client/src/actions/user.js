@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { handleError } from './../utils';
 
 const log = console.log;
 
@@ -15,7 +14,7 @@ export const readCookie = (app) => {
             app.setState({ currentUser: res.data.currentUser })
         })
         .catch(error => {
-            handleError(error);
+            log(error);
         })
 };
 
@@ -28,7 +27,7 @@ export const login = (credentials, app, signin) => {
         })
         .catch(error => {
             signin.setState({ showSnackbar: true, message: "Incorrect username/password", severity: 'error' })
-            handleError(error);
+            log(error);
         })
 };
 
@@ -39,7 +38,7 @@ export const logout = (app) => {
             app.setState({ currentUser: null, isAdmin: false, isLoggedIn: false })
         })
         .catch(error => {
-            handleError(error);
+            log(error);
         })
 };
 
@@ -48,12 +47,11 @@ export const logout = (app) => {
 export const signup = (signupComp, info) => {
     api.post('/', info)
         .then(res => {
-            // log(res);
             signupComp.setState({ showSnackbar: true, message: "Signed up successfully", severity: 'success' })
         })
         .catch(error => {
             signupComp.setState({ showSnackbar: true, message: "Sorry there was a registration problem", severity: 'error' })
-            handleError(error);
+            log(error);
         })
 }
 
@@ -64,7 +62,7 @@ export const getProfile = (id, setInfo) => {
             setInfo(res.data);
         })
         .catch(error => {
-            handleError(error);
+            log(error);
         })
 }
 
@@ -75,7 +73,7 @@ export const getProfileForCurrentUser = (setInfo) => {
             setInfo(res.data);
         })
         .catch(error => {
-            handleError(error);
+            log(error);
         })
 }
 
@@ -83,12 +81,11 @@ export const getProfileForCurrentUser = (setInfo) => {
 export const updateProfile = (id, info, app, setOpen) => {
     api.patch(`/${id}`, info)
         .then(res => {
-            log(res);
             app.setState({ currentUser: res.data.username });
             setOpen(true);
         })
         .catch(error => {
-            handleError(error);
+            log(error);
         })
 }
 
@@ -96,12 +93,10 @@ export const updateProfile = (id, info, app, setOpen) => {
 export const updateProfileForCurrentUser = (info, app, setOpen) => {
     api.patch(`/user`, info)
         .then(res => {
-            log(res);
             app.setState({ currentUser: res.data.username });
             setOpen(true);
         })
         .catch(error => {
-            handleError(error);
-            alert("Could not update profile info");
+            log(error);
         })
 }

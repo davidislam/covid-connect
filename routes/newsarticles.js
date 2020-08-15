@@ -7,7 +7,7 @@ const { ObjectID } = require('mongodb');
 
 const log = console.log;
 
-const { isMongoError, authenticate, authenticateAdmin } = require('./../utils');
+const { authenticateAdmin } = require('./../utils');
 
 router
   .route('/')
@@ -99,7 +99,7 @@ router
         }
       })
       .catch(error => {
-        res.status(400).send(); // bad request for changing the student.
+        res.status(400).send();
       });
   });
 

@@ -53,8 +53,7 @@ export default function SignupComponent(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     signup(props.signup, value);
-    console.log(value);
-    setTimeout(() => { history.push('/signin') }, 2000);
+    setTimeout(() => { history.push('/signin') }, 1500);
   }
 
   const ageArray = populateAge();

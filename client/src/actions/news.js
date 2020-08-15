@@ -1,11 +1,8 @@
 import axios from 'axios';
-import { handleError, days, daysCapitalized, months } from './../utils';
 import { NewsArticle } from '../../../models/news';
-const ObjectID = require("bson-objectid");
-
 
 const api = axios.create({
-  baseURL: '/newsarticles'
+    baseURL: '/newsarticles'
 })
 
 const log = console.log;
@@ -20,7 +17,7 @@ export const getNewsArticles = (newsarticleList) => {
             if (res.status === 200) {
                 return res.json();
             } else {
-                alert("Could not get news articles");
+                console.log("Could not get news articles");
             }
         })
         .then(json => {
@@ -92,21 +89,21 @@ export const addNewsArticle = (formComp, dashboardComp) => {
 
 export async function removeNewsById(comp, id) {
     try {
-      const res = await api.delete(`/${id}`);
-      log(res);
-      comp.setState({
-        snackbarOpen: true,
-        snackbarMessage: `${res.data.name} has been removed from the database`,
-        snackbarSeverity: 'success',
-        cid: ''
-      })
-      getNewsArticles(comp);
+        const res = await api.delete(`/${id}`);
+        log(res);
+        comp.setState({
+            snackbarOpen: true,
+            snackbarMessage: `${res.data.name} has been removed from the database`,
+            snackbarSeverity: 'success',
+            cid: ''
+        })
+        getNewsArticles(comp);
     } catch (error) {
-      handleError(error);
-      comp.setState({
-        snackbarOpen: true,
-        snackbarMessage: 'Could not remove article',
-        snackbarSeverity: 'error'
-      })
+        log(error);
+        comp.setState({
+            snackbarOpen: true,
+            snackbarMessage: 'Could not remove article',
+            snackbarSeverity: 'error'
+        })
     }
-  }
+}

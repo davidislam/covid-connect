@@ -80,7 +80,6 @@ class Home extends Component {
     });
   }
 
-  // Backend next step: Set up a proper database of information to fill the FlipScreens
   flipCollection = [
     <FlipScreen
       image={img1}
