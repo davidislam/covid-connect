@@ -37,7 +37,7 @@ class AdminView extends Component {
         <hr style={{ maxWidth: '50%', marginTop: '30px', marginBottom: '30px' }} />
         <RemoveCentre />
         <hr style={{ maxWidth: '50%', marginTop: '30px', marginBottom: '30px' }} />
-        
+
         {/* NEWS ARTICLE MOD ----------------------------------------------------   */}
         <h2> News Articles Modification</h2>
         <AddNews />

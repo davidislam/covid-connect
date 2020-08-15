@@ -32,44 +32,16 @@ export const getNewsArticles = (newsarticleList) => {
 };
 
 // A function to send a POST request with a new newsarticles article
-export const addNewsArticle = (formComp, dashboardComp) => {
+export const addNewsArticle = (formComp, data) => {
 
-    const url = "/newsarticles";
+  api.post('/',data)
+    .then(res => {
+      formComp.setState({ showSnackbar: true, message: "Added news successfully", severity: 'success' })
+    })
+    .catch(err => {
+      signupComp.setState({ showSnackbar: true, message: "Sorry there was a upload problem", severity: 'error' })
+    })
 
-    const newsarticle = formComp.state
-
-    const request = new Request(url, {
-        method: "post",
-        body: JSON.stringify(newsarticle),
-        headers: {
-            Accept: "application/json, text/plain, */*",
-            "Content-Type": "application/json"
-        }
-    });
-
-    // Send the request with fetch()
-    fetch(request)
-        .then(function (res) {
-
-            if (res.status === 200) {
-                dashboardComp.setState({
-                    message: {
-                        body: "Success: Added a news article.",
-                        type: "success"
-                    }
-                });
-            } else {
-                dashboardComp.setState({
-                    message: {
-                        body: "Error: Could not add news article.",
-                        type: "error"
-                    }
-                });
-            }
-        })
-        .catch(error => {
-            console.log(error);
-        });
 };
 
 export async function removeNewsById(comp, id) {
