@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
 import CustomizedSnackbar from '../../CustomizedSnackbar';
-import { modifyCentreById, getCentres } from '../../../actions/centre';
+import { modifyCentreById } from '../../../actions/centre';
 import { toggle, handleChange } from '../../../utils';
 import Geocode from 'react-geocode';
 import DialogWindowModifyCentre from './DialogWindowModifyCentre';
@@ -23,6 +23,7 @@ export default class ModifyCentre extends Component {
     postalCode: "",
     number: "",
     url: "",
+    info: '',
     monday: false,
     tuesday: false,
     wednesday: false,
@@ -48,13 +49,9 @@ export default class ModifyCentre extends Component {
     };
   }
 
-  // componentDidMount() {
-  //   getCentres(this);
-  // }
-
   handleSubmit = (e) => {
     e.preventDefault();
-    const { name, address, city, postalCode, number, url, selectedCentreID } = this.state;
+    const { name, address, city, postalCode, number, url, selectedCentreID, info } = this.state;
 
     if (selectedCentreID === '') {
       this.setState({ snackbarOpen: true, snackbarMessage: "Please select a centre to modify", snackbarSeverity: "warning" });
@@ -66,7 +63,7 @@ export default class ModifyCentre extends Component {
       response => {
         const { lat, lng } = response.results[0].geometry.location;
         const location = { address, city, postalCode, latitude: lat, longitude: lng };
-        const modifiedCentre = { name, location, phoneNumber: number, url, hours: this.hours };
+        const modifiedCentre = { name, location, phoneNumber: number, url, hours: this.hours, info };
         modifyCentreById(selectedCentreID, modifiedCentre, this);
       },
       error => {

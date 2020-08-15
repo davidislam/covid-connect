@@ -37,6 +37,10 @@ export function createCentre(comp, centre) {
         snackbarSeverity: "success",
         snackbarOpen: true,
       })
+      comp.hours = {
+        monday: [], tuesday: [], wednesday: [], thursday: [], friday: [],
+        saturday: [], sunday: []
+      };
     })
     .catch(error => {
       handleError(error);
@@ -93,6 +97,7 @@ export function modifyCentreById(id, centre, comp) {
         postalCode: "",
         number: "",
         url: "",
+        info: '',
         monday: false,
         tuesday: false,
         wednesday: false,
