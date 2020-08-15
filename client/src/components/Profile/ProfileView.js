@@ -69,7 +69,7 @@ export default function ProfileView(props) {
                 value={props.username}
                 onChange={props.changeInfo('username')}
                 validators={['required', 'minStringLength:4']}
-                errorMessages={[{ requiredMsg }, 'your username must be at least 4 characters long']}
+                errorMessages={[requiredMsg, 'your username must be at least 4 characters long']}
               />
             </Grid>
 
@@ -80,7 +80,7 @@ export default function ProfileView(props) {
                 value={props.email}
                 onChange={props.changeInfo('email')}
                 validators={['required', 'isEmail']}
-                errorMessages={[{ requiredMsg }, 'invalid email']}
+                errorMessages={[requiredMsg, 'invalid email']}
               />
             </Grid>
 
@@ -91,7 +91,7 @@ export default function ProfileView(props) {
                 value={props.name}
                 onChange={props.changeInfo('name')}
                 validators={['required', 'minStringLength:3']}
-                errorMessages={[{ requiredMsg }, 'your name must be at least 3 characters long']}
+                errorMessages={[requiredMsg, 'your name must be at least 3 characters long']}
               />
             </Grid>
 
@@ -102,7 +102,7 @@ export default function ProfileView(props) {
                 value={props.age}
                 onChange={props.changeInfo('age')}
                 validators={['required', 'isNumber']}
-                errorMessages={[{ requiredMsg }, 'invalid age']}
+                errorMessages={[requiredMsg, 'invalid age']}
               />
             </Grid>
 

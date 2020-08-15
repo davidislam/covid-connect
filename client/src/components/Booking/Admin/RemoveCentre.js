@@ -19,9 +19,9 @@ class RemoveCentre extends Component {
     snackbarSeverity: ''
   }
 
-  componentDidMount() {
-    getCentres(this);
-  }
+  // componentDidMount() {
+  //   getCentres(this);
+  // }
 
   deleteCentre = () => {
     const { cid } = this.state
@@ -40,7 +40,7 @@ class RemoveCentre extends Component {
         <h2>Delete a centre</h2>
         <FormControl required>
           <InputLabel>Name</InputLabel>
-          <Select value={cid} name="cid" onChange={(e) => handleChange(this, e)} style={{ width: '50ch' }}>
+          <Select onOpen={() => getCentres(this)} value={cid} name="cid" onChange={(e) => handleChange(this, e)} style={{ width: '50ch' }}>
             {centres.map(centre =>
               <MenuItem key={centre._id} value={centre._id}>{centre.name}</MenuItem>)}
           </Select>

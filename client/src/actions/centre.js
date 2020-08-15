@@ -58,25 +58,25 @@ export function getCentreById(id) {
     })
 }
 
-export function removeCentreById(comp, id) {
-  api.delete(`/${id}`)
-    .then(res => {
-      log(res);
-      comp.setState({
-        snackbarOpen: true,
-        snackbarMessage: `${res.data.name} has been removed from the database`,
-        snackbarSeverity: 'success',
-        cid: ''
-      })
+export async function removeCentreById(comp, id) {
+  try {
+    const res = await api.delete(`/${id}`);
+    log(res);
+    comp.setState({
+      snackbarOpen: true,
+      snackbarMessage: `${res.data.name} has been removed from the database`,
+      snackbarSeverity: 'success',
+      cid: ''
     })
-    .catch(error => {
-      handleError(error);
-      comp.setState({
-        snackbarOpen: true,
-        snackbarMessage: 'Could not remove centre',
-        snackbarSeverity: 'error'
-      })
+    getCentres(comp);
+  } catch (error) {
+    handleError(error);
+    comp.setState({
+      snackbarOpen: true,
+      snackbarMessage: 'Could not remove centre',
+      snackbarSeverity: 'error'
     })
+  }
 }
 
 export function modifyCentreById(id, centre, comp) {

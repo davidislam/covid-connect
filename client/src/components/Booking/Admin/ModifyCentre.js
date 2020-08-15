@@ -48,13 +48,9 @@ export default class ModifyCentre extends Component {
     };
   }
 
-  componentDidMount() {
-    getCentres(this);
-    // this.hours = {
-    //   monday: [], tuesday: [], wednesday: [], thursday: [], friday: [],
-    //   saturday: [], sunday: []
-    // };
-  }
+  // componentDidMount() {
+  //   getCentres(this);
+  // }
 
   handleSubmit = (e) => {
     e.preventDefault();

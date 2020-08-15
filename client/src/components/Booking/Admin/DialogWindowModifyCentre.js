@@ -13,15 +13,17 @@ import { ValidatorForm } from 'react-material-ui-form-validator';
 import CentreInfo from './CentreInfo';
 import AddTimeslot from './AddTimeslot';
 import Timeslots from './Timeslots';
-import { handleSelectChange, getNonEmptyTimes } from '../../../actions/centre';
+import { handleSelectChange, getNonEmptyTimes, getCentres } from '../../../actions/centre';
 
 
 export default class DialogWindowModifyCentre extends Component {
+
   render() {
     const { onClose, onChange, handleSubmit, title, heading, comp } = this.props;
     const { open, selectedCentreID, centres, visibility } = comp.state;
     return (
       <Dialog
+        onEntered={() => getCentres(this.props.comp)}
         open={open}
         onClose={onClose}
         aria-labelledby="modify-centre"

@@ -31,7 +31,9 @@ function Profile(props) {
   const handleSubmit = e => {
     e.preventDefault();
     updateProfileForCurrentUser(info, props.app, setOpen);
-    setChangeState(!changeState);
+    setTimeout(() => {
+      setChangeState(!changeState);
+    }, 1000)
   }
 
   const handleClick = () => {

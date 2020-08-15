@@ -102,6 +102,7 @@ export const updateProfileForCurrentUser = (info, app, setOpen) => {
         })
         .catch(error => {
             handleError(error);
+            alert("Could not update profile info");
         })
 }
 

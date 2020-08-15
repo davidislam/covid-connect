@@ -4,7 +4,7 @@ import { TextValidator } from 'react-material-ui-form-validator';
 
 export default class CentreInfo extends Component {
   render() {
-    const { name, city, address, postalCode, number, url } = this.props.comp.state;
+    const { name, city, address, postalCode, number, url, info } = this.props.comp.state;
     const { onChange } = this.props;
     const requiredMsg = "this field is required";
     return (
@@ -52,6 +52,13 @@ export default class CentreInfo extends Component {
           name="url"
           type="url"
           value={url}
+          onChange={onChange}
+        />
+        <TextValidator
+          label="Info"
+          name="info"
+          type="text"
+          value={info}
           onChange={onChange}
         />
       </div>

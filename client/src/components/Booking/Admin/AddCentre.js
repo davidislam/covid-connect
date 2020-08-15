@@ -21,6 +21,7 @@ export default class AddCentre extends Component {
     postalCode: "",
     number: "",
     url: "",
+    info: "",
     startTime: "",
     startMeridiem: "",
     endTime: "",
@@ -46,7 +47,7 @@ export default class AddCentre extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const { name, address, city, postalCode, number, url } = this.state;
+    const { name, address, city, postalCode, number, url, info } = this.state;
     if (!timeslotAdded(this))
       return;
     const addr = `${address}, ${city}, Ontario, Canada ${postalCode}`;
@@ -54,7 +55,7 @@ export default class AddCentre extends Component {
       response => {
         const { lat, lng } = response.results[0].geometry.location;
         const location = { address, city, postalCode, latitude: lat, longitude: lng };
-        const newCentre = { name, location, phoneNumber: number, url, hours: this.hours };
+        const newCentre = { name, location, phoneNumber: number, url, hours: this.hours, info };
         createCentre(this, newCentre);
       },
       error => {

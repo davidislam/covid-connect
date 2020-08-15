@@ -57,10 +57,10 @@ const CentreSchema = new mongoose.Schema({
   url: {
     type: String,
     // minlength: 1,
-    validate: {
-      validator: validator.isURL,
-      message: 'Invalid url'
-    }
+    // validate: {
+    //   validator: validator.isURL,
+    //   message: 'Invalid url'
+    // }
   },
   hours: {
     monday: [TimeslotSchema],
