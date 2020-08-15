@@ -20,6 +20,10 @@ const AppointmentSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  name: {
+    type: String,
+    required: true
+  },
   tid: {
     type: mongoose.Schema.Types.ObjectId,
     required: true

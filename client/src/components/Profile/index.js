@@ -15,7 +15,7 @@ function Profile(props) {
     username: '',
     email: '',
     name: '',
-    age: null,
+    age: 0,
     healthCardNumber: '',
     phoneNumber: '',
     address: ''

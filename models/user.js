@@ -48,9 +48,9 @@ const UserSchema = new mongoose.Schema({
 	},
 	age: {
 		type: Number,
-		min: 1,
+		min: 0,
 		max: 99,
-		default: 1
+		default: 0
 	},
 	healthCardNumber: {
 		type: String,
