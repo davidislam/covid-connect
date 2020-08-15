@@ -49,13 +49,13 @@ export const getNewsArticles = (newsarticleList) => {
 // A function to send a POST request with a new newsarticles article
 export const addNewsArticle = (formComp, data) => {
 
-  api.post('/',data)
-    .then(res => {
-      formComp.setState({ showSnackbar: true, message: "Added news successfully", severity: 'success' })
-    })
-    .catch(err => {
-      signupComp.setState({ showSnackbar: true, message: "Sorry there was a upload problem", severity: 'error' })
-    })
+    api.post('/', data)
+        .then(res => {
+            formComp.setState({ showSnackbar: true, message: "Added news successfully", severity: 'success' })
+        })
+        .catch(err => {
+            formComp.setState({ showSnackbar: true, message: "Sorry there was a upload problem", severity: 'error' })
+        })
 
 };
 
@@ -77,4 +77,4 @@ export async function removeNewsById(comp, id) {
             snackbarSeverity: 'error'
         })
     }
-  }
+}

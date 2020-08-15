@@ -24,7 +24,7 @@ const options = {
 
 export default function Map() {
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+    googleMapsApiKey: "AIzaSyAO5JtoJKjDn4JQ5lYkdmTvGnWzz8_jdPA",
   })
   const [selectedCentre, setSelectedCentre] = useState(null);
   const [centres, setCentres] = useState([]);

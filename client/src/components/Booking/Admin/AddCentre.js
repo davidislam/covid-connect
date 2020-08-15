@@ -7,7 +7,7 @@ import Geocode from 'react-geocode';
 import DialogWindowAddCentre from './DialogWindowAddCentre';
 
 
-Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
+Geocode.setApiKey("AIzaSyAO5JtoJKjDn4JQ5lYkdmTvGnWzz8_jdPA");
 Geocode.setRegion('ca');
 Geocode.enableDebug();
 
