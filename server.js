@@ -47,13 +47,13 @@ const users = require('./routes/users');
 const centres = require('./routes/centres');
 const appointments = require('./routes/appointments');
 const newsarticles = require('./routes/newsarticles');
-const images = require('./routes/images')
+//const images = require('./routes/images')
 
 app.use('/users', users);
 app.use('/centres', centres);
 app.use('/appointments', appointments);
 app.use('/newsarticles', newsarticles);
-app.use('/images')
+//app.use('/images')
 
 /*** Webpage routes below **********************************/
 // Serve the build
