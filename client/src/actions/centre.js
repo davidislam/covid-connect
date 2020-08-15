@@ -262,12 +262,9 @@ export const addTimeslot = (comp) => {
     }
   })
 
-  // log(comp.hours);
-
   comp.setState({
     startTime: '', startMeridiem: '', endTime: '', endMeridiem: '',
-    snackbarOpen: true, snackbarMessage: "Timeslot added", snackbarSeverity: 'info',
-    monday: false, tuesday: false, wednesday: false, thursday: false, friday: false, saturday: false, sunday: false
+    snackbarOpen: true, snackbarMessage: "Timeslot added", snackbarSeverity: 'info'
   });
   return true;
 }

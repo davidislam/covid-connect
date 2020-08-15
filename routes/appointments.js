@@ -28,6 +28,7 @@ router
       time: req.body.time,
       address: req.body.address,
       creator: req.user._id,
+      name: req.user.name,
       tid: req.body.tid,
       status: 'Pending',
       cid: req.body.cid,

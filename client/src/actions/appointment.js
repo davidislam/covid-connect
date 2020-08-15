@@ -68,7 +68,9 @@ export const getUserAppointments = async (comp) => {
         id: appt._id,
         date: appt.date,
         time: appt.time,
-        address: appt.address
+        address: appt.address,
+        name: appt.name,
+        status: appt.status
       })
       return arr;
     }, [])
@@ -87,15 +89,13 @@ export function addAppointment(hoursForm, appt) {
     api.post('/user', appt)
   ])
     .then(axios.spread((ts, appt) => {
-      // Both requests are now complete
-      // log(ts);
-      // log(appt);
       hoursForm.setState({
         errorMessage: '',
         showSnackbar: true,
         snackbarMessage: "Appointment details have been added to your profile",
         snackbarSeverity: 'success',
-        timeslots: ts.data
+        timeslots: ts.data,
+        chosenTimeId: ''
       })
     }))
     .catch(error => {
@@ -110,7 +110,7 @@ export function deleteAppointment(aid, cid, day, tid, comp) {
     api.get('/user'),
     api.patch(`/${cid}/${day}/${tid}`),
   ])
-    .then(axios.spread((ts, canceledAppt, appts) => {
+    .then(axios.spread((canceledAppt, appts, ts) => {
       log(ts);
       log(canceledAppt);
       log(appts);

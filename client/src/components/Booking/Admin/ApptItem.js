@@ -8,16 +8,16 @@ export default class ApptItem extends Component {
   }
 
   render() {
-    const { id, date, time, address } = this.props.appt;
-    const title = `${id}, ${date} ${time}, ${address}`;
+    const { id, date, time, address, name, status } = this.props.appt;
+    const title = `${id}, ${name} ${date} ${time}, ${address}`;
     return (
       <div style={itemStyle}>
         <p>
           {title}
           <select style={{ marginLeft: '10px' }} name="status" value={this.state.status} onChange={(e) => handleChange(this, e)}>
-            <option value="Pending">Pending</option>
-            <option value="Positive">Positive</option>
-            <option value="Negative">Negative</option>
+            <option value="Pending" selected={status === "Pending"}>Pending</option>
+            <option value="Positive" selected={status === "Positive"}>Positive</option>
+            <option value="Negative" selected={status === "Negative"}>Negative</option>
           </select>
           <button onClick={() => this.props.updateAppt(id, this.state.status)} style={btnStyle}>
             UPDATE

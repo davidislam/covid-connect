@@ -30,7 +30,7 @@ export default function SignupComponent(props) {
     email: '',
     gender: '',
     name: '',
-    age: 1,
+    age: 0,
     healthCardNumber: '',
     phoneNumber: '',
     address: '',
@@ -44,7 +44,7 @@ export default function SignupComponent(props) {
   const populateAge = () => {
     let i = 0;
     let ageArr = [];
-    while (i < 99) {
+    while (i < 100) {
       ageArr.push(i++);
     }
     return ageArr;
