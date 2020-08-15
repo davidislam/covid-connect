@@ -7,7 +7,7 @@ import { addNewsArticle } from '../../../../actions/news'
 import { toggle, handleChange } from '../../../../utils';
 import DialogWindowAddNews from './DialogWindowAddNews';
 
-export default class AddCentre extends Component {
+export default class AddNews extends Component {
   state = {
     link: "",
     image: "",
