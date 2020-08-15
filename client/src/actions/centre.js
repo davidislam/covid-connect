@@ -278,7 +278,7 @@ export const handleSelectChange = (comp, e) => {
   const value = e.target.value; // cid
   getCentre(value)
     .then(centre => {
-      const { _id, name, location, phoneNumber, url, hours } = centre;
+      const { _id, name, location, phoneNumber, url, hours, info } = centre;
       const { city, address, postalCode } = location;
 
       comp.hours = hours;
@@ -291,6 +291,7 @@ export const handleSelectChange = (comp, e) => {
         postalCode,
         number: phoneNumber,
         url,
+        info,
         monday: false,
         tuesday: false,
         wednesday: false,

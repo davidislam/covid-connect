@@ -3,7 +3,7 @@ import axios from 'axios';
 const log = console.log;
 
 const api = axios.create({
-  baseURL: 'http://localhost:5000/appointments'
+  baseURL: '/appointments'
 })
 
 export function getAppointmentsForCurrentUser(comp) {
