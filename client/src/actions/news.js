@@ -8,7 +8,7 @@ export const getNewsArticles = (newsarticleList) => {
             if (res.status === 200) {
                 return res.json();
             } else {
-                alert("Could not get news articles");
+                console.log("Could not get news articles");
             }
         })
         .then(json => {

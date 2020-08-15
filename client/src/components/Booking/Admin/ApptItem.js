@@ -9,7 +9,7 @@ export default class ApptItem extends Component {
 
   render() {
     const { id, date, time, address, name, status } = this.props.appt;
-    const title = `${id}, ${name} ${date} ${time}, ${address}`;
+    const title = `${id}, ${name}, ${date} ${time}, ${address}`;
     return (
       <div style={itemStyle}>
         <p>
