@@ -5,7 +5,7 @@ import CustomizedSnackbar from '../../../CustomizedSnackbar';
 import { addNewsArticle } from '../../../../actions/news'
 //import { createCentre, timeslotAdded } from '../../../actions/centre';
 import { toggle, handleChange } from '../../../../utils';
-//import DialogWindowAddCentre from './DialogWindowAddCentre';
+import DialogWindowAddNews from './DialogWindowAddNews';
 
 export default class AddCentre extends Component {
   state = {
@@ -46,14 +46,14 @@ export default class AddCentre extends Component {
           color="primary"
           onClick={() => toggle(this, "open")}
         >
-          Add Assessment Centre
+          Add News Article
         </Button>
         <DialogWindowAddCentre
           onClose={() => toggle(this, "open")}
           onChange={(e) => handleChange(this, e)}
           handleSubmit={this.handleSubmit}
-          title='Add Centre'
-          heading='To add an assessment centre to this website, please fill out the form below.'
+          title='Add News'
+          heading='To add the information for a news article, please fill out the form below.'
           comp={this}
         />
         <CustomizedSnackbar
