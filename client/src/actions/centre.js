@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { handleError, days, months } from './../utils';
+import { handleError, days, daysCapitalized, months } from './../utils';
 
 
 const api = axios.create({
@@ -78,13 +78,46 @@ export function removeCentreById(comp, id) {
     })
 }
 
-export function modifyCentreById(id) {
-  api.patch(`/${id}`)
+export function modifyCentreById(id, centre, comp) {
+  api.patch(`/${id}`, centre)
     .then(res => {
       log(res)
+      comp.setState({
+        centres: [],
+        selectedCentreID: "",
+        open: false,
+        name: "",
+        city: "",
+        address: "",
+        postalCode: "",
+        number: "",
+        url: "",
+        monday: false,
+        tuesday: false,
+        wednesday: false,
+        thursday: false,
+        friday: false,
+        saturday: false,
+        sunday: false,
+        startTime: "",
+        startMeridiem: "",
+        endTime: "",
+        endMeridiem: "",
+        snackbarMessage: "Assessment centre modified",
+        snackbarSeverity: "success",
+        snackbarOpen: true,
+        visibility: 'hidden',
+        timeslotId: '',
+        timeslotDay: '',
+      })
     })
     .catch(error => {
       handleError(error);
+      comp.setState({
+        snackbarMessage: "Could not modify centre",
+        snackbarSeverity: "error",
+        snackbarOpen: true
+      })
     })
 }
 
@@ -231,4 +264,74 @@ export const addTimeslot = (comp) => {
     monday: false, tuesday: false, wednesday: false, thursday: false, friday: false, saturday: false, sunday: false
   });
   return true;
+}
+
+
+// Returns centre object with id <cid> upon success
+const getCentre = async (cid) => {
+  try {
+    const centre = await api.get(`/${cid}`).then(({ data }) => data);
+    return centre;
+  } catch (error) {
+    log(error);
+    alert('Could not get centre')
+  }
+}
+
+// Get selected centre and update form fields with respect to the centre
+export const handleSelectChange = (comp, e) => {
+  const value = e.target.value; // cid
+  const centre = getCentre(value);
+  if (!centre)
+    return;
+  const { _id, name, location, phoneNumber, url, hours } = centre;
+  const { city, address, postalCode } = location;
+
+  comp.hours = hours;
+
+  comp.setState({
+    centreID: _id,
+    name,
+    city,
+    address,
+    postalCode,
+    number: phoneNumber,
+    url,
+    monday: false,
+    tuesday: false,
+    wednesday: false,
+    thursday: false,
+    friday: false,
+    saturday: false,
+    sunday: false,
+    startTime: "",
+    startMeridiem: "",
+    endTime: "",
+    endMeridiem: "",
+    visibility: 'visible',
+    timeslotId: '',
+    timeslotDay: ''
+  })
+}
+
+
+// Returns a list of timeslots with title "<day> <time>, <booked>""
+export const getNonEmptyTimes = (comp) => {
+  const rs = [];
+
+  daysCapitalized.forEach(day => {
+    const dayLowerCase = day.toLowerCase();
+    const arr = comp.hours[dayLowerCase];
+    if (arr.length !== 0) {
+      // Add each ts in arr
+      arr.forEach(ts => {
+        const id = ts._id;
+        const isBooked = ts.isTaken ? 'booked' : 'not booked';
+        const title = `${day} ${ts.time}, ${isBooked}`;
+        rs.push({ id, title });
+      })
+    }
+  })
+
+  return rs;
 }

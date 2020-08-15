@@ -6,14 +6,14 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { ValidatorForm } from 'react-material-ui-form-validator';
-import CentreInfo from './CentreInfo';
+import CentreInfo from './Admin/CentreInfo';
 import AddTimeslot from './AddTimeslot';
 
 
-export default class DialogWindow extends Component {
+export default class DialogWindowAddCentre extends Component {
   render() {
     const { onClose, onChange, handleSubmit, title, heading } = this.props;
-    const { open, name, city, address, postalCode, number, url } = this.props.comp.state;
+    const { open } = this.props.comp.state;
     return (
       <Dialog
         open={open}

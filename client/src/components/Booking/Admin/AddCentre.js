@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
-import CustomizedSnackbar from './../CustomizedSnackbar';
-import { createCentre, timeslotAdded } from './../../actions/centre';
-import { toggle, handleChange } from './../../utils';
+import CustomizedSnackbar from '../../CustomizedSnackbar';
+import { createCentre, timeslotAdded } from '../../../actions/centre';
+import { toggle, handleChange } from '../../../utils';
 import Geocode from 'react-geocode';
-import DialogWindow from './DialogWindow';
+import DialogWindowAddCentre from '../DialogWindowAddCentre';
 
 
 Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
@@ -75,7 +75,7 @@ export default class AddCentre extends Component {
         >
           Add Assessment Centre
         </Button>
-        <DialogWindow
+        <DialogWindowAddCentre
           onClose={() => toggle(this, "open")}
           onChange={(e) => handleChange(this, e)}
           handleSubmit={this.handleSubmit}
