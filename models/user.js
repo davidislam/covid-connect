@@ -34,11 +34,7 @@ const UserSchema = new mongoose.Schema({
 	},
 	name: {
 		type: String,
-		required: true,
-		validate: {
-			validator: validator.isAlphanumeric,
-			message: 'Invalid name'
-		}
+		required: true
 	},
 	gender: {
 		type: String,

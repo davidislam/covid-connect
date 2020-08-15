@@ -58,7 +58,7 @@ router
   });
 
 router
-  .route('')
+  .route('/')
   .post((req, res) => {
     const user = new User(req.body);
 
