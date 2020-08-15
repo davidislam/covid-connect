@@ -29,7 +29,7 @@ export default class AddNews extends Component {
     e.preventDefault();
     try {
       const { link, image, heading } = this.state;
-      const newArticle = {link, image, heading}
+      const newArticle = { link, image, heading }
       addNewsArticle(this, newArticle);
     } catch (error) {
       console.error(error);

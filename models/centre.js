@@ -51,16 +51,10 @@ const CentreSchema = new mongoose.Schema({
     }
   },
   phoneNumber: {
-    type: String,
-    // minlength: 10,
+    type: String
   },
   url: {
-    type: String,
-    // minlength: 1,
-    // validate: {
-    //   validator: validator.isURL,
-    //   message: 'Invalid url'
-    // }
+    type: String
   },
   hours: {
     monday: [TimeslotSchema],

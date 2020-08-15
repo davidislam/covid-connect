@@ -28,7 +28,7 @@ class Booking extends Component {
         {this.props.isLoggedIn ? <h1>Hi {this.props.username}!</h1> : <h1>Hi!</h1>}
         <p>Find your closest Ontario assessment centre to get a COVID-19 (coronavirus) test.</p>
         <p>All assessment centres will test you if you would like to be tested. Testing is a free service.</p>
-        <p>Call the assessment centre or your <a href="http://www.health.gov.on.ca/en/common/system/services/phu/locations.aspx">local public health unit</a> if you have questions or cannot find a centre near you.</p>
+        <p>Call the assessment centre or your <a href="http://www.health.gov.on.ca/en/common/system/services/phu/locations.aspx" target="_blank" rel="noopener noreferrer">local public health unit</a> if you have questions or cannot find a centre near you.</p>
         <Map />
         <h2>Schedule an appointment</h2>
         <DatePicker label="Choose date" value={date} onChange={(date) => this.setState({ date })} />

@@ -65,7 +65,6 @@ export default function SigninComponent(props) {
           variant="contained"
           color="primary"
           type="submit"
-        //onClick={() => login(this, app)} {/* C */}
         >
           Sign in
         </Button>

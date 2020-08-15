@@ -5,7 +5,7 @@ let router = express.Router();
 const { Centre } = require("./../models/centre");
 const { ObjectID } = require('mongodb');
 
-const { isMongoError, authenticate, authenticateAdmin } = require('./../utils');
+const { isMongoError, authenticateAdmin } = require('./../utils');
 
 const log = console.log;
 
@@ -107,6 +107,7 @@ router
         }
       })
       .catch(error => {
+        log(error);
         res.status(400).send();
       });
   })

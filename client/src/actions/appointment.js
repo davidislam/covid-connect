@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { handleError } from './../utils';
 
 const log = console.log;
 
@@ -13,7 +12,7 @@ export function getAppointmentsForCurrentUser(comp) {
       comp.setState({ appointments: res.data })
     })
     .catch(error => {
-      handleError(error);
+      log(error);
     })
 }
 
@@ -24,7 +23,7 @@ export function getAppointmentById(id) {
       log(res);
     })
     .catch(error => {
-      handleError(error);
+      log(error);
     })
 }
 
@@ -32,7 +31,6 @@ export function getAppointmentById(id) {
 export function changeAppointmentStatusById(id, status, comp) {
   api.patch(`/${id}`, { status })
     .then(res => {
-      // log(res);
       comp.setState({
         snackbarMessage: "Appointment status successfully changed",
         snackbarSeverity: "success",
@@ -45,7 +43,7 @@ export function changeAppointmentStatusById(id, status, comp) {
         snackbarSeverity: "error",
         snackbarOpen: true,
       })
-      handleError(error);
+      log(error);
     })
 }
 
@@ -56,7 +54,7 @@ export function getAllAppointments() {
       log(res);
     })
     .catch(error => {
-      handleError(error);
+      log(error);
     })
 }
 
@@ -76,8 +74,7 @@ export const getUserAppointments = async (comp) => {
     }, [])
     comp.setState({ appointments: rs });
   } catch (error) {
-    handleError(error);
-    alert("Could not get user appointments");
+    log(error);
   }
 }
 
@@ -99,8 +96,13 @@ export function addAppointment(hoursForm, appt) {
       })
     }))
     .catch(error => {
-      alert("Could not schedule appointment");
-      handleError(error);
+      hoursForm.setState({
+        errorMessage: '',
+        showSnackbar: true,
+        snackbarMessage: "Could not book appointment",
+        snackbarSeverity: 'error'
+      })
+      log(error);
     })
 }
 
@@ -111,13 +113,9 @@ export function deleteAppointment(aid, cid, day, tid, comp) {
     api.patch(`/${cid}/${day}/${tid}`),
   ])
     .then(axios.spread((canceledAppt, appts, ts) => {
-      log(ts);
-      log(canceledAppt);
-      log(appts);
       comp.setState({ appointments: appts.data });
     }))
     .catch(error => {
-      log("Something went wrong");
-      handleError(error);
+      log(error);
     })
 }
