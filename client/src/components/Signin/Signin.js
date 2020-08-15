@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { TextField, makeStyles, Button, InputAdornment, IconButton } from "@material-ui/core"
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
-//import appointment from '../../../../models/appointment';
-import { updateLoginForm, login } from "../../actions/user";
+import { login } from "../../actions/user";
 
 
 const useStyles = makeStyles(theme => ({
@@ -24,27 +23,26 @@ export default function SigninComponent(props) {
   })
   const [showPass, setShowPass] = useState(false);
 
-  // const handleChange = (prop) => (event) => {
-  //   setValue({ ...value, [prop]: event.target.value });
-  // };
+  const handleChange = (prop) => (event) => {
+    setValue({ ...value, [prop]: event.target.value });
+  };
 
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   login(value, props.app, props.signin);
-  // }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    login(value, props.app, props.signin);
+  }
 
   return (
     <div>
-      <form className={classes.root} onSubmit={() => login(this, props.app)}>
+      <form className={classes.root} onSubmit={handleSubmit}>
         <TextField
           id="Username"
           label="Username"
           variant="outlined"
           value={value.username}
-          onChange={e => updateLoginForm(this, e.target)}
+          onChange={handleChange("username")}
           required />
-          
+
         <br />
 
         <TextField
@@ -53,7 +51,7 @@ export default function SigninComponent(props) {
           variant="outlined"
           type={showPass ? "text" : "password"}
           value={value.password}
-          onChange={e => updateLoginForm(this, e.target)}
+          onChange={handleChange("password")}
           InputProps={{
             endAdornment: <InputAdornment position="end">
               <IconButton onClick={() => setShowPass(!showPass)} >
@@ -62,13 +60,13 @@ export default function SigninComponent(props) {
             </InputAdornment>,
           }}
           required />
-        <br /> 
-        <Button 
-          variant="contained" 
-          color="primary" 
+        <br />
+        <Button
+          variant="contained"
+          color="primary"
           type="submit"
-          //onClick={() => login(this, app)} {/* C */}
-          > 
+        //onClick={() => login(this, app)} {/* C */}
+        >
           Sign in
         </Button>
       </form>

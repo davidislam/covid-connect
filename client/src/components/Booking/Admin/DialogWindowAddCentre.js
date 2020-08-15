@@ -10,10 +10,10 @@ import CentreInfo from './CentreInfo';
 import AddTimeslot from './AddTimeslot';
 
 
-export default class DialogWindow extends Component {
+export default class DialogWindowAddCentre extends Component {
   render() {
     const { onClose, onChange, handleSubmit, title, heading } = this.props;
-    const { open, name, city, address, postalCode, number, url } = this.props.comp.state;
+    const { open } = this.props.comp.state;
     return (
       <Dialog
         open={open}

@@ -3,6 +3,7 @@ const express = require('express');
 let router = express.Router();
 
 const { Appointment } = require('./../models/appointment');
+const { Centre } = require('./../models/centre');
 const { ObjectID } = require('mongodb');
 
 const log = console.log;

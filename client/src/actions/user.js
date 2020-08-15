@@ -19,16 +19,6 @@ export const readCookie = (app) => {
         })
 };
 
-// A functon to update login form state
-export const updateLoginForm = (loginComp, field) => {
-    const value = field.value;
-    const name = field.name;
-
-    loginComp.setState({
-        [name]: value
-    });
-};
-
 // A function to send a POST request with the user to be logged in
 export const login = (credentials, app, signin) => {
     api.post('/login', credentials)
@@ -112,5 +102,6 @@ export const updateProfileForCurrentUser = (info, app, setOpen) => {
         })
         .catch(error => {
             handleError(error);
+            alert("Could not update profile info");
         })
 }

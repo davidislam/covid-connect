@@ -3,7 +3,7 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";
-import { handleChange } from './../../utils';
+import { handleChange } from '../../../utils';
 
 
 export default function (props) {

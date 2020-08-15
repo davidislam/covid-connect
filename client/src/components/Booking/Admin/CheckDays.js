@@ -2,7 +2,7 @@ import React from 'react';
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormGroup from "@material-ui/core/FormGroup";
-import { daysCapitalized, toggle } from './../../utils';
+import { daysCapitalized, toggle } from './../../../utils';
 
 
 export default function (props) {

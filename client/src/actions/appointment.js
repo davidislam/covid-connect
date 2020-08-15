@@ -4,7 +4,7 @@ import { handleError } from './../utils';
 const log = console.log;
 
 const api = axios.create({
-  baseURL: '/appointments'
+  baseURL: 'http://localhost:5000/appointments'
 })
 
 export function getAppointmentsForCurrentUser(comp) {
@@ -29,12 +29,22 @@ export function getAppointmentById(id) {
 }
 
 // Requires admin auth
-export function changeAppointmentStatusById(id, status) {
+export function changeAppointmentStatusById(id, status, comp) {
   api.patch(`/${id}`, { status })
     .then(res => {
-      log(res);
+      // log(res);
+      comp.setState({
+        snackbarMessage: "Appointment status successfully changed",
+        snackbarSeverity: "success",
+        snackbarOpen: true,
+      })
     })
     .catch(error => {
+      comp.setState({
+        snackbarMessage: "Could not change appointment status",
+        snackbarSeverity: "error",
+        snackbarOpen: true,
+      })
       handleError(error);
     })
 }
@@ -50,6 +60,25 @@ export function getAllAppointments() {
     })
 }
 
+export const getUserAppointments = async (comp) => {
+  try {
+    const appts = await api.get('/').then(({ data }) => data);
+    const rs = appts.reduce((arr, appt) => {
+      arr.push({
+        id: appt._id,
+        date: appt.date,
+        time: appt.time,
+        address: appt.address
+      })
+      return arr;
+    }, [])
+    comp.setState({ appointments: rs });
+  } catch (error) {
+    handleError(error);
+    alert("Could not get user appointments");
+  }
+}
+
 
 export function addAppointment(hoursForm, appt) {
   const { cid, day, tid } = appt;
@@ -59,8 +88,8 @@ export function addAppointment(hoursForm, appt) {
   ])
     .then(axios.spread((ts, appt) => {
       // Both requests are now complete
-      log(ts);
-      log(appt);
+      // log(ts);
+      // log(appt);
       hoursForm.setState({
         errorMessage: '',
         showSnackbar: true,
@@ -77,9 +106,9 @@ export function addAppointment(hoursForm, appt) {
 
 export function deleteAppointment(aid, cid, day, tid, comp) {
   axios.all([
-    api.patch(`/${cid}/${day}/${tid}`),
     api.delete(`/${aid}`),
-    api.get('/user')
+    api.get('/user'),
+    api.patch(`/${cid}/${day}/${tid}`),
   ])
     .then(axios.spread((ts, canceledAppt, appts) => {
       log(ts);
@@ -88,7 +117,7 @@ export function deleteAppointment(aid, cid, day, tid, comp) {
       comp.setState({ appointments: appts.data });
     }))
     .catch(error => {
-      alert("Could not cancel appointment");
+      log("Something went wrong");
       handleError(error);
     })
 }
