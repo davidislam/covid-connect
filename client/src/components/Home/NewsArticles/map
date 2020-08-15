@@ -1,0 +1,20 @@
+React components:
+* if tabbed, it means the file is the support for the file above
+
+Page display of all news articles in the database:
+    NewsArticleTable
+        NewsArticleList
+        maybe NewsScreen? (FlipScreen equivalent)
+    
+
+ADDING
+    AddNewsArticles
+        DialogWindowAddNews
+            NewsInfo
+
+    OR ArticlesForm?
+
+
+DELETING
+    RemoveNews
+        

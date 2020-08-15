@@ -10,10 +10,12 @@ import { ValidatorForm } from 'react-material-ui-form-validator';
 import NewsInfo from './NewsInfo';
 
 
-export default class DialogWindowAddCentre extends Component {
+export default class DialogWindowAddNews extends Component {
   render() {
+
     const { onClose, onChange, handleSubmit, title, heading } = this.props;
     const { open } = this.props.comp.state;
+    
     return (
       <Dialog
         open={open}

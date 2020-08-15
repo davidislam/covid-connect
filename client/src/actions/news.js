@@ -1,3 +1,14 @@
+import axios from 'axios';
+import { handleError, days, daysCapitalized, months } from './../utils';
+const ObjectID = require("bson-objectid");
+
+
+const api = axios.create({
+  baseURL: '/newsarticles'
+})
+
+const log = console.log;
+
 // A function to send a GET request to the web server,
 // and then loop through them and add a list element for each newsarticles article
 export const getNewsArticles = (newsarticleList) => {
@@ -60,3 +71,24 @@ export const addNewsArticle = (formComp, dashboardComp) => {
             console.log(error);
         });
 };
+
+export async function removeNewsById(comp, id) {
+    try {
+      const res = await api.delete(`/${id}`);
+      log(res);
+      comp.setState({
+        snackbarOpen: true,
+        snackbarMessage: `${res.data.name} has been removed from the database`,
+        snackbarSeverity: 'success',
+        cid: ''
+      })
+      getNewsArticles(comp);
+    } catch (error) {
+      handleError(error);
+      comp.setState({
+        snackbarOpen: true,
+        snackbarMessage: 'Could not remove article',
+        snackbarSeverity: 'error'
+      })
+    }
+  }
