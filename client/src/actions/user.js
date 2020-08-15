@@ -46,7 +46,7 @@ export const login = (credentials, app, signin) => {
 export const logout = (app) => {
     api.get('/logout')
         .then(res => {
-            app.setState({ currentUser: null, isAdmin: false })
+            app.setState({ currentUser: null, isAdmin: false, isLoggedIn: false })
         })
         .catch(error => {
             handleError(error);
@@ -114,5 +114,3 @@ export const updateProfileForCurrentUser = (info, app, setOpen) => {
             handleError(error);
         })
 }
-
-

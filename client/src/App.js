@@ -23,8 +23,8 @@ class App extends Component {
   }
 
   state = {
-    isAdmin: true,
-    currentUser: "admin",
+    isAdmin: false,
+    currentUser: "",
   }
 
   render() {
