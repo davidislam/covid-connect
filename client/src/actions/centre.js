@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { handleError, days, daysCapitalized, months } from './../utils';
-var ObjectID = require("bson-objectid");
+const ObjectID = require("bson-objectid");
 
 
 const api = axios.create({
-  baseURL: 'http://localhost:5000/centres'
+  baseURL: '/centres'
 })
 
 const log = console.log;
