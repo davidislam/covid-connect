@@ -10,4 +10,4 @@ mongoose.connect(mongoURI,
   })
   ;
 
-module.exports = { mongoose } 
+module.exports = { mongoose }
