@@ -30,5 +30,6 @@ export const handleError = error => {
   console.log(error.config);
 }
 
-export const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+export const daysCapitalized = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+export const days = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
 export const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];

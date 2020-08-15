@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import AddCentre from './AddCentre';
 import RemoveCentre from './RemoveCentre';
-import ModifyCentre from './ModifyCentre';
+// import ModifyCentre from './ModifyCentre';
 
 
 class AdminView extends Component {

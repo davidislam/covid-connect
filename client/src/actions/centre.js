@@ -8,24 +8,6 @@ const api = axios.create({
 
 const log = console.log;
 
-///
-
-export function getCentreByName(name) {
-  return;
-}
-
-export function modifyCentre(centre) {
-  return;
-}
-
-export function removeCentre(centre) {
-  return;
-}
-
-export function addCentre(centre) {
-  return;
-}
-///
 
 export function createCentre(comp, centre) {
   api.post('/', centre)
@@ -189,7 +171,7 @@ export function formattedDate(date) {
 
 // Returns a day of the week in lowercase
 export function getDay(date) {
-  return days[date.getDay()].toLowerCase();
+  return days[date.getDay()];
 }
 
 // Returns a formatted address in the form "<addr>, <city>, ON <postal code>""
@@ -197,3 +179,56 @@ export function formattedAddress(location) {
   return `${location.address}, ${location.city}, ON ${location.postalCode}`
 }
 
+// Returns true iff a timeslot has been added
+export function timeslotAdded(comp) {
+  for (let i = 0; i < days.length; i++) {
+    if (comp.hours[days[i]].length !== 0) {
+      return true;
+    }
+  }
+  comp.setState({ snackbarOpen: true, snackbarMessage: "Please add a timeslot", snackbarSeverity: "warning" });
+  return false;
+}
+
+// Returns true iff a day has been selected
+export function daySelected(comp) {
+  for (let i = 0; i < days.length; i++) {
+    if (comp.state[days[i]]) {
+      return true;
+    }
+  }
+  comp.setState({ snackbarOpen: true, snackbarMessage: "Please choose a day", snackbarSeverity: "warning" });
+  return false;
+}
+
+
+// Returns true iff a timeslot has been added
+export const addTimeslot = (comp) => {
+  if (!daySelected(comp))
+    return false;
+
+  const { startTime, startMeridiem, endTime, endMeridiem } = comp.state;
+  if (startTime === "" || startMeridiem === "" || endTime === "" || endMeridiem === "") {
+    comp.setState({ snackbarOpen: true, snackbarMessage: "Please choose a time", snackbarSeverity: "warning" })
+    return false;
+  }
+
+  const formattedTime = `${startTime} - ${endTime} ${endMeridiem}`;
+  const timeslot = { time: formattedTime, isTaken: false };
+
+  // Add <timeslot> to checked days
+  days.forEach(day => {
+    if (comp.state[day]) {
+      comp.hours[day].push(timeslot);
+    }
+  })
+
+  log(comp.hours);
+
+  comp.setState({
+    startTime: '', startMeridiem: '', endTime: '', endMeridiem: '',
+    snackbarOpen: true, snackbarMessage: "Timeslot added", snackbarSeverity: 'info',
+    monday: false, tuesday: false, wednesday: false, thursday: false, friday: false, saturday: false, sunday: false
+  });
+  return true;
+}
