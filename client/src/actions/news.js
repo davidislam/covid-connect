@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { NewsArticle } from '../../../models/news';
 
 const api = axios.create({
     baseURL: '/newsarticles'
@@ -27,6 +28,23 @@ export const getNewsArticles = (newsarticleList) => {
             console.log(error);
         });
 };
+
+// A function to get how many news articles are in database
+export const getNewsCount = (newsarticleList) => {
+    const url = "/newsarticles"
+
+    fetch(url)
+        .then(res => { 
+            if (res.status == 200) {
+                return NewsArticle.estimatedDocumentCount()
+            } else {
+                alert("Could not get database")
+            }
+        })
+        .catch(error => {
+            console.log(error);
+        });
+}
 
 // A function to send a POST request with a new newsarticles article
 export const addNewsArticle = (formComp, dashboardComp) => {
