@@ -4,7 +4,7 @@ import { handleError } from './../utils';
 const log = console.log;
 
 const api = axios.create({
-  baseURL: '/appointments'
+  baseURL: 'http://localhost:5000/appointments'
 })
 
 export function getAppointmentsForCurrentUser(comp) {
@@ -48,6 +48,25 @@ export function getAllAppointments() {
     .catch(error => {
       handleError(error);
     })
+}
+
+export const getUserAppointments = async (comp) => {
+  try {
+    const appts = await api.get('/').then(({ data }) => data);
+    const rs = appts.reduce((arr, appt) => {
+      arr.push({
+        id: appt._id,
+        date: appt.date,
+        time: appt.time,
+        address: appt.address
+      })
+      return arr;
+    }, [])
+    comp.setState({ appointments: rs });
+  } catch (error) {
+    handleError(error);
+    alert("Could not get user appointments");
+  }
 }
 
 
