@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
-import CustomizedSnackbar from '../../CustomizedSnackbar';
+import CustomizedSnackbar from '../../../CustomizedSnackbar';
 
-import { addNewsArticle } from '../../../actions/news'
+import { addNewsArticle } from '../../../../actions/news'
 //import { createCentre, timeslotAdded } from '../../../actions/centre';
-import { toggle, handleChange } from '../../../utils';
-import DialogWindowAddCentre from './DialogWindowAddCentre';
+import { toggle, handleChange } from '../../../../utils';
+//import DialogWindowAddCentre from './DialogWindowAddCentre';
 
 export default class AddCentre extends Component {
   state = {
